@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS | Secure Custodian Vault & Asset Lock</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght=300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #02040a; color: #f1f5f9; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .glow-red { box-shadow: 0 0 20px rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3); }
+        .glow-emerald { box-shadow: 0 0 20px rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col p-4 md:p-6">
+
+    <!-- SUBHUD HEADER -->
+    <header class="w-full max-w-6xl mx-auto border border-red-900/40 bg-slate-900/60 p-4 rounded-xl flex flex-col md:flex-row justify-between items-center gap-4 mb-6 font-mono text-xs backdrop-blur-sm">
+        <div>
+            <h1 class="text-xl font-bold text-red-500 tracking-wider">KUTS_CUSTODIAN_VAULT</h1>
+            <p class="text-slate-400 text-[0.65rem] uppercase">Cryptographic Cold Storage // Multisig Inflow Ledger</p>
+        </div>
+        <div class="text-right">
+            <span class="text-slate-500 text-[0.6rem] block">VAULT BACKBONE</span>
+            <a href="treasury-core.html" class="text-cyan-400 font-bold hover:underline">&lt;&lt; RETURN TO CORE</a>
+        </div>
+    </header>
+
+    <main class="w-full max-w-6xl mx-auto flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- SECURE VAULT CONTROL (LEFT 5 COLUMNS) -->
+        <section class="lg:col-span-5 bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col justify-between glow-red">
+            <div>
+                <h2 class="text-xs text-red-400 font-bold tracking-widest uppercase font-mono border-b border-slate-800 pb-3 mb-4">Time-Locked Asset Escrow</h2>
+                
+                <form id="vault-lock-form" class="space-y-4 font-mono text-xs">
+                    <div>
+                        <label class="block text-slate-500 text-[0.6rem] mb-1">ASSET TYPE TO LOCK</label>
+                        <select class="w-full bg-black border border-slate-800 p-2.5 rounded text-slate-300 focus:border-red-500 outline-none">
+                            <option value="KINE">Ꝃ - Kine Native Tokens</option>
+                            <option value="RESERVE_CREDIT">Real-World Asset (RWA) Credits</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-slate-500 text-[0.6rem] mb-1">QUANTUM TO DEPOSIT (Ꝃ)</label>
+                        <input type="number" id="lock-amount" placeholder="ENTER AMOUNT" min="100" required class="w-full bg-black border border-slate-800 p-2.5 rounded text-slate-200 focus:border-red-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-slate-500 text-[0.6rem] mb-1">CHRONO TIME-LOCK DURATION</label>
+                        <select id="lock-duration" class="w-full bg-black border border-slate-800 p-2.5 rounded text-red-400 font-bold focus:border-red-500 outline-none">
+                            <option value="90">90 KUTS Cycles (Short Term)</option>
+                            <option value="360">360 KUTS Cycles (Standard Fiscal Year)</option>
+                            <option value="720">720 KUTS Cycles (Strategic Reserve)</option>
+                        </select>
+                    </div>
+
+                    <div class="bg-black/50 p-3 rounded border border-slate-800 text-[0.65rem] text-slate-400 space-y-1">
+                        <span class="text-red-400 font-bold block uppercase tracking-wider text-[0.6rem]">🔒 Cryptographic Guardrail</span>
+                        <p class="font-sans">Assets committed to cold storage cannot be extracted prematurely. Release requires signatures from a minimum of 18 registered Level 1 Anchor Nodes.</p>
+                    </div>
+
+                    <button type="submit" class="w-full bg-red-950 hover:bg-red-900 text-red-200 font-bold py-3 rounded text-[0.65rem] tracking-widest uppercase transition-all border border-red-700">
+                        Commit Asset to Cold Lock
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- LIVE STREAM OF INFLOWS (RIGHT 7 COLUMNS) -->
+        <section class="lg:col-span-7 bg-slate-900/30 border border-slate-800 rounded-xl p-5 flex flex-col overflow-hidden glow-emerald">
+            <div class="flex justify-between items-center border-b border-slate-800 pb-3 mb-4">
+                <h2 class="text-xs text-emerald-400 font-bold tracking-widest uppercase font-mono">Automated 1% TDS Fee Inflow Log</h2>
+                <span class="text-[0.6rem] font-mono text-emerald-500 bg-emerald-950/40 border border-emerald-900/50 px-2 py-0.5 rounded tracking-widest">LIVE MESH STREAM</span>
+            </div>
+            
+            <div id="inflow-container" class="space-y-2 flex-1 overflow-y-auto pr-1">
+                <!-- PRE-SET RECORD 1 -->
+                <div class="bg-black/40 border border-slate-900 p-3 rounded font-mono text-[0.7rem] flex justify-between items-center">
+                    <div>
+                        <span class="text-slate-400 block font-bold">SWEEP // TCRIND014 → CUSTODIAN</span>
+                        <span class="text-slate-600 text-[0.6rem]">HASH: 0x9A4F...E1C</span>
+                    </div>
+                    <span class="text-emerald-400 font-bold text-sm">+42.50 Ꝃ</span>
+                </div>
+                <!-- PRE-SET RECORD 2 -->
+                <div class="bg-black/40 border border-slate-900 p-3 rounded font-mono text-[0.7rem] flex justify-between items-center">
+                    <div>
+                        <span class="text-slate-400 block font-bold">SWEEP // KNMIND002 → CUSTODIAN</span>
+                        <span class="text-slate-600 text-[0.6rem]">HASH: 0x3B8D...88A</span>
+                    </div>
+                    <span class="text-emerald-400 font-bold text-sm">+115.00 Ꝃ</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="w-full max-w-6xl mx-auto border-t border-slate-900 pt-4 mt-6 text-center font-mono text-[0.6rem] text-slate-600">
+        PINALEAF ADVANCEMENTS LLP // SECURE CUSTODY PROTOCOL MDI6000
+    </footer>
+
+    <script>
+        // Simulate real-time 1% TDS network sweeps dropping into the vault
+        setInterval(() => {
+            const container = document.getElementById('inflow-container');
+            const nodes = ["TCRIND088", "BOMIND012", "LDNUKC001", "KNMIND005", "PLKIND022"];
+            const randomNode = nodes[Math.floor(Math.random() * nodes.length)];
+            const sweepAmount = (Math.random() * 85 + 5).toFixed(2);
+            const randomHash = "0x" + Math.floor(Math.random() * 999999).toString(16).toUpperCase() + "...FF" + Math.floor(Math.random() * 9);
+
+            const recordHTML = `
+                <div class="bg-emerald-950/5 border border-emerald-900/10 p-3 rounded font-mono text-[0.7rem] flex justify-between items-center animate-fade-in">
+                    <div>
+                        <span class="text-emerald-500 block font-bold">SWEEP // ${randomNode} → CUSTODIAN</span>
+                        <span class="text-slate-600 text-[0.6rem]">HASH: ${randomHash}</span>
+                    </div>
+                    <span class="text-emerald-400 font-bold text-sm">+${sweepAmount} Ꝃ</span>
+                </div>
+            `;
+            container.insertAdjacentHTML('afterbegin', recordHTML);
+            
+            if(container.children.length > 8) {
+                container.removeChild(container.lastChild);
+            }
+        }, 4000);
+
+        // Commit asset event handler
+        document.getElementById('vault-lock-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const amount = document.getElementById('lock-amount').value;
+            const duration = document.getElementById('lock-duration').value;
+            
+            alert(`VAULT ESCROW SUCCESS:\n${parseInt(amount).toLocaleString()} Ꝃ successfully written to Cold Storage. Timelock active for next ${duration} KUTS Cycles.`);
+            document.getElementById('vault-lock-form').reset();
+        });
+    </script>
+<!-- Resilient Inline Auth & Navigation Injector for Local Testing -->
+    <script>
+        (function() {
+            window.addEventListener('DOMContentLoaded', () => {
+                // Check session; if missing during local test, auto-initialize a mock test session instead of failing
+                let session = localStorage.getItem('kuts_active_session');
+                if (!session) {
+                    session = JSON.stringify({ nodeId: "THRINC000-LOCAL-TEST", expiry: Date.now() + 86400000 });
+                    localStorage.setItem('kuts_active_session', session);
+                }
+
+                // Inject Global Header if missing
+                if (!document.getElementById('kuts-global-header')) {
+                    const headerHTML = `
+                        <header id="kuts-global-header" class="w-full max-w-7xl mx-auto p-6 flex justify-between items-center border-b border-slate-800 bg-[#030712] text-slate-200 mb-6">
+                            <div class="text-blue-400 font-mono font-bold tracking-widest text-sm">
+                                KUTS_MESH_OPERATIONS // MDI6000 [LOCAL MODE]
+                            </div>
+                            <nav id="nav-auth" class="flex gap-4 items-center font-mono"></nav>
+                        </header>`;
+                    document.body.insertAdjacentHTML('afterbegin', headerHTML);
+                }
+
+                // Inject Global Footer if missing
+                if (!document.getElementById('kuts-global-footer') && !window.location.pathname.includes('index.html')) {
+                    const footerHTML = `
+                        <footer id="kuts-global-footer" class="max-w-7xl mx-auto mt-auto py-8 border-t border-slate-800 text-center w-full">
+                            <a href="index.html" class="inline-flex items-center gap-2 text-[0.7rem] text-slate-500 hover:text-blue-400 font-mono uppercase tracking-widest transition-all">
+                                <span class="text-lg">←</span> RETURN TO UNIVERSAL GATEWAY
+                            </a>
+                        </footer>`;
+                    document.body.insertAdjacentHTML('beforeend', footerHTML);
+                }
+
+                updateAuthUI();
+            });
+
+            window.updateAuthUI = function() {
+                const nav = document.getElementById('nav-auth');
+                if (!nav) return;
+                
+                nav.innerHTML = `
+                    <a href="index.html" class="text-slate-400 text-[0.65rem] uppercase font-mono hover:text-white">Gateway</a>
+                    <button onclick="secureLogout()" class="bg-red-950 hover:bg-red-900 text-red-400 font-mono text-[0.65rem] px-3 py-1.5 rounded border border-red-900 uppercase tracking-widest cursor-pointer">
+                        [X] DISCONNECT
+                    </button>`;
+            };
+
+            window.secureLogout = function() {
+                localStorage.removeItem('kuts_active_session');
+                window.location.href = 'sign-in.html';
+            };
+        })();
+    </script>
+</body>
+</html>

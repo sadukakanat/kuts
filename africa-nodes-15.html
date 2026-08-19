@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Africa Grid | 15 Primary Anchor Nodes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="core/auth-bridge.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght=300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #030712; color: #cbd5e1; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .module-card { background: rgba(17, 24, 39, 0.5); border: 1px solid rgba(30, 41, 59, 1); transition: all 0.3s; }
+        .module-card:hover { border-color: rgba(249, 115, 22, 0.5); box-shadow: 0 0 15px rgba(249, 115, 22, 0.1); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <div>
+        <!-- GLOBAL HEADER -->
+        <header class="border-b border-slate-800 p-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div>
+                <h1 class="text-3xl font-bold text-orange-400 font-mono tracking-widest">KUTS_AFRICA_SUBGRID</h1>
+                <p class="text-slate-500 mt-1 font-mono text-sm">Level 2 Meso-Grid // 15-Node Africa Allocation</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <input type="text" id="searchInput" placeholder="Search hubs, resource corridors, ID..." 
+                       onkeyup="filterNodes()" class="bg-slate-900 border border-slate-700 p-2 rounded text-sm text-slate-200 font-mono w-72">
+                <a href="index.html" class="bg-slate-800 hover:bg-slate-700 text-orange-300 font-mono px-4 py-2 rounded text-sm border border-slate-700 transition-colors">
+                    << Return to Gateway
+                </a>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main class="max-w-7xl mx-auto px-6 py-12">
+            <section class="flex flex-col gap-6 mb-10">
+                <div class="font-mono text-xs text-orange-400 bg-orange-950/40 border border-orange-800/60 px-3 py-1 rounded self-start uppercase tracking-widest">
+                    ● Regional Allocation // Emerging Raw Material & Demographic Anchors
+                </div>
+                <h2 class="text-4xl font-bold leading-tight text-white">
+                    Africa <span class="text-orange-500">15-Node Primary Corridor</span>
+                </h2>
+                <p class="text-slate-400 max-w-3xl text-base">
+                    As part of the 144-node harmonic expansion, the African continent is allocated 15 dedicated Level 2 Primary Anchor Nodes. These nodes secure vital raw material extraction routes, regional trade junctions, and rapid demographic growth corridors within the KUTS network.
+                </p>
+
+                <!-- CORRIDOR METRICS BAR -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 font-mono text-xs mt-2">
+                    <div class="bg-slate-900/80 border border-slate-800 p-3 rounded">
+                        <span class="text-orange-400 block font-bold text-lg">15 Nodes</span>
+                        <span class="text-slate-400">Total African Allocation[cite: 4]</span>
+                    </div>
+                    <div class="bg-slate-900/80 border border-slate-800 p-3 rounded">
+                        <span class="text-yellow-400 block font-bold text-lg">Raw Materials</span>
+                        <span class="text-slate-400">Extraction & Supply Hubs</span>
+                    </div>
+                    <div class="bg-slate-900/80 border border-slate-800 p-3 rounded">
+                        <span class="text-emerald-400 block font-bold text-lg">Rift & Gulf</span>
+                        <span class="text-slate-400">Nairobi & Lagos Interconnects[cite: 4]</span>
+                    </div>
+                    <div class="bg-slate-900/80 border border-slate-800 p-3 rounded">
+                        <span class="text-purple-400 block font-bold text-lg">Least Action</span>
+                        <span class="text-slate-400">Upstream Routing Protocol</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- NODES TABLE CONTAINER -->
+            <section class="module-card rounded-xl overflow-hidden border border-slate-800">
+                <div class="overflow-x-auto">
+                    <table id="africaNodesTable" class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-900/80 border-b border-slate-800 font-mono text-xs text-slate-400 uppercase tracking-wider">
+                                <th class="p-4">Designation</th>
+                                <th class="p-4">Location / Core Hub</th>
+                                <th class="p-4">Industrial / Kinetic Focus</th>
+                                <th class="p-4">Global ID (9-Digit)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800/60 text-sm text-slate-300 font-mono">
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="af-001 good hope pivot cape town south africa cptzac011">
+                                <td class="p-4 text-orange-400 font-bold">AF-001</td>
+                                <td class="p-4 text-white font-semibold">Cape Town</td>
+                                <td class="p-4 text-slate-400">Good Hope Pivot & Southern Maritime Logistics[cite: 4]</td>
+                                <td class="p-4 text-cyan-400 font-bold">CPTZAC011</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="af-002 good hope pivot cape town south africa cptzac011">
+                                <td class="p-4 text-orange-400 font-bold">AF-002</td>
+                                <td class="p-4 text-white font-semibold">Nairobi</td>
+                                <td class="p-4 text-slate-400">East African Rift Anchor & Regional Telemetry[cite: 4]</td>
+                                <td class="p-4 text-cyan-400 font-bold">NBOKEC014</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="af-003 med red sea intersection cairo egypt caiegc018">
+                                <td class="p-4 text-orange-400 font-bold">AF-003</td>
+                                <td class="p-4 text-white font-semibold">Cairo</td>
+                                <td class="p-4 text-slate-400">Med-Red Sea Intersection & Trade Gateway[cite: 4]</td>
+                                <td class="p-4 text-cyan-400 font-bold">CAIEGC018</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="af-004 gulf of guinea anchor lagos nigeria losngc020">
+                                <td class="p-4 text-orange-400 font-bold">AF-004</td>
+                                <td class="p-4 text-white font-semibold">Lagos</td>
+                                <td class="p-4 text-slate-400">Gulf of Guinea Economic Anchor & West African Hub[cite: 4]</td>
+                                <td class="p-4 text-cyan-400 font-bold">LOSNGC020</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="af-005 equatorial atlantic bridge dakar senegal dkrsnc032">
+                                <td class="p-4 text-orange-400 font-bold">AF-005</td>
+                                <td class="p-4 text-white font-semibold">Dakar</td>
+                                <td class="p-4 text-slate-400">Equatorial Atlantic Bridge & Western Maritime Post[cite: 4]</td>
+                                <td class="p-4 text-cyan-400 font-bold">DKRSNC032</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="af-006 johannesburg south africa mineral resource banking">
+                                <td class="p-4 text-orange-400 font-bold">AF-006</td>
+                                <td class="p-4 text-white font-semibold">Johannesburg</td>
+                                <td class="p-4 text-slate-400">Mineral Extraction Settlement & Financial Core</td>
+                                <td class="p-4 text-cyan-400 font-bold">JHBSAP006</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="af-007 casablanca morocco north african trade">
+                                <td class="p-4 text-orange-400 font-bold">AF-007</td>
+                                <td class="p-4 text-white font-semibold">Casablanca</td>
+                                <td class="p-4 text-slate-400">North African Logistics & Mediterranean Gateway</td>
+                                <td class="p-4 text-cyan-400 font-bold">CASAOMP007</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="af-008 addis ababa ethiopia horn of africa hub">
+                                <td class="p-4 text-orange-400 font-bold">AF-008</td>
+                                <td class="p-4 text-white font-semibold">Addis Ababa</td>
+                                <td class="p-4 text-slate-400">Horn of Africa Transit Axis & Diplomatic Node</td>
+                                <td class="p-4 text-cyan-400 font-bold">ADDETP008</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="af-009 accra ghana tech and trade corridor">
+                                <td class="p-4 text-orange-400 font-bold">AF-009</td>
+                                <td class="p-4 text-white font-semibold">Accra</td>
+                                <td class="p-4 text-slate-400">West African Digital Tech & Agribusiness Hub</td>
+                                <td class="p-4 text-cyan-400 font-bold">ACCGHP009</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="af-010 through af-015 extended african nodes">
+                                <td class="p-4 text-orange-400 font-bold">AF-010 → AF-015</td>
+                                <td class="p-4 text-white font-semibold">Extended Regional Nodes (Dar es Salaam, Kampala, Lusaka, Abidjan, Tunis, Algiers, etc.)</td>
+                                <td class="p-4 text-slate-400">Regional Sub-Capillaries & Inland Transport Corridors</td>
+                                <td class="p-4 text-cyan-400 font-bold">AFRINP010-015</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-800 mt-16 py-8 px-6 bg-slate-950 text-center font-mono text-xs text-slate-500">
+        <p>© 2026 PINALEAF ADVANCEMENTS LLP // AAROHAN 2050 // AFRICA 15-NODE MESH</p>
+    </footer>
+
+    <!-- INTERACTION SCRIPT -->
+    <script>
+        function filterNodes() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            document.querySelectorAll('.node-row').forEach(row => {
+                const searchData = row.getAttribute('data-search');
+                row.style.display = searchData.includes(input) ? "" : "none";
+            });
+        }
+        window.onload = updateAuthUI;
+    </script>
+</body>
+</html>

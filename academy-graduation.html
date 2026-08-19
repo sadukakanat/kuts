@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Academy | Graduation & Key Minting</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #030712; color: #cbd5e1; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .glow-emerald { box-shadow: 0 0 30px rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.4); }
+        .terminal-text { text-shadow: 0 0 5px currentColor; }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #030712; }
+        ::-webkit-scrollbar-thumb { background: #10b981; border-radius: 4px; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col p-4 md:p-6 bg-[#030712] relative overflow-x-hidden items-center justify-center">
+
+    <!-- Background Grid Effect -->
+    <div class="absolute inset-0 pointer-events-none opacity-20" style="background-image: linear-gradient(rgba(16, 185, 129, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(16, 185, 129, 0.05) 1px, transparent 1px); background-size: 30px 30px; z-index: -1;"></div>
+
+    <main class="w-full max-w-3xl mx-auto z-10 relative flex flex-col gap-6">
+        
+        <!-- HEADER / STATUS -->
+        <div class="text-center space-y-2 mb-4">
+            <h1 class="text-2xl md:text-3xl font-bold text-emerald-400 tracking-widest font-mono uppercase">FINAL CERTIFICATION GATE</h1>
+            <p class="text-slate-400 text-sm font-sans">UCM Training Complete. Ready for live network bridging.</p>
+        </div>
+
+        <!-- MINTING TERMINAL -->
+        <section class="bg-[#02040a] border border-slate-800 rounded-xl p-6 md:p-8 flex flex-col shadow-[inset_0_0_30px_rgba(0,0,0,1)] relative overflow-hidden transition-all duration-700" id="minting-container">
+            
+            <div class="flex justify-between items-center border-b border-slate-800 pb-3 mb-4 shrink-0">
+                <h2 class="text-xs text-slate-500 font-bold tracking-widest uppercase font-mono">Cryptographic Key Generator</h2>
+                <div class="flex gap-2">
+                    <div class="h-2 w-2 rounded-full bg-slate-700" id="status-dot-1"></div>
+                    <div class="h-2 w-2 rounded-full bg-slate-700" id="status-dot-2"></div>
+                    <div class="h-2 w-2 rounded-full bg-slate-700" id="status-dot-3"></div>
+                </div>
+            </div>
+
+            <!-- Pre-Mint State -->
+            <div id="pre-mint-state" class="flex flex-col items-center justify-center py-8 gap-4">
+                <div class="bg-black/50 border border-slate-800 p-4 rounded text-center w-full max-w-md font-mono text-xs text-slate-400 space-y-2">
+                    <p>Verified Operator: <span id="ui-trainee-name" class="text-slate-200 font-bold">LOADING...</span></p>
+                    <p>Current Temporary ID: <span id="ui-trainee-id" class="text-sky-400 font-bold">LOADING...</span></p>
+                    <p class="pt-2 mt-2 border-t border-slate-800 text-amber-500/80">Action required to burn temporary ID and map physical coordinates to the Master Ledger.</p>
+                </div>
+                <button onclick="executeMintingProtocol()" id="init-mint-btn" class="mt-2 bg-emerald-700 hover:bg-emerald-600 text-white font-bold py-3.5 px-8 rounded border border-emerald-400 tracking-widest text-[0.75rem] uppercase transition-all font-mono shadow-[0_0_15px_rgba(16,185,129,0.2)]">
+                    Initialize Handshake & Mint Key
+                </button>
+            </div>
+
+            <!-- Active Minting Feed (Hidden initially) -->
+            <div id="minting-feed" class="hidden flex-col gap-2 font-mono text-[0.65rem] md:text-xs h-48 overflow-y-auto pr-2">
+                <!-- Logs injected via JS -->
+            </div>
+
+            <!-- Post-Mint State (Hidden initially) -->
+            <div id="post-mint-state" class="hidden flex-col items-center justify-center pt-6 mt-2 border-t border-emerald-900/50 animate-fade-in">
+                <span class="text-slate-500 font-mono text-[0.6rem] uppercase tracking-widest mb-1">Your Permanent 22-Digit Identity Key</span>
+                <div class="bg-black border border-emerald-500/50 p-4 rounded-lg w-full max-w-md text-center mb-6 shadow-[0_0_20px_rgba(16,185,129,0.15)]">
+                    <span id="final-live-key" class="text-emerald-400 font-bold text-sm md:text-base tracking-widest select-all terminal-text"></span>
+                </div>
+                
+                <button onclick="enterTheGrid()" class="w-full max-w-md bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-lg border border-blue-400 tracking-widest text-[0.75rem] uppercase transition-all font-mono shadow-[0_0_20px_rgba(59,130,246,0.3)]">
+                    Enter the Kinetic Grid &gt;&gt;
+                </button>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="w-full text-center font-mono text-[0.6rem] text-slate-600 uppercase tracking-widest absolute bottom-4">
+        © 2026 PINALEAF ADVANCEMENTS LLP // AAROHAN 2050 // KINETIC MATRIX
+    </footer>
+
+    <script>
+        let traineeData = null;
+        let generatedKey = "";
+
+        // On Load: Verify Trainee Session
+        window.addEventListener('DOMContentLoaded', () => {
+            const traineeRaw = sessionStorage.getItem('ucm_active_trainee');
+            if (traineeRaw) {
+                traineeData = JSON.parse(traineeRaw);
+                document.getElementById('ui-trainee-id').innerText = traineeData.id;
+                document.getElementById('ui-trainee-name').innerText = traineeData.name.toUpperCase();
+            } else {
+                // Failsafe for direct access
+                document.getElementById('ui-trainee-id').innerText = "ERROR_NO_UCM_TOKEN";
+                document.getElementById('ui-trainee-name').innerText = "UNREGISTERED_ENTITY";
+                document.getElementById('init-mint-btn').disabled = true;
+                document.getElementById('init-mint-btn').classList.replace('bg-emerald-700', 'bg-red-900');
+                document.getElementById('init-mint-btn').innerText = "ACCESS DENIED";
+            }
+        });
+
+        // Sleep helper for async sequences
+        const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+        function getLiveTimestamp() {
+            const now = new Date();
+            const day = String(now.getDate()).padStart(2, '0');
+            const h = String(now.getHours()).padStart(2, '0');
+            const m = String(now.getMinutes()).padStart(2, '0');
+            const s = String(now.getSeconds()).padStart(2, '0');
+            return `0130.05.26.04.${day}.${h}.${m}.${s}.00.00.00`;
+        }
+
+        async function executeMintingProtocol() {
+            // UI Transition
+            document.getElementById('pre-mint-state').classList.add('hidden');
+            const feed = document.getElementById('minting-feed');
+            feed.classList.remove('hidden');
+            feed.classList.add('flex');
+            
+            const dot1 = document.getElementById('status-dot-1');
+            const dot2 = document.getElementById('status-dot-2');
+            const dot3 = document.getElementById('status-dot-3');
+
+            const log = (msg, color = "text-slate-400") => {
+                feed.innerHTML += `<div class="${color}">${msg}</div>`;
+                feed.scrollTop = feed.scrollHeight;
+            };
+
+            // Sequence
+            dot1.classList.replace('bg-slate-700', 'bg-amber-500');
+            dot1.classList.add('animate-pulse');
+            log("> Requesting network connection to Master Origin Node (THRINC000)...");
+            await sleep(800);
+            
+            log(`> Authenticating UCM Certificate for trainee [${traineeData.id}]...`, "text-sky-400");
+            await sleep(1000);
+
+            dot1.classList.replace('bg-amber-500', 'bg-emerald-500');
+            dot1.classList.remove('animate-pulse');
+            dot2.classList.replace('bg-slate-700', 'bg-red-500');
+            dot2.classList.add('animate-pulse');
+
+            log(`> WARNING: Burning temporary UCM ID from active memory...`, "text-amber-500");
+            await sleep(900);
+            log(`> Temporary ID destroyed. Trainee record purged from Sandbox.`, "text-red-400");
+            await sleep(700);
+
+            dot2.classList.replace('bg-red-500', 'bg-emerald-500');
+            dot2.classList.remove('animate-pulse');
+            dot3.classList.replace('bg-slate-700', 'bg-sky-500');
+            dot3.classList.add('animate-pulse');
+
+            log("> Accessing Functional Bracket: Category 04 (Neural) Identity Array...", "text-slate-300");
+            await sleep(800);
+            log("> Synchronizing temporal epoch via Light-Velocity calculator...", "text-slate-300");
+            await sleep(1200);
+            
+            // Minting the final string using (*00*)
+            generatedKey = `(*00*):${getLiveTimestamp()}`;
+            log(`> █ MINT SUCCESS: Cryptographic identity locked to ledger.`, "text-emerald-400 font-bold");
+            
+            dot3.classList.replace('bg-sky-500', 'bg-emerald-500');
+            dot3.classList.remove('animate-pulse');
+
+            await sleep(800);
+
+            // Container UI shift
+            document.getElementById('minting-container').classList.add('glow-emerald');
+            document.getElementById('final-live-key').innerText = generatedKey;
+            document.getElementById('post-mint-state').classList.remove('hidden');
+            document.getElementById('post-mint-state').classList.add('flex');
+        }
+
+        function enterTheGrid() {
+            // 1. Destroy UCM Session
+            sessionStorage.removeItem('ucm_active_trainee');
+
+            // 2. Establish Live Operational Session
+            const liveSession = {
+                nodeId: generatedKey,
+                name: traineeData ? traineeData.name : "Operator",
+                expiry: Date.now() + (24 * 60 * 60 * 1000) // 24 Hour standard session
+            };
+            localStorage.setItem('kuts_active_session', JSON.stringify(liveSession));
+
+            // 3. Bridge to the Live Master Monolith (index.html)
+            window.location.href = 'index.html';
+        }
+    </script>
+<footer class="max-w-7xl mx-auto mt-auto py-8 border-t border-slate-800 text-center w-full"><a href="index.html" class="inline-flex items-center gap-2 text-[0.7rem] text-slate-500 hover:text-blue-400 font-mono uppercase tracking-widest transition-all"><span class="text-lg">←</span> RETURN TO UNIVERSAL GATEWAY</a></footer>
+</body>
+</html>

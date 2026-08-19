@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Swarm Eye | Macro-Analytics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght=300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #020617; color: #e2e8f0; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .glow-blue { box-shadow: 0 0 20px rgba(59, 130, 246, 0.15); border-color: rgba(59, 130, 246, 0.4); }
+        
+        /* Simulated Radar Map Grid */
+        .map-bg {
+            background-image: 
+                linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            background-position: center center;
+        }
+        
+        /* Map Node Pulses */
+        .node-pulse {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #60a5fa;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px #60a5fa, 0 0 20px #60a5fa;
+            animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+        @keyframes ping {
+            75%, 100% { transform: translate(-50%, -50%) scale(3); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col p-4 md:p-6 relative">
+
+    <!-- HEADER -->
+    <header class="w-full mx-auto border border-blue-900/60 bg-slate-900/60 p-4 rounded-xl flex flex-col md:flex-row justify-between items-center gap-4 mb-6 font-mono text-xs z-20 backdrop-blur-sm">
+        <div>
+            <h1 class="text-xl font-bold text-blue-400 tracking-wider">KUTS_SWARM_EYE</h1>
+            <p class="text-slate-400 text-[0.65rem]">MACRO-NETWORK ANALYTICS // GLOBAL KINETIC HEATMAP</p>
+        </div>
+        <div class="flex gap-4 text-right shrink-0">
+            <div>
+                <span class="text-slate-500 block text-[0.6rem]">NETWORK STATUS</span>
+                <span class="text-emerald-400 font-bold animate-pulse">OPTIMAL</span>
+            </div>
+            <div class="border-l border-slate-700 pl-4">
+                <span class="text-slate-500 block text-[0.6rem]">MASTER NODE</span>
+                <span class="text-blue-400 font-bold">THRINC000</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="w-full mx-auto flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 z-20">
+        
+        <!-- LEFT COLUMN: LIVE METRICS -->
+        <section class="lg:col-span-3 flex flex-col gap-4">
+            
+            <div class="bg-slate-900/70 border border-slate-800 rounded-xl p-5 flex flex-col glow-blue relative overflow-hidden">
+                <div class="absolute top-0 w-full h-1 bg-blue-500/50"></div>
+                <span class="text-[0.65rem] text-slate-400 font-mono tracking-widest uppercase mb-1">Global Kine Velocity (24H)</span>
+                <span id="metric-velocity" class="text-3xl text-blue-400 font-bold font-mono tracking-wider">24,591 Ꝃ</span>
+                <span class="text-[0.6rem] text-emerald-400 mt-2 font-mono">▲ +4.2% VS PREV CYCLE</span>
+            </div>
+
+            <div class="bg-slate-900/70 border border-slate-800 rounded-xl p-5 flex flex-col relative overflow-hidden">
+                <div class="absolute top-0 w-full h-1 bg-cyan-500/50"></div>
+                <span class="text-[0.65rem] text-slate-400 font-mono tracking-widest uppercase mb-1">Active Hardware Nodes</span>
+                <span id="metric-nodes" class="text-3xl text-cyan-400 font-bold font-mono tracking-wider">1,402</span>
+                <span class="text-[0.6rem] text-emerald-400 mt-2 font-mono">▲ +12 NEW BINDINGS</span>
+            </div>
+
+            <div class="bg-slate-900/70 border border-slate-800 rounded-xl p-5 flex flex-col relative overflow-hidden">
+                <div class="absolute top-0 w-full h-1 bg-purple-500/50"></div>
+                <span class="text-[0.65rem] text-slate-400 font-mono tracking-widest uppercase mb-1">Network Hash Rate</span>
+                <span id="metric-hash" class="text-3xl text-purple-400 font-bold font-mono tracking-wider">48.2 TH/s</span>
+                <span class="text-[0.6rem] text-slate-500 mt-2 font-mono">STEADY STATE MAINTAINED</span>
+            </div>
+
+        </section>
+
+        <!-- CENTER COLUMN: GLOBAL HEAT MAP -->
+        <section class="lg:col-span-6 bg-slate-900/50 border border-slate-800 rounded-xl flex flex-col overflow-hidden relative">
+            <div class="p-4 border-b border-slate-800 bg-black/60 flex justify-between items-center z-10 backdrop-blur-sm">
+                <h2 class="text-xs text-slate-300 font-bold tracking-widest uppercase font-mono">Live Spatial Matrix</h2>
+                <div class="flex gap-2">
+                    <span class="h-2 w-2 rounded-full bg-blue-500 animate-pulse mt-1"></span>
+                    <span class="text-[0.6rem] font-mono text-blue-400 uppercase tracking-widest">Live Feed</span>
+                </div>
+            </div>
+            
+            <div class="flex-1 map-bg relative overflow-hidden" id="map-container">
+                <!-- Node pulses injected by JS -->
+                
+                <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20">
+                    <div class="w-64 h-64 border border-blue-500 rounded-full"></div>
+                    <div class="w-96 h-96 border border-blue-500 rounded-full absolute"></div>
+                    <div class="w-[32rem] h-[32rem] border border-blue-500 rounded-full absolute"></div>
+                    <div class="w-full h-px bg-blue-500 absolute"></div>
+                    <div class="h-full w-px bg-blue-500 absolute"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RIGHT COLUMN: LIVE TRANSACTION FEED -->
+        <section class="lg:col-span-3 bg-slate-900/50 border border-slate-800 rounded-xl flex flex-col overflow-hidden max-h-[600px]">
+            <div class="p-4 border-b border-slate-800 bg-black/60 z-10">
+                <h2 class="text-xs text-slate-300 font-bold tracking-widest uppercase font-mono">Global Ledger Stream</h2>
+            </div>
+            <div class="flex-1 overflow-y-auto p-4 flex flex-col gap-2" id="tx-stream">
+                <!-- Transactions injected by JS -->
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="w-full mx-auto border-t border-slate-900 pt-4 mt-6 flex justify-between items-center font-mono text-[0.6rem] text-slate-500 z-20">
+        <span>© 2026 PINALEAF ADVANCEMENTS LLP. MDI6000 PROJECT ARCHITECTURE.</span>
+        <span class="uppercase tracking-widest text-blue-500/30">MACRO ANALYTICS ENGINE</span>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const mapContainer = document.getElementById('map-container');
+        const txStream = document.getElementById('tx-stream');
+        const velocityEl = document.getElementById('metric-velocity');
+        const nodesEl = document.getElementById('metric-nodes');
+        const hashEl = document.getElementById('metric-hash');
+
+        // State
+        let baseVelocity = 24591.22;
+        let baseNodes = 1402;
+        let txCount = 0;
+
+        // Generate random coordinates within the map box
+        function createMapPulse() {
+            const rect = mapContainer.getBoundingClientRect();
+            const x = Math.random() * (rect.width - 40) + 20;
+            const y = Math.random() * (rect.height - 40) + 20;
+            
+            const pulse = document.createElement('div');
+            pulse.className = 'node-pulse';
+            pulse.style.left = `${x}px`;
+            pulse.style.top = `${y}px`;
+            
+            mapContainer.appendChild(pulse);
+            
+            // Remove after animation completes
+            setTimeout(() => {
+                if(pulse.parentNode === mapContainer) {
+                    mapContainer.removeChild(pulse);
+                }
+            }, 2000);
+        }
+
+        // Generate a random ledger entry
+        function generateStreamTx() {
+            txCount++;
+            const type = Math.random() > 0.5 ? 'EXEC' : 'BIND';
+            const nodeList = ["BOMIND004", "LDNUKC001", "NYKUSC003", "DXBAEC002", "SGPASC001", "THRINC001"];
+            const node = nodeList[Math.floor(Math.random() * nodeList.length)];
+            const hash = "0x" + Math.floor(Math.random() * 999999999).toString(16).toUpperCase();
+            
+            const colorClass = type === 'EXEC' ? 'text-blue-400' : 'text-emerald-400';
+            const amount = type === 'EXEC' ? (Math.random() * 10).toFixed(2) + " Ꝃ" : "H-KEY";
+
+            const txHTML = `
+                <div class="bg-black/40 border border-slate-800 rounded p-2 text-[0.65rem] font-mono animate-fade-in transition-all">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="${colorClass} font-bold">${type} // ${node}</span>
+                        <span class="text-slate-300 font-bold">${amount}</span>
+                    </div>
+                    <div class="text-slate-500 truncate select-all">${hash}</div>
+                </div>
+            `;
+            
+            txStream.insertAdjacentHTML('afterbegin', txHTML);
+            
+            // Keep stream from growing infinitely
+            if (txStream.children.length > 20) {
+                txStream.removeChild(txStream.lastChild);
+            }
+        }
+
+        // Update top-level metrics
+        function updateMetrics() {
+            baseVelocity += (Math.random() * 2);
+            velocityEl.innerText = baseVelocity.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0}) + " Ꝃ";
+            
+            if(Math.random() > 0.8) {
+                baseNodes += 1;
+                nodesEl.innerText = baseNodes.toLocaleString();
+            }
+            
+            const hashFluctuation = (48.0 + (Math.random() * 0.5)).toFixed(2);
+            hashEl.innerText = hashFluctuation + " TH/s";
+        }
+
+        // Master Engine Loop
+        setInterval(() => {
+            if(Math.random() > 0.3) {
+                createMapPulse();
+                generateStreamTx();
+            }
+        }, 800);
+
+        setInterval(updateMetrics, 2000);
+        
+        // Initial populate
+        for(let i=0; i<6; i++) { generateStreamTx(); }
+    </script>
+<!-- Resilient Inline Auth & Navigation Injector for Local Testing -->
+    <script>
+        (function() {
+            window.addEventListener('DOMContentLoaded', () => {
+                // Check session; if missing during local test, auto-initialize a mock test session instead of failing
+                let session = localStorage.getItem('kuts_active_session');
+                if (!session) {
+                    session = JSON.stringify({ nodeId: "THRINC000-LOCAL-TEST", expiry: Date.now() + 86400000 });
+                    localStorage.setItem('kuts_active_session', session);
+                }
+
+                // Inject Global Header if missing
+                if (!document.getElementById('kuts-global-header')) {
+                    const headerHTML = `
+                        <header id="kuts-global-header" class="w-full max-w-7xl mx-auto p-6 flex justify-between items-center border-b border-slate-800 bg-[#030712] text-slate-200 mb-6">
+                            <div class="text-blue-400 font-mono font-bold tracking-widest text-sm">
+                                KUTS_MESH_OPERATIONS // MDI6000 [LOCAL MODE]
+                            </div>
+                            <nav id="nav-auth" class="flex gap-4 items-center font-mono"></nav>
+                        </header>`;
+                    document.body.insertAdjacentHTML('afterbegin', headerHTML);
+                }
+
+                // Inject Global Footer if missing
+                if (!document.getElementById('kuts-global-footer') && !window.location.pathname.includes('index.html')) {
+                    const footerHTML = `
+                        <footer id="kuts-global-footer" class="max-w-7xl mx-auto mt-auto py-8 border-t border-slate-800 text-center w-full">
+                            <a href="index.html" class="inline-flex items-center gap-2 text-[0.7rem] text-slate-500 hover:text-blue-400 font-mono uppercase tracking-widest transition-all">
+                                <span class="text-lg">←</span> RETURN TO UNIVERSAL GATEWAY
+                            </a>
+                        </footer>`;
+                    document.body.insertAdjacentHTML('beforeend', footerHTML);
+                }
+
+                updateAuthUI();
+            });
+
+            window.updateAuthUI = function() {
+                const nav = document.getElementById('nav-auth');
+                if (!nav) return;
+                
+                nav.innerHTML = `
+                    <a href="index.html" class="text-slate-400 text-[0.65rem] uppercase font-mono hover:text-white">Gateway</a>
+                    <button onclick="secureLogout()" class="bg-red-950 hover:bg-red-900 text-red-400 font-mono text-[0.65rem] px-3 py-1.5 rounded border border-red-900 uppercase tracking-widest cursor-pointer">
+                        [X] DISCONNECT
+                    </button>`;
+            };
+
+            window.secureLogout = function() {
+                localStorage.removeItem('kuts_active_session');
+                window.location.href = 'sign-in.html';
+            };
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Commune | Independent Credit Desk</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght=300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #030712; color: #cbd5e1; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .glow-emerald { box-shadow: 0 0 20px rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.25); }
+        .pulse-emerald { animation: e-glow 3s infinite ease-in-out; }
+        @keyframes e-glow { 0%, 100% { border-color: rgba(16, 185, 129, 0.2); } 50% { border-color: rgba(16, 185, 129, 0.55); } }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col p-4 md:p-6 bg-[#030712]">
+
+    <!-- MODULE SUBHUD -->
+    <header class="w-full max-w-6xl mx-auto border border-slate-800 bg-slate-900/50 p-4 rounded-xl flex flex-col md:flex-row justify-between items-center gap-4 mb-6 font-mono text-xs backdrop-blur-sm">
+        <div>
+            <h1 class="text-base font-bold text-emerald-400 tracking-wider">KUTS_INDEPENDENT_CREDIT_DESK</h1>
+            <p class="text-slate-500 text-[0.6rem] uppercase tracking-wider">Category 09 // Independent Mutual Advance Layer // Usury-Free Capital Matrix</p>
+        </div>
+        <div class="text-right flex flex-col items-center md:items-end gap-1">
+            <a href="../index.html" class="text-cyan-400 font-bold hover:underline tracking-widest text-[0.65rem]">&lt;&lt; ESCAPE TO SYSTEM ROOT</a>
+            <span class="text-emerald-400 font-bold bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-900/30 text-[0.55rem]">AUXILIARY LAYER ACTIVE</span>
+        </div>
+    </header>
+
+    <main class="w-full max-w-6xl mx-auto flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- LEFT 4 COLUMNS: INITIALIZE NEW LOAN/ADVANCE -->
+        <section class="lg:col-span-4 bg-slate-900/50 border border-slate-800 rounded-xl p-5 flex flex-col justify-between glow-emerald backdrop-blur-sm pulse-emerald">
+            <div>
+                <h2 class="text-xs text-emerald-400 font-bold tracking-widest uppercase font-mono border-b border-slate-800 pb-3 mb-4">Issue Micro-Advance</h2>
+                
+                <form id="loan-form" onsubmit="processCreditEmission(event)" class="space-y-4 font-mono text-xs">
+                    <div>
+                        <label class="block text-slate-500 text-[0.6rem] mb-1">TARGET WORKER NODE ID</label>
+                        <input type="text" id="credit-worker" placeholder="e.g., 0xCOM_NODE_082" inherit required class="w-full bg-black border border-slate-800 p-2.5 rounded text-slate-200 outline-none focus:border-emerald-500 uppercase tracking-wider">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-slate-500 text-[0.6rem] mb-1">ADVANCE PRINCIPAL AMOUNT (Ꝃ)</label>
+                        <input type="number" id="credit-amount" placeholder="Maximum 500 Ꝃ" max="500" min="10" required class="w-full bg-black border border-slate-800 p-2.5 rounded text-emerald-400 font-bold outline-none focus:border-emerald-500">
+                    </div>
+
+                    <div>
+                        <label class="block text-slate-500 text-[0.6rem] mb-1">REPAYMENT VELOCITY WINDOW</label>
+                        <select id="credit-window" required class="w-full bg-black border border-slate-800 p-2.5 rounded text-slate-300 outline-none focus:border-emerald-500 font-sans text-xs">
+                            <option value="4 cycles">4 Sync Cycles (Fast Clear)</option>
+                            <option value="8 cycles">8 Sync Cycles (Standard)</option>
+                            <option value="12 cycles">12 Sync Cycles (Extended)</option>
+                        </select>
+                    </div>
+
+                    <div class="bg-emerald-950/20 border border-emerald-900/40 p-3 rounded text-[0.65rem] text-emerald-400/90 leading-relaxed font-sans">
+                        <strong>⚠️ Zero Interest Mandate:</strong> Total due matches principal exactly[cite: 2, 7]. No compounding, no penalties[cite: 2, 7]. Repayment metrics map directly to reputation velocity[cite: 2, 7].
+                    </div>
+
+                    <button type="submit" class="w-full bg-emerald-950 hover:bg-emerald-900 border border-emerald-700 text-emerald-300 py-3 rounded uppercase tracking-widest font-bold text-[0.65rem] transition-all shadow-[0_0_15px_rgba(16,185,129,0.15)]">
+                        Authorize Advance Emission
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- RIGHT 8 COLUMNS: PASSIVE DEBT STANDINGS MATRIX -->
+        <section class="lg:col-span-8 bg-slate-900/30 border border-slate-800 rounded-xl p-5 flex flex-col backdrop-blur-sm self-stretch overflow-hidden">
+            <h2 class="text-xs text-slate-300 font-bold tracking-widest uppercase font-mono border-b border-slate-800 pb-3 mb-4">Active Advance Balances Ledger</h2>
+            
+            <div class="overflow-x-auto flex-1">
+                <table class="w-full text-left border-collapse font-mono text-xs whitespace-nowrap">
+                    <thead>
+                        <tr class="bg-black/30 text-slate-500 uppercase text-[0.6rem] tracking-wider border-b border-slate-800">
+                            <th class="p-3">Worker ID Token</th>
+                            <th class="p-3">Principal Issued</th>
+                            <th class="p-3">Remaining Balance</th>
+                            <th class="p-3">Timeline Velocity</th>
+                            <th class="p-3 text-right pr-4">Credit Status Flag</th>
+                        </tr>
+                    </thead>
+                    <tbody id="loan-body" class="divide-y divide-slate-900 text-slate-300 text-[0.65rem]">
+                        <tr class="hover:bg-slate-900/20 transition-colors">
+                            <td class="p-3 text-emerald-400 font-bold select-all">0xCOM_NODE_082</td>
+                            <td class="p-3">200.00 Ꝃ</td>
+                            <td class="p-3 font-semibold text-slate-100">50.00 Ꝃ</td>
+                            <td class="p-3 text-slate-400">1 / 4 Cycles Left</td>
+                            <td class="p-3 text-right pr-4 text-emerald-400 font-bold">● ORE_HEALTH_EXCELLENT</td>
+                        </tr>
+                        <tr class="hover:bg-slate-900/20 transition-colors">
+                            <td class="p-3 text-emerald-400 font-bold select-all">0xCOM_NODE_104</td>
+                            <td class="p-3">350.00 Ꝃ</td>
+                            <td class="p-3 font-semibold text-slate-100">350.00 Ꝃ</td>
+                            <td class="p-3 text-slate-400">8 / 8 Cycles Left</td>
+                            <td class="p-3 text-right pr-4 text-yellow-500 font-bold">● INITIAL_DRAWDOWN</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- INTRA-FOLDER MODULAR DEPLOYMENT MENUBAR -->
+    <nav class="w-full max-w-6xl mx-auto mt-6 grid grid-cols-2 sm:grid-cols-5 gap-2 font-mono text-[0.65rem] text-slate-400 shrink-0">
+        <a href="./my-task.html" class="bg-slate-950 border border-slate-900 hover:border-purple-900/60 p-2 rounded text-center transition-colors">➔ My Tasks</a>
+        <a href="./account.html" class="bg-slate-950 border border-slate-900 hover:border-purple-900/60 p-2 rounded text-center transition-colors">➔ Wallet Ledger</a>
+        <a href="./registry.html" class="bg-slate-950 border border-slate-900 hover:border-purple-900/60 p-2 rounded text-center transition-colors">➔ Member Registry</a>
+        <a href="./task-board.html" class="bg-slate-950 border border-slate-900 hover:border-purple-900/60 p-2 rounded text-center transition-colors">➔ Task Allocator</a>
+        <a href="./allowance-ledger.html" class="bg-slate-950 border border-slate-900 hover:border-purple-900/60 p-2 rounded text-center transition-colors">➔ Allowance Matrix</a>
+    </nav>
+
+    <!-- FOOTER -->
+    <footer class="w-full max-w-6xl mx-auto border-t border-slate-900 pt-4 mt-4 text-center font-mono text-[0.6rem] text-slate-600">
+        © 2026 PINALEAF ADVANCEMENTS LLP // AUXILIARY MUTUAL ADVANCE DEPLOYMENT MATRIX // VERSION 2.0
+    </footer>
+
+    <script>
+        function processCreditEmission(e) {
+            e.preventDefault();
+            const workerId = document.getElementById('credit-worker').value.toUpperCase().trim();
+            const amount = parseFloat(document.getElementById('credit-amount').value) || 0;
+            const windowTime = document.getElementById('credit-window').value;
+            const body = document.getElementById('loan-body');
+
+            const row = `
+                <tr class="animate-pulse bg-emerald-950/10">
+                    <td class="p-3 text-emerald-400 font-bold select-all">${workerId}</td>
+                    <td class="p-3">${amount.toFixed(2)} Ꝃ</td>
+                    <td class="p-3 font-semibold text-slate-100">${amount.toFixed(2)} Ꝃ</td>
+                    <td class="p-3 text-slate-400">${windowTime} Remaining</td>
+                    <td class="p-3 text-right pr-4 text-cyan-400 font-bold">⚡ PENDING_BROADCAST</td>
+                </tr>
+            `;
+            body.insertAdjacentHTML('afterbegin', row);
+            e.target.reset();
+        }
+    </script>
+</body>
+</html>

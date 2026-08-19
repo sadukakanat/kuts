@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Governance | Executive Capacity Planner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght=300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #030712; color: #cbd5e1; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .glow-purple { box-shadow: 0 0 25px rgba(147, 51, 234, 0.1); border-color: rgba(147, 51, 234, 0.25); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col p-4 md:p-6 bg-[#030712]">
+
+    <!-- HEADER HUD -->
+    <header class="w-full max-w-6xl mx-auto border border-slate-800 bg-slate-900/50 p-4 rounded-xl flex flex-col sm:flex-row justify-between items-center gap-4 mb-6 font-mono text-xs backdrop-blur-sm">
+        <div>
+            <h1 class="text-base font-bold text-purple-400 tracking-wider">KUTS_EXECUTIVE_CAPACITY_PLANNER</h1>
+            <p class="text-slate-500 text-[0.6rem] uppercase tracking-wider">MDI6000 Master Infrastructure Runway Optimization Engine</p>
+        </div>
+        <div class="text-right flex flex-col items-center sm:items-end gap-1">
+            <a href="index.html" class="text-purple-400 font-bold hover:underline tracking-widest text-[0.65rem]">&lt;&lt; ESCAPE TO SYSTEM ROOT</a>
+            <span class="text-purple-400 font-bold bg-purple-950/40 px-2 py-0.5 rounded border border-purple-900/30 text-[0.55rem]">CAPACITY CORE ONLINE</span>
+        </div>
+    </header>
+
+    <main class="w-full max-w-6xl mx-auto flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- LEFT PANEL: MACRO RUNWAY METRICS -->
+        <section class="lg:col-span-4 bg-slate-900/50 border border-slate-800 rounded-xl p-5 flex flex-col justify-between glow-purple backdrop-blur-sm">
+            <div class="space-y-4 font-mono text-xs">
+                <h2 class="text-xs text-purple-400 font-bold tracking-widest uppercase border-b border-slate-800 pb-3 mb-2">System Runway Status</h2>
+                
+                <div class="bg-black/40 border border-slate-900 p-3 rounded-lg">
+                    <span class="text-slate-500 block text-[0.55rem] uppercase">Aggregated Network Volatility</span>
+                    <span id="planner-total-tx" class="text-xl text-slate-200 font-bold block mt-0.5">0 Captured Blocks</span>
+                </div>
+
+                <div class="bg-black/40 border border-slate-900 p-3 rounded-lg">
+                    <span class="text-slate-500 block text-[0.55rem] uppercase">Active Registered Endpoints</span>
+                    <span id="planner-active-hw" class="text-xl text-cyan-400 font-bold block mt-0.5">0 Hardware Slots</span>
+                </div>
+
+                <div class="bg-black/40 border border-slate-900 p-4 rounded-xl border-purple-950/40 text-center">
+                    <span class="text-slate-500 block text-[0.55rem] uppercase font-bold tracking-wider mb-1">Global Network Yield</span>
+                    <span id="planner-gross-yield" class="text-2xl font-bold text-emerald-400 tracking-wider">0.0000 Ꝃ</span>
+                </div>
+            </div>
+
+            <div class="bg-purple-950/10 border border-purple-900/20 p-3 rounded text-[0.6rem] text-slate-400 font-sans leading-relaxed mt-6">
+                <strong>📈 Multi-Scalar Forecasting:</strong> This overview aggregates values processed across both the Worker and MSME tiers, giving industrial planners a clear look at output trends without back-end parsing latency.
+            </div>
+        </section>
+
+        <!-- RIGHT PANEL: DYNAMIC CAPACITY ANALYTICS GRID -->
+        <section class="lg:col-span-8 bg-slate-900/30 border border-slate-800 rounded-xl p-5 flex flex-col backdrop-blur-sm justify-between self-stretch overflow-hidden">
+            <div class="space-y-4">
+                <h2 class="text-xs text-slate-300 font-bold tracking-widest uppercase font-mono border-b border-slate-800 pb-3 mb-4">Multi-Scalar Allocation Thresholds</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 font-mono text-xs">
+                    <!-- Target Capacity 1 -->
+                    <div class="bg-black/40 border border-slate-800 p-4 rounded-xl flex flex-col justify-between">
+                        <div>
+                            <span class="text-purple-400 font-bold text-[0.65rem] uppercase block tracking-wider">Industrial Power Threshold</span>
+                            <p class="text-slate-500 font-sans text-[0.65rem] mt-1 leading-relaxed">Monitors infrastructure load balancing benchmarks calibrated to real-time machine outputs.</p>
+                        </div>
+                        <div class="mt-4 flex justify-between items-end border-t border-slate-900/80 pt-2">
+                            <span class="text-slate-500 text-[0.55rem]">CAPACITY UTILITY:</span>
+                            <span class="text-slate-200 font-bold text-sm">48.5 / 100 MW</span>
+                        </div>
+                    </div>
+
+                    <!-- Target Capacity 2 -->
+                    <div class="bg-black/40 border border-slate-800 p-4 rounded-xl flex flex-col justify-between">
+                        <div>
+                            <span class="text-cyan-400 font-bold text-[0.65rem] uppercase block tracking-wider">Corridor Logistics Capacity</span>
+                            <p class="text-slate-500 font-sans text-[0.65rem] mt-1 leading-relaxed">Tracks shipping and cargo values routing across active supply-chain corridors.</p>
+                        </div>
+                        <div class="mt-4 flex justify-between items-end border-t border-slate-900/80 pt-2">
+                            <span class="text-slate-500 text-[0.55rem]">TRANSIT VOLUME:</span>
+                            <span class="text-cyan-400 font-bold text-sm" id="planner-transit-val">0.00 Ꝃ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MANUAL TARGET CALIBRATOR SIMULATOR -->
+            <div class="border-t border-slate-800 pt-4 mt-6 font-mono text-xs">
+                <span class="text-slate-500 text-[0.6rem] block font-bold mb-2 uppercase">Simulate Capacity Optimization Target Scaling</span>
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <input type="number" id="planner-scale-input" value="6000" class="bg-black border border-slate-800 p-2.5 rounded text-slate-200 outline-none focus:border-purple-500 w-full sm:w-1/3">
+                    <button onclick="calculateOptimizedCapacities()" class="bg-purple-900 hover:bg-purple-800 text-purple-100 font-bold py-2.5 px-6 rounded border border-purple-500 tracking-wider text-[0.65rem] uppercase transition-colors whitespace-nowrap">
+                        Execute Optimization Model
+                    </button>
+                </div>
+                <div class="mt-3 text-[0.65rem] text-slate-400 font-sans hidden" id="planner-scale-result">
+                    Optimization run successful: Scaled target commands a baseline structure footprint requirements margin of <span class="text-purple-400 font-mono font-bold" id="planner-scaled-output">0.0000 Ꝃ</span> across active network nodes.
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FLOATING NAV BASE -->
+    <nav class="w-full max-w-6xl mx-auto mt-6 grid grid-cols-2 sm:grid-cols-4 gap-2 font-mono text-[0.65rem] text-slate-400 shrink-0">
+        <a href="./dashboard.html" class="bg-slate-950 border border-slate-900 hover:border-purple-900/60 p-2 rounded text-center transition-colors">➔ Sync Dashboard</a>
+        <a href="./supply-chain.html" class="bg-slate-950 border border-slate-900 hover:border-cyan-900/60 p-2 rounded text-center transition-colors">➔ Supply Chain</a>
+        <a href="./compliance.html" class="bg-slate-950 border border-slate-900 hover:border-blue-900/60 p-2 rounded text-center transition-colors">➔ Compliance Audit</a>
+        <a href="./device-manager.html" class="bg-slate-950 border border-slate-900 hover:border-cyan-900/60 p-2 rounded text-center transition-colors">➔ Device Manager</a>
+    </nav>
+
+    <!-- CORE LOGIC SCRIPTS -->
+    <script src="./core/kuts-core-bridge.js"></script>
+    <script>
+        function renderPlannerMetrics() {
+            const logs = KUTS_BRIDGE.getAuditLogs();
+            
+            // Read active bound endpoints array from shared entity key stores
+            const rawHw = localStorage.getItem(KUTS_BRIDGE.STORAGE_KEYS.ENTITIES);
+            const boundDevices = rawHw ? JSON.parse(rawHw) : [];
+
+            // Compute running values directly from live cross-suite variables
+            let grossVolume = 0;
+            let totalLogisticsGross = 0;
+
+            logs.forEach(log => {
+                grossVolume += log.gross;
+                if (log.desc.includes("Freight Run") || log.source.includes("LOGISTICS")) {
+                    totalLogisticsGross += log.gross;
+                }
+            });
+
+            document.getElementById('planner-total-tx').innerText = `${logs.length} Captured Blocks`;
+            document.getElementById('planner-active-hw').innerText = `${boundDevices.length} Hardware Slots`;
+            document.getElementById('planner-gross-yield').innerText = grossVolume.toFixed(4) + " Ꝃ";
+            document.getElementById('planner-transit-val').innerText = totalLogisticsGross.toFixed(2) + " Ꝃ";
+        }
+
+        function calculateOptimizedCapacities() {
+            const daysInput = parseFloat(document.getElementById('planner-scale-input').value) || 0;
+            const outputBox = document.getElementById('planner-scale-result');
+            
+            // Apply standard system allocation scaling ratio model calculations
+            const scaledTarget = daysInput * 0.24;
+
+            document.getElementById('planner-scaled-output').innerText = scaledTarget.toFixed(4) + " Ꝃ";
+            outputBox.classList.remove('hidden');
+        }
+
+        window.addEventListener('storage', renderPlannerMetrics);
+        window.addEventListener('DOMContentLoaded', () => {
+            renderPlannerMetrics();
+        });
+    </script>
+<!-- Resilient Inline Auth & Navigation Injector for Local Testing -->
+    <script>
+        (function() {
+            window.addEventListener('DOMContentLoaded', () => {
+                // Check session; if missing during local test, auto-initialize a mock test session instead of failing
+                let session = localStorage.getItem('kuts_active_session');
+                if (!session) {
+                    session = JSON.stringify({ nodeId: "THRINC000-LOCAL-TEST", expiry: Date.now() + 86400000 });
+                    localStorage.setItem('kuts_active_session', session);
+                }
+
+                // Inject Global Header if missing
+                if (!document.getElementById('kuts-global-header')) {
+                    const headerHTML = `
+                        <header id="kuts-global-header" class="w-full max-w-7xl mx-auto p-6 flex justify-between items-center border-b border-slate-800 bg-[#030712] text-slate-200 mb-6">
+                            <div class="text-blue-400 font-mono font-bold tracking-widest text-sm">
+                                KUTS_MESH_OPERATIONS // MDI6000 [LOCAL MODE]
+                            </div>
+                            <nav id="nav-auth" class="flex gap-4 items-center font-mono"></nav>
+                        </header>`;
+                    document.body.insertAdjacentHTML('afterbegin', headerHTML);
+                }
+
+                // Inject Global Footer if missing
+                if (!document.getElementById('kuts-global-footer') && !window.location.pathname.includes('index.html')) {
+                    const footerHTML = `
+                        <footer id="kuts-global-footer" class="max-w-7xl mx-auto mt-auto py-8 border-t border-slate-800 text-center w-full">
+                            <a href="index.html" class="inline-flex items-center gap-2 text-[0.7rem] text-slate-500 hover:text-blue-400 font-mono uppercase tracking-widest transition-all">
+                                <span class="text-lg">←</span> RETURN TO UNIVERSAL GATEWAY
+                            </a>
+                        </footer>`;
+                    document.body.insertAdjacentHTML('beforeend', footerHTML);
+                }
+
+                updateAuthUI();
+            });
+
+            window.updateAuthUI = function() {
+                const nav = document.getElementById('nav-auth');
+                if (!nav) return;
+                
+                nav.innerHTML = `
+                    <a href="index.html" class="text-slate-400 text-[0.65rem] uppercase font-mono hover:text-white">Gateway</a>
+                    <button onclick="secureLogout()" class="bg-red-950 hover:bg-red-900 text-red-400 font-mono text-[0.65rem] px-3 py-1.5 rounded border border-red-900 uppercase tracking-widest cursor-pointer">
+                        [X] DISCONNECT
+                    </button>`;
+            };
+
+            window.secureLogout = function() {
+                localStorage.removeItem('kuts_active_session');
+                window.location.href = 'sign-in.html';
+            };
+        })();
+    </script>
+</body>
+</html>

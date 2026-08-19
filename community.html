@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS P2P Social Bulletin Mesh</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght=300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #050a15; color: #e2e8f0; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .terminal-box { border-color: rgba(147, 51, 234, 0.3); box-shadow: 0 0 15px rgba(147, 51, 234, 0.15); }
+        .glow-purple { border-color: rgba(147, 51, 234, 0.5); box-shadow: 0 0 20px rgba(147, 51, 234, 0.25); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col p-4 md:p-6 bg-[#040812]">
+
+    <header class="w-full max-w-5xl mx-auto border border-purple-900/60 bg-slate-900/40 p-4 rounded-xl flex flex-col md:flex-row justify-between items-center gap-4 mb-6 font-mono text-xs">
+        <div>
+            <h1 class="text-xl font-bold text-purple-400 tracking-wider">KUTS_COMMUNITY_MESH</h1>
+            <p class="text-slate-400 text-[0.65rem]">SERVERLESS TELEMETRY DISCOVERY // PROTOCOL: DECENTRALIZED WHISPER GOSSIP</p>
+        </div>
+        <div class="bg-black/50 p-2 rounded border border-purple-900/30 text-emerald-400 text-center w-full md:w-auto">
+            <span class="text-slate-500 block text-[0.55rem]">UNIVERSAL COUPLING TEMPORAL VALUE</span>
+            <span id="comm-clock" class="text-[0.75rem]">SYNCHRONIZING PEER SWARM...</span>
+        </div>
+        <div class="text-right shrink-0">
+            <span class="text-slate-400">MESH PEERS: </span>
+            <span id="peer-count" class="text-purple-400 font-bold animate-pulse">● 0 PEERS ACTIVE</span>
+        </div>
+    </header>
+
+    <main class="w-full max-w-5xl mx-auto grid md:grid-cols-12 gap-6 flex-1 items-start">
+        
+        <section class="md:col-span-5 flex flex-col gap-6">
+            <div class="bg-slate-900/50 border border-purple-900/40 rounded-xl p-5 flex flex-col gap-4 terminal-box glow-purple">
+                <div class="border-b border-purple-900/40 pb-2">
+                    <h2 class="text-xs text-purple-400 font-bold tracking-widest uppercase font-mono">01. Broadcast Input Signal</h2>
+                    <p class="text-slate-400 font-sans text-[0.7rem] mt-0.5">Inject an encrypted state status string directly into the localized gossip stream.</p>
+                </div>
+
+                <form id="gossip-form" class="flex flex-col gap-4 font-mono text-xs text-slate-300" onsubmit="event.preventDefault(); dispatchGossipWhisper();">
+                    <div class="flex flex-col gap-1">
+                        <label class="text-slate-500 font-bold uppercase">Operator Identity / Node ID:</label>
+                        <input type="text" id="gossip-node-id" value="+9198460XXXXX" class="bg-black/60 border border-slate-800 rounded p-2 text-purple-300 focus:outline-none focus:border-purple-500 font-bold">
+                    </div>
+
+                    <div class="flex flex-col gap-1">
+                        <label class="text-slate-500 font-bold uppercase">Bulletin Announcement Body:</label>
+                        <textarea id="gossip-msg" rows="3" class="bg-black/60 border border-slate-800 rounded p-2 text-slate-200 focus:outline-none focus:border-purple-500 font-sans text-xs resize-none" placeholder="Enter localized supply-chain status updates, corridor logistics anomalies, or machine throughput milestones..."></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-purple-900 hover:bg-purple-800 text-white font-bold py-3 px-4 rounded border border-purple-500 text-xs tracking-wider transition-colors uppercase mt-1">
+                        Whisper to Network Swarm >>
+                    </button>
+                </form>
+            </div>
+
+            <div class="bg-slate-900/30 border border-slate-800 p-4 rounded-xl font-mono text-[0.65rem] text-slate-400 leading-relaxed">
+                <span class="text-purple-400 block font-bold mb-1 uppercase">🔒 Ephemeral Volatile Invariance:</span>
+                This social dashboard does not communicate with centralized web databases or cloud loggers. Messages are stored entirely in local browser RAM sandbox channels, echoing directly from node-to-node across active active clients. Closing the browser screen purges data blocks immediately.
+            </div>
+        </section>
+
+        <section class="md:col-span-7 bg-slate-900/20 border border-blue-900/30 rounded-xl p-4 terminal-box h-[485px] flex flex-col">
+            <div class="flex justify-between items-center border-b border-blue-900/40 pb-3 mb-3 shrink-0">
+                <h2 class="text-xs text-purple-400 font-bold tracking-widest uppercase font-mono">02. Decentralized Peer-to-Peer Bulletin Stream</h2>
+                <span class="text-[0.6rem] bg-slate-950 text-slate-500 px-2 py-0.5 rounded border border-slate-900 font-mono font-bold">LIVE MESH SWARM</span>
+            </div>
+
+            <div id="gossip-ticker" class="flex-1 overflow-y-auto flex flex-col gap-2 pr-1 text-xs font-mono">
+                </div>
+        </section>
+    </main>
+
+    <footer class="w-full max-w-5xl mx-auto border-t border-slate-900 pt-4 mt-6 flex flex-col sm:flex-row justify-between items-center font-mono text-[0.6rem] text-slate-500 gap-2">
+        <span>© 2026 PINALEAF ADVANCEMENTS LLP. ALL RIGHTS RESERVED.</span>
+        <span class="text-purple-400/40 uppercase tracking-widest">DECENTRALIZED SOCIAL MATRIX INITIALIZED // DATABASE FREE SECURITY VALIDATED</span>
+    </footer>
+
+    <script>
+        let currentPeers = 3;
+
+        // --- MASTER UNIVERSAL TEMPORAL MATRIX TIMER ---
+        function runCommunityClock() {
+            setInterval(() => {
+                const now = new Date();
+                const GE = "0130"; const EE = "05"; const PE = "26"; const TE = "04"; 
+                const Day = now.getDate().toString().padStart(2, '0');
+                const GigaE = now.getHours().toString().padStart(2, '0');
+                const MegaE = now.getMinutes().toString().padStart(2, '0');
+                const KiloE = now.getSeconds().toString().padStart(2, '0');
+                
+                const ms = now.getMilliseconds();
+                const BaseE = Math.floor(ms / 10).toString().padStart(2, '0');
+                const MilliE = Math.floor(Math.random() * 99).toString().padStart(2, '0'); 
+                const MicroE = Math.floor(Math.random() * 99).toString().padStart(2, '0');
+
+                document.getElementById('comm-clock').innerText = 
+                    `(+00):${GE}.${EE}.${PE}.${TE}.${Day}.${GigaE}.${MegaE}.${KiloE}.${BaseE}.${MilliE}.${MicroE}`;
+            }, 33);
+        }
+
+        // --- DISPATCH HUMAN MANUAL OPERATOR MESSAGE WHISPER ---
+        function dispatchGossipWhisper() {
+            const ticker = document.getElementById('gossip-ticker');
+            const nodeId = document.getElementById('gossip-node-id').value.trim();
+            const textMsg = document.getElementById('gossip-msg').value.trim();
+
+            if (!textMsg) return;
+
+            const timeString = document.getElementById('comm-clock').innerText.split(':')[1] || "00.00.00...";
+            appendWhisperCard(nodeId, textMsg, timeString, true);
+            
+            document.getElementById('gossip-msg').value = ""; // Clear clean text form field area
+        }
+
+        // --- REUSABLE CARD RENDER TEMPLATE COMPILER ---
+        function appendWhisperCard(origin, msg, timestamp, isLocalOrigin) {
+            const ticker = document.getElementById('gossip-ticker');
+            
+            const cardHTML = `
+                <div class="p-3 bg-slate-900/60 border ${isLocalOrigin ? 'border-purple-900/50 bg-purple-950/5' : 'border-slate-800'} rounded-xl flex flex-col gap-1 transition-all hover:border-purple-500/30">
+                    <div class="flex justify-between text-[0.6rem] text-slate-500">
+                        <span class="${isLocalOrigin ? 'text-purple-400 font-bold' : 'text-blue-400 font-bold'} bg-slate-950 px-1.5 py-0.5 rounded uppercase tracking-wider">
+                            ${isLocalOrigin ? '● LOCAL_NODE_WHISPER' : '👥 INBOUND_MESH_ECHO'}
+                        </span>
+                        <span>STAMP_REF: ${timestamp.substring(13, 21)}</span>
+                    </div>
+                    <div class="text-[0.65rem] text-slate-400 font-mono mt-0.5"><span class="text-slate-500 font-bold">NODE_ID:</span> <span class="text-slate-200 select-all font-bold">${origin}</span></div>
+                    <div class="text-slate-300 font-sans mt-1 leading-relaxed text-xs">${msg}</div>
+                </div>`;
+            
+            ticker.insertAdjacentHTML('afterbegin', cardHTML);
+            if (ticker.children.length > 12) ticker.removeChild(ticker.lastChild);
+        }
+
+        // --- SIMULATED BACKGROUND PEER SWARM SWAPPING TRAFFIC ---
+        function simulateNetworkSwarmEchoes() {
+            const targetTicker = document.getElementById('gossip-ticker');
+            
+            // Adjust dynamic participant count metrics randomly to simulate live networking loops
+            currentPeers = Math.max(1, currentPeers + (Math.random() > 0.5 ? 1 : -1));
+            document.getElementById('peer-count').innerText = `● ${currentPeers} PEERS ACTIVE`;
+
+            const simulatedWhispers = [
+                { id: "TUPINS014", msg: "Corridor Ingestion Baseline stable. Energy throughput averaging 245 kWh across active weaving sectors." },
+                { id: "ERDINS015", msg: "Agricultural Soil Organic Carbon (SOC) sensor calibration complete. Preparing to batch telemetry profiles." },
+                { id: "CJBINP005", msg: "Level 2 Primary routing parameters synced cleanly. Standing by to route meso-grid data cascades." },
+                { id: "+9194471XXXXX", msg: "Freight transport vector approaching Palakkad macro gateway tracking bounds safely." }
+            ];
+
+            const chosenSample = simulatedWhispers[Math.floor(Math.random() * simulatedWhispers.length)];
+            const timeStreamStamp = document.getElementById('comm-clock').innerText.split(':')[1] || "00.00.00...";
+
+            appendWhisperCard(chosenSample.id, chosenSample.msg, timeStreamStamp, false);
+        }
+
+        // Register boot system initializations logs hooks
+        window.addEventListener('DOMContentLoaded', () => {
+            runCommunityClock();
+            
+            // Inject a few starting seed mock chat rows for visual design modeling layouts
+            setTimeout(() => {
+                appendWhisperCard("THRINC000", "Genesis Master Origin signaling tracking activated cleanly. Standing by for local MSME cluster nodes.", "00.00.00.00.00.00.00.00", false);
+                buildLoopTraffic = setInterval(simulateNetworkSwarmEchoes, 6000); // Trigger an inbound message every 6 seconds
+            }, 500);
+        });
+</script>
+<!-- Resilient Inline Auth & Navigation Injector for Local Testing -->
+    <script>
+        (function() {
+            window.addEventListener('DOMContentLoaded', () => {
+                // Check session; if missing during local test, auto-initialize a mock test session instead of failing
+                let session = localStorage.getItem('kuts_active_session');
+                if (!session) {
+                    session = JSON.stringify({ nodeId: "THRINC000-LOCAL-TEST", expiry: Date.now() + 86400000 });
+                    localStorage.setItem('kuts_active_session', session);
+                }
+
+                // Inject Global Header if missing
+                if (!document.getElementById('kuts-global-header')) {
+                    const headerHTML = `
+                        <header id="kuts-global-header" class="w-full max-w-7xl mx-auto p-6 flex justify-between items-center border-b border-slate-800 bg-[#030712] text-slate-200 mb-6">
+                            <div class="text-blue-400 font-mono font-bold tracking-widest text-sm">
+                                KUTS_MESH_OPERATIONS // MDI6000 [LOCAL MODE]
+                            </div>
+                            <nav id="nav-auth" class="flex gap-4 items-center font-mono"></nav>
+                        </header>`;
+                    document.body.insertAdjacentHTML('afterbegin', headerHTML);
+                }
+
+                // Inject Global Footer if missing
+                if (!document.getElementById('kuts-global-footer') && !window.location.pathname.includes('index.html')) {
+                    const footerHTML = `
+                        <footer id="kuts-global-footer" class="max-w-7xl mx-auto mt-auto py-8 border-t border-slate-800 text-center w-full">
+                            <a href="index.html" class="inline-flex items-center gap-2 text-[0.7rem] text-slate-500 hover:text-blue-400 font-mono uppercase tracking-widest transition-all">
+                                <span class="text-lg">←</span> RETURN TO UNIVERSAL GATEWAY
+                            </a>
+                        </footer>`;
+                    document.body.insertAdjacentHTML('beforeend', footerHTML);
+                }
+
+                updateAuthUI();
+            });
+
+            window.updateAuthUI = function() {
+                const nav = document.getElementById('nav-auth');
+                if (!nav) return;
+                
+                nav.innerHTML = `
+                    <a href="index.html" class="text-slate-400 text-[0.65rem] uppercase font-mono hover:text-white">Gateway</a>
+                    <button onclick="secureLogout()" class="bg-red-950 hover:bg-red-900 text-red-400 font-mono text-[0.65rem] px-3 py-1.5 rounded border border-red-900 uppercase tracking-widest cursor-pointer">
+                        [X] DISCONNECT
+                    </button>`;
+            };
+
+            window.secureLogout = function() {
+                localStorage.removeItem('kuts_active_session');
+                window.location.href = 'sign-in.html';
+            };
+        })();
+    </script>
+</body>
+</html>

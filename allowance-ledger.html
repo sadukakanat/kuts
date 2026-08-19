@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Commune | Support & Allowance Ledger</title>
+    <!-- 1. Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 2. Link your Auth Bridge -->
+    <script src="core/auth-bridge.js"></script> 
+    
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght=300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #030712; color: #cbd5e1; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .glow-purple { box-shadow: 0 0 20px rgba(147, 51, 234, 0.1); border-color: rgba(147, 51, 234, 0.25); }
+        .pulse-purple { animation: p-glow 3s infinite ease-in-out; }
+        @keyframes p-glow { 0%, 100% { border-color: rgba(147, 51, 234, 0.2); } 50% { border-color: rgba(147, 51, 234, 0.5); } }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col p-4 md:p-6 bg-[#030712]">
+
+    <header class="w-full max-w-6xl mx-auto border border-slate-800 bg-slate-900/50 p-4 rounded-xl flex flex-col md:flex-row justify-between items-center gap-4 mb-6 font-mono text-xs backdrop-blur-sm">
+        <div>
+            <h1 class="text-base font-bold text-purple-400 tracking-wider">KUTS_ALLOWANCE_SUPPORT_MATRICES</h1>
+            <p class="text-slate-500 text-[0.6rem] uppercase tracking-wider">Category 09 // Production Stipends & Dynamic Payout Amortization</p>
+        </div>
+        <div class="text-right flex flex-col items-center md:items-end gap-1">
+            <a href="index.html" class="text-cyan-400 font-bold hover:underline tracking-widest text-[0.65rem]">&lt;&lt; ESCAPE TO SYSTEM ROOT</a>
+            <span class="text-slate-400 text-[0.65rem]">COMMUNE CODE BOUND: <span class="text-purple-400 font-bold uppercase">THRINC000</span></span>
+        </div>
+    </header>
+
+    <main class="w-full max-w-6xl mx-auto flex-1 flex flex-col gap-6">
+        <section class="grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono text-center text-xs">
+            <div class="bg-slate-900/40 border border-slate-800 p-4 rounded-xl">
+                <span class="text-slate-500 block text-[0.55rem] uppercase tracking-widest">Total Claims Logged</span>
+                <span id="stat-total-claims" class="text-purple-400 font-bold text-xl mt-1 block">0</span>
+            </div>
+            <div class="bg-slate-900/40 border border-slate-800 p-4 rounded-xl">
+                <span class="text-slate-500 block text-[0.55rem] uppercase tracking-widest">Gross Kine Generated</span>
+                <span id="stat-gross-kine" class="text-yellow-500 font-bold text-xl mt-1 block">0.00 Ꝃ</span>
+            </div>
+            <div class="bg-slate-900/40 border border-slate-800 p-4 rounded-xl">
+                <span class="text-slate-500 block text-[0.55rem] uppercase tracking-widest">Net Disbursed Realized (98%)</span>
+                <span id="stat-net-disbursed" class="text-emerald-400 font-bold text-xl mt-1 block">0.0000 Ꝃ</span>
+            </div>
+        </section>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start flex-1">
+            <section class="lg:col-span-4 bg-slate-900/50 border border-slate-800 rounded-xl p-5 flex flex-col justify-between glow-purple backdrop-blur-sm pulse-purple">
+                <form id="allowance-form" onsubmit="processAllowanceClaim(event)" class="space-y-4 font-mono text-xs">
+                    <h2 class="text-xs text-purple-400 font-bold tracking-widest uppercase border-b border-slate-800 pb-3 mb-2">Log Daily Activity Pulse</h2>
+                    
+                    <div>
+                        <label class="block text-slate-500 text-[0.6rem] mb-1">RECIPIENT WORKER ID TOKEN</label>
+                        <input type="text" id="all-worker" placeholder="e.g., 0xCOM_NODE_082" required class="w-full bg-black border border-slate-800 p-2.5 rounded text-purple-400 font-bold outline-none focus:border-purple-500 uppercase tracking-wider">
+                    </div>
+
+                    <div>
+                        <label class="block text-slate-500 text-[0.6rem] mb-1">ACTIVITY SPECTRUM</label>
+                        <select id="all-type" required class="w-full bg-black border border-slate-800 p-2.5 rounded text-slate-200 font-sans outline-none focus:border-purple-500">
+                            <option value="Labor Allocation Stipend">Field Labor & Network Deployment Allowance</option>
+                            <option value="Logistics Grid Support">Logistics Corridor Travel Support</option>
+                            <option value="Hardware Energy Subsidy">Hardware Ingestion Power Subsidy</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-slate-500 text-[0.6rem] mb-1">BASE INTENSITY VALUE (Ꝃ)</label>
+                        <input type="number" id="all-base" placeholder="e.g., 100" min="10" required class="w-full bg-black border border-slate-800 p-2.5 rounded text-slate-200 outline-none focus:border-purple-500">
+                    </div>
+
+                    <div class="p-3 bg-black/40 border border-slate-900 rounded space-y-1.5 text-[0.6rem] text-slate-400 font-sans">
+                        <div class="flex justify-between"><span>Signing Bonus Baseline:</span><span class="font-mono text-purple-400 font-bold">+25.00 Ꝃ</span></div>
+                        <div class="flex justify-between"><span>Performance Accelerator:</span><span class="font-mono text-purple-400 font-bold">+15.00%</span></div>
+                        <div class="flex justify-between border-t border-slate-800 pt-1.5 font-bold"><span>System Split Deductions:</span><span class="font-mono text-red-400">-2.00% (TDS+RSP)</span></div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-purple-950 hover:bg-purple-900 border border-purple-700 text-purple-300 py-3 rounded uppercase tracking-widest font-bold text-[0.65rem] transition-all">
+                        Commit Allowance Release
+                    </button>
+                </form>
+            </section>
+
+            <section class="lg:col-span-8 bg-slate-900/30 border border-slate-800 rounded-xl p-5 flex flex-col backdrop-blur-sm self-stretch overflow-hidden">
+                <div class="border-b border-slate-800 pb-3 mb-4 flex justify-between items-center font-mono">
+                    <h2 class="text-xs text-slate-300 font-bold tracking-widest uppercase">Allowance Audit Stack Logs</h2>
+                    <button onclick="clearAllowanceCache()" class="text-red-400 hover:underline text-[0.6rem] uppercase tracking-wider font-bold">Purge Allowance Log</button>
+                </div>
+
+                <div class="overflow-x-auto flex-1">
+                    <table class="w-full text-left border-collapse font-mono text-xs whitespace-nowrap">
+                        <thead>
+                            <tr class="bg-black/30 text-slate-500 uppercase text-[0.6rem] tracking-wider border-b border-slate-800">
+                                <th class="p-3">KUTS Timestamp</th>
+                                <th class="p-3">Worker Reference</th>
+                                <th class="p-3">Activity Stream</th>
+                                <th class="p-3 text-right">Base Payout</th>
+                                <th class="p-3 text-right text-emerald-400 pr-4">Net Settled (98%)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="allowance-body" class="divide-y divide-slate-800/40 text-slate-300 text-[0.65rem]">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <nav class="w-full max-w-6xl mx-auto mt-6 grid grid-cols-2 sm:grid-cols-5 gap-2 font-mono text-[0.65rem] text-slate-400 shrink-0">
+        <a href="./my-task.html" class="bg-slate-950 border border-slate-900 hover:border-purple-900/60 p-2 rounded text-center transition-colors">➔ My Tasks</a>
+        <a href="./account.html" class="bg-slate-950 border border-slate-900 hover:border-purple-900/60 p-2 rounded text-center transition-colors">➔ Wallet Ledger</a>
+        <a href="./registry.html" class="bg-slate-950 border border-slate-900 hover:border-purple-900/60 p-2 rounded text-center transition-colors">➔ Member Registry</a>
+        <a href="./task-board.html" class="bg-slate-950 border border-slate-900 hover:border-purple-900/60 p-2 rounded text-center transition-colors">➔ Task Allocator</a>
+        <a href="./device-manager.html" class="bg-slate-950 border border-slate-900 hover:border-purple-900/60 p-2 rounded text-center transition-colors">➔ Device Swarm</a>
+    </nav>
+
+    <footer class="w-full max-w-6xl mx-auto border-t border-slate-900 pt-4 mt-4 text-center font-mono text-[0.6rem] text-slate-600">
+        © 2026 PINALEAF ADVANCEMENTS LLP // PRODUCTION ALLOWANCE DEPLOYMENTS // DISBURSAL SUITE v2.0
+    </footer>
+
+    <script>
+        let allowanceState = { entries: [] };
+
+        function initAllowanceLedger() {
+            const cache = localStorage.getItem('kuts_allowance_ledger_v2');
+            if (cache) {
+                allowanceState = JSON.parse(cache);
+            } else {
+                allowanceState.entries = [
+                    { timestamp: "(+00):0130.05.26.04.02.11.08.45", worker: "0xCOM_NODE_082", label: "Labor Allocation Stipend", gross: 140.00, net: 137.20 }
+                ];
+                saveState();
+            }
+            updateAllowanceUI();
+        }
+
+        function saveState() {
+            localStorage.setItem('kuts_allowance_ledger_v2', JSON.stringify(allowanceState));
+        }
+
+        function processAllowanceClaim(e) {
+            e.preventDefault();
+            const worker = document.getElementById('all-worker').value.toUpperCase().trim();
+            const label = document.getElementById('all-type').value;
+            const baseValue = parseFloat(document.getElementById('all-base').value) || 0;
+
+            const signingBonus = 25.00;
+            const performanceAccelerator = baseValue * 0.15;
+            const grossGenerated = baseValue + signingBonus + performanceAccelerator;
+            const netRealized = grossGenerated * 0.98;
+
+            const now = new Date();
+            const ts = `(+00):0130.05.26.04.${now.getDate().toString().padStart(2,'0')}.${now.getHours().toString().padStart(2,'0')}.${now.getMinutes().toString().padStart(2,'0')}.${now.getSeconds().toString().padStart(2,'0')}`;
+
+            allowanceState.entries.unshift({ timestamp: ts, worker, label, gross: grossGenerated, net: netRealized });
+            saveState();
+            updateAllowanceUI();
+            e.target.reset();
+        }
+
+        function updateAllowanceUI() {
+            let aggregatedGross = 0;
+            let aggregatedNet = 0;
+            const tbody = document.getElementById('allowance-body');
+            tbody.innerHTML = "";
+
+            document.getElementById('stat-total-claims').innerText = allowanceState.entries.length;
+
+            if (allowanceState.entries.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-slate-500 italic">No allowance claim logs committed on this network layer.</td></tr>`;
+                document.getElementById('stat-gross-kine').innerText = "0.00 Ꝃ";
+                document.getElementById('stat-net-disbursed').innerText = "0.0000 Ꝃ";
+                return;
+            }
+
+            allowanceState.entries.forEach(entry => {
+                aggregatedGross += entry.gross;
+                aggregatedNet += entry.net;
+
+                const row = `
+                    <tr class="hover:bg-slate-900/30 transition-colors">
+                        <td class="p-3 text-slate-500 font-mono">${entry.timestamp}</td>
+                        <td class="p-3 text-purple-400 font-bold select-all">${entry.worker}</td>
+                        <td class="p-3 font-sans text-slate-200">${entry.label}</td>
+                        <td class="p-3 text-right text-slate-400">${entry.gross.toFixed(2)} Ꝃ</td>
+                        <td class="p-3 text-right text-emerald-400 font-bold font-mono pr-4">${entry.net.toFixed(4)} Ꝃ</td>
+                    </tr>
+                `;
+                tbody.insertAdjacentHTML('beforeend', row);
+            });
+
+            document.getElementById('stat-gross-kine').innerText = aggregatedGross.toFixed(2) + " Ꝃ";
+            document.getElementById('stat-net-disbursed').innerText = aggregatedNet.toFixed(4) + " Ꝃ";
+        }
+
+        function clearAllowanceCache() {
+            if (confirm("CRITICAL WARNING:\nYou are performing a memory wipe on the active localized allowance logs. Clear audit rows?")) {
+                allowanceState.entries = [];
+                saveState();
+                updateAllowanceUI();
+            }
+        }
+
+        // Consolidated DOM Initialization & Session Checks
+        window.addEventListener('DOMContentLoaded', () => {
+            if (!localStorage.getItem('kuts_active_session')) {
+                window.location.href = 'sign-in.html';
+                return;
+            }
+            
+            initAllowanceLedger();
+
+            // Local fallback test session mock if running standalone
+            let session = localStorage.getItem('kuts_active_session');
+            if (!session) {
+                session = JSON.stringify({ nodeId: "THRINC000-LOCAL-TEST", expiry: Date.now() + 86400000 });
+                localStorage.setItem('kuts_active_session', session);
+            }
+
+            // Inject Global Header if missing
+            if (!document.getElementById('kuts-global-header')) {
+                const headerHTML = `
+                    <header id="kuts-global-header" class="w-full max-w-7xl mx-auto p-6 flex justify-between items-center border-b border-slate-800 bg-[#030712] text-slate-200 mb-6">
+                        <div class="text-blue-400 font-mono font-bold tracking-widest text-sm">
+                            KUTS_MESH_OPERATIONS // MDI6000 [LOCAL MODE]
+                        </div>
+                        <nav id="nav-auth" class="flex gap-4 items-center font-mono"></nav>
+                    </header>`;
+                document.body.insertAdjacentHTML('afterbegin', headerHTML);
+            }
+
+            // Inject Global Footer if missing
+            if (!document.getElementById('kuts-global-footer') && !window.location.pathname.includes('index.html')) {
+                const footerHTML = `
+                    <footer id="kuts-global-footer" class="max-w-7xl mx-auto mt-auto py-8 border-t border-slate-800 text-center w-full">
+                        <a href="index.html" class="inline-flex items-center gap-2 text-[0.7rem] text-slate-500 hover:text-blue-400 font-mono uppercase tracking-widest transition-all">
+                            <span class="text-lg">←</span> RETURN TO UNIVERSAL GATEWAY
+                        </a>
+                    </footer>`;
+                document.body.insertAdjacentHTML('beforeend', footerHTML);
+            }
+
+            updateAuthUI();
+        });
+
+        window.updateAuthUI = function() {
+            const nav = document.getElementById('nav-auth');
+            if (!nav) return;
+            
+            nav.innerHTML = `
+                <a href="index.html" class="text-slate-400 text-[0.65rem] uppercase font-mono hover:text-white">Gateway</a>
+                <button onclick="secureLogout()" class="bg-red-950 hover:bg-red-900 text-red-400 font-mono text-[0.65rem] px-3 py-1.5 rounded border border-red-900 uppercase tracking-widest cursor-pointer">
+                    [X] DISCONNECT
+                </button>`;
+        };
+
+        window.secureLogout = function() {
+            localStorage.removeItem('kuts_active_session');
+            window.location.href = 'sign-in.html';
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Biotic Tracker & Soil Carbon Tokenizer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght=300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #050a15; color: #e2e8f0; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .terminal-box { border-color: rgba(16, 185, 129, 0.3); box-shadow: 0 0 15px rgba(4, 120, 87, 0.15); }
+        .pulse-teal { animation: t-glow 2.5s infinite ease-in-out; }
+        @keyframes t-glow { 0%, 100% { border-color: rgba(20, 184, 166, 0.2); } 50% { border-color: rgba(20, 184, 166, 0.7); } }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col p-4 md:p-6 bg-[#030712]">
+
+    <header class="w-full max-w-6xl mx-auto border border-teal-900/60 bg-slate-900/40 p-4 rounded-xl flex flex-col md:flex-row justify-between items-center gap-4 mb-6 font-mono text-xs">
+        <div>
+            <h1 class="text-xl font-bold text-teal-400 tracking-wider">KUTS_BIOTIC_TRACKER</h1>
+            <p class="text-slate-400 text-[0.65rem]">PLANT DOMAIN REGULATION MODULE // (\00/) BIOME NET-POSITIVE ACTION</p>
+        </div>
+        <div class="bg-black/50 p-2 rounded border border-teal-900/30 text-teal-400 text-center w-full md:w-auto">
+            <span class="text-slate-500 block text-[0.55rem]">UNIVERSAL COUPLING TEMPORAL SIGNATURE</span>
+            <span id="biotic-clock" class="text-[0.75rem]">SYNCHRONIZING REGENERATIVE STREAM...</span>
+        </div>
+        <div class="text-right shrink-0">
+            <span class="text-slate-400">ZONE ANCHOR: </span>
+            <span class="text-teal-400 font-bold animate-pulse">● PLT_SAHYADRI_ACTIVE</span>
+        </div>
+    </header>
+
+    <main class="w-full max-w-6xl mx-auto grid md:grid-cols-12 gap-6 flex-1 items-start">
+        
+        <section class="md:col-span-5 flex flex-col gap-6">
+            <div class="bg-slate-900/50 border border-teal-900/40 rounded-xl p-5 flex flex-col gap-4 pulse-teal">
+                <div class="border-b border-teal-900/40 pb-2">
+                    <h2 class="text-xs text-teal-400 font-bold tracking-widest uppercase font-mono">01. Biotic Ingestion Terminal</h2>
+                    <p class="text-slate-400 font-sans text-[0.7rem] mt-0.5">Input verified agricultural and carbon metrics to mint ecosystem tokens.</p>
+                </div>
+
+                <form id="biotic-ingestion-form" class="flex flex-col gap-4 font-mono text-xs text-slate-300" onsubmit="event.preventDefault(); processBioticIngestion();">
+                    <div class="flex flex-col gap-1">
+                        <label class="text-slate-500 font-bold uppercase">Steward Node / Origin Address:</label>
+                        <input type="text" id="steward-id" value="+9194471XXXXX" class="bg-black/60 border border-slate-800 rounded p-2 text-teal-300 focus:outline-none focus:border-teal-500 select-all font-bold">
+                    </div>
+
+                    <div class="flex flex-col gap-1">
+                        <label class="text-slate-500 font-bold uppercase">Biotic Metric Category:</label>
+                        <select id="metric-category" class="bg-black/60 border border-slate-800 rounded p-2 text-slate-200 focus:outline-none focus:border-teal-500">
+                            <option value="carbon">Soil Organic Carbon Sequestration (SOC % Δ)</option>
+                            <option value="biomass">Biomass Regeneration Volume (Tons)</option>
+                            <option value="soil_h">Active Rhizosphere Microbe Activity (Relative Fluctuations)</option>
+                        </select>
+                    </div>
+
+                    <div class="flex flex-col gap-1">
+                        <label id="lbl-volume-input" class="text-slate-500 font-bold uppercase">Verified Volumetric Influx Data Value:</label>
+                        <input type="number" step="0.01" id="metric-value" value="1.50" class="bg-black/60 border border-slate-800 rounded p-2 text-slate-100 focus:outline-none focus:border-teal-500 font-bold">
+                    </div>
+
+                    <button type="submit" class="w-full bg-teal-800 hover:bg-teal-700 text-white font-bold py-3 px-4 rounded border border-teal-500 text-xs tracking-wider transition-colors uppercase mt-2">
+                        Transmit Biotic Pulse to Mesh >>
+                    </button>
+                </form>
+            </div>
+            
+            <div class="bg-slate-900/30 border border-slate-800 p-4 rounded-xl font-mono text-[0.65rem] text-slate-400 leading-relaxed">
+                <span class="text-teal-400 block font-bold mb-1 uppercase">(\00/) Biome Net-Positive Standard Ruleset:</span>
+                Under the architecture framework rules, ecological maintenance is modeled as co-equal to industrial action. Verified agricultural sequestration acts as an alternate raw base-energy input value, balancing the carbon index calculations across regional supply grids automatically.
+            </div>
+        </section>
+
+        <section class="md:col-span-7 bg-slate-900/20 border border-teal-900/30 rounded-xl p-4 terminal-box h-[510px] flex flex-col">
+            <div class="flex justify-between items-center border-b border-teal-900/40 pb-3 mb-3 shrink-0">
+                <h2 class="text-xs text-teal-400 font-bold tracking-widest uppercase font-mono">02. Live Biotic Sequestration Audit Log</h2>
+                <span class="text-[0.6rem] bg-slate-950 text-slate-500 px-2 py-0.5 rounded border border-slate-900 font-mono font-bold">PLANT INDEX REGISTER</span>
+            </div>
+
+            <div id="biotic-ticker" class="flex-1 overflow-y-auto flex flex-col gap-2 pr-1 text-xs font-mono">
+                <div class="text-slate-500 italic p-4 text-center">Awaiting ecosystem metric telemetry to compute carbon credits mapping logs...</div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="w-full max-w-6xl mx-auto border-t border-teal-900/40 pt-4 mt-6 flex flex-col sm:flex-row justify-between items-center font-mono text-[0.6rem] text-slate-500 gap-2">
+        <span>© 2026 PINALEAF ADVANCEMENTS LLP. ALL RIGHTS RESERVED.</span>
+        <span class="text-teal-500/50 uppercase tracking-widest">BIOTIC INTERACTION PIPELINE DEPLOYED // SEEPAGE COMPLIANCE AUDITED</span>
+    </footer>
+
+    <script>
+        // --- HIGH-RESOLUTION DECENTRALIZED TIME STRING CALIBRATOR ---
+        function runBioticClock() {
+            setInterval(() => {
+                const now = new Date();
+                const GE = "0130"; const EE = "05"; const PE = "26"; const TE = "04"; 
+                const Day = now.getDate().toString().padStart(2, '0');
+                const GigaE = now.getHours().toString().padStart(2, '0');
+                const MegaE = now.getMinutes().toString().padStart(2, '0');
+                const KiloE = now.getSeconds().toString().padStart(2, '0');
+                
+                const ms = now.getMilliseconds();
+                const BaseE = Math.floor(ms / 10).toString().padStart(2, '0');
+                const MilliE = Math.floor(Math.random() * 99).toString().padStart(2, '0'); 
+                const MicroE = Math.floor(Math.random() * 99).toString().padStart(2, '0');
+
+                document.getElementById('biotic-clock').innerText = 
+                    `(+00):${GE}.${EE}.${PE}.${TE}.${Day}.${GigaE}.${MegaE}.${KiloE}.${BaseE}.${MilliE}.${MicroE}`;
+            }, 33);
+        }
+
+        // --- ECOSYSTEM REW-ALLOCATIONS CALCULATOR ---
+        function processBioticIngestion() {
+            const formElement = document.getElementById('biotic-ingestion-form');
+            const ticker = document.getElementById('biotic-ticker');
+            
+            const idValue = document.getElementById('steward-id').value.trim();
+            const category = document.getElementById('metric-category').value;
+            const numericVal = parseFloat(document.getElementById('metric-value').value) || 0;
+
+            if(ticker.innerText.includes("Awaiting ecosystem metric")) {
+                ticker.innerHTML = ""; // Wipe clean the placeholder log on first input
+            }
+
+            let computedKineMints = 0;
+            let descriptiveString = "";
+
+            // Evaluate mapping formula parameters corresponding to structural design parameters
+            if (category === 'carbon') {
+                computedKineMints = numericVal * 15; // 1% SOC fluctuation translates to 15 Kine credits mapping ratio
+                descriptiveString = `Soil Carbon Sequestration Surge: Volumetric Influx at +${numericVal.toFixed(2)}% SOC`;
+            } else if (category === 'biomass') {
+                computedKineMints = numericVal * 2.5; // 1 Ton organic vegetable/wood material maps to 2.5 Kine credits
+                descriptiveString = `Biomass Mass Volume logged: Synthesized +${numericVal.toFixed(2)} Tons Net Material`;
+            } else if (category === 'soil_h') {
+                computedKineMints = numericVal * 1.2;
+                descriptiveString = `Rhizosphere Bio-Activity Baseline Update: Level logged at +${numericVal.toFixed(2)} index`;
+            }
+
+            // Apply standard Category 12 split rules (98% to steward, 1% to admin overhead, 1% back to eco pool)
+            const stewardReward = computedKineMints * 0.98;
+            const systemTds = computedKineMints * 0.01;
+            const systemRsp = computedKineMints * 0.01;
+
+            const timeString = document.getElementById('biotic-clock').innerText.split(':')[1] || "00.00.00...";
+
+            const logHTML = `
+                <div class="p-3 bg-slate-900/60 border border-slate-800 rounded-xl flex flex-col gap-1.5 transition-all hover:border-teal-500/40">
+                    <div class="flex justify-between text-[0.6rem]">
+                        <span class="text-teal-400 bg-teal-950/60 border border-teal-800/40 px-1.5 py-0.5 rounded font-bold uppercase tracking-wide">
+                            (\00/) Biotic Tokenization Pulse Verified
+                        </span>
+                        <span class="text-slate-500 font-mono">${timeString}</span>
+                    </div>
+                    <div class="text-slate-200 font-medium text-xs font-sans">${descriptiveString}</div>
+                    <div class="text-[0.65rem] text-slate-400 font-mono"><span class="text-slate-500">STEWARD_ADDR:</span> <span class="text-slate-300 font-bold select-all">${idValue}</span></div>
+                    <div class="grid grid-cols-3 gap-2 text-[0.6rem] pt-1.5 mt-1 border-t border-slate-900/80 font-mono">
+                        <span class="text-emerald-400 font-bold">Steward Share: +${stewardReward.toFixed(4)} Ꝃ</span>
+                        <span class="text-amber-500 font-bold">TDS Sweep: +${systemTds.toFixed(4)} Ꝃ</span>
+                        <span class="text-teal-400 font-bold">Eco RSP Resv: +${systemRsp.toFixed(4)} Ꝃ</span>
+                    </div>
+                </div>`;
+            
+            ticker.insertAdjacentHTML('afterbegin', logHTML);
+            if(ticker.children.length > 8) ticker.removeChild(ticker.lastChild);
+        }
+
+        // Initialize script event handlers
+        window.addEventListener('DOMContentLoaded', () => {
+            runBioticClock();
+            
+            // Provide context-aware input parameter dynamic text swaps to assist human users
+            document.getElementById('metric-category').addEventListener('change', (e) => {
+                const label = document.getElementById('lbl-volume-input');
+                if(e.target.value === 'carbon') label.innerText = "Verified Volumetric Sequestration Delta (SOC % Δ):";
+                else if(e.target.value === 'biomass') label.innerText = "Total Weighbridge Net Yield (Metric Tons):";
+                else if(e.target.value === 'soil_h') label.innerText = "Rhizosphere Respiration Activity Baseline Value:";
+            });
+        });
+    </script>
+<!-- Resilient Inline Auth & Navigation Injector for Local Testing -->
+    <script>
+        (function() {
+            window.addEventListener('DOMContentLoaded', () => {
+                // Check session; if missing during local test, auto-initialize a mock test session instead of failing
+                let session = localStorage.getItem('kuts_active_session');
+                if (!session) {
+                    session = JSON.stringify({ nodeId: "THRINC000-LOCAL-TEST", expiry: Date.now() + 86400000 });
+                    localStorage.setItem('kuts_active_session', session);
+                }
+
+                // Inject Global Header if missing
+                if (!document.getElementById('kuts-global-header')) {
+                    const headerHTML = `
+                        <header id="kuts-global-header" class="w-full max-w-7xl mx-auto p-6 flex justify-between items-center border-b border-slate-800 bg-[#030712] text-slate-200 mb-6">
+                            <div class="text-blue-400 font-mono font-bold tracking-widest text-sm">
+                                KUTS_MESH_OPERATIONS // MDI6000 [LOCAL MODE]
+                            </div>
+                            <nav id="nav-auth" class="flex gap-4 items-center font-mono"></nav>
+                        </header>`;
+                    document.body.insertAdjacentHTML('afterbegin', headerHTML);
+                }
+
+                // Inject Global Footer if missing
+                if (!document.getElementById('kuts-global-footer') && !window.location.pathname.includes('index.html')) {
+                    const footerHTML = `
+                        <footer id="kuts-global-footer" class="max-w-7xl mx-auto mt-auto py-8 border-t border-slate-800 text-center w-full">
+                            <a href="index.html" class="inline-flex items-center gap-2 text-[0.7rem] text-slate-500 hover:text-blue-400 font-mono uppercase tracking-widest transition-all">
+                                <span class="text-lg">←</span> RETURN TO UNIVERSAL GATEWAY
+                            </a>
+                        </footer>`;
+                    document.body.insertAdjacentHTML('beforeend', footerHTML);
+                }
+
+                updateAuthUI();
+            });
+
+            window.updateAuthUI = function() {
+                const nav = document.getElementById('nav-auth');
+                if (!nav) return;
+                
+                nav.innerHTML = `
+                    <a href="index.html" class="text-slate-400 text-[0.65rem] uppercase font-mono hover:text-white">Gateway</a>
+                    <button onclick="secureLogout()" class="bg-red-950 hover:bg-red-900 text-red-400 font-mono text-[0.65rem] px-3 py-1.5 rounded border border-red-900 uppercase tracking-widest cursor-pointer">
+                        [X] DISCONNECT
+                    </button>`;
+            };
+
+            window.secureLogout = function() {
+                localStorage.removeItem('kuts_active_session');
+                window.location.href = 'sign-in.html';
+            };
+        })();
+    </script>
+</body>
+</html>

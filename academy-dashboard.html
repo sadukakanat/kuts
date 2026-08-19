@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Academy | Student Flight Deck</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #030712; color: #cbd5e1; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .glow-sky { box-shadow: 0 0 25px rgba(56, 189, 248, 0.1); border-color: rgba(56, 189, 248, 0.3); }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #030712; }
+        ::-webkit-scrollbar-thumb { background: #38bdf8; border-radius: 4px; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col p-4 md:p-6 bg-[#030712] relative overflow-x-hidden">
+
+    <!-- Background Grid Effect -->
+    <div class="absolute inset-0 pointer-events-none opacity-20" style="background-image: linear-gradient(rgba(56, 189, 248, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(56, 189, 248, 0.1) 1px, transparent 1px); background-size: 30px 30px; z-index: -1;"></div>
+
+    <!-- ACADEMY HEADER -->
+    <header class="w-full max-w-6xl mx-auto border border-sky-900/60 bg-slate-900/60 p-4 rounded-xl flex flex-col md:flex-row justify-between items-center gap-4 mb-8 font-mono text-xs backdrop-blur-md">
+        <div>
+            <h1 class="text-xl font-bold text-sky-400 tracking-wider">KUTS_ACADEMY</h1>
+            <p class="text-slate-400 text-[0.65rem] uppercase tracking-widest mt-1">Master The Kinetic Economy // Student Flight Deck</p>
+        </div>
+        <div class="text-right flex flex-col items-center md:items-end gap-1">
+            <span class="text-slate-400">TRAINEE ID: <span id="ui-trainee-id" class="text-sky-400 font-bold uppercase tracking-widest bg-black/50 px-2 py-0.5 rounded border border-slate-800">LOADING...</span></span>
+            <button onclick="logoutAcademy()" class="text-red-400 hover:text-red-300 transition-colors uppercase tracking-widest text-[0.6rem] mt-1">[X] SECURE LOGOUT</button>
+        </div>
+    </header>
+
+    <!-- MAIN DASHBOARD CONTENT -->
+    <main class="w-full max-w-6xl mx-auto flex-1 flex flex-col gap-8">
+        
+        <!-- TOP SECTION: PROGRESS & COMPLIMENTARY TIER STATUS -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Welcome & Progress -->
+            <div class="md:col-span-2 bg-slate-900/50 border border-slate-800 rounded-xl p-6 glow-sky backdrop-blur-sm flex flex-col justify-center">
+                <h2 class="text-xl md:text-2xl font-bold text-slate-100 font-sans tracking-tight mb-1">Welcome back, <span id="ui-trainee-name" class="text-sky-400">Operator</span>.</h2>
+                <p class="text-slate-400 text-xs font-mono mb-4">UCM Track Progress: Self-Paced Progression</p>
+                
+                <div class="w-full bg-black/60 rounded-full h-2.5 border border-slate-800 mb-2">
+                    <div class="bg-sky-500 h-2.5 rounded-full" style="width: 16.6%"></div>
+                </div>
+                <div class="flex justify-between text-[0.6rem] font-mono text-slate-500 uppercase font-bold tracking-wider">
+                    <span>16.6% Completed</span>
+                    <span>Goal: 22-Digit Identity Key[cite: 1]</span>
+                </div>
+            </div>
+
+            <!-- Complimentary Program Status Card -->
+            <div class="bg-slate-900/50 border border-slate-800 rounded-xl p-6 flex flex-col justify-center items-center text-center backdrop-blur-sm">
+                <span class="text-slate-500 font-mono text-[0.65rem] uppercase tracking-widest mb-2 border-b border-slate-800 pb-2 w-full">Program Status</span>
+                <span class="text-2xl font-bold text-emerald-400 font-mono tracking-tight mb-1">COMPLIMENTARY</span>
+                <span class="text-sky-400 font-mono text-[0.65rem] font-bold bg-sky-950/30 px-2 py-0.5 rounded border border-sky-900/50 uppercase">Full Sponsored Access</span>
+            </div>
+        </section>
+
+        <!-- MIDDLE SECTION: SELF-PACED CURRICULUM GRID -->
+        <section>
+            <h2 class="text-xs text-sky-400 font-bold tracking-widest uppercase font-mono border-b border-slate-800 pb-3 mb-6">UCM Self-Paced Training Modules</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 font-mono text-xs">
+                
+                <!-- Module 1: Active -->
+                <div class="bg-slate-900/70 border border-sky-500/40 rounded-xl p-5 flex flex-col justify-between shadow-[0_0_15px_rgba(56,189,248,0.1)]">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="bg-sky-900 text-sky-200 px-2 py-0.5 rounded font-bold text-[0.6rem] uppercase">Module 1</span>
+                            <span class="text-emerald-400 font-bold animate-pulse">● UNLOCKED</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-slate-200 mb-1">Foundation & Master Ledger</h3>
+                        <p class="text-slate-400 font-sans text-[0.65rem] leading-relaxed">Systems Thinking, the Covenant Charter, and understanding the Base-100 geometric scaling architecture[cite: 1].</p>
+                    </div>
+                    <a href="academy-curriculum.html" class="mt-4 text-center bg-sky-600 hover:bg-sky-500 text-white py-2 rounded uppercase tracking-wider text-[0.65rem] font-bold transition-colors">Enter Module &gt;&gt;</a>
+                </div>
+
+                <!-- Module 2 -->
+                <div class="bg-slate-900/50 border border-slate-800 rounded-xl p-5 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="bg-slate-800 text-slate-300 px-2 py-0.5 rounded font-bold text-[0.6rem] uppercase">Module 2</span>
+                            <span class="text-emerald-400 font-bold">● UNLOCKED</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-slate-200 mb-1">Identity & Temporal Coordinates</h3>
+                        <p class="text-slate-400 font-sans text-[0.65rem] leading-relaxed">Mastering zero-collision data integrity and generating 22-digit KUTS Serial Numbers[cite: 1].</p>
+                    </div>
+                    <a href="academy-curriculum.html" class="mt-4 text-center bg-slate-800 hover:bg-slate-700 text-slate-200 py-2 rounded uppercase tracking-wider text-[0.65rem] font-bold transition-colors">Enter Module &gt;&gt;</a>
+                </div>
+
+                <!-- Module 3 -->
+                <div class="bg-slate-900/50 border border-slate-800 rounded-xl p-5 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="bg-slate-800 text-slate-300 px-2 py-0.5 rounded font-bold text-[0.6rem] uppercase">Module 3</span>
+                            <span class="text-emerald-400 font-bold">● UNLOCKED</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-slate-200 mb-1">Economics & The Kine (Ꝃ)</h3>
+                        <p class="text-slate-400 font-sans text-[0.65rem] leading-relaxed">Usury-free accounting, fiat valuations, and navigating the Local Node Wallet Ledger[cite: 1].</p>
+                    </div>
+                    <a href="academy-curriculum.html" class="mt-4 text-center bg-slate-800 hover:bg-slate-700 text-slate-200 py-2 rounded uppercase tracking-wider text-[0.65rem] font-bold transition-colors">Enter Module &gt;&gt;</a>
+                </div>
+
+                <!-- Module 4 -->
+                <div class="bg-slate-900/50 border border-slate-800 rounded-xl p-5 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="bg-slate-800 text-slate-300 px-2 py-0.5 rounded font-bold text-[0.6rem] uppercase">Module 4</span>
+                            <span class="text-emerald-400 font-bold">● UNLOCKED</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-slate-200 mb-1">Worker Allowances & Productivity</h3>
+                        <p class="text-slate-400 font-sans text-[0.65rem] leading-relaxed">The Least Action Protocol, claiming baseline bonuses, and navigating the Commune Task Board[cite: 1].</p>
+                    </div>
+                    <a href="academy-curriculum.html" class="mt-4 text-center bg-slate-800 hover:bg-slate-700 text-slate-200 py-2 rounded uppercase tracking-wider text-[0.65rem] font-bold transition-colors">Enter Module &gt;&gt;</a>
+                </div>
+
+                <!-- Module 5: Offline Batch Workshop -->
+                <div class="bg-slate-900/30 border border-slate-700 border-dashed rounded-xl p-5 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="bg-amber-900/50 text-amber-400 border border-amber-900/50 px-2 py-0.5 rounded font-bold text-[0.6rem] uppercase">Module 5 (Offline)</span>
+                            <span class="text-amber-400 font-bold">📅 SCHEDULING</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-slate-300 mb-1">Hardware Binding Workshop</h3>
+                        <p class="text-slate-500 font-sans text-[0.65rem] leading-relaxed">In-person training for MSME smart hardware & IoT integration bypassing human input forms[cite: 1].</p>
+                    </div>
+                    <button onclick="document.getElementById('booking-section').scrollIntoView({behavior: 'smooth'});" class="mt-4 text-center bg-transparent border border-slate-600 hover:border-amber-500 hover:text-amber-400 text-slate-400 py-2 rounded uppercase tracking-wider text-[0.65rem] font-bold transition-colors">Book Batch Seat &gt;&gt;</button>
+                </div>
+
+                <!-- Module 6: Sandbox / Graduation -->
+                <div class="bg-slate-900/50 border border-slate-800 rounded-xl p-5 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="bg-slate-800 text-slate-300 px-2 py-0.5 rounded font-bold text-[0.6rem] uppercase">Module 6</span>
+                            <span class="text-emerald-400 font-bold">● UNLOCKED</span>
+                        </div>
+                        <h3 class="text-sm font-bold text-slate-200 mb-1">Final Simulation & Graduation</h3>
+                        <p class="text-slate-400 font-sans text-[0.65rem] leading-relaxed">Execute a full B2B supply chain loop in the sandbox to mint your live operational key[cite: 1].</p>
+                    </div>
+                    <a href="academy-sandbox.html" class="mt-4 text-center bg-slate-800 hover:bg-slate-700 text-slate-200 py-2 rounded uppercase tracking-wider text-[0.65rem] font-bold transition-colors">Open Sandbox &gt;&gt;</a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- BOTTOM SECTION: OFFLINE CLUSTER SCHEDULER -->
+        <section id="booking-section" class="bg-slate-900/40 border border-slate-800 rounded-xl p-6 backdrop-blur-sm mt-4">
+            <h2 class="text-xs text-amber-400 font-bold tracking-widest uppercase font-mono border-b border-slate-800 pb-3 mb-5 flex items-center gap-2">
+                <span>📍 Offline Cluster Batch Scheduler</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="font-sans text-sm text-slate-400 leading-relaxed">
+                    <p class="mb-3">Module 5 requires physical verification and hardware training. Book a weekend slot at your nearest KUTS Meso-Grid Node[cite: 1].</p>
+                    <ul class="space-y-2 font-mono text-[0.65rem] text-slate-500">
+                        <li><strong class="text-slate-300">Prerequisite:</strong> Completion of online theory modules at your own pace.</li>
+                        <li><strong class="text-slate-300">Requirement:</strong> Bring your UCM Trainee ID and standard government ID[cite: 1].</li>
+                        <li><strong class="text-slate-300">Capacity:</strong> 20 Trainees per batch[cite: 1].</li>
+                    </ul>
+                </div>
+
+                <form onsubmit="bookOfflineBatch(event)" class="font-mono text-xs space-y-4">
+                    <div>
+                        <label class="block text-slate-500 text-[0.6rem] mb-1 uppercase tracking-wider font-bold">Select Regional Node</label>
+                        <select id="batch-location" class="w-full bg-black/80 border border-slate-700 rounded p-2.5 text-slate-200 focus:outline-none focus:border-amber-500">
+                            <option value="THRISSUR">Thrissur Master Origin Node</option>
+                            <option value="PALAKKAD">Palakkad Sahyadri Grid (Agro-Focus)</option>
+                            <option value="COIMBATORE">Coimbatore Sub-Grid (Manufacturing)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-slate-500 text-[0.6rem] mb-1 uppercase tracking-wider font-bold">Available Upcoming Dates</label>
+                        <select id="batch-date" class="w-full bg-black/80 border border-slate-700 rounded p-2.5 text-slate-200 focus:outline-none focus:border-amber-500">
+                            <option value="AUG_14">August 14-15, 2026 (Weekend Batch)</option>
+                            <option value="AUG_28">August 28-29, 2026 (Weekend Batch)</option>
+                            <option value="SEP_11">September 11-12, 2026 (Weekend Batch)</option>
+                        </select>
+                    </div>
+                    <button type="submit" id="book-btn" class="w-full bg-amber-900/60 hover:bg-amber-800 text-amber-200 font-bold py-3 rounded border border-amber-700 tracking-widest text-[0.65rem] uppercase transition-all">
+                        Confirm Seat Reservation
+                    </button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="w-full max-w-6xl mx-auto border-t border-slate-900 pt-6 mt-12 mb-4 text-center font-mono text-[0.6rem] text-slate-600 uppercase tracking-widest">
+        © 2026 PINALEAF ADVANCEMENTS LLP // KUTS ACADEMY EDUCATIONAL PORTAL
+    </footer>
+
+    <script>
+        // Check session and hydrate UI
+        window.addEventListener('DOMContentLoaded', () => {
+            const traineeRaw = sessionStorage.getItem('ucm_active_trainee');
+            
+            if (!traineeRaw) {
+                // Redirect back to login/enrollment if no active session
+                window.location.href = 'academy-login.html';
+                return;
+            }
+
+            const trainee = JSON.parse(traineeRaw);
+            document.getElementById('ui-trainee-id').innerText = trainee.id;
+            document.getElementById('ui-trainee-name').innerText = trainee.name.split(' ')[0]; // First name only
+        });
+
+        function bookOfflineBatch(event) {
+            event.preventDefault();
+            const btn = document.getElementById('book-btn');
+            const locSelect = document.getElementById('batch-location');
+            const loc = locSelect.options[locSelect.selectedIndex].text;
+            
+            btn.innerHTML = `<span class="animate-pulse">PROCESSING RESERVATION...</span>`;
+            btn.classList.replace('bg-amber-900/60', 'bg-slate-800');
+            btn.classList.replace('border-amber-700', 'border-slate-600');
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.innerHTML = `✓ SEAT CONFIRMED: ${loc.split(' ')[0]}`;
+                btn.classList.replace('bg-slate-800', 'bg-emerald-900/80');
+                btn.classList.replace('border-slate-600', 'border-emerald-500');
+                btn.classList.replace('text-amber-200', 'text-emerald-400');
+            }, 1200);
+        }
+
+        function logoutAcademy() {
+            sessionStorage.removeItem('ucm_active_trainee');
+            window.location.href = 'academy-login.html';
+        }
+    </script>
+<footer class="max-w-7xl mx-auto mt-auto py-8 border-t border-slate-800 text-center w-full"><a href="index.html" class="inline-flex items-center gap-2 text-[0.7rem] text-slate-500 hover:text-blue-400 font-mono uppercase tracking-widest transition-all"><span class="text-lg">←</span> RETURN TO UNIVERSAL GATEWAY</a></footer>
+</body>
+</html>

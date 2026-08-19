@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Kine-Currency Valuation Bridge</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght=300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #050a15; color: #e2e8f0; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .terminal-box { border-color: rgba(249, 115, 22, 0.3); box-shadow: 0 0 15px rgba(249, 115, 22, 0.1); }
+        .pulse-orange { animation: o-glow 2.5s infinite ease-in-out; }
+        @keyframes o-glow { 0%, 100% { border-color: rgba(249, 115, 22, 0.2); } 50% { border-color: rgba(249, 115, 22, 0.6); } }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col p-4 md:p-6 bg-[#030712]">
+
+    <header class="w-full max-w-5xl mx-auto border border-orange-900/60 bg-slate-900/40 p-4 rounded-xl flex flex-col md:flex-row justify-between items-center gap-4 mb-6 font-mono text-xs">
+        <div>
+            <h1 class="text-xl font-bold text-orange-400 tracking-wider">KUTS_VALUE_BRIDGE</h1>
+            <p class="text-slate-400 text-[0.65rem]">KINE METRIC UNIT TO FIAT VALUATION MATRIX // BASE RATE: 1 Ꝃ = ₹100 INR</p>
+        </div>
+        <div class="text-right shrink-0 font-mono">
+            <span class="text-slate-400">VALUATION FEED: </span>
+            <span class="text-orange-400 font-bold animate-pulse">● FEED_STABLE_INVARIANT</span>
+        </div>
+    </header>
+
+    <main class="w-full max-w-5xl mx-auto grid md:grid-cols-2 gap-6 flex-1 items-start">
+        
+        <section class="bg-slate-900/50 border border-orange-900/40 rounded-xl p-5 flex flex-col gap-4 terminal-box pulse-orange">
+            <div class="border-b border-orange-900/40 pb-2">
+                <h2 class="text-xs text-orange-400 font-bold tracking-widest uppercase font-mono">01. Kine Assets to Fiat Denomination</h2>
+                <p class="text-slate-400 font-sans text-[0.7rem] mt-0.5">Calculate the industrial liquidation value of accumulated Kine units back into standard currency pools.</p>
+            </div>
+
+            <form onsubmit="event.preventDefault(); calculateKineToFiat();" class="flex flex-col gap-3 font-mono text-xs text-slate-300">
+                <div class="flex flex-col gap-1">
+                    <label class="text-slate-500 font-bold">ENTER KINE QUANTITY (Ꝃ):</label>
+                    <input type="number" step="0.0001" id="kine-input-val" value="50.0000" required class="bg-black/60 border border-slate-800 rounded p-2 text-slate-100 focus:outline-none focus:border-orange-500 font-bold">
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label class="text-slate-500 font-bold">TARGET EXTRAPOLATION FIAT:</label>
+                    <select id="kine-target-currency" class="bg-black/60 border border-slate-800 rounded p-2 text-slate-200 font-sans">
+                        <option value="INR">INR (Indian Rupee - Baseline 1:100)</option>
+                        <option value="USD">USD (United States Dollar)</option>
+                        <option value="EUR">EUR (Eurozone Euro)</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full bg-orange-900/60 hover:bg-orange-800 text-white font-bold py-2.5 rounded border border-orange-500 text-xs tracking-wider uppercase mt-1">
+                    Evaluate Liquid Liquidation >>
+                </button>
+            </form>
+
+            <div id="kine-to-fiat-result" class="hidden bg-black/50 p-4 rounded border border-slate-900 font-mono flex flex-col gap-2 text-[0.7rem]">
+                <div class="flex justify-between"><span>Gross Valuation Yielded:</span><span id="res-gross-fiat" class="text-slate-100 font-bold"></span></div>
+                <div class="flex justify-between text-red-400"><span>Mandatory Category 12 TDS Sweep (1%):</span><span id="res-tds-fiat"></span></div>
+                <div class="flex justify-between text-teal-400"><span>Biotic Stewardship Allocation (1%):</span><span id="res-rsp-fiat"></span></div>
+                <div class="flex justify-between border-t border-slate-800 pt-2 text-xs font-bold"><span>NET SETTLED BALANCE VALUE:</span><span id="res-net-fiat" class="text-orange-400"></span></div>
+            </div>
+        </section>
+
+        <section class="bg-slate-900/50 border border-orange-900/40 rounded-xl p-5 flex flex-col gap-4 terminal-box pulse-orange">
+            <div class="border-b border-orange-900/40 pb-2">
+                <h2 class="text-xs text-orange-400 font-bold tracking-widest uppercase font-mono">02. Currency Capital to Kine Mapping</h2>
+                <p class="text-slate-400 font-sans text-[0.7rem] mt-0.5">Determine how much physical token allocation a capital input commands under the Least Action framework.</p>
+            </div>
+
+            <form onsubmit="event.preventDefault(); calculateFiatToKine();" class="flex flex-col gap-3 font-mono text-xs text-slate-300">
+                <div class="flex flex-col gap-1">
+                    <label class="text-slate-500 font-bold">ENTER FIAT CAPITAL AMOUNT:</label>
+                    <input type="number" step="0.01" id="fiat-input-val" placeholder="e.g., 5000.00" required class="bg-black/60 border border-slate-800 rounded p-2 text-slate-100 focus:outline-none focus:border-orange-500 font-bold">
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label class="text-slate-500 font-bold">SOURCE CURRENCY POOL:</label>
+                    <select id="fiat-source-currency" class="bg-black/60 border border-slate-800 rounded p-2 text-slate-200 font-sans">
+                        <option value="INR">INR (Indian Rupee)</option>
+                        <option value="USD">USD (United States Dollar)</option>
+                        <option value="EUR">EUR (Eurozone Euro)</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full bg-blue-900/60 hover:bg-blue-800 text-white font-bold py-2.5 rounded border border-blue-500 text-xs tracking-wider uppercase mt-1">
+                    Mint Capital Equivalency Mapping >>
+                </button>
+            </form>
+
+            <div id="fiat-to-kine-result" class="hidden bg-black/50 p-3 rounded border border-slate-900 font-mono text-center flex flex-col gap-1">
+                <span class="text-slate-500 text-[0.55rem] uppercase font-bold">TOTAL COMMANDEERED QUANTITY MAPPED:</span>
+                <span id="kine-output-mint" class="text-emerald-400 font-bold tracking-wider text-sm select-all"></span>
+            </div>
+        </section>
+    </main>
+
+    <footer class="w-full max-w-5xl mx-auto border-t border-slate-900 pt-4 mt-6 flex flex-col sm:flex-row justify-between items-center font-mono text-[0.6rem] text-slate-500 gap-2">
+        <span>© 2026 PINALEAF ADVANCEMENTS LLP. ALL RIGHTS RESERVED.</span>
+        <span class="text-orange-500/30 uppercase tracking-widest">INVARIANT LEAST ACTION VALUATION SUBSYSTEM</span>
+    </footer>
+
+    <script>
+        // Invariant baseline exchange rates relative to INR (1 Kine = 100 INR absolute anchor)
+        const RATES_TO_INR = {
+            "INR": 1.0,
+            "USD": 83.50, // Standard fixed static forex parity variable for serverless decoupling
+            "EUR": 89.20
+        };
+
+        function calculateKineToFiat() {
+            const kineAmt = parseFloat(document.getElementById('kine-input-val').value) || 0;
+            const targetCurrency = document.getElementById('kine-target-currency').value;
+            const resultBox = document.getElementById('kine-to-fiat-result');
+
+            if (kineAmt <= 0) return;
+
+            // 1 Kine = 100 INR baseline
+            const totalInr = kineAmt * 100;
+            const totalTargetCurrency = totalInr / RATES_TO_INR[targetCurrency];
+
+            const gross = totalTargetCurrency;
+            const tds = gross * 0.01;
+            const rsp = gross * 0.01;
+            const net = gross - (tds + rsp);
+
+            const symbol = targetCurrency === 'INR' ? '₹' : (targetCurrency === 'USD' ? '$' : '€');
+
+            document.getElementById('res-gross-fiat').innerText = `${symbol}${gross.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})} ${targetCurrency}`;
+            document.getElementById('res-tds-fiat').innerText = `-${symbol}${tds.toLocaleString('en-IN', {minimumFractionDigits: 4, maximumFractionDigits: 4})} ${targetCurrency}`;
+            document.getElementById('res-rsp-fiat').innerText = `-${symbol}${rsp.toLocaleString('en-IN', {minimumFractionDigits: 4, maximumFractionDigits: 4})} ${targetCurrency}`;
+            document.getElementById('res-net-fiat').innerText = `${symbol}${net.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})} ${targetCurrency}`;
+
+            resultBox.classList.remove('hidden');
+        }
+
+        function calculateFiatToKine() {
+            const fiatAmt = parseFloat(document.getElementById('fiat-input-val').value) || 0;
+            const srcCurrency = document.getElementById('fiat-source-currency').value;
+            const resultBox = document.getElementById('fiat-to-kine-result');
+
+            if (fiatAmt <= 0) return;
+
+            // Convert input currency source back into baseline INR parameters
+            const amountInInr = fiatAmt * RATES_TO_INR[srcCurrency];
+            
+            // 100 INR = 1 Kine
+            const totalKineYielded = amountInInr / 100;
+
+            document.getElementById('kine-output-mint').innerText = `${totalKineYielded.toFixed(4)} Ꝃ (Kine Units)`;
+            resultBox.classList.remove('hidden');
+        }
+    </script>
+<!-- Resilient Inline Auth & Navigation Injector for Local Testing -->
+    <script>
+        (function() {
+            window.addEventListener('DOMContentLoaded', () => {
+                // Check session; if missing during local test, auto-initialize a mock test session instead of failing
+                let session = localStorage.getItem('kuts_active_session');
+                if (!session) {
+                    session = JSON.stringify({ nodeId: "THRINC000-LOCAL-TEST", expiry: Date.now() + 86400000 });
+                    localStorage.setItem('kuts_active_session', session);
+                }
+
+                // Inject Global Header if missing
+                if (!document.getElementById('kuts-global-header')) {
+                    const headerHTML = `
+                        <header id="kuts-global-header" class="w-full max-w-7xl mx-auto p-6 flex justify-between items-center border-b border-slate-800 bg-[#030712] text-slate-200 mb-6">
+                            <div class="text-blue-400 font-mono font-bold tracking-widest text-sm">
+                                KUTS_MESH_OPERATIONS // MDI6000 [LOCAL MODE]
+                            </div>
+                            <nav id="nav-auth" class="flex gap-4 items-center font-mono"></nav>
+                        </header>`;
+                    document.body.insertAdjacentHTML('afterbegin', headerHTML);
+                }
+
+                // Inject Global Footer if missing
+                if (!document.getElementById('kuts-global-footer') && !window.location.pathname.includes('index.html')) {
+                    const footerHTML = `
+                        <footer id="kuts-global-footer" class="max-w-7xl mx-auto mt-auto py-8 border-t border-slate-800 text-center w-full">
+                            <a href="index.html" class="inline-flex items-center gap-2 text-[0.7rem] text-slate-500 hover:text-blue-400 font-mono uppercase tracking-widest transition-all">
+                                <span class="text-lg">←</span> RETURN TO UNIVERSAL GATEWAY
+                            </a>
+                        </footer>`;
+                    document.body.insertAdjacentHTML('beforeend', footerHTML);
+                }
+
+                updateAuthUI();
+            });
+
+            window.updateAuthUI = function() {
+                const nav = document.getElementById('nav-auth');
+                if (!nav) return;
+                
+                nav.innerHTML = `
+                    <a href="index.html" class="text-slate-400 text-[0.65rem] uppercase font-mono hover:text-white">Gateway</a>
+                    <button onclick="secureLogout()" class="bg-red-950 hover:bg-red-900 text-red-400 font-mono text-[0.65rem] px-3 py-1.5 rounded border border-red-900 uppercase tracking-widest cursor-pointer">
+                        [X] DISCONNECT
+                    </button>`;
+            };
+
+            window.secureLogout = function() {
+                localStorage.removeItem('kuts_active_session');
+                window.location.href = 'sign-in.html';
+            };
+        })();
+    </script>
+</body>
+</html>

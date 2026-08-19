@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Biotic Treasury | Carbon Credit Marketplace</title>
+    <!-- 1. Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght=300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #030712; color: #cbd5e1; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .glow-teal { box-shadow: 0 0 25px rgba(20, 184, 166, 0.1); border-color: rgba(20, 184, 166, 0.3); }
+        .pulse-teal { animation: t-glow 3s infinite ease-in-out; }
+        @keyframes t-glow { 0%, 100% { border-color: rgba(20, 184, 166, 0.2); } 50% { border-color: rgba(20, 184, 166, 0.6); } }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col p-4 md:p-6 bg-[#030712]">
+
+    <!-- MODULE SUBHUD HEADER -->
+    <header class="w-full max-w-6xl mx-auto border border-teal-900/60 bg-slate-900/50 p-4 rounded-xl flex flex-col md:flex-row justify-between items-center gap-4 mb-6 font-mono text-xs backdrop-blur-sm">
+        <div>
+            <h1 class="text-base font-bold text-teal-400 tracking-wider">KUTS_CARBON_CREDIT_EXCHANGE</h1>
+            <p class="text-slate-500 text-[0.6rem] uppercase tracking-wider">Category 12 // Biotic Offsets & MSME Compliance Clearinghouse</p>
+        </div>
+        <div class="text-right flex flex-col items-center md:items-end gap-1">
+            <a href="index.html" class="text-cyan-400 font-bold hover:underline tracking-widest text-[0.65rem]">&lt;&lt; ESCAPE TO SYSTEM ROOT</a>
+            <span class="text-teal-400 font-bold bg-teal-950/40 px-2 py-0.5 rounded border border-teal-900/30 text-[0.55rem]">ECO-ORACLE SYNC ONLINE</span>
+        </div>
+    </header>
+
+    <!-- METRIC STATS BAR -->
+    <main class="w-full max-w-6xl mx-auto flex-1 flex flex-col gap-6">
+        <section class="grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono text-center text-xs">
+            <div class="bg-slate-900/40 border border-slate-800 p-4 rounded-xl">
+                <span class="text-slate-500 block text-[0.55rem] uppercase tracking-widest">Total Carbon Sequestered</span>
+                <span id="stat-total-co2" class="text-teal-400 font-bold text-xl mt-1 block">1,420.50 T</span>
+            </div>
+            <div class="bg-slate-900/40 border border-slate-800 p-4 rounded-xl">
+                <span class="text-slate-500 block text-[0.55rem] uppercase tracking-widest">Active Eco-Credits Available</span>
+                <span id="stat-available-credits" class="text-yellow-500 font-bold text-xl mt-1 block">850.00 CC</span>
+            </div>
+            <div class="bg-slate-900/40 border border-slate-800 p-4 rounded-xl">
+                <span class="text-slate-500 block text-[0.55rem] uppercase tracking-widest">Retired Compliance Offsets</span>
+                <span id="stat-retired" class="text-emerald-400 font-bold text-xl mt-1 block">570.50 CC</span>
+            </div>
+        </section>
+
+        <!-- MAIN INTERACTIVE INTERFACE GRID -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start flex-1">
+            
+            <!-- LEFT COLUMN: MINT / RETIRE FORM -->
+            <section class="lg:col-span-4 bg-slate-900/50 border border-slate-800 rounded-xl p-5 flex flex-col justify-between glow-teal backdrop-blur-sm pulse-teal">
+                <form id="carbon-form" onsubmit="processCarbonAction(event)" class="space-y-4 font-mono text-xs">
+                    <h2 class="text-xs text-teal-400 font-bold tracking-widest uppercase border-b border-slate-800 pb-3 mb-2">Execute Credit Action</h2>
+                    
+                    <div>
+                        <label class="block text-slate-500 text-[0.6rem] mb-1">STEWARD OR ENTITY NODE ID</label>
+                        <input type="text" id="cc-node" placeholder="e.g., ENT-PKD-004" required class="w-full bg-black border border-slate-800 p-2.5 rounded text-teal-400 font-bold outline-none focus:border-teal-500 uppercase tracking-wider">
+                    </div>
+
+                    <div>
+                        <label class="block text-slate-500 text-[0.6rem] mb-1">TRANSACTION INTENT</label>
+                        <select id="cc-action" required class="w-full bg-black border border-slate-800 p-2.5 rounded text-slate-200 font-sans outline-none focus:border-teal-500">
+                            <option value="MINT">Mint Credits (From Biotic Sequestration Delta)</option>
+                            <option value="RETIRE">Retire Credits (Offset Industrial Compliance)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-slate-500 text-[0.6rem] mb-1">CARBON QUANTUM VOLUME (Metric Tons / CC)</label>
+                        <input type="number" id="cc-volume" placeholder="e.g., 50" min="1" step="0.5" required class="w-full bg-black border border-slate-800 p-2.5 rounded text-slate-200 outline-none focus:border-teal-500">
+                    </div>
+
+                    <div class="p-3 bg-black/40 border border-slate-900 rounded space-y-1.5 text-[0.6rem] text-slate-400 font-sans">
+                        <div class="flex justify-between"><span>Verification Oracle:</span><span class="font-mono text-teal-400 font-bold">ATAIR Sahyadri Grid</span></div>
+                        <div class="flex justify-between"><span>Category 12 Split:</span><span class="font-mono text-emerald-400 font-bold">98% Steward / 2% RSP</span></div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-teal-950 hover:bg-teal-900 border border-teal-700 text-teal-300 py-3 rounded uppercase tracking-widest font-bold text-[0.65rem] transition-all">
+                        Commit Market Action
+                    </button>
+                </form>
+            </section>
+
+            <!-- RIGHT COLUMN: IMMUTABLE MARKET AUDIT STREAM -->
+            <section class="lg:col-span-8 bg-slate-900/30 border border-slate-800 rounded-xl p-5 flex flex-col backdrop-blur-sm self-stretch overflow-hidden">
+                <div class="border-b border-slate-800 pb-3 mb-4 flex justify-between items-center font-mono">
+                    <h2 class="text-xs text-slate-300 font-bold tracking-widest uppercase">Live Carbon Offset Ledger Records</h2>
+                    <button onclick="clearCarbonCache()" class="text-red-400 hover:underline text-[0.6rem] uppercase tracking-wider font-bold">Purge Ledger Cache</button>
+                </div>
+
+                <div class="overflow-x-auto flex-1">
+                    <table class="w-full text-left border-collapse font-mono text-xs whitespace-nowrap">
+                        <thead>
+                            <tr class="bg-black/30 text-slate-500 uppercase text-[0.6rem] tracking-wider border-b border-slate-800">
+                                <th class="p-3">KUTS Timestamp</th>
+                                <th class="p-3">Entity Reference</th>
+                                <th class="p-3">Operation Mode</th>
+                                <th class="p-3 text-right">Volume</th>
+                                <th class="p-3 text-right text-teal-400 pr-4">Status / Hash</th>
+                            </tr>
+                        </thead>
+                        <tbody id="carbon-body" class="divide-y divide-slate-800/40 text-slate-300 text-[0.65rem]">
+                            <!-- Dynamic rows injected here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full max-w-6xl mx-auto border-t border-slate-900 pt-4 mt-6 text-center font-mono text-[0.6rem] text-slate-600">
+        © 2026 PINALEAF ADVANCEMENTS LLP // CARBON CREDIT CLEARINGHOUSE // MDI6000 SUITE
+    </footer>
+
+    <!-- CLIENT SCRIPT LOGIC -->
+    <script>
+        let carbonState = { entries: [] };
+
+        function initCarbonMarket() {
+            const cache = localStorage.getItem('kuts_carbon_marketplace_state');
+            if (cache) {
+                carbonState = JSON.parse(cache);
+            } else {
+                // Initial baseline seed record matching ATAIR Palakkad setup
+                carbonState.entries = [
+                    { timestamp: "(+00):0130.05.26.04.10.15.22.10", node: "ENT-PKD-004", mode: "MINT", volume: 150.00, hash: "CC-HASH-99824" }
+                ];
+                saveCarbonState();
+            }
+            updateCarbonUI();
+        }
+
+        function saveCarbonState() {
+            localStorage.setItem('kuts_carbon_marketplace_state', JSON.stringify(carbonState));
+        }
+
+        function processCarbonAction(e) {
+            e.preventDefault();
+            const node = document.getElementById('cc-node').value.toUpperCase().trim();
+            const mode = document.getElementById('cc-action').value;
+            const volume = parseFloat(document.getElementById('cc-volume').value) || 0;
+
+            const now = new Date();
+            const ts = `(+00):0130.05.26.04.${now.getDate().toString().padStart(2,'0')}.${now.getHours().toString().padStart(2,'0')}.${now.getMinutes().toString().padStart(2,'0')}.${now.getSeconds().toString().padStart(2,'0')}`;
+            const hash = "CC-HASH-" + Math.floor(10000 + Math.random() * 89999);
+
+            carbonState.entries.unshift({ timestamp: ts, node, mode, volume, hash });
+            saveCarbonState();
+            updateCarbonUI();
+            e.target.reset();
+        }
+
+        function updateCarbonUI() {
+            let totalMinted = 0;
+            let totalRetired = 0;
+            const tbody = document.getElementById('carbon-body');
+            tbody.innerHTML = "";
+
+            if (carbonState.entries.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-slate-500 italic">No carbon market transactions recorded on this network segment.</td></tr>`;
+                document.getElementById('stat-total-co2').innerText = "0.00 T";
+                document.getElementById('stat-available-credits').innerText = "0.00 CC";
+                document.getElementById('stat-retired').innerText = "0.00 CC";
+                return;
+            }
+
+            carbonState.entries.forEach(entry => {
+                if (entry.mode === "MINT") totalMinted += entry.volume;
+                if (entry.mode === "RETIRE") totalRetired += entry.volume;
+
+                const isMint = entry.mode === "MINT";
+                const modeBadge = isMint 
+                    ? `<span class="bg-teal-950 text-teal-400 border border-teal-800 px-2 py-0.5 rounded font-bold">MINT_CREDITS</span>` 
+                    : `<span class="bg-amber-950 text-amber-400 border border-amber-800 px-2 py-0.5 rounded font-bold">RETIRE_OFFSET</span>`;
+
+                const row = `
+                    <tr class="hover:bg-slate-900/30 transition-colors">
+                        <td class="p-3 text-slate-500 font-mono">${entry.timestamp}</td>
+                        <td class="p-3 text-teal-400 font-bold select-all">${entry.node}</td>
+                        <td class="p-3">${modeBadge}</td>
+                        <td class="p-3 text-right text-slate-200 font-bold">${entry.volume.toFixed(2)} CC</td>
+                        <td class="p-3 text-right text-emerald-400 font-mono pr-4">${entry.hash}</td>
+                    </tr>
+                `;
+                tbody.insertAdjacentHTML('beforeend', row);
+            });
+
+            const available = Math.max(0, totalMinted - totalRetired);
+            document.getElementById('stat-total-co2').innerText = totalMinted.toFixed(2) + " T";
+            document.getElementById('stat-available-credits').innerText = available.toFixed(2) + " CC";
+            document.getElementById('stat-retired').innerText = totalRetired.toFixed(2) + " CC";
+        }
+
+        function clearCarbonCache() {
+            if (confirm("WARNING: Clear local carbon marketplace audit logs?")) {
+                carbonState.entries = [];
+                saveCarbonState();
+                updateCarbonUI();
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', initCarbonMarket);
+    </script>
+</body>
+</html>

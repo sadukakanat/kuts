@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Academy | Knowledge Vault & Curriculum Matrix</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #030712; color: #cbd5e1; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .glow-sky { box-shadow: 0 0 25px rgba(56, 189, 248, 0.1); border-color: rgba(56, 189, 248, 0.3); }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #030712; }
+        ::-webkit-scrollbar-thumb { background: #38bdf8; border-radius: 4px; }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
+        .video-container iframe, .video-container div { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col p-4 md:p-6 bg-[#030712] relative overflow-x-hidden">
+
+    <!-- Background Grid Effect -->
+    <div class="absolute inset-0 pointer-events-none opacity-20" style="background-image: linear-gradient(rgba(56, 189, 248, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(56, 189, 248, 0.1) 1px, transparent 1px); background-size: 30px 30px; z-index: -1;"></div>
+
+    <!-- ACADEMY HEADER -->
+    <header class="w-full max-w-7xl mx-auto border border-sky-900/60 bg-slate-900/60 p-4 rounded-xl flex flex-col md:flex-row justify-between items-center gap-4 mb-6 font-mono text-xs backdrop-blur-md z-10 relative">
+        <div>
+            <h1 class="text-xl font-bold text-sky-400 tracking-wider">KUTS_ACADEMY</h1>
+            <p class="text-slate-400 text-[0.65rem] uppercase tracking-widest mt-1">MDI6000 Training Matrix // Progressive Module Architecture</p>
+        </div>
+        <div class="text-right flex flex-col items-center md:items-end gap-1">
+            <span class="text-slate-400">TRAINEE ID: <span id="ui-trainee-id" class="text-sky-400 font-bold uppercase tracking-widest bg-black/50 px-2 py-0.5 rounded border border-slate-800">LOADING...</span></span>
+            <a href="academy-dashboard.html" class="text-slate-500 hover:text-sky-300 transition-colors uppercase tracking-widest text-[0.6rem] mt-1">&lt;&lt; Return to Flight Deck</a>
+        </div>
+    </header>
+
+    <!-- MAIN CURRICULUM LAYOUT -->
+    <main class="w-full max-w-7xl mx-auto flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 z-10 relative">
+        
+        <!-- LEFT SIDEBAR: COURSE NAVIGATION -->
+        <aside class="lg:col-span-3 bg-slate-900/50 border border-slate-800 rounded-xl p-5 backdrop-blur-sm h-fit">
+            <h2 class="text-xs text-sky-400 font-bold tracking-widest uppercase font-mono border-b border-slate-800 pb-3 mb-4">Syllabus Progression</h2>
+            
+            <nav class="flex flex-col gap-2 font-mono text-[0.65rem]" id="syllabus-nav">
+                <!-- Dynamically updated via JS progression state -->
+            </nav>
+        </aside>
+
+        <!-- RIGHT CONTENT: DYNAMIC MODULE CONTENT -->
+        <section class="lg:col-span-9 flex flex-col gap-6" id="module-content-container">
+            <!-- Content gets injected or updated dynamically based on active module selection -->
+        </section>
+    </main>
+
+    <footer class="w-full max-w-7xl mx-auto border-t border-slate-900 pt-6 mt-12 mb-4 text-center font-mono text-[0.6rem] text-slate-600 uppercase tracking-widest">
+        © 2026 PINALEAF ADVANCEMENTS LLP // KUTS ACADEMY EDUCATIONAL PORTAL
+    </footer>
+    <footer class="max-w-7xl mx-auto mt-auto py-8 border-t border-slate-800 text-center w-full"><a href="index.html" class="inline-flex items-center gap-2 text-[0.7rem] text-slate-500 hover:text-blue-400 font-mono uppercase tracking-widest transition-all"><span class="text-lg">←</span> RETURN TO UNIVERSAL GATEWAY</a></footer>
+
+    <!-- CURRICULUM ENGINE LOGIC -->
+    <script>
+        // Master Curriculum Data Structure based on MDI6000 Master Templates & Addendums
+        const curriculumModules = [
+            {
+                id: 1,
+                code: "M1",
+                title: "Foundation & The Master Ledger",
+                subtitle: "Module 1.1: The 64-Order Geometric Scaling Architecture",
+                videoTitle: "Why We Anchor to Light-Velocity (c)",
+                overview: "The KUTS framework completely abandons arbitrary Gregorian calendars and sexagesimal timekeeping. Instead, it utilizes a Base-100 geometric progression mapped against the universal physical constant of light-velocity ($c \\approx 299,792,458$ m/s)[cite: 3]. This guarantees a linear, drift-free temporal record across all global spatial anchor nodes[cite: 3].",
+                details: "Every event and asset is logged using a standardized 22-digit alphanumeric string arranged in an 11-tier hierarchical sequence[cite: 3]. For example, the historic passing of Mahatma Gandhi is securely mapped to (+00):1290.81.16.05.82.11.24.08.00.00.00, proving linear consistency across centuries[cite: 3].",
+                questionText: "1. According to the Master Ledger specifications, what universal constant serves as the fundamental clock-source for KUTS synchronization?",
+                options: [
+                    { val: "wrong1", label: "Planetary rotation and Greenwich Mean Time (UTC)" },
+                    { val: "correct", label: "Light-velocity (c) in a vacuum" },
+                    { val: "wrong2", label: "Global gold reserves and standard treasury benchmarks" }
+                ],
+                correctVal: "correct"
+            },
+            {
+                id: 2,
+                code: "M2",
+                title: "Macro-Chronometry & Cosmology",
+                subtitle: "Module 2.1: Tracing Time to the Universal Genesis String",
+                videoTitle: "From the Planck Wall to Galactic Crystallization",
+                overview: "The KUTS architecture scales infinitely from macro-cosmic origins down to quantum fractions[cite: 4]. The absolute cosmic origin is immutably logged as the Universal Genesis String: `(??00??):0000.00.00.00.00.00.00.01`, representing Category 16 (Latent/Unknown) prior to standard spatial dimensions[cite: 4].",
+                details: "Subsequent macro-epochs track the Cosmic Web Crystallization (`~00~:0000.00.13.40.00.00.00.00.00`) and the Planetary Accretion Era (`[+00]:0000.00.93.45.00.00.00.00.00`), connecting universal evolution directly to the terrestrial WGS 84 spatial grid[cite: 4].",
+                questionText: "2. Which Functional Bracket and sub-code designates the primordial Universal Genesis String representing the singularity?",
+                options: [
+                    { val: "correct", label: "(??00??):0000.00.00.00.00.00.00.01 (Category 16 - Latent)" },
+                    { val: "wrong1", label: "[+00]:0000.00.93.45.00.00.00.00.00 (Planetary Accretion)" },
+                    { val: "wrong2", label: "(~00~):0000.00.13.40.00.00.00.00.00 (Cosmic Web)" }
+                ],
+                correctVal: "correct"
+            },
+            {
+                id: 3,
+                code: "M3",
+                title: "The 16 Functional Domain Brackets",
+                subtitle: "Module 3.1: Automating Operational Context (The What)",
+                videoTitle: "Domain Routing & Functional Isolation",
+                overview: "While the 64-order scale defines the temporal 'When', the 16 Functional Brackets define the operational 'What'[cite: 3]. Every ledger transaction is encapsulated within one of these brackets to enable automated routing and high-frequency AI logging[cite: 3].",
+                details: "Examples include Temporal `(+00)` for clock cycles, Spatial `[+00]` for anchor nodes, Kinetic `(<<00>>)` for velocity vectors, and Fiscal `($00$)` for systemic economic exchange[cite: 3].",
+                questionText: "3. In the 16 functional domain hierarchy, which specific bracket code designates Fiscal value and currency exchange?",
+                options: [
+                    { val: "wrong1", label: "Neural (*00*)" },
+                    { val: "correct", label: "Fiscal ($00$)" },
+                    { val: "wrong2", label: "Virtual (@00@)" }
+                ],
+                correctVal: "correct"
+            },
+            {
+                id: 4,
+                code: "M4",
+                title: "Planetary Geodesic Architecture",
+                subtitle: "Module 4.1: The 34 Global, 144 Primary, & 1,728 Secondary Nodes",
+                videoTitle: "Topological Capillaries and the Mesh Network",
+                overview: "The physical network operates across a multi-tier hierarchy: Level 1 consists of 34 Global Anchor Nodes anchored by Master Origin THRINC000 in Thrissur, India[cite: 7]. Level 2 comprises 144 Primary Production Nodes weighted for MSME corridors (e.g., 45 nodes across India)[cite: 3].",
+                details: "Level 3 expands into 1,728 Secondary Capillary Nodes acting as edge-compute mesh endpoints[cite: 3], while Level 4 handles terminal interaction via static IPs for Destination Nodes and E.164 mobile numbers for User Points[cite: 3].",
+                questionText: "4. How many Level 2 Primary Production Nodes are distributed across the global harmonic grid?",
+                options: [
+                    { val: "wrong1", label: "34 Global Nodes" },
+                    { val: "wrong2", label: "1,728 Secondary Nodes" },
+                    { val: "correct", label: "144 Primary Nodes" }
+                ],
+                correctVal: "correct"
+            },
+            {
+                id: 5,
+                code: "M5",
+                title: "Fiscal Mechanics & Least Action",
+                subtitle: "Module 5.1: The Kine Protocol & Triple-Split Distribution",
+                videoTitle: "Automating Compliance and Biotic Stewardship",
+                overview: "The Fiscal Category manages the Kine (Ꝃ) ecosystem, where 1 Kine is minted upon verified resource contribution (e.g., 10 kWh energy or 0.1M AI compute tokens)[cite: 3]. Micro-units include Flux (ƒ) and macro-units include Dyne (Ꝺ)[cite: 3].",
+                details: "Every transaction executes an automated Triple-Split distribution via the Security Audit Protocol: 98% Kinetic Reward to the user, 1% Infrastructure Tax (TDS) for system upkeep, and 1% Regenerative Biotic Stewardship Pool (RSP)[cite: 5].",
+                questionText: "5. What percentage of the automated Triple-Split distribution is allocated to the Regenerative Stewardship Pool (RSP)?",
+                options: [
+                    { val: "wrong1", label: "98% Kinetic Reward" },
+                    { val: "wrong2", label: "1% Infrastructure Tax (TDS)" },
+                    { val: "correct", label: "1% Regenerative Biotic Stewardship (RSP)" }
+                ],
+                correctVal: "correct"
+            },
+            {
+                id: 6,
+                code: "M6",
+                title: "Sandbox Tactical Exam & Deployment",
+                subtitle: "Module 6.1: Executing the Daily Pulse & Genesis Loop",
+                videoTitle: "Terminal Integration and Operational Command",
+                overview: "Trainees complete their curriculum by executing a Daily Pulse transmission through the Genesis Browser interface[cite: 5]. Activity is audited against physical sensor data by the Security Audit Protocol[cite: 5].",
+                details: "Upon successful verification, the Genesis Loop anchors operations directly through Pinaleaf Advancements LLP (THRIND000) under absolute administrative coordination[cite: 5].",
+                questionText: "6. Which entity operates at Layer 0 as the Genesis Loop core command center for the MDI6000 master plan?",
+                options: [
+                    { val: "correct", label: "Pinaleaf Advancements LLP (THRIND000)" },
+                    { val: "wrong1", label: "External Gregorian calendar authorities" },
+                    { val: "wrong2", label: "Unregistered speculative trading brokers" }
+                ],
+                correctVal: "correct"
+            }
+        ];
+
+        // Retrieve current unlocked module level from localStorage (default to 1)
+        function getUnlockedModule() {
+            const saved = localStorage.getItem('kuts_unlocked_module');
+            return saved ? parseInt(saved, 10) : 1;
+        }
+
+        function setUnlockedModule(level) {
+            localStorage.setItem('kuts_unlocked_module', level);
+        }
+
+        let activeModuleId = 1;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            // Hydrate Trainee ID
+            const traineeRaw = sessionStorage.getItem('ucm_active_trainee');
+            if (traineeRaw) {
+                const trainee = JSON.parse(traineeRaw);
+                document.getElementById('ui-trainee-id').innerText = trainee.id;
+            } else {
+                document.getElementById('ui-trainee-id').innerText = "TRN-2026-THR";
+            }
+
+            renderSyllabusNav();
+            loadModuleContent(activeModuleId);
+        });
+
+        function renderSyllabusNav() {
+            const unlockedLevel = getUnlockedModule();
+            const navContainer = document.getElementById('syllabus-nav');
+            navContainer.innerHTML = '';
+
+            curriculumModules.forEach((mod) => {
+                const isUnlocked = mod.id <= unlockedLevel;
+                const isActive = mod.id === activeModuleId;
+
+                const link = document.createElement('a');
+                link.href = "#";
+                
+                if (isActive) {
+                    link.className = "p-3 bg-sky-900/40 border border-sky-500/50 rounded flex justify-between items-center text-sky-200 font-bold tracking-wider";
+                    link.innerHTML = `<span>${mod.code}: ${mod.title.split('&')[0]}</span><span class="text-sky-400 text-[0.55rem]">ACTIVE</span>`;
+                } else if (isUnlocked) {
+                    link.className = "p-3 bg-slate-900/80 border border-slate-700 hover:border-sky-500/50 rounded flex justify-between items-center text-slate-300 transition-colors";
+                    link.innerHTML = `<span>${mod.code}: ${mod.title.split('&')[0]}</span><span class="text-emerald-400 text-[0.55rem]">UNLOCKED</span>`;
+                    link.onclick = (e) => {
+                        e.preventDefault();
+                        activeModuleId = mod.id;
+                        renderSyllabusNav();
+                        loadModuleContent(activeModuleId);
+                    };
+                } else {
+                    link.className = "p-3 bg-black/40 border border-slate-800 rounded flex justify-between items-center text-slate-500 uppercase cursor-not-allowed opacity-60";
+                    link.innerHTML = `<span>${mod.code}: ${mod.title.split('&')[0]}</span><span>🔒</span>`;
+                    link.onclick = (e) => e.preventDefault();
+                }
+                navContainer.appendChild(link);
+            });
+        }
+
+        function loadModuleContent(id) {
+            const mod = curriculumModules.find(m => m.id === id);
+            const container = document.getElementById('module-content-container');
+            const unlockedLevel = getUnlockedModule();
+            const isCompleted = mod.id < unlockedLevel;
+
+            container.innerHTML = `
+                <!-- VIDEO MASTERCLASS -->
+                <div class="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden glow-sky backdrop-blur-sm">
+                    <div class="p-4 border-b border-slate-800 bg-black/40 flex justify-between items-center">
+                        <h2 class="text-sm font-bold text-slate-200 font-sans">${mod.subtitle}</h2>
+                        <span class="text-[0.6rem] font-mono text-sky-400 bg-sky-950/50 px-2 py-0.5 rounded border border-sky-900/50">VIDEO MASTERCLASS</span>
+                    </div>
+                    <div class="video-container bg-black border-b border-slate-800 flex items-center justify-center cursor-pointer group">
+                        <div class="absolute inset-0 bg-slate-900 flex flex-col items-center justify-center">
+                            <div class="w-16 h-16 rounded-full bg-sky-600/80 border border-sky-400 flex items-center justify-center mb-3 group-hover:bg-sky-500 transition-colors shadow-[0_0_20px_rgba(56,189,248,0.4)]">
+                                <span class="text-white text-2xl ml-1">▶</span>
+                            </div>
+                            <span class="text-slate-400 font-mono text-xs uppercase tracking-widest">Press to Play: ${mod.videoTitle}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- INTERACTIVE DOCUMENTATION -->
+                <div class="bg-slate-900/50 border border-slate-800 rounded-xl p-6 md:p-8 backdrop-blur-sm text-sm text-slate-300 font-sans leading-relaxed space-y-6">
+                    <h3 class="text-lg font-bold text-slate-100 tracking-tight border-b border-slate-800 pb-2">${mod.title}</h3>
+                    <p>${mod.overview}</p>
+                    <h3 class="text-lg font-bold text-slate-100 tracking-tight border-b border-slate-800 pb-2 mt-8">Structural Breakdown & Systemic Implementation</h3>
+                    <p>${mod.details}</p>
+                </div>
+
+                <!-- KNOWLEDGE CHECK QUIZ -->
+                <div class="bg-sky-950/20 border border-sky-900/40 rounded-xl p-6 md:p-8 backdrop-blur-sm" id="quiz-section">
+                    <h3 class="text-sm text-sky-400 font-bold tracking-widest uppercase font-mono border-b border-sky-900/40 pb-3 mb-5">Knowledge Check: ${mod.code}</h3>
+                    
+                    ${isCompleted ? `
+                        <div class="flex flex-col items-center text-center gap-3 py-4">
+                            <div class="h-12 w-12 rounded-full bg-emerald-900/50 border border-emerald-500 flex items-center justify-center text-emerald-400 text-xl font-bold mb-1">✓</div>
+                            <h3 class="text-emerald-400 font-bold font-mono tracking-widest uppercase text-sm">${mod.code} Verified & Completed</h3>
+                            <p class="text-slate-300 font-sans text-xs">You have already successfully verified this module.</p>
+                            ${mod.id < curriculumModules.length ? `
+                                <button onclick="advanceToNextModule(${mod.id + 1})" class="mt-3 bg-sky-600 hover:bg-sky-500 text-white font-bold px-6 py-3 rounded-lg border border-sky-400 tracking-widest text-[0.7rem] uppercase transition-all font-mono">
+                                    Proceed to Next Module >>
+                                </button>
+                            ` : `<p class="text-xs text-sky-400 font-mono mt-2">All Curriculum Modules Fully Mastered!</p>`}
+                        </div>
+                    ` : `
+                        <form id="quiz-form" onsubmit="submitQuiz(event, ${mod.id})" class="space-y-6">
+                            <div>
+                                <p class="text-slate-200 font-sans font-semibold mb-3 text-sm">${mod.questionText}</p>
+                                <div class="space-y-2 font-mono text-xs" id="options-group">
+                                    ${mod.options.map(opt => `
+                                        <label class="flex items-center gap-3 p-3 bg-black/40 border border-slate-800 rounded cursor-pointer hover:border-sky-700 transition-colors">
+                                            <input type="radio" name="quiz_ans" value="${opt.val}" required class="accent-sky-500 w-4 h-4 bg-black border-slate-600">
+                                            <span class="text-slate-300">${opt.label}</span>
+                                        </label>
+                                    `).join('')}
+                                </div>
+                            </div>
+
+                            <div id="quiz-error" class="hidden text-red-400 font-mono text-xs bg-red-950/40 border border-red-900/50 p-3 rounded">
+                                ✖ ERROR: Incorrect answer selected. Please review the documentation above and try again.
+                            </div>
+
+                            <button type="submit" id="quiz-submit-btn" class="w-full bg-sky-600 hover:bg-sky-500 text-white font-bold py-3 rounded-lg border border-sky-400 tracking-widest text-[0.7rem] uppercase transition-all font-mono">
+                                Submit Knowledge Check >>
+                            </button>
+                        </form>
+                    `}
+                </div>
+            `;
+        }
+
+        function submitQuiz(event, moduleId) {
+            event.preventDefault();
+            const mod = curriculumModules.find(m => m.id === moduleId);
+            const selected = document.querySelector('input[name="quiz_ans"]:checked');
+            const errorBox = document.getElementById('quiz-error');
+            const submitBtn = document.getElementById('quiz-submit-btn');
+
+            if (selected && selected.value === mod.correctVal) {
+                // Unlock next module if available
+                const currentUnlocked = getUnlockedModule();
+                if (moduleId >= currentUnlocked && moduleId < curriculumModules.length) {
+                    setUnlockedModule(moduleId + 1);
+                }
+                
+                // Refresh Navigation & Reload View into Completed state
+                renderSyllabusNav();
+                loadModuleContent(moduleId);
+            } else {
+                errorBox.classList.remove('hidden');
+                submitBtn.innerHTML = "Retry Knowledge Check >>";
+                submitBtn.classList.replace('bg-sky-600', 'bg-red-900/80');
+                submitBtn.classList.replace('border-sky-400', 'border-red-500');
+            }
+        }
+
+        function advanceToNextModule(nextId) {
+            activeModuleId = nextId;
+            renderSyllabusNav();
+            loadModuleContent(activeModuleId);
+        }
+    </script>
+</body>
+</html>

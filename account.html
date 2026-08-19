@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Node Wallet | Account Ledger</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="core/auth-bridge.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght=300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #050a15; color: #e2e8f0; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .terminal-box { border-color: rgba(250, 204, 21, 0.3); box-shadow: 0 0 15px rgba(250, 204, 21, 0.1); }
+        .pulse-yellow { animation: y-glow 2.5s infinite ease-in-out; }
+        @keyframes y-glow { 0%, 100% { border-color: rgba(250, 204, 21, 0.2); } 50% { border-color: rgba(250, 204, 21, 0.6); } }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col p-4 md:p-6 bg-[#030712]">
+
+    <!-- HUD TERMINAL HEADER -->
+    <header class="w-full max-w-6xl mx-auto border border-yellow-900/60 bg-slate-900/40 p-4 rounded-xl flex flex-col md:flex-row justify-between items-center gap-4 mb-6 font-mono text-xs">
+        <div>
+            <h1 class="text-xl font-bold text-yellow-400 tracking-wider">KUTS_NODE_WALLET</h1>
+            <p class="text-slate-400 text-[0.65rem]">LOCALIZED STATE ACCOUNTING // KINE (Ꝃ) SETTLEMENT LAYER</p>
+        </div>
+        <div class="text-right shrink-0">
+            <span class="text-slate-400">ACTIVE NODE: </span>
+            <span class="text-yellow-400 font-bold animate-pulse">THRINC000</span>
+        </div>
+    </header>
+
+    <!-- MASTER ACCOUNT BALANCES -->
+    <main class="w-full max-w-6xl mx-auto flex-1 flex flex-col gap-6">
+        <section class="grid md:grid-cols-3 gap-6 font-mono">
+            <!-- TOTAL BALANCE -->
+            <div class="bg-slate-900/60 border border-yellow-500/50 rounded-xl p-5 flex flex-col items-center justify-center terminal-box pulse-yellow relative overflow-hidden">
+                <div class="absolute top-0 w-full h-1 bg-yellow-500"></div>
+                <span class="text-slate-400 text-xs tracking-widest uppercase mb-2">Net Settled Balance</span>
+                <span id="ui-balance" class="text-4xl text-yellow-400 font-bold tracking-wider">0.0000 Ꝃ</span>
+            </div>
+            <!-- TOTAL CREDITS -->
+            <div class="bg-slate-900/40 border border-emerald-900/50 rounded-xl p-5 flex flex-col items-center justify-center relative">
+                <div class="absolute top-0 w-full h-1 bg-emerald-500/50"></div>
+                <span class="text-slate-400 text-xs tracking-widest uppercase mb-2">Gross Inflow (Credits)</span>
+                <span id="ui-credits" class="text-2xl text-emerald-400 font-bold tracking-wider">+0.0000 Ꝃ</span>
+            </div>
+            <!-- TOTAL DEBITS -->
+            <div class="bg-slate-900/40 border border-red-900/50 rounded-xl p-5 flex flex-col items-center justify-center relative">
+                <div class="absolute top-0 w-full h-1 bg-red-500/50"></div>
+                <span class="text-slate-400 text-xs tracking-widest uppercase mb-2">Gross Outflow (Debits)</span>
+                <span id="ui-debits" class="text-2xl text-red-400 font-bold tracking-wider">-0.0000 Ꝃ</span>
+            </div>
+        </section>
+
+        <!-- TRANSACTION LEDGER -->
+        <section class="bg-slate-900/50 border border-slate-800 rounded-xl flex flex-col overflow-hidden flex-1 max-h-[500px]">
+            <div class="p-4 border-b border-slate-800 bg-black/40 flex justify-between items-center shrink-0">
+                <h2 class="text-xs text-slate-300 font-bold tracking-widest uppercase font-mono">Transaction History</h2>
+                <div class="flex gap-2">
+                    <button onclick="exportLedgerCSV()" class="bg-blue-950/40 hover:bg-blue-900/60 text-blue-400 px-3 py-1 rounded text-[0.65rem] font-mono tracking-wider transition-colors border border-blue-900/40">Export CSV</button>
+                    <button onclick="injectTestTransaction()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1 rounded text-[0.65rem] font-mono tracking-wider transition-colors border border-slate-700">Simulate Ping</button>
+                    <button onclick="clearWalletData()" class="bg-red-950/40 hover:bg-red-900/60 text-red-400 px-3 py-1 rounded text-[0.65rem] font-mono tracking-wider transition-colors border border-red-900/40">Clear Ledger</button>
+                </div>
+            </div>
+            
+            <div class="overflow-x-auto flex-1">
+                <table class="w-full text-left border-collapse font-mono text-[0.7rem] whitespace-nowrap">
+                    <thead class="bg-slate-950/80 sticky top-0 z-10">
+                        <tr class="text-slate-500 uppercase tracking-wider">
+                            <th class="p-3 font-medium">KUTS Timestamp</th>
+                            <th class="p-3 font-medium">Tx Hash ID</th>
+                            <th class="p-3 font-medium">Counterparty</th>
+                            <th class="p-3 font-medium">Type</th>
+                            <th class="p-3 font-medium text-right">Amount (Ꝃ)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transaction-table" class="divide-y divide-slate-800/50 text-slate-300">
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer class="w-full max-w-6xl mx-auto border-t border-slate-900 pt-4 mt-6 flex justify-between items-center font-mono text-[0.6rem] text-slate-500">
+        <span>© 2026 PINALEAF ADVANCEMENTS LLP. ALL RIGHTS RESERVED.</span>
+        <button onclick="secureLogout()" class="bg-red-950 hover:bg-red-900 text-red-400 px-3 py-1.5 rounded border border-red-900 uppercase tracking-widest transition-all">
+            [X] SECURE DISCONNECT
+        </button>
+    </footer>
+    
+    <footer class="max-w-7xl mx-auto mt-6 py-4 text-center">
+        <a href="index.html" class="inline-flex items-center gap-2 text-[0.7rem] text-slate-500 hover:text-blue-400 font-mono uppercase tracking-widest transition-all">
+            <span class="text-lg">←</span> RETURN TO UNIVERSAL GATEWAY
+        </a>
+    </footer>
+
+    <script>
+        // Centralized initialization
+        window.addEventListener('DOMContentLoaded', () => {
+            if (!localStorage.getItem('kuts_active_session')) {
+                window.location.href = 'sign-in.html';
+            }
+            updateAuthUI();
+            initWallet();
+        });
+
+        // Wallet Logic
+        let walletData = { balance: 0.0000, totalCredits: 0.0000, totalDebits: 0.0000, transactions: [] };
+        function initWallet() {
+            const savedData = localStorage.getItem('kuts_wallet_state');
+            if (savedData) walletData = JSON.parse(savedData);
+            else addTransaction("Genesis Network Airdrop", "SYSTEM", "credit", 500.0000, "12252031THRINC0001");
+            renderWallet();
+        }
+
+        function addTransaction(memo, counterparty, type, amount, customHash = null) {
+            const hash = customHash || "TX" + Math.floor(Math.random() * 99999999).toString(16).toUpperCase().padStart(8, '0');
+            const now = new Date();
+            const timestamp = `(+00):0130.05.26.04.${now.getDate().toString().padStart(2,'0')}.${now.getHours().toString().padStart(2,'0')}.${now.getMinutes().toString().padStart(2,'0')}.${now.getSeconds().toString().padStart(2,'0')}`;
+            const tx = { timestamp, hash, memo, counterparty, type, amount: parseFloat(amount) };
+            walletData.transactions.unshift(tx);
+            if (type === 'credit') { walletData.balance += tx.amount; walletData.totalCredits += tx.amount; }
+            else if (type === 'debit') { walletData.balance -= tx.amount; walletData.totalDebits += tx.amount; }
+            localStorage.setItem('kuts_wallet_state', JSON.stringify(walletData));
+            renderWallet();
+        }
+
+        function renderWallet() {
+            document.getElementById('ui-balance').innerText = walletData.balance.toFixed(4) + " Ꝃ";
+            document.getElementById('ui-credits').innerText = "+" + walletData.totalCredits.toFixed(4) + " Ꝃ";
+            document.getElementById('ui-debits').innerText = "-" + walletData.totalDebits.toFixed(4) + " Ꝃ";
+            const tbody = document.getElementById('transaction-table');
+            tbody.innerHTML = walletData.transactions.length === 0 ? `<tr><td colspan="5" class="p-6 text-center text-slate-500 italic">No network transactions logged.</td></tr>` : "";
+            walletData.transactions.forEach(tx => {
+                const isCredit = tx.type === 'credit';
+                tbody.insertAdjacentHTML('beforeend', `
+                    <tr class="hover:bg-slate-900/40 transition-colors">
+                        <td class="p-3 text-slate-500">${tx.timestamp}</td>
+                        <td class="p-3 text-blue-400 select-all">${tx.hash}</td>
+                        <td class="p-3">${tx.counterparty}</td>
+                        <td class="p-3 uppercase"><span class="bg-black px-2 py-0.5 rounded border ${isCredit ? 'border-emerald-900/50 text-emerald-500' : 'border-red-900/50 text-red-500'}">${tx.type}</span></td>
+                        <td class="p-3 text-right font-bold ${isCredit ? 'text-emerald-400' : 'text-red-400'}">${isCredit ? '+' : '-'}${tx.amount.toFixed(4)}</td>
+                    </tr>
+                `);
+            });
+        }
+
+        function clearWalletData() {
+            if(confirm("WARNING: Purge local node ledger?")) {
+                localStorage.removeItem('kuts_wallet_state');
+                walletData = { balance: 0, totalCredits: 0, totalDebits: 0, transactions: [] };
+                renderWallet();
+            }
+        }
+
+        function injectTestTransaction() {
+            const isDebit = Math.random() > 0.5;
+            addTransaction(isDebit ? "Node Transfer Out" : "Kinetic Log Reward", ["LDNUKC001", "NYKUSC003", "DXBAEC002", "NETWORK_SWEEP"][Math.floor(Math.random() * 4)], isDebit ? 'debit' : 'credit', (Math.random() * 50).toFixed(4));
+        }
+
+        function exportLedgerCSV() {
+            if (walletData.transactions.length === 0) return alert("Ledger empty.");
+            let csvContent = "KUTS Timestamp,Transaction Hash,Counterparty Node,Transaction Type,Volume (Kine)\n";
+            walletData.transactions.forEach(tx => {
+                csvContent += `"${tx.timestamp}","${tx.hash}","${tx.counterparty}","${tx.type.toUpperCase()}","${tx.amount.toFixed(4)}"\n`;
+            });
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.setAttribute("href", url);
+            link.setAttribute("download", `KUTS_Ledger_THRINC000_${new Date().toISOString().split('T')[0]}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>

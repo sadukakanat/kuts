@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Asia-Pacific Grid | 30 Primary Anchor Nodes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="core/auth-bridge.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght=300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #030712; color: #cbd5e1; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .module-card { background: rgba(17, 24, 39, 0.5); border: 1px solid rgba(30, 41, 59, 1); transition: all 0.3s; }
+        .module-card:hover { border-color: rgba(59, 130, 246, 0.5); box-shadow: 0 0 15px rgba(59, 130, 246, 0.1); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <div>
+        <!-- GLOBAL HEADER -->
+        <header class="border-b border-slate-800 p-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div>
+                <h1 class="text-3xl font-bold text-blue-400 font-mono tracking-widest">KUTS_APAC_SUBGRID</h1>
+                <p class="text-slate-500 mt-1 font-mono text-sm">Level 2 Meso-Grid // 30-Node Asia-Pacific Allocation</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <input type="text" id="searchInput" placeholder="Search hubs, manufacturing centers, ID..." 
+                       onkeyup="filterNodes()" class="bg-slate-900 border border-slate-700 p-2 rounded text-sm text-slate-200 font-mono w-72">
+                <a href="index.html" class="bg-slate-800 hover:bg-slate-700 text-blue-300 font-mono px-4 py-2 rounded text-sm border border-slate-700 transition-colors">
+                    << Return to Gateway
+                </a>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main class="max-w-7xl mx-auto px-6 py-12">
+            <section class="flex flex-col gap-6 mb-10">
+                <div class="font-mono text-xs text-blue-400 bg-blue-950/40 border border-blue-800/60 px-3 py-1 rounded self-start uppercase tracking-widest">
+                    ● Regional Allocation // Manufacturing & Tech Corridors
+                </div>
+                <h2 class="text-4xl font-bold leading-tight text-white">
+                    Asia-Pacific <span class="text-blue-500">30-Node Primary Corridor</span>
+                </h2>
+                <p class="text-slate-400 max-w-3xl text-base">
+                    As a vital pillar of the global KUTS harmonic expansion, the Asia-Pacific region is allocated 30 dedicated Level 2 Primary Anchor Nodes. These nodes capture high-frequency technological manufacturing output, semiconductor fabrication, and major maritime shipping lanes, routing verified kinetic data upstream.
+                </p>
+
+                <!-- CORRIDOR METRICS BAR -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 font-mono text-xs mt-2">
+                    <div class="bg-slate-900/80 border border-slate-800 p-3 rounded">
+                        <span class="text-blue-400 block font-bold text-lg">30 Nodes</span>
+                        <span class="text-slate-400">Total APAC Allocation[cite: 4]</span>
+                    </div>
+                    <div class="bg-slate-900/80 border border-slate-800 p-3 rounded">
+                        <span class="text-cyan-400 block font-bold text-lg">Semiconductor</span>
+                        <span class="text-slate-400">Primary Tech Focus</span>
+                    </div>
+                    <div class="bg-slate-900/80 border border-slate-800 p-3 rounded">
+                        <span class="text-emerald-400 block font-bold text-lg">Maritime Hubs</span>
+                        <span class="text-slate-400">Strait & Port Integration</span>
+                    </div>
+                    <div class="bg-slate-900/80 border border-slate-800 p-3 rounded">
+                        <span class="text-purple-400 block font-bold text-lg">Least Action</span>
+                        <span class="text-slate-400">Upstream Routing Protocol</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- NODES TABLE CONTAINER -->
+            <section class="module-card rounded-xl overflow-hidden border border-slate-800">
+                <div class="overflow-x-auto">
+                    <table id="apacNodesTable" class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-900/80 border-b border-slate-800 font-mono text-xs text-slate-400 uppercase tracking-wider">
+                                <th class="p-4">Designation</th>
+                                <th class="p-4">Location / Core Hub</th>
+                                <th class="p-4">Industrial / Kinetic Focus</th>
+                                <th class="p-4">Global ID (9-Digit)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800/60 text-sm text-slate-300 font-mono">
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="ap-001 tokyo tech hub tokyo japan tyojpc004">
+                                <td class="p-4 text-blue-400 font-bold">AP-001</td>
+                                <td class="p-4 text-white font-semibold">Tokyo</td>
+                                <td class="p-4 text-slate-400">Advanced Robotics & Core Financial Tech[cite: 4]</td>
+                                <td class="p-4 text-cyan-400 font-bold">TYOJPC004</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="ap-002 singapore strait pivot singapore sgpsgc009">
+                                <td class="p-4 text-blue-400 font-bold">AP-002</td>
+                                <td class="p-4 text-white font-semibold">Singapore</td>
+                                <td class="p-4 text-slate-400">Malacca Strait Maritime & Trade Hub[cite: 4]</td>
+                                <td class="p-4 text-cyan-400 font-bold">SGPSGC009</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="ap-003 philippine sea tech node manila philippines mnlphc031">
+                                <td class="p-4 text-blue-400 font-bold">AP-003</td>
+                                <td class="p-4 text-white font-semibold">Manila</td>
+                                <td class="p-4 text-slate-400">Philippine Sea Tech & Assembly Node[cite: 4]</td>
+                                <td class="p-4 text-cyan-400 font-bold">MNLPHC031</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="ap-004 east asian interior chengdu china ctucnc023">
+                                <td class="p-4 text-blue-400 font-bold">AP-004</td>
+                                <td class="p-4 text-white font-semibold">Chengdu</td>
+                                <td class="p-4 text-slate-400">East Asian Interior Logistics & Manufacturing[cite: 4]</td>
+                                <td class="p-4 text-cyan-400 font-bold">CTUCNC023</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="ap-005 seoul south korea semiconductor fabrication">
+                                <td class="p-4 text-blue-400 font-bold">AP-005</td>
+                                <td class="p-4 text-white font-semibold">Seoul</td>
+                                <td class="p-4 text-slate-400">Semiconductor Fabrication & High-Speed Data Grid</td>
+                                <td class="p-4 text-cyan-400 font-bold">SEOKRP005</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="ap-006 taipei taiwan semiconductor core">
+                                <td class="p-4 text-blue-400 font-bold">AP-006</td>
+                                <td class="p-4 text-white font-semibold">Taipei</td>
+                                <td class="p-4 text-slate-400">Precision Microelectronics & Silicon Foundry Node</td>
+                                <td class="p-4 text-cyan-400 font-bold">TPETWP006</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="ap-007 osaka japan industrial manufacturing">
+                                <td class="p-4 text-blue-400 font-bold">AP-007</td>
+                                <td class="p-4 text-white font-semibold">Osaka</td>
+                                <td class="p-4 text-slate-400">Heavy Industrial Manufacturing & Kansai Logistics</td>
+                                <td class="p-4 text-cyan-400 font-bold">OSAJPP007</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="ap-008 shanghai china shipping port">
+                                <td class="p-4 text-blue-400 font-bold">AP-008</td>
+                                <td class="p-4 text-white font-semibold">Shanghai</td>
+                                <td class="p-4 text-slate-400">Global Container Shipping Port & Financial Gateway</td>
+                                <td class="p-4 text-cyan-400 font-bold">SHACNP008</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="ap-009 shenzhen china hardware tech hub">
+                                <td class="p-4 text-blue-400 font-bold">AP-009</td>
+                                <td class="p-4 text-white font-semibold">Shenzhen</td>
+                                <td class="p-4 text-slate-400">Hardware Prototyping & Consumer Electronics Core</td>
+                                <td class="p-4 text-cyan-400 font-bold">SZGCNP009</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="ap-010 bangkok thailand asean supply chain">
+                                <td class="p-4 text-blue-400 font-bold">AP-010</td>
+                                <td class="p-4 text-white font-semibold">Bangkok</td>
+                                <td class="p-4 text-slate-400">ASEAN Agro-Industrial Supply Chain Terminal</td>
+                                <td class="p-4 text-cyan-400 font-bold">BKKTHP010</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="ap-011 jakarta indonesia resource logistics">
+                                <td class="p-4 text-blue-400 font-bold">AP-011</td>
+                                <td class="p-4 text-white font-semibold">Jakarta</td>
+                                <td class="p-4 text-slate-400">Archipelagic Resource Logistics & Energy Hub</td>
+                                <td class="p-4 text-cyan-400 font-bold">JKTIDP011</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="ap-012 hanoi vietnam manufacturing corridor">
+                                <td class="p-4 text-blue-400 font-bold">AP-012</td>
+                                <td class="p-4 text-white font-semibold">Hanoi</td>
+                                <td class="p-4 text-slate-400">Northern Manufacturing Corridor & Assembly Base</td>
+                                <td class="p-4 text-cyan-400 font-bold">HANVNP012</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="ap-013 through ap-030 extended apac nodes">
+                                <td class="p-4 text-blue-400 font-bold">AP-013 → AP-030</td>
+                                <td class="p-4 text-white font-semibold">Extended Regional Nodes (Kuala Lumpur, Melbourne, Auckland, Ho Chi Minh City, Brisbane, Perth, Busan, Kyoto, etc.)</td>
+                                <td class="p-4 text-slate-400">Regional Secondary Capillary Interconnects & Trade Ports</td>
+                                <td class="p-4 text-cyan-400 font-bold">APACINP013-030</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-800 mt-16 py-8 px-6 bg-slate-950 text-center font-mono text-xs text-slate-500">
+        <p>© 2026 PINALEAF ADVANCEMENTS LLP // AAROHAN 2050 // ASIA-PACIFIC 30-NODE MESH</p>
+    </footer>
+
+    <!-- INTERACTION SCRIPT -->
+    <script>
+        function filterNodes() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            document.querySelectorAll('.node-row').forEach(row => {
+                const searchData = row.getAttribute('data-search');
+                row.style.display = searchData.includes(input) ? "" : "none";
+            });
+        }
+        window.onload = updateAuthUI;
+    </script>
+</body>
+</html>
