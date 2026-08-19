@@ -1,101 +1,123 @@
 /**
- * KUTS Unified Core Calculations Bridge System
- * Manages central local storage parameters, execution hooks, and systemic deduction loops.
+ * KUTS (Kinetic Unified Temporal Synchronization) Core Engine
+ * Core Path: KUTS-Core-Genesis/core/kuts-core-bridge.js
+ * Reference: Master Template & Document Addendum Finalized 2026
  */
 
-const KUTS_BRIDGE = {
-    // Shared LocalStorage memory key maps
-    STORAGE_KEYS: {
-        WALLET: 'kuts_directory_wallet',
-        AUDIT_LOGS: 'kuts_directory_audit_logs',
-        ENTITIES: 'kuts_directory_entities'
-    },
+const KUTS_DOMAINS = {
+    "01": { bracket: "(+00)", label: "Temporal", desc: "Time/Epochs (Clock Cycle)" },
+    "02": { bracket: "[+00]", label: "Spatial", desc: "Anchor Nodes / Points (Mapped Boundary)" },
+    "03": { bracket: "[<<00>>]", label: "Kinetic", desc: "Velocity/Force (Directed Vector)" },
+    "04": { bracket: "(*00*)", label: "Neural", desc: "Identity/Logic (Neural Synapse)" },
+    "05": { bracket: "(~00~)", label: "Elemental", desc: "Raw Matter/Atoms (Contained Vibration)" },
+    "06": { bracket: "(\\00/)", label: "Plants", desc: "Stationary Life (Rooted Growth)" },
+    "07": { bracket: "(/00/)", label: "Animals", desc: "Mobile Life (Encapsulated Motion)" },
+    "08": { bracket: "{+00}", label: "Expressive", desc: "Creative Works (Artistic Vision)" },
+    "09": { bracket: "{~00~}", label: "Fluidic", desc: "Air & Water (Enclosed Wave Flow)" },
+    "10": { bracket: "[@00@]", label: "Virtual", desc: "Digital Assets / AI (Data Tags)" },
+    "11": { bracket: "[[00]]", label: "Institutional", desc: "Laws & Licenses (Formal Columns)" },
+    "12": { bracket: "[$00$]", label: "Fiscal", desc: "Value / Currency (Systemic Exchange)" },
+    "13": { bracket: "[/00/]", label: "Structural", desc: "Infrastructure (Beams/Frames)" },
+    "14": { bracket: "[#00#]", label: "Mechanical", desc: "Machines/Hardware (Gears/Grids)" },
+    "15": { bracket: "((00))", label: "Radiant", desc: "Signals/Fields (Expanding Waves)" },
+    "16": { bracket: "(??00??)", label: "Latent", desc: "The Unknown (Enclosed Inquiry)" }
+};
+
+class KUTSCoreBridge {
+    constructor() {
+        // Core Physics Constant & Level 1 Baseline Reference
+        this.SPEED_OF_LIGHT = 299792458; 
+        this.MASTER_ORIGIN = { id: "THRINC000", lat: 10.5249, lng: 76.2144 };
+        this.APEX_DESTINATION = { id: "THRIND000", name: "Pinaleaf Advancements LLP" };
+    }
 
     /**
-     * Retrieves current node wallet state details
+     * Hardcoded Invariant Inception Coordinates (Theoretical Cosmology Addendum)
      */
-    getWalletState() {
-        const defaultState = { balance: 0.00 };
-        const data = localStorage.getItem(this.STORAGE_KEYS.WALLET);
-        return data ? JSON.parse(data) : defaultState;
-    },
+    getUniversalGenesisBlocks() {
+        return {
+            universalGenesisString: {
+                serial: "(??00??):0000.00.00.00.00.00.00.00.01",
+                category: "Category 16 - Latent / The Unknown",
+                description: "The Initial Planck Epoch Singularity. Kinetic-Point Wall floor."
+            },
+            cosmicWebCrystallization: {
+                serial: "(~00~):0000.00.13.40.00.00.00.00.00",
+                category: "Category 05 - Elemental",
+                description: "Epoch of Reionization (~130M-140M Years Post-Singularity). Primordial atomic structure gas filaments."
+            },
+            galaxyFormationEra: {
+                serial: "(~00~):0000.00.37.80.00.00.00.00.00",
+                category: "Category 05 - Elemental",
+                description: "Gravitational wells of Dark Matter Halos accelerating peak galactic structures and collisions."
+            },
+            planetaryAccretionEra: {
+                serial: "[+00]:0000.00.93.45.00.00.00.00.00",
+                category: "Category 00 - Spatial Anchor Initialized",
+                description: "Birth of the Terrestrial Grid. Collapse of solar nebula into solid planetary crust."
+            }
+        };
+    }
 
     /**
-     * Retrieves the entire raw transaction audit history chain array
+     * Validates and structuralizes any hierarchical KUTS 9-Digit Grid ID
+     * Standard: [3-Locality/City][2-Nation][1-Function][3-Sequence]
      */
-    getAuditLogs() {
-        const data = localStorage.getItem(this.STORAGE_KEYS.AUDIT_LOGS);
-        return data ? JSON.parse(data) : [];
-    },
-
-    /**
-     * Compiles 22-digit micro-precision timestamp string matching KUTS network contracts
-     */
-    generateSystemTimestamp() {
-        const now = new Date();
-        const GE = "0130"; const EE = "05"; const PE = "26"; const TE = "04";
-        const Day = now.getDate().toString().padStart(2, '0');
-        const H = now.getHours().toString().padStart(2, '0');
-        const M = now.getMinutes().toString().padStart(2, '0');
-        const S = now.getSeconds().toString().padStart(2, '0');
-        const ms = now.getMilliseconds();
-        
-        const BaseE = Math.floor(ms / 10).toString().padStart(2, '0');
-        const MilliE = Math.floor(Math.random() * 99).toString().padStart(2, '0');
-        const MicroE = Math.floor(Math.random() * 99).toString().padStart(2, '0');
-        
-        return `(+00):${GE}.${EE}.${PE}.${TE}.${Day}.${H}.${M}.${S}.${BaseE}.${MilliE}.${MicroE}`;
-    },
-
-    /**
-     * Core Ingestion Module: Dispatches new transaction block logs, 
-     * applies 1% System TDS deductions, and handles game royalty triggers.
-     */
-    executeTransaction(sourceNodeId, targetNodeId, grossKineInput, manifestDescription) {
-        const gross = parseFloat(grossKineInput) || 0;
-        
-        // 1. Calculate standard 1% Statutory TDS deduction
-        const tds = Math.round((gross * 0.01) * 10000) / 10000;
-        
-        // 2. Evaluate game-related royalty triggers
-        let royalty = 0.00;
-        if (sourceNodeId === "LOCAL-GAME-SANDBOX" || manifestDescription.includes("Pulse Harvest")) {
-            royalty = Math.round((gross * 0.01) * 10000) / 10000;
+    parseSpatialGridIdentifier(gridId) {
+        const cleaned = gridId.trim().toUpperCase();
+        if (cleaned.length !== 9) {
+            return { valid: false, reason: "ID must be precisely 9 alphanumeric characters." };
         }
 
-        // 3. Compute clean remaining net value
-        const net = Math.round((gross - tds - royalty) * 10000) / 10000;
-        
-        const uniqueTxHash = `AUD-${Math.floor(100000 + Math.random() * 900000)}`;
-        const timeString = this.generateSystemTimestamp();
+        const locality = cleaned.substring(0, 3);
+        const nation = cleaned.substring(3, 5);
+        const functionCode = cleaned.substring(5, 6);
+        const sequence = cleaned.substring(6, 9);
 
-        // 4. Construct complete, structured transaction block
-        const logEntry = {
-            id: uniqueTxHash,
-            timestamp: timeString,
-            source: sourceNodeId.toUpperCase(),
-            target: targetNodeId.toUpperCase(),
-            gross: gross,
-            tds: tds,
-            royalty: royalty,
-            net: net,
-            desc: manifestDescription
+        let hierarchyLevel = "Unknown Edge";
+        if (functionCode === "C") hierarchyLevel = "Level 1 - Global Node (Geodesic Boundary)";
+        if (functionCode === "P") hierarchyLevel = "Level 2 - Primary Node (Kinetic Density)";
+        if (functionCode === "S") hierarchyLevel = "Level 3 - Secondary Node (Topological Capillaries)";
+        if (functionCode === "D") hierarchyLevel = "Level 4 - Apex Enterprise Destination Node";
+        if (functionCode === "U") hierarchyLevel = "Level 4 - Apex Individual User Point";
+
+        return {
+            valid: true,
+            gridId: cleaned,
+            level: hierarchyLevel,
+            components: { locality, nation, functionCode, sequence }
+        };
+    }
+
+    /**
+     * Level 4 Secondary Node Interface Translator Handshake
+     * Takes volatile terminal telecom inputs and converts them into verified KUTS blocks
+     */
+    translateTerminalToSecondaryNode(inputID, type, secondaryNodeField = "TUPINS014") {
+        const now = new Date();
+        const timestamp22Digit = `0130.05.26.04.${String(now.getDate()).padStart(2,'0')}.${String(now.getHours()).padStart(2,'0')}.${String(now.getMinutes()).padStart(2,'0')}.${String(now.getSeconds()).padStart(2,'0')}.00.00.00`;
+
+        let formattedOutput = {
+            ingestionTimestamp: timestamp22Digit,
+            secondaryAnchorGov: secondaryNodeField,
+            validatedIdentity: inputID.trim(),
+            unwrappedPayloadKey: ""
         };
 
-        // 5. Append transaction block to active local history array registers
-        const activeLogs = this.getAuditLogs();
-        activeLogs.unshift(logEntry);
-        localStorage.setItem(this.STORAGE_KEYS.AUDIT_LOGS, JSON.stringify(activeLogs));
+        if (type === "EnterpriseStaticIP") {
+            // Destination Node (DN) Mapping Pattern
+            formattedOutput.unwrappedPayloadKey = `[@00@]:${timestamp22Digit}`;
+            formattedOutput.meta = "Static Digital Footprint Enterprise Server Stream";
+        } else if (type === "HumanMobile") {
+            // User Point (UP) Mapping Pattern (E.164 Mobile format validation verification)
+            formattedOutput.unwrappedPayloadKey = `(*00*):${timestamp22Digit}`;
+            formattedOutput.meta = "Dynamic Human Footprint Cellular Pulse Stream";
+        }
 
-        // 6. Credit net value balance parameter straight to localized user wallet
-        const currentWallet = this.getWalletState();
-        currentWallet.balance = Math.round((currentWallet.balance + net) * 10000) / 10000;
-        currentWallet.lastUpdated = new Date().toISOString();
-        localStorage.setItem(this.STORAGE_KEYS.WALLET, JSON.stringify(currentWallet));
-
-        // 7. BROADCAST TRIGGER LINK FOR LAYER 06 BACKEND RELAY SYNCS
-        window.dispatchEvent(new Event('KUTS_TRANSACTION_EXECUTED'));
-
-        return logEntry;
+        return formattedOutput;
     }
-};
+}
+
+// Export for cross-suite utility mapping accessibility
+window.KUTS_CORE = new KUTSCoreBridge();
+console.log("KUTS Invariant Core Bridge Layer Initialized Successfully.");
