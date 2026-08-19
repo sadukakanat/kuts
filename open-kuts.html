@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Network Gateway | System Root</title>
+    <!-- Tailwind CSS Engine for local micro-enterprise adjustments -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Typography Fonts matching KUTS Core design system specifications -->
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body { 
+            background-color: #030712; 
+            color: #cbd5e1; 
+            font-family: 'Inter', sans-serif; 
+        }
+        .font-mono { 
+            font-family: 'Share Tech Mono', monospace; 
+        }
+        .glow-blue { 
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.15); 
+            border-color: rgba(59, 130, 246, 0.3); 
+        }
+        .scanline {
+            width: 100%; height: 6px; z-index: 40; position: absolute; pointer-events: none;
+            background: linear-gradient(to bottom, rgba(59, 130, 246, 0.0) 0%, rgba(59, 130, 246, 0.08) 50%, rgba(59, 130, 246, 0.0) 100%);
+            animation: scan 6s linear infinite;
+        }
+        @keyframes scan { 0% { top: 0%; } 100% { top: 100%; } }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between p-4 md:p-6 relative overflow-hidden bg-[#030712] select-none">
+    
+    <!-- Ephemeral Scanline Indicator Matrix -->
+    <div class="scanline"></div>
+
+    <!-- HUD TERMINAL HEADER LAYER -->
+    <header class="w-full max-w-4xl mx-auto border border-slate-800/80 bg-slate-900/40 p-4 rounded-xl flex flex-col sm:flex-row justify-between items-center gap-4 mb-6 font-mono text-xs backdrop-blur-sm relative z-10">
+        <div>
+            <h1 class="text-lg font-bold text-blue-400 tracking-wider flex items-center gap-2">
+                <span class="h-2 w-2 rounded-full bg-blue-500 animate-pulse"></span> KUTS_SYSTEM_GATEWAY
+            </h1>
+            <p class="text-slate-500 text-[0.6rem] uppercase tracking-wider">Project MDI6000 // Decentralized Identity Entry Core</p>
+        </div>
+        <div class="bg-black/40 border border-slate-900 px-3 py-1.5 rounded text-emerald-400 text-center text-[0.7rem]" id="gateway-clock">
+            INITIALIZING READ HEADS...
+        </div>
+    </header>
+
+    <!-- CORE AUTHENTICATION MATRIX -->
+    <main class="w-full max-w-md mx-auto bg-slate-900/30 border border-slate-800/80 rounded-2xl p-6 md:p-8 glow-blue backdrop-blur-md flex flex-col gap-6 relative z-10 my-auto">
+        
+        <div class="text-center border-b border-slate-800/60 pb-4">
+            <h2 class="text-xl font-bold font-mono tracking-tight text-slate-100 uppercase">Node Access Ingestion</h2>
+            <p class="text-[0.68rem] text-slate-400 font-sans mt-1">Please enter your assigned 22-digit physical node identification string code to establish data mesh handshake parameters.</p>
+        </div>
+
+        <!-- FORM ENTRY CONTAINER -->
+        <form id="gateway-auth-form" onsubmit="evaluateHandshakePayload(event)" class="space-y-4 font-mono text-xs">
+            <div class="space-y-1.5">
+                <label class="text-slate-500 font-bold uppercase tracking-wider block">Assigned Node ID Token:</label>
+                <input 
+                    type="text" 
+                    id="node-input-string" 
+                    placeholder="e.g., 10252041THRINCF395" 
+                    required 
+                    maxlength="22"
+                    class="w-full bg-black/60 border border-slate-800 rounded-xl p-3 text-emerald-400 focus:outline-none focus:border-blue-500 font-bold tracking-widest text-center uppercase select-all transition-all"
+                >
+            </div>
+
+            <button 
+                type="submit" 
+                id="handshake-submit-btn" 
+                class="w-full bg-blue-950/60 hover:bg-blue-900 border border-blue-700 text-blue-300 py-3 rounded-xl font-bold uppercase tracking-widest text-[0.65rem] transition-all duration-300 shadow-[0_0_15px_rgba(59,130,246,0.1)] cursor-pointer"
+            >
+                Authorize Handshake Sequence >>
+            </button>
+        </form>
+
+        <!-- PRESET TELEMETRY PROFILE ASSIGNMENTS -->
+        <div class="space-y-2 border-t border-slate-800/60 pt-4 font-mono text-[0.65rem]">
+            <span class="text-slate-500 font-bold uppercase block tracking-wider">Ecosystem Station Presets:</span>
+            <div class="flex flex-col gap-1">
+                <button onclick="injectPresetId('12252031THRINC0564')" class="text-left text-slate-400 hover:text-blue-400 bg-black/40 border border-slate-900/80 p-2 rounded truncate transition-all flex justify-between items-center">
+                    <span>➔ KUTS Framework Architecture Target</span>
+                    <span class="text-[0.55rem] text-slate-600 font-bold">CORE_REF</span>
+                </button>
+                <button onclick="injectPresetId('10252041THRINCF395')" class="text-left text-slate-400 hover:text-orange-400 bg-black/40 border border-slate-900/80 p-2 rounded truncate transition-all flex justify-between items-center">
+                    <span>➔ Pinaleaf Advancements LLP Node Hub</span>
+                    <span class="text-[0.55rem] text-slate-600 font-bold">MSME_REF</span>
+                </button>
+                <button onclick="injectPresetId('05252047THRINC3A6D')" class="text-left text-slate-400 hover:text-purple-400 bg-black/40 border border-slate-900/80 p-2 rounded truncate transition-all flex justify-between items-center">
+                    <span>➔ Local Autonomous AI Companion Engine</span>
+                    <span class="text-[0.55rem] text-slate-600 font-bold">AI_REF</span>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- METADATA INFORMATION BAR FOOTER -->
+    <footer class="w-full max-w-4xl mx-auto border-t border-slate-900/60 pt-4 text-center font-mono text-[0.58rem] text-slate-600 uppercase tracking-widest flex flex-col sm:flex-row justify-between items-center gap-2 relative z-10">
+        <span>© 2026 PINALEAF ADVANCEMENTS LLP. ALL RIGHTS RESERVED.</span>
+        <a href="KUTS-Module-Menu.html" class="text-blue-500/50 hover:text-blue-400 transition-colors tracking-widest font-bold">➔ VIEW MASTER DIRECTORY MENU (74 MODULES)</a>
+    </footer>
+
+    <!-- CENTRAL STATE COMPACTION SCRIPTS -->
+    <script>
+        // Synchronized real-time calendar sequence loop
+        function runMasterGatewayClock() {
+            setInterval(() => {
+                const d = new Date();
+                const year = d.getFullYear();
+                const start = new Date(year, 0, 0);
+                const diff = d - start;
+                const oneDay = 1000 * 60 * 60 * 24;
+                const dayOfYear = String(Math.floor(diff / oneDay)).padStart(3, '0');
+                
+                const hrs = String(d.getHours()).padStart(2, '0');
+                const mins = String(d.getMinutes()).padStart(2, '0');
+                const secs = String(d.getSeconds()).padStart(2, '0');
+                const ms = String(d.getMilliseconds()).padStart(3, '0');
+
+                document.getElementById('gateway-clock').innerText = 
+                    `(+00):0130.05.26.04.${dayOfYear}.${hrs}.${mins}.${secs}.${ms}`;
+            }, 33);
+        }
+
+        // Auto-populate helper for testing endpoints
+        function injectPresetId(idString) {
+            const inputField = document.getElementById('node-input-string');
+            inputField.value = idString;
+            inputField.focus();
+        }
+
+        // Validate structure and map the sequence payload directly onto active dashboards
+        function evaluateHandshakePayload(event) {
+            event.preventDefault();
+            const inputString = document.getElementById('node-input-string').value.trim().toUpperCase();
+            const submitBtn = document.getElementById('handshake-submit-btn');
+
+            if (inputString.length < 14) {
+                alert("Handshake Security Alert:\nInvalid ID format string width. Target signature metric is too narrow.");
+                return;
+            }
+
+            // Visual compilation state buffer
+            submitBtn.innerHTML = `<span class="animate-pulse text-emerald-400">⚡ COMPILING VECTOR PATHS...</span>`;
+            submitBtn.disabled = true;
+
+            setTimeout(() => {
+                // Seed an address placeholder dynamically to shared browser session pools
+                localStorage.setItem('kuts_active_identity_token', inputString);
+                
+                // Route target operator smoothly to the decentralized control corridor portal
+                window.location.href = './browser-genesis.html';
+            }, 800);
+        }
+
+        // Initialize synchronization triggers on document load
+        window.addEventListener('DOMContentLoaded', runMasterGatewayClock);
+    </script>
+</body>
+</html>

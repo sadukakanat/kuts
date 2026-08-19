@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Logistics | Capillary Supply Chain Matrix</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght=300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #030712; color: #cbd5e1; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .glow-blue { box-shadow: 0 0 25px rgba(6, 182, 212, 0.1); border-color: rgba(6, 182, 212, 0.25); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col p-4 md:p-6 bg-[#030712]">
+
+    <!-- HEADER HUD -->
+    <header class="w-full max-w-6xl mx-auto border border-slate-800 bg-slate-900/50 p-4 rounded-xl flex flex-col sm:flex-row justify-between items-center gap-4 mb-6 font-mono text-xs backdrop-blur-sm">
+        <div>
+            <h1 class="text-base font-bold text-cyan-400 tracking-wider">KUTS_CAPILLARY_SUPPLY_CHAIN</h1>
+            <p class="text-slate-500 text-[0.6rem] uppercase tracking-wider">Category 02 // Corridor Freight & Logistics Ingestion Hub</p>
+        </div>
+        <div class="text-right flex flex-col items-center sm:items-end gap-1">
+            <a href="index.html" class="text-cyan-400 font-bold hover:underline tracking-widest text-[0.65rem]">&lt;&lt; ESCAPE TO SYSTEM ROOT</a>
+            <span class="text-cyan-400 font-bold bg-cyan-950/40 px-2 py-0.5 rounded border border-cyan-900/30 text-[0.55rem]">LOGISTICS SYNC ACTIVE</span>
+        </div>
+    </header>
+
+    <main class="w-full max-w-6xl mx-auto flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- LEFT COLUMN: SHIPMENT MANIFEST INJECTOR -->
+        <section class="lg:col-span-4 bg-slate-900/50 border border-slate-800 rounded-xl p-5 flex flex-col justify-between glow-blue backdrop-blur-sm">
+            <form onsubmit="dispatchManifestPulse(event)" class="space-y-4 font-mono text-xs">
+                <h2 class="text-xs text-cyan-400 font-bold tracking-widest uppercase border-b border-slate-800 pb-3 mb-2">Dispatch Manifest Cargo</h2>
+                
+                <div>
+                    <label class="block text-slate-500 text-[0.6rem] mb-1">CARRIER DESTINATION NODE ID</label>
+                    <input type="text" id="ship-target" value="TUPINS014" required class="w-full bg-black border border-slate-800 p-2.5 rounded text-cyan-400 font-bold outline-none focus:border-cyan-500 uppercase tracking-wider">
+                </div>
+
+                <div>
+                    <label class="block text-slate-500 text-[0.6rem] mb-1">MATERIAL COMMODITY CLASS</label>
+                    <select id="ship-class" class="w-full bg-black border border-slate-800 p-2.5 rounded text-slate-200 font-sans outline-none focus:border-cyan-500" onchange="calculateLiveLogisticsKine()">
+                        <option value="1.20">Industrial Textile Fabrics (Multiplier: 1.20x)</option>
+                        <option value="3.00">Organic Eco-Harvest Materials (Multiplier: 3.00x)</option>
+                        <option value="2.50">Solid Infrastructure Commodities (Multiplier: 2.50x)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-slate-500 text-[0.6rem] mb-1">CARGO MANIFEST WEIGHT (TONS)</label>
+                    <input type="number" id="ship-weight" value="10" min="1" step="0.1" required class="w-full bg-black border border-slate-800 p-2.5 rounded text-slate-200 outline-none focus:border-cyan-500" oninput="calculateLiveLogisticsKine()">
+                </div>
+
+                <!-- CONVERSION PREVIEW TILE -->
+                <div class="bg-black/40 border border-slate-900 p-3 rounded-lg text-[0.65rem] flex flex-col gap-1 text-slate-400">
+                    <span class="text-slate-500 uppercase block font-bold text-[0.55rem] border-b border-slate-900 pb-1">Asset Conversion Preview:</span>
+                    <div class="flex justify-between"><span>Calculated Valuation Yield:</span><span class="text-cyan-400 font-bold" id="preview-gross-kine">12.0000 Ꝃ</span></div>
+                </div>
+
+                <button type="submit" class="w-full bg-cyan-950 hover:bg-cyan-900 border border-cyan-700 text-cyan-300 py-3 rounded uppercase tracking-widest font-bold text-[0.65rem] transition-all">
+                    Sign & Route Freight Vector
+                </button>
+            </form>
+        </section>
+
+        <!-- RIGHT COLUMN: SHIPPING AUDIT LOG -->
+        <section class="lg:col-span-8 bg-slate-900/30 border border-slate-800 rounded-xl p-5 flex flex-col backdrop-blur-sm self-stretch overflow-hidden">
+            <h2 class="text-xs text-slate-300 font-bold tracking-widest uppercase font-mono border-b border-slate-800 pb-3 mb-4">Corridor Freight Tracking Register</h2>
+            
+            <div class="overflow-x-auto flex-1">
+                <table class="w-full text-left border-collapse font-mono text-xs whitespace-nowrap">
+                    <thead>
+                        <tr class="bg-black/30 text-slate-500 uppercase text-[0.6rem] tracking-wider border-b border-slate-800">
+                            <th class="p-3">Tracking Hash</th>
+                            <th class="p-3">Destination Node</th>
+                            <th class="p-3">Cargo Description Parameters</th>
+                            <th class="p-3 text-right">Computed Volume (Ꝃ)</th>
+                            <th class="p-3 text-right text-red-400">1% System TDS</th>
+                            <th class="p-3 text-right pr-4 text-emerald-400">Net Value</th>
+                        </tr>
+                    </thead>
+                    <tbody id="logistics-stream-body" class="divide-y divide-slate-800/40 text-slate-300 text-[0.65rem]">
+                        <!-- Rendered Reactively via Cross-Suite Execution Bridge -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- HUB NAV INTERFACE -->
+    <nav class="w-full max-w-6xl mx-auto mt-6 grid grid-cols-2 sm:grid-cols-4 gap-2 font-mono text-[0.65rem] text-slate-400 shrink-0">
+        <a href="./entity-registry.html" class="bg-slate-950 border border-slate-900 hover:border-cyan-900/60 p-2 rounded text-center transition-colors">➔ MSME Control</a>
+        <a href="./account.html" class="bg-slate-950 border border-slate-900 hover:border-purple-900/60 p-2 rounded text-center transition-colors">➔ Wallet Ledger</a>
+        <a href="./compliance.html" class="bg-slate-950 border border-slate-900 hover:border-blue-900/60 p-2 rounded text-center transition-colors">➔ Compliance Audit</a>
+        <a href="./capacity-planner.html" class="bg-slate-950 border border-slate-900 hover:border-purple-900/60 p-2 rounded text-center transition-colors">➔ Macro HUD</a>
+    </nav>
+
+    <!-- CORE LOGIC SCRIPTS USING LAYER 03 CORE BRIDGE -->
+    <script src="./core/kuts-core-bridge.js"></script>
+    <script>
+        function calculateLiveLogisticsKine() {
+            const multiplier = parseFloat(document.getElementById('ship-class').value);
+            const weight = parseFloat(document.getElementById('ship-weight').value) || 0;
+            const computedKine = weight * multiplier;
+            document.getElementById('preview-gross-kine').innerText = computedKine.toFixed(4) + " Ꝃ";
+            return computedKine;
+        }
+
+        function updateLogisticsAuditView() {
+            const logs = KUTS_BRIDGE.getAuditLogs();
+            const tbody = document.getElementById('logistics-stream-body');
+            tbody.innerHTML = "";
+
+            // Filter down logs to capture only Category 02 logistics pipelines
+            const logisticsLogs = logs.filter(log => log.desc.includes("Freight Run") || log.source.includes("TUP") || log.target.includes("TUP"));
+
+            if (logisticsLogs.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-500 italic">// No active corridor freight vectors logged.</td></tr>`;
+                return;
+            }
+
+            logisticsLogs.forEach(log => {
+                tbody.insertAdjacentHTML('beforeend', `
+                    <tr class="hover:bg-slate-900/20 transition-colors">
+                        <td class="p-3 text-cyan-400 font-bold select-all">${log.id}</td>
+                        <td class="p-3 select-all text-slate-400">${log.target}</td>
+                        <td class="p-3 font-sans text-slate-200 text-[0.6rem] truncate max-w-[220px]" title="${log.desc}">${log.desc}</td>
+                        <td class="p-3 text-right font-mono">${log.gross.toFixed(2)} Ꝃ</td>
+                        <td class="p-3 text-right text-red-400/80 font-mono">-${log.tds.toFixed(2)} Ꝃ</td>
+                        <td class="p-3 text-right pr-4 text-emerald-400 font-bold font-mono">+${log.net.toFixed(4)} Ꝃ</td>
+                    </tr>
+                `);
+            });
+        }
+
+        function dispatchManifestPulse(event) {
+            event.preventDefault();
+            const targetNode = document.getElementById('ship-target').value.toUpperCase().trim();
+            const selectEl = document.getElementById('ship-class');
+            const classLabel = selectEl.options[selectEl.selectedIndex].text.split(' (')[0];
+            const weight = document.getElementById('ship-weight').value;
+            
+            const totalGrossKine = calculateLiveLogisticsKine();
+            const manifestDescription = `Freight Run Manifest: ${weight} Tons of [${classLabel}]`;
+
+            // Commit package vector right into the cross-suite state loop
+            KUTS_BRIDGE.executeTransaction("LOCAL-LOGISTICS-DESK", targetNode, totalGrossKine, manifestDescription);
+            
+            document.getElementById('ship-weight').value = "10";
+            calculateLiveLogisticsKine();
+            updateLogisticsAuditView();
+        }
+
+        window.addEventListener('storage', updateLogisticsAuditView);
+        window.addEventListener('DOMContentLoaded', () => {
+            calculateLiveLogisticsKine();
+            updateLogisticsAuditView();
+        });
+    </script>
+<!-- Resilient Inline Auth & Navigation Injector for Local Testing -->
+    <script>
+        (function() {
+            window.addEventListener('DOMContentLoaded', () => {
+                // Check session; if missing during local test, auto-initialize a mock test session instead of failing
+                let session = localStorage.getItem('kuts_active_session');
+                if (!session) {
+                    session = JSON.stringify({ nodeId: "THRINC000-LOCAL-TEST", expiry: Date.now() + 86400000 });
+                    localStorage.setItem('kuts_active_session', session);
+                }
+
+                // Inject Global Header if missing
+                if (!document.getElementById('kuts-global-header')) {
+                    const headerHTML = `
+                        <header id="kuts-global-header" class="w-full max-w-7xl mx-auto p-6 flex justify-between items-center border-b border-slate-800 bg-[#030712] text-slate-200 mb-6">
+                            <div class="text-blue-400 font-mono font-bold tracking-widest text-sm">
+                                KUTS_MESH_OPERATIONS // MDI6000 [LOCAL MODE]
+                            </div>
+                            <nav id="nav-auth" class="flex gap-4 items-center font-mono"></nav>
+                        </header>`;
+                    document.body.insertAdjacentHTML('afterbegin', headerHTML);
+                }
+
+                // Inject Global Footer if missing
+                if (!document.getElementById('kuts-global-footer') && !window.location.pathname.includes('index.html')) {
+                    const footerHTML = `
+                        <footer id="kuts-global-footer" class="max-w-7xl mx-auto mt-auto py-8 border-t border-slate-800 text-center w-full">
+                            <a href="index.html" class="inline-flex items-center gap-2 text-[0.7rem] text-slate-500 hover:text-blue-400 font-mono uppercase tracking-widest transition-all">
+                                <span class="text-lg">←</span> RETURN TO UNIVERSAL GATEWAY
+                            </a>
+                        </footer>`;
+                    document.body.insertAdjacentHTML('beforeend', footerHTML);
+                }
+
+                updateAuthUI();
+            });
+
+            window.updateAuthUI = function() {
+                const nav = document.getElementById('nav-auth');
+                if (!nav) return;
+                
+                nav.innerHTML = `
+                    <a href="index.html" class="text-slate-400 text-[0.65rem] uppercase font-mono hover:text-white">Gateway</a>
+                    <button onclick="secureLogout()" class="bg-red-950 hover:bg-red-900 text-red-400 font-mono text-[0.65rem] px-3 py-1.5 rounded border border-red-900 uppercase tracking-widest cursor-pointer">
+                        [X] DISCONNECT
+                    </button>`;
+            };
+
+            window.secureLogout = function() {
+                localStorage.removeItem('kuts_active_session');
+                window.location.href = 'sign-in.html';
+            };
+        })();
+    </script>
+</body>
+</html>

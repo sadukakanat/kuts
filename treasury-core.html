@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS | Autonomous Multi-Role Central Treasury Command</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght=300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #02040a; color: #f0fdf4; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .glow-orange { box-shadow: 0 0 20px rgba(249, 115, 22, 0.1); border-color: rgba(249, 115, 22, 0.3); }
+        .glow-cyan { box-shadow: 0 0 20px rgba(6, 182, 212, 0.1); border-color: rgba(6, 182, 212, 0.3); }
+        .t-group { border: 1px solid rgba(249, 115, 22, 0.2); background: rgba(15, 23, 42, 0.6); border-radius: 8px; padding: 0.4rem; }
+        .t-link { display: block; font-size: 0.65rem; padding: 0.35rem 0.6rem; border-radius: 4px; transition: all 0.2s; white-space: nowrap; font-family: 'Share Tech Mono', monospace; font-weight: bold; }
+        .t-link:hover { background: rgba(249, 115, 22, 0.2); color: #fff; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col p-4 md:p-6 bg-[#030712] selection:bg-orange-500/30">
+
+    <!-- MASTER HUD NAVIGATION HEAD -->
+    <header class="w-full max-w-[85rem] mx-auto border border-orange-900/40 bg-slate-900/80 p-4 rounded-xl flex flex-col xl:flex-row justify-between items-center gap-6 mb-6 backdrop-blur-md sticky top-4 z-50">
+        <div class="text-center xl:text-left shrink-0">
+            <h1 class="text-xl font-bold text-orange-500 tracking-wider font-mono">KUTS_TREASURY_CORE <span class="text-slate-400 text-sm">v2.4</span></h1>
+            <p class="text-slate-400 text-[0.65rem] font-mono uppercase">Multi-Scalar Resource Allocation & Algorithmic Peg</p>
+        </div>
+
+        <!-- THE TREASURY SPACE CROSS-LINK INTERFACE -->
+        <nav class="flex flex-wrap justify-center gap-3">
+            <div class="t-group">
+                <span class="text-[0.5rem] text-slate-500 font-mono uppercase tracking-wider px-1 block mb-1">Treasury Network Modules</span>
+                <div class="flex flex-wrap justify-center xl:justify-end gap-1">
+                    <a href="./treasury-core.html" class="t-link text-orange-400 bg-orange-950/40 border border-orange-900/50">[01] CORE ENGINE</a>
+                    <a href="./genesis-ledger.html" class="t-link text-amber-500">[02] GENESIS RESERVE (100K Ꝺ)</a>
+                    <a href="./funding-matrix.html" class="t-link text-cyan-400">[03] STRATEGIC DYNE FUNDING</a>
+                    <a href="./loan-ledger.html" class="t-link text-emerald-400">[04] KINE LOAN LEDGER</a>
+                    <a href="./repayment-engine.html" class="t-link text-yellow-400">[05] FLUX REPAYMENT SWEEPS</a>
+                    <a href="./custodian-vault.html" class="t-link text-red-400">[06] CUSTODIAN C_LOCK</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- CORE FUNCTIONAL INTERFACE -->
+    <main class="w-full max-w-[85rem] mx-auto flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- LEFT 7 COLUMNS: FX MONITOR & REBASE CONTROLLER -->
+        <div class="lg:col-span-7 flex flex-col gap-6">
+            
+            <!-- GLOBAL FIAT INDEX WATCHDOG -->
+            <section class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 glow-cyan relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="flex justify-between items-center border-b border-slate-800 pb-3 mb-4 relative z-10">
+                    <h2 class="text-xs text-cyan-400 font-bold tracking-widest uppercase font-mono">Global Currency Watchdog Array</h2>
+                    <span class="text-[0.6rem] font-mono text-slate-500 uppercase flex items-center gap-2">
+                        <span class="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse"></span> Network Polling: Active
+                    </span>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 font-mono text-xs relative z-10">
+                    <div class="bg-black/50 p-3 rounded border border-slate-800/80 hover:border-cyan-900/50 transition-colors">
+                        <span class="text-slate-500 block text-[0.6rem] mb-1">USD / KINE</span>
+                        <span id="fx-usd" class="text-slate-200 text-sm font-bold tracking-wider">1.0000</span>
+                    </div>
+                    <div class="bg-black/50 p-3 rounded border border-slate-800/80 hover:border-cyan-900/50 transition-colors">
+                        <span class="text-slate-500 block text-[0.6rem] mb-1">EUR / KINE</span>
+                        <span id="fx-eur" class="text-slate-200 text-sm font-bold tracking-wider">0.9212</span>
+                    </div>
+                    <div class="bg-black/50 p-3 rounded border border-slate-800/80 hover:border-cyan-900/50 transition-colors">
+                        <span class="text-slate-500 block text-[0.6rem] mb-1">INR / KINE</span>
+                        <span id="fx-inr" class="text-slate-200 text-sm font-bold tracking-wider">83.4540</span>
+                    </div>
+                    <div class="bg-black/50 p-3 rounded border border-slate-800/80 hover:border-cyan-900/50 transition-colors">
+                        <span class="text-slate-500 block text-[0.6rem] mb-1">GBP / KINE</span>
+                        <span id="fx-gbp" class="text-slate-200 text-sm font-bold tracking-wider">0.7890</span>
+                    </div>
+                </div>
+                
+                <div class="mt-4 bg-cyan-950/20 border border-cyan-900/40 p-3 rounded flex justify-between items-center text-[0.65rem] font-mono relative z-10">
+                    <div class="text-cyan-300">SYSTEM VELOCITY INDEX: <span id="v-index" class="font-bold text-white tracking-widest">1.043</span></div>
+                    <div id="stabilization-status" class="text-emerald-400 font-bold uppercase tracking-wider">● Peg Defended // Supply Balanced</div>
+                </div>
+            </section>
+
+            <!-- MULTI-SCALAR CUSTODIAN VAULT BALANCE -->
+            <section class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 glow-orange">
+                <div class="flex justify-between items-center border-b border-slate-800 pb-3 mb-4">
+                    <h2 class="text-xs text-orange-400 font-bold tracking-widest uppercase font-mono">Multi-Scalar Reserve Custodian</h2>
+                    <span class="text-[0.6rem] font-mono text-slate-500">MDI6000 MACRO-ALLOCATION</span>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 font-mono mb-4">
+                    <!-- DYNE (Macro) -->
+                    <div class="bg-slate-950 p-4 rounded border border-amber-900/30 flex flex-col justify-center">
+                        <div class="flex justify-between items-start mb-1">
+                            <span class="text-slate-500 block text-[0.55rem] uppercase">LOCKED GENESIS CAPITAL</span>
+                            <span class="text-[0.55rem] bg-amber-950/50 text-amber-500 px-1 rounded">MACRO (Ꝺ)</span>
+                        </div>
+                        <span class="text-2xl text-amber-500 font-bold tracking-wide">100,000 <span class="text-sm">Ꝺ</span></span>
+                    </div>
+                    <!-- KINE (Standard) -->
+                    <div class="bg-slate-950 p-4 rounded border border-orange-900/30 flex flex-col justify-center">
+                        <div class="flex justify-between items-start mb-1">
+                            <span class="text-slate-500 block text-[0.55rem] uppercase">AUTOMATED INFLOWS (TDS)</span>
+                            <span class="text-[0.55rem] bg-orange-950/50 text-orange-400 px-1 rounded">PRIMARY (Ꝃ)</span>
+                        </div>
+                        <span class="text-2xl text-orange-400 font-bold tracking-wide">142,910 <span class="text-sm">Ꝃ</span></span>
+                    </div>
+                    <!-- FLUX (Micro) -->
+                    <div class="bg-slate-950 p-4 rounded border border-cyan-900/30 flex flex-col justify-center">
+                        <div class="flex justify-between items-start mb-1">
+                            <span class="text-slate-500 block text-[0.55rem] uppercase">AI SYNC PACKET POOL</span>
+                            <span class="text-[0.55rem] bg-cyan-950/50 text-cyan-400 px-1 rounded">MICRO (ƒ)</span>
+                        </div>
+                        <span class="text-2xl text-cyan-400 font-bold tracking-wide">8,450,000 <span class="text-sm">ƒ</span></span>
+                    </div>
+                </div>
+                
+                <div class="border-t border-slate-800/60 pt-4 flex flex-col md:flex-row gap-4 justify-between items-center">
+                    <p class="text-[0.65rem] text-slate-400 max-w-md font-sans leading-relaxed">
+                        Algorithmic intervention monitors physical output vs fiat drift. The Treasury expands or contracts standard <span class="text-orange-400 font-mono">Kine (Ꝃ)</span> circulation automatically to defend the master ratio anchor.
+                    </p>
+                    <div class="flex gap-2 shrink-0 font-mono text-[0.65rem]">
+                        <button onclick="triggerIntervention('CONTRACT')" class="bg-red-950/80 hover:bg-red-900 border border-red-700/50 text-red-300 py-2 px-3 rounded uppercase tracking-wider font-bold transition-all">Force Contraction</button>
+                        <button onclick="triggerIntervention('EXPAND')" class="bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-700/50 text-emerald-300 py-2 px-3 rounded uppercase tracking-wider font-bold transition-all">Force Expansion</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- RIGHT 5 COLUMNS: QUICK ACTION DISBURSEMENT -->
+        <div class="lg:col-span-5 flex flex-col gap-6">
+            <section class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col h-full relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-orange-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <h2 class="text-xs text-slate-300 font-bold tracking-widest uppercase font-mono border-b border-slate-800 pb-3 mb-4">Primary Allocation Registry</h2>
+                
+                <form id="loan-form" class="space-y-4 font-mono text-xs flex-1 relative z-10">
+                    <div>
+                        <label class="block text-slate-500 text-[0.6rem] mb-1">TARGET NODE ID (CREDIT APPLICANT)</label>
+                        <input type="text" placeholder="e.g., TCRIND082" required class="w-full bg-black/80 border border-slate-800 p-2.5 rounded text-orange-400 font-bold placeholder-slate-700 focus:border-orange-500 outline-none uppercase tracking-widest transition-colors">
+                    </div>
+                    <div>
+                        <label class="block text-slate-500 text-[0.6rem] mb-1">PRINCIPAL QUANTUM <span class="text-orange-400">(KINE Ꝃ)</span></label>
+                        <input type="number" placeholder="MAX REQUEST 50000 Ꝃ" min="100" max="50000" required class="w-full bg-black/80 border border-slate-800 p-2.5 rounded text-slate-200 focus:border-orange-500 outline-none transition-colors">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-slate-500 text-[0.6rem] mb-1">TERM DURATION</label>
+                            <input type="text" value="Output Amortized" disabled class="w-full bg-slate-950 border border-slate-900 p-2.5 rounded text-slate-400 text-[0.7rem] opacity-80">
+                        </div>
+                        <div>
+                            <label class="block text-slate-500 text-[0.6rem] mb-1">INTEREST STRUCT</label>
+                            <input type="text" value="0.00% Zero Usury" disabled class="w-full bg-emerald-950/20 border border-emerald-900/40 p-2.5 rounded text-emerald-400 font-bold text-[0.7rem]">
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full bg-orange-600 hover:bg-orange-500 text-white font-bold py-3 rounded text-[0.65rem] tracking-widest uppercase transition-all mt-4 border border-orange-400 shadow-[0_0_15px_rgba(249,115,22,0.3)]">
+                        Disburse System Credit
+                    </button>
+                </form>
+                
+                <div class="mt-6 border-t border-slate-800/80 pt-4 relative z-10">
+                    <span class="text-[0.6rem] text-slate-500 tracking-widest uppercase font-mono block mb-2">Active Treasury Kine Disbursals</span>
+                    <div id="loan-log" class="space-y-1.5 max-h-[120px] overflow-y-auto font-mono text-[0.6rem] pr-1">
+                        <div class="bg-black/40 border border-slate-800/80 p-2 rounded flex justify-between items-center text-slate-400">
+                            <span>TX-LN-004 // THRINC044</span>
+                            <span class="text-orange-400 font-bold bg-orange-950/30 px-1.5 py-0.5 rounded">+12,500 Ꝃ</span>
+                        </div>
+                        <div class="bg-black/40 border border-slate-800/80 p-2 rounded flex justify-between items-center text-slate-400">
+                            <span>TX-LN-003 // BOMIND012</span>
+                            <span class="text-orange-400 font-bold bg-orange-950/30 px-1.5 py-0.5 rounded">+5,000 Ꝃ</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <footer class="w-full max-w-[85rem] mx-auto border-t border-slate-900 pt-4 mt-6 flex flex-col md:flex-row justify-between items-center gap-2 font-mono text-[0.6rem] text-slate-500 mb-6">
+        <span>© 2026 PINALEAF ADVANCEMENTS LLP. PROJECT MDI6000 ARCHITECTURE.</span>
+        <span class="text-orange-500/40 uppercase tracking-widest border border-orange-500/20 px-2 py-1 rounded">Autonomous Stabilizer & Lending Layer</span>
+    </footer>
+
+    <script>
+        // Real-time Forex Simulator (Simulating minor drift against fiat)
+        setInterval(() => {
+            document.getElementById('fx-usd').innerText = (1.0000 + (Math.random() * 0.004 - 0.002)).toFixed(4);
+            document.getElementById('fx-eur').innerText = (0.9212 + (Math.random() * 0.002 - 0.001)).toFixed(4);
+            document.getElementById('fx-inr').innerText = (83.4540 + (Math.random() * 0.12 - 0.06)).toFixed(4);
+            document.getElementById('fx-gbp').innerText = (0.7890 + (Math.random() * 0.001 - 0.0005)).toFixed(4);
+            
+            const vIndex = (1.000 + (Math.random() * 0.09)).toFixed(3);
+            document.getElementById('v-index').innerText = vIndex;
+        }, 3000);
+
+        // Disbursal Form Submission Logic
+        document.getElementById('loan-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const node = e.target.querySelector('input[type="text"]').value.toUpperCase().trim();
+            const amount = e.target.querySelector('input[type="number"]').value;
+            const log = document.getElementById('loan-log');
+            
+            const newLogHTML = `
+                <div class="bg-emerald-950/20 border border-emerald-900/40 p-2 rounded flex justify-between items-center text-slate-200 animate-pulse">
+                    <span>TX-LN-NEW // ${node}</span>
+                    <span class="text-emerald-400 font-bold bg-emerald-950/50 px-1.5 py-0.5 rounded">+${parseInt(amount).toLocaleString()} Ꝃ</span>
+                </div>
+            `;
+            log.insertAdjacentHTML('afterbegin', newLogHTML);
+            e.target.reset();
+        });
+
+        // Intervention Simulation
+        function triggerIntervention(action) {
+            const status = document.getElementById('stabilization-status');
+            status.innerHTML = `<span class="text-orange-400 animate-pulse">Executing Protocol: ${action}...</span>`;
+            setTimeout(() => {
+                status.innerHTML = `● Peg Defended // Re-Balanced via ${action}`;
+            }, 2500);
+        }
+    </script>
+</footer>
+<!-- Resilient Inline Auth & Navigation Injector for Local Testing -->
+    <script>
+        (function() {
+            window.addEventListener('DOMContentLoaded', () => {
+                // Check session; if missing during local test, auto-initialize a mock test session instead of failing
+                let session = localStorage.getItem('kuts_active_session');
+                if (!session) {
+                    session = JSON.stringify({ nodeId: "THRINC000-LOCAL-TEST", expiry: Date.now() + 86400000 });
+                    localStorage.setItem('kuts_active_session', session);
+                }
+
+                // Inject Global Header if missing
+                if (!document.getElementById('kuts-global-header')) {
+                    const headerHTML = `
+                        <header id="kuts-global-header" class="w-full max-w-7xl mx-auto p-6 flex justify-between items-center border-b border-slate-800 bg-[#030712] text-slate-200 mb-6">
+                            <div class="text-blue-400 font-mono font-bold tracking-widest text-sm">
+                                KUTS_MESH_OPERATIONS // MDI6000 [LOCAL MODE]
+                            </div>
+                            <nav id="nav-auth" class="flex gap-4 items-center font-mono"></nav>
+                        </header>`;
+                    document.body.insertAdjacentHTML('afterbegin', headerHTML);
+                }
+
+                // Inject Global Footer if missing
+                if (!document.getElementById('kuts-global-footer') && !window.location.pathname.includes('index.html')) {
+                    const footerHTML = `
+                        <footer id="kuts-global-footer" class="max-w-7xl mx-auto mt-auto py-8 border-t border-slate-800 text-center w-full">
+                            <a href="index.html" class="inline-flex items-center gap-2 text-[0.7rem] text-slate-500 hover:text-blue-400 font-mono uppercase tracking-widest transition-all">
+                                <span class="text-lg">←</span> RETURN TO UNIVERSAL GATEWAY
+                            </a>
+                        </footer>`;
+                    document.body.insertAdjacentHTML('beforeend', footerHTML);
+                }
+
+                updateAuthUI();
+            });
+
+            window.updateAuthUI = function() {
+                const nav = document.getElementById('nav-auth');
+                if (!nav) return;
+                
+                nav.innerHTML = `
+                    <a href="index.html" class="text-slate-400 text-[0.65rem] uppercase font-mono hover:text-white">Gateway</a>
+                    <button onclick="secureLogout()" class="bg-red-950 hover:bg-red-900 text-red-400 font-mono text-[0.65rem] px-3 py-1.5 rounded border border-red-900 uppercase tracking-widest cursor-pointer">
+                        [X] DISCONNECT
+                    </button>`;
+            };
+
+            window.secureLogout = function() {
+                localStorage.removeItem('kuts_active_session');
+                window.location.href = 'sign-in.html';
+            };
+        })();
+    </script>
+</body>
+</html>

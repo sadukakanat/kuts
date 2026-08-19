@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS North America Grid | 18 Primary Anchor Nodes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="core/auth-bridge.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght=300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #030712; color: #cbd5e1; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .module-card { background: rgba(17, 24, 39, 0.5); border: 1px solid rgba(30, 41, 59, 1); transition: all 0.3s; }
+        .module-card:hover { border-color: rgba(168, 85, 247, 0.5); box-shadow: 0 0 15px rgba(168, 85, 247, 0.1); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <div>
+        <!-- GLOBAL HEADER -->
+        <header class="border-b border-slate-800 p-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div>
+                <h1 class="text-3xl font-bold text-purple-400 font-mono tracking-widest">KUTS_NAMERICA_SUBGRID</h1>
+                <p class="text-slate-500 mt-1 font-mono text-sm">Level 2 Meso-Grid // 18-Node North America Allocation</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <input type="text" id="searchInput" placeholder="Search hubs, tech corridors, ID..." 
+                       onkeyup="filterNodes()" class="bg-slate-900 border border-slate-700 p-2 rounded text-sm text-slate-200 font-mono w-72">
+                <a href="index.html" class="bg-slate-800 hover:bg-slate-700 text-purple-300 font-mono px-4 py-2 rounded text-sm border border-slate-700 transition-colors">
+                    << Return to Gateway
+                </a>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main class="max-w-7xl mx-auto px-6 py-12">
+            <section class="flex flex-col gap-6 mb-10">
+                <div class="font-mono text-xs text-purple-400 bg-purple-950/40 border border-purple-800/60 px-3 py-1 rounded self-start uppercase tracking-widest">
+                    ● Regional Allocation // Tech & Fiscal Hubs
+                </div>
+                <h2 class="text-4xl font-bold leading-tight text-white">
+                    North America <span class="text-purple-500">18-Node Primary Corridor</span>
+                </h2>
+                <p class="text-slate-400 max-w-3xl text-base">
+                    As part of the 144-node harmonic expansion, the North American region is allocated 18 dedicated Level 2 Primary Anchor Nodes. These nodes anchor Western financial settlement, advanced software computation, and continental freight pipelines into the global KUTS ledger.
+                </p>
+
+                <!-- CORRIDOR METRICS BAR -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 font-mono text-xs mt-2">
+                    <div class="bg-slate-900/80 border border-slate-800 p-3 rounded">
+                        <span class="text-purple-400 block font-bold text-lg">18 Nodes</span>
+                        <span class="text-slate-400">Total North American Allocation[cite: 4]</span>
+                    </div>
+                    <div class="bg-slate-900/80 border border-slate-800 p-3 rounded">
+                        <span class="text-blue-400 block font-bold text-lg">Fiscal Pivots</span>
+                        <span class="text-slate-400">New York & Global Exchange</span>
+                    </div>
+                    <div class="bg-slate-900/80 border border-slate-800 p-3 rounded">
+                        <span class="text-emerald-400 block font-bold text-lg">Tech Anchors</span>
+                        <span class="text-slate-400">Silicon & Pacific Rim Core</span>
+                    </div>
+                    <div class="bg-slate-900/80 border border-slate-800 p-3 rounded">
+                        <span class="text-cyan-400 block font-bold text-lg">Least Action</span>
+                        <span class="text-slate-400">Upstream Routing Protocol</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- NODES TABLE CONTAINER -->
+            <section class="module-card rounded-xl overflow-hidden border border-slate-800">
+                <div class="overflow-x-auto">
+                    <table id="namericaNodesTable" class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-900/80 border-b border-slate-800 font-mono text-xs text-slate-400 uppercase tracking-wider">
+                                <th class="p-4">Designation</th>
+                                <th class="p-4">Location / Core Hub</th>
+                                <th class="p-4">Industrial / Kinetic Focus</th>
+                                <th class="p-4">Global ID (9-Digit)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800/60 text-sm text-slate-300 font-mono">
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="na-001 western fiscal pivot new york city usa nykusc003">
+                                <td class="p-4 text-purple-400 font-bold">NA-001</td>
+                                <td class="p-4 text-white font-semibold">New York City</td>
+                                <td class="p-4 text-slate-400">Western Fiscal Pivot & Capital Exchange[cite: 4]</td>
+                                <td class="p-4 text-cyan-400 font-bold">NYKUSC003</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="na-002 pacific rim tech anchor los angeles usa laxusc013">
+                                <td class="p-4 text-purple-400 font-bold">NA-002</td>
+                                <td class="p-4 text-white font-semibold">Los Angeles</td>
+                                <td class="p-4 text-slate-400">Pacific Rim Tech Anchor & Intermodal Logistics[cite: 4]</td>
+                                <td class="p-4 text-cyan-400 font-bold">LAXUSC013</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="na-003 north atlantic maritime halifax canada halcac029">
+                                <td class="p-4 text-purple-400 font-bold">NA-003</td>
+                                <td class="p-4 text-white font-semibold">Halifax</td>
+                                <td class="p-4 text-slate-400">North Atlantic Maritime Gateway[cite: 4]</td>
+                                <td class="p-4 text-cyan-400 font-bold">HALCAC029</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="na-004 boreal pacific bridge anchorage usa ancusc026">
+                                <td class="p-4 text-purple-400 font-bold">NA-004</td>
+                                <td class="p-4 text-white font-semibold">Anchorage</td>
+                                <td class="p-4 text-slate-400">Boreal Pacific Bridge & Arctic Transit[cite: 4]</td>
+                                <td class="p-4 text-cyan-400 font-bold">ANCUSC026</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="na-005 san francisco usa silicon valley computation">
+                                <td class="p-4 text-purple-400 font-bold">NA-005</td>
+                                <td class="p-4 text-white font-semibold">San Francisco</td>
+                                <td class="p-4 text-slate-400">Silicon Core & Advanced Neural Processing Base</td>
+                                <td class="p-4 text-cyan-400 font-bold">SFOCUSP005</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="na-006 chicago usa midwest industrial hub">
+                                <td class="p-4 text-purple-400 font-bold">NA-006</td>
+                                <td class="p-4 text-white font-semibold">Chicago</td>
+                                <td class="p-4 text-slate-400">Midwest Freight Interchange & Commodity Logistics</td>
+                                <td class="p-4 text-cyan-400 font-bold">CHIUSP006</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="na-007 toronto canada northern tech hub">
+                                <td class="p-4 text-purple-400 font-bold">NA-007</td>
+                                <td class="p-4 text-white font-semibold">Toronto</td>
+                                <td class="p-4 text-slate-400">Northern Financial Exchange & AI Research Axis</td>
+                                <td class="p-4 text-cyan-400 font-bold">TORCANP007</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="na-008 houston usa energy extraction grid">
+                                <td class="p-4 text-purple-400 font-bold">NA-008</td>
+                                <td class="p-4 text-white font-semibold">Houston</td>
+                                <td class="p-4 text-slate-400">Gulf Coast Energy Grid & Hydrocarbon Tracking Node</td>
+                                <td class="p-4 text-cyan-400 font-bold">HOUUSP008</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="na-009 seattle usa aerospace and cloud grid">
+                                <td class="p-4 text-purple-400 font-bold">NA-009</td>
+                                <td class="p-4 text-white font-semibold">Seattle</td>
+                                <td class="p-4 text-slate-400">Aerospace Engineering & Cloud Infrastructure Hub</td>
+                                <td class="p-4 text-cyan-400 font-bold">SEAUSP009</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="na-010 through na-018 extended north american nodes">
+                                <td class="p-4 text-purple-400 font-bold">NA-010 → NA-018</td>
+                                <td class="p-4 text-white font-semibold">Extended Regional Nodes (Atlanta, Washington D.C., Denver, Miami, Vancouver, Montreal, Dallas, Boston, Phoenix, etc.)</td>
+                                <td class="p-4 text-slate-400">Regional Sub-Capillaries & Logistics Distribution Points</td>
+                                <td class="p-4 text-cyan-400 font-bold">NAMINP010-018</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-800 mt-16 py-8 px-6 bg-slate-950 text-center font-mono text-xs text-slate-500">
+        <p>© 2026 PINALEAF ADVANCEMENTS LLP // AAROHAN 2050 // NORTH AMERICA 18-NODE MESH</p>
+    </footer>
+
+    <!-- INTERACTION SCRIPT -->
+    <script>
+        function filterNodes() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            document.querySelectorAll('.node-row').forEach(row => {
+                const searchData = row.getAttribute('data-search');
+                row.style.display = searchData.includes(input) ? "" : "none";
+            });
+        }
+        window.onload = updateAuthUI;
+    </script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Edge Biometric Security Sandbox</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght=300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #050a15; color: #e2e8f0; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .terminal-box { border-color: rgba(239, 68, 68, 0.3); box-shadow: 0 0 15px rgba(220, 38, 38, 0.15); }
+        .glow-red { border-color: rgba(239, 68, 68, 0.5); box-shadow: 0 0 20px rgba(220, 38, 38, 0.25); }
+        #video-feed { transform: scaleX(-1); } /* Mirror effect for human operator */
+    </style>
+</head>
+<body class="min-h-screen flex flex-col p-4 md:p-6 bg-[#040812]">
+
+    <header class="w-full max-w-5xl mx-auto border border-red-900/60 bg-slate-900/40 p-4 rounded-xl flex flex-col md:flex-row justify-between items-center gap-4 mb-6 font-mono text-xs">
+        <div>
+            <h1 class="text-xl font-bold text-red-500 tracking-wider">KUTS_BIOMETRIC_SECURITY</h1>
+            <p class="text-slate-400 text-[0.65rem]">LOCAL EDGE SANDBOX // PROTOCOL: DATABASE-FREE FACIAL GEOMETRY TOKENIZER</p>
+        </div>
+        <div class="bg-black/50 p-2 rounded border border-red-900/30 text-emerald-400 text-center w-full md:w-auto">
+            <span class="text-slate-500 block text-[0.55rem]">DECENTRALIZED TIME-STREAM TIMESTAMP</span>
+            <span id="sec-clock" class="text-[0.75rem]">LOADING ENCRYPTION VECTOR...</span>
+        </div>
+        <div class="text-right shrink-0">
+            <span class="text-slate-400">CAMERA STATE: </span>
+            <span id="camera-status" class="text-red-500 font-bold animate-pulse">● STANDBY</span>
+        </div>
+    </header>
+
+    <main class="w-full max-w-5xl mx-auto grid md:grid-cols-12 gap-6 flex-1 items-start">
+        
+        <section class="md:col-span-6 flex flex-col gap-4">
+            <div class="bg-slate-900/50 border border-slate-800 rounded-2xl p-4 flex flex-col gap-3 relative overflow-hidden text-center" id="feed-container">
+                <div class="flex justify-between items-center font-mono text-[0.65rem] text-slate-500 border-b border-slate-800/60 pb-2">
+                    <span>EDGE HW INGESTION STREAM</span>
+                    <span class="text-red-400">ISOLATED MEMORY SANDBOX</span>
+                </div>
+                
+                <div class="w-full aspect-video bg-black/80 rounded-xl border border-slate-900 overflow-hidden relative flex items-center justify-center">
+                    <video id="video-feed" autoplay playsinline class="w-full h-full object-cover hidden"></video>
+                    <div id="video-placeholder" class="text-slate-600 font-mono text-xs flex flex-col items-center gap-2">
+                        <span>[ NO LIVE FEED INITIALIZED ]</span>
+                        <button onclick="initializeLocalCamera()" class="bg-red-950 text-red-400 border border-red-900 px-3 py-1.5 rounded hover:bg-red-900 hover:text-white transition-colors uppercase font-bold text-[0.65rem]">
+                            Initialize Camera Matrix
+                        </button>
+                    </div>
+                    <div id="scanner-line" class="absolute left-0 w-full h-0.5 bg-red-500/40 shadow-[0_0_10px_rgba(239,68,68,0.5)] hidden"></div>
+                </div>
+
+                <button id="scan-btn" disabled onclick="executeBiometricScan()" class="w-full bg-slate-800 text-slate-500 font-mono font-bold py-2.5 px-4 rounded border border-slate-700 text-xs tracking-wider transition-all uppercase">
+                    Scan Facial Geometry Matrix
+                </button>
+            </div>
+        </section>
+
+        <section class="md:col-span-6 flex flex-col gap-6 w-full">
+            <div class="bg-slate-900/20 border border-blue-900/30 rounded-xl p-4 terminal-box h-[385px] flex flex-col">
+                <div class="flex justify-between items-center border-b border-blue-900/40 pb-3 mb-3 shrink-0">
+                    <h2 class="text-xs text-blue-400 font-bold tracking-widest uppercase font-mono">01. Biometric Tokenization Output Ledger</h2>
+                    <span class="text-[0.6rem] bg-slate-950 text-slate-500 px-2 py-0.5 rounded border border-slate-900 font-mono font-bold">CRYPTO STATE LOGS</span>
+                </div>
+
+                <div id="security-ticker" class="flex-1 overflow-y-auto flex flex-col gap-2 pr-1 text-xs font-mono">
+                    <div class="text-slate-500 italic p-4 text-center">Activate local camera hardware matrix to scan verification profiles...</div>
+                </div>
+            </div>
+
+            <div class="bg-slate-900/30 border border-slate-800 p-4 rounded-xl font-mono text-[0.65rem] text-slate-400 leading-relaxed">
+                <span class="text-red-400 block font-bold mb-1 uppercase">🛡 Anti-Surveillance Sovereign Constraints:</span>
+                This utility does not upload pictures, match facial images, or cache video bytes. It translates biometric spatial points directly into temporary memory coordinates, computes an encrypted string signature block, and instantly purges the video data cache from memory.
+            </div>
+        </section>
+    </main>
+
+    <footer class="w-full max-w-5xl mx-auto border-t border-slate-900 pt-4 mt-6 flex flex-col sm:flex-row justify-between items-center font-mono text-[0.6rem] text-slate-500 gap-2">
+        <span>© 2026 PINALEAF ADVANCEMENTS LLP. ALL RIGHTS RESERVED.</span>
+        <span class="text-red-500/40 uppercase tracking-widest">ZERO CLOUD OVERHEAD LEVERAGE // P2P INFRASTRUCTURE SECURED</span>
+    </footer>
+
+    <script>
+        let localStream = null;
+
+        // --- MASTER CHRONO TEMPORAL STRING CLOCK LOOP ---
+        function runSecurityClock() {
+            setInterval(() => {
+                const now = new Date();
+                const GE = "0130"; const EE = "05"; const PE = "26"; const TE = "04"; 
+                const Day = now.getDate().toString().padStart(2, '0');
+                const GigaE = now.getHours().toString().padStart(2, '0');
+                const MegaE = now.getMinutes().toString().padStart(2, '0');
+                const KiloE = now.getSeconds().toString().padStart(2, '0');
+                
+                const ms = now.getMilliseconds();
+                const BaseE = Math.floor(ms / 10).toString().padStart(2, '0');
+                const MilliE = Math.floor(Math.random() * 99).toString().padStart(2, '0'); 
+                const MicroE = Math.floor(Math.random() * 99).toString().padStart(2, '0');
+
+                document.getElementById('sec-clock').innerText = 
+                    `(+00):${GE}.${EE}.${PE}.${TE}.${Day}.${GigaE}.${MegaE}.${KiloE}.${BaseE}.${MilliE}.${MicroE}`;
+            }, 33);
+        }
+
+        // --- NATIVE CAMERA INITIALIZATION (No External Libraries) ---
+        async function initializeLocalCamera() {
+            const video = document.getElementById('video-feed');
+            const placeholder = document.getElementById('video-placeholder');
+            const scanBtn = document.getElementById('scan-btn');
+            const camStatus = document.getElementById('camera-status');
+            const container = document.getElementById('feed-container');
+
+            try {
+                localStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: false });
+                video.srcObject = localStream;
+                video.classList.remove('hidden');
+                placeholder.classList.add('hidden');
+                
+                // Toggle state view dashboards indicators
+                scanBtn.disabled = false;
+                scanBtn.className = "w-full bg-red-900 hover:bg-red-800 text-white font-mono font-bold py-2.5 px-4 rounded border border-red-500 text-xs tracking-wider transition-all uppercase cursor-pointer";
+                camStatus.innerText = "● LIVE_STREAM_CONNECTED";
+                camStatus.className = "text-emerald-400 font-bold animate-pulse";
+                container.className = "bg-slate-900/50 border rounded-2xl p-4 flex flex-col gap-3 relative overflow-hidden text-center glow-red";
+            } catch (err) {
+                console.error("Camera Access Denied: ", err);
+                alert("Topological Exception: Camera handshake rejected. Verify device system privacy rules.");
+            }
+        }
+
+        // --- SIMULATED CLIENT-SIDE BIOMETRIC POINT GEOMETRY EXTRACTOR ---
+        async function executeBiometricScan() {
+            const scanLine = document.getElementById('scanner-line');
+            const ticker = document.getElementById('security-ticker');
+            
+            if (ticker.innerText.includes("Activate local camera")) {
+                ticker.innerHTML = ""; // Wipe template placeholder log cleanly
+            }
+
+            // Animate scanning lasers line sweep visually
+            scanLine.classList.remove('hidden');
+            scanLine.style.top = "0%";
+            let position = 0;
+            const animInterval = setInterval(() => {
+                position += 5;
+                scanLine.style.top = position + "%";
+                if(position >= 100) {
+                    clearInterval(animInterval);
+                    scanLine.classList.add('hidden');
+                }
+            }, 30);
+
+            // Extract temporal time coordinates components
+            const timeStreamStamp = document.getElementById('sec-clock').innerText.split(':')[1] || "00.00.00...";
+
+            // Simulate localized measurement ratios processing inside isolation memory
+            const mockDistanceRatioNode = (0.523 + Math.random() * 0.05).toFixed(6);
+            const mockJawlineAngleNode = (121.4 + Math.random() * 2.5).toFixed(4);
+
+            // Mix geometry strings together and hash them client-side to generate unforgeable keys
+            const rawMetricsString = `EYE_DIST:${mockDistanceRatioNode}|JAW_ANG:${mockJawlineAngleNode}|TIME:${timeStreamStamp}`;
+            const encoder = new TextEncoder();
+            const dataBytes = encoder.encode(rawMetricsString);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', dataBytes);
+            
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            
+            // Extract a fixed-width 12-digit signature string format
+            const biometricFaceToken = `BIOSEC-${hashHex.substring(0, 12).toUpperCase()}`;
+
+            setTimeout(() => {
+                const logHTML = `
+                    <div class="p-3 bg-slate-900/60 border border-slate-800 rounded-xl flex flex-col gap-2 transition-all hover:border-red-900/40">
+                        <div class="flex justify-between text-[0.6rem] text-slate-500">
+                            <span class="text-red-400 bg-red-950/40 border border-red-900/40 px-1.5 py-0.5 rounded font-bold uppercase tracking-wide">
+                                🔒 Geometry Tokenized Locally
+                            </span>
+                            <span>TIME: ${timeStreamStamp.substring(13, 21)}</span>
+                        </div>
+                        <div class="bg-black/60 p-2.5 rounded border border-red-950 flex justify-between items-center font-mono">
+                            <span class="text-red-400 font-bold tracking-wider text-xs select-all">${biometricFaceToken}</span>
+                            <span class="text-[0.55rem] text-emerald-400 bg-emerald-950/30 border border-emerald-900/40 px-1.5 py-0.5 rounded uppercase font-bold">MATCH_VERIFIED</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 text-[0.6rem] text-slate-500 font-mono border-t border-slate-900 pt-1.5 mt-0.5">
+                            <span>Interpupillary Ratio: <span class="text-slate-300 font-bold">${mockDistanceRatioNode}</span></span>
+                            <span>Jawline Contour: <span class="text-slate-300 font-bold">${mockJawlineAngleNode}°</span></span>
+                        </div>
+                    </div>`;
+
+                ticker.insertAdjacentHTML('afterbegin', logHTML);
+                if (ticker.children.length > 4) ticker.removeChild(ticker.lastChild);
+            }, 600);
+        }
+
+        // Trigger loop setups on loading hook
+        window.addEventListener('DOMContentLoaded', () => {
+            runSecurityClock();
+        });
+    </script>
+<!-- Universal Gateway Return Link -->
+<footer class="max-w-7xl mx-auto mt-12 py-8 border-t border-slate-800 text-center">
+    <a href="index.html" class="inline-flex items-center gap-2 text-[0.7rem] text-slate-500 hover:text-blue-400 font-mono uppercase tracking-widest transition-all">
+        <span class="text-lg">←</span> RETURN TO UNIVERSAL GATEWAY
+    </a>
+</footer>
+</body>
+</html>

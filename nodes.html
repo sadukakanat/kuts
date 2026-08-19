@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Anchor Node Generator & Validator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght=300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #050a15; color: #e2e8f0; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .terminal-box { border-color: rgba(245, 158, 11, 0.3); box-shadow: 0 0 15px rgba(245, 158, 11, 0.1); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col p-4 md:p-6 bg-[#030712]">
+
+    <!-- HUD TERMINAL HEADER -->
+    <header class="w-full max-w-6xl mx-auto border border-amber-900/60 bg-slate-900/40 p-4 rounded-xl flex flex-col md:flex-row justify-between items-center gap-4 mb-6 font-mono text-xs">
+        <div>
+            <h1 class="text-xl font-bold text-amber-500 tracking-wider">KUTS_NODE_GRID_MANAGER</h1>
+            <p class="text-slate-400 text-[0.65rem]">GEODESIC BOUNDING LAYER INDUSTRIAL MANAGER // MULTI-TIER CORES (M, A, C, P, S, E)</p>
+        </div>
+        <div class="text-right shrink-0 font-mono">
+            <span class="text-slate-400">GRID STATUS: </span>
+            <span class="text-amber-500 font-bold animate-pulse">● GEODESIC_MESH_ACTIVE</span>
+        </div>
+    </header>
+
+    <!-- MAIN GRID INTERFACE -->
+    <main class="w-full max-w-6xl mx-auto grid md:grid-cols-12 gap-6 flex-1 items-start">
+        
+        <!-- LEFT PANEL: GENERATOR TERMINAL -->
+        <section class="md:col-span-6 bg-slate-900/50 border border-amber-900/40 rounded-xl p-5 flex flex-col gap-4 terminal-box">
+            <div class="border-b border-amber-900/40 pb-2">
+                <h2 class="text-xs text-amber-500 font-bold tracking-widest uppercase font-mono">01. Geodesic Identifier Minter</h2>
+                <p class="text-slate-400 font-sans text-[0.7rem] mt-0.5">Generate a validated 9-character System Alphanumeric ID for physical grid routing hardware anchors.</p>
+            </div>
+
+            <form onsubmit="event.preventDefault(); generateNodeId();" class="flex flex-col gap-4 font-mono text-xs text-slate-300">
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="flex flex-col gap-1">
+                        <label class="text-slate-500 font-bold">CITY / STATION TAG (3 Chars):</label>
+                        <input type="text" id="node-city" placeholder="e.g. THR" maxlength="3" required class="bg-black/60 border border-slate-800 rounded p-2 text-amber-400 uppercase font-bold tracking-widest text-center">
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label class="text-slate-500 font-bold">COUNTRY CODE (2 Chars):</label>
+                        <input type="text" id="node-country" placeholder="e.g. IN" maxlength="2" required class="bg-black/60 border border-slate-800 rounded p-2 text-amber-400 uppercase font-bold tracking-widest text-center">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="flex flex-col gap-1">
+                        <label class="text-slate-500 font-bold">NODE HIERARCHY LEVEL:</label>
+                        <select id="node-level" class="bg-black/60 border border-slate-800 rounded p-2 text-slate-200 focus:outline-none focus:border-amber-500 font-sans">
+                            <option value="M">Master Node (M)</option>
+                            <option value="A">Antipodal Node (A)</option>
+                            <option value="C">Global Nodes (C)</option>
+                            <option value="P">Primary Nodes (P)</option>
+                            <option value="S">Secondary Nodes (S)</option>
+                            <option value="E">Edge / End Point Nodes (E)</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label class="text-slate-500 font-bold">NODE INDEX SEQUENCE (3 Digits):</label>
+                        <input type="number" id="node-seq" placeholder="000" min="0" max="999" required class="bg-black/60 border border-slate-800 rounded p-2 text-amber-400 font-bold text-center">
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full bg-amber-900/60 hover:bg-amber-800 text-white font-bold py-3 px-4 rounded border border-amber-500 text-xs tracking-wider transition-colors uppercase">
+                    Mint Station Alphanumeric ID >>
+                </button>
+            </form>
+
+            <!-- GENERATION OUTPUT RESULT CONTAINER -->
+            <div id="gen-result" class="hidden bg-black/40 border border-amber-900/30 p-3 rounded font-mono text-center flex flex-col gap-1">
+                <span class="text-slate-500 text-[0.6rem] uppercase font-bold">Compiled Anchor Routing ID</span>
+                <span id="gen-id-output" class="text-amber-400 text-lg font-bold tracking-widest select-all">THRINC000</span>
+            </div>
+        </section>
+
+        <!-- RIGHT PANEL: CHECKER & VALIDATION ENGINE -->
+        <section class="md:col-span-6 bg-slate-900/50 border border-amber-900/40 rounded-xl p-5 flex flex-col gap-4 terminal-box">
+            <div class="border-b border-amber-900/40 pb-2">
+                <h2 class="text-xs text-amber-500 font-bold tracking-widest uppercase font-mono">02. Dynamic Integrity Checker</h2>
+                <p class="text-slate-400 font-sans text-[0.7rem] mt-0.5">Parse an unknown station code array string to evaluate structural grid conformance flags.</p>
+            </div>
+
+            <div class="flex flex-col gap-3 font-mono text-xs">
+                <div class="flex flex-col gap-1">
+                    <label class="text-slate-500 font-bold">PASTE HARDWARE ID FOR INTEGRITY PASS:</label>
+                    <input type="text" id="check-input" placeholder="e.g., THRINC000" oninput="checkNodeId();" class="bg-black/60 border border-slate-800 rounded p-2 text-emerald-400 font-bold tracking-widest text-center uppercase select-all">
+                </div>
+
+                <!-- VALIDATION MATRIX STATUS CHECK LIST -->
+                <div id="checker-status-box" class="bg-black/50 border border-slate-900 p-4 rounded-xl flex flex-col gap-2.5 text-[0.7rem]">
+                    <div class="text-slate-500 italic text-center py-4">Awaiting hardware identifier deployment verification stream...</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- JAVASCRIPT DETAILED ARCHITECTURE RUNTIME ENGINE -->
+    <script>
+        function generateNodeId() {
+            const city = document.getElementById('node-city').value.trim().toUpperCase().padEnd(3, 'X').substring(0,3);
+            const country = document.getElementById('node-country').value.trim().toUpperCase().padEnd(2, 'X').substring(0,2);
+            const lvl = document.getElementById('node-level').value;
+            const seq = document.getElementById('node-seq').value.toString().padStart(3, '0').substring(0,3);
+
+            const finalId = `${city}${country}${lvl}${seq}`;
+            document.getElementById('gen-id-output').innerText = finalId;
+            document.getElementById('gen-result').classList.remove('hidden');
+        }
+
+        function checkNodeId() {
+            const input = document.getElementById('check-input').value.trim().toUpperCase();
+            const box = document.getElementById('checker-status-box');
+
+            if (!input) {
+                box.innerHTML = `<div class="text-slate-500 italic text-center py-4">Awaiting hardware identifier deployment verification stream...</div>`;
+                return;
+            }
+
+            const lenPass = input.length === 9;
+            const cityMatch = input.substring(0,3).match(/^[A-Z]{3}$/);
+            const countryMatch = input.substring(3,5).match(/^[A-Z]{2}$/);
+            const levelMatch = ['M', 'A', 'C', 'P', 'S', 'E'].includes(input.charAt(5));
+            const seqMatch = input.substring(6,9).match(/^[0-9]{3}$/);
+
+            let levelName = "UNKNOWN CLASS LAYER";
+            const code = input.charAt(5);
+            if (code === 'M') levelName = "Master Node";
+            if (code === 'A') levelName = "Antipodal Node";
+            if (code === 'C') levelName = "Global Nodes";
+            if (code === 'P') levelName = "Primary Nodes";
+            if (code === 'S') levelName = "Secondary Nodes";
+            if (code === 'E') levelName = "Edge / End Point Node (Physical Device)";
+
+            const totalValid = lenPass && cityMatch && countryMatch && levelMatch && seqMatch;
+
+            box.innerHTML = `
+                <div class="flex justify-between border-b border-slate-900 pb-1.5 font-bold uppercase text-[0.6rem]">
+                    <span class="text-slate-500">Validation Protocol Parameter</span>
+                    <span class="${totalValid ? 'text-emerald-400' : 'text-red-400'}">${totalValid ? '✔ PASSED' : '⚠ COMPLIANCE_FAIL'}</span>
+                </div>
+                <div class="flex justify-between"><span>1. Structure Character Width (9 Length):</span><span class="${lenPass?'text-emerald-400':'text-red-400 font-bold'}">${lenPass?'PASSED':'FAILED [Length: '+input.length+']'}</span></div>
+                <div class="flex justify-between"><span>2. Station Geo Prefix (3 Letters):</span><span class="${cityMatch?'text-emerald-400':'text-red-400 font-bold'}">${cityMatch?'PASSED ('+input.substring(0,3)+')':'FAILED'}</span></div>
+                <div class="flex justify-between"><span>3. Sovereign Country Code (2 Letters):</span><span class="${countryMatch?'text-emerald-400':'text-red-400 font-bold'}">${countryMatch?'PASSED ('+input.substring(3,5)+')':'FAILED'}</span></div>
+                <div class="flex justify-between"><span>4. Architectural Layer Code (M/A/C/P/S/E):</span><span class="${levelMatch?'text-emerald-400':'text-red-400 font-bold'}">${levelMatch?'PASSED ('+levelName+')':'FAILED [Invalid Class Designation]'}</span></div>
+                <div class="flex justify-between"><span>5. Sequential Mesh Index (3 Digits):</span><span class="${seqMatch?'text-emerald-400':'text-red-400 font-bold'}">${seqMatch?'PASSED ('+input.substring(6,9)+')':'FAILED'}</span></div>
+            `;
+        }
+    </script>
+<!-- Resilient Inline Auth & Navigation Injector for Local Testing -->
+    <script>
+        (function() {
+            window.addEventListener('DOMContentLoaded', () => {
+                let session = localStorage.getItem('kuts_active_session');
+                if (!session) {
+                    session = JSON.stringify({ nodeId: "THRINC000-LOCAL-TEST", expiry: Date.now() + 86400000 });
+                    localStorage.setItem('kuts_active_session', session);
+                }
+
+                if (!document.getElementById('kuts-global-header')) {
+                    const headerHTML = `
+                        <header id="kuts-global-header" class="w-full max-w-7xl mx-auto p-6 flex justify-between items-center border-b border-slate-800 bg-[#030712] text-slate-200 mb-6">
+                            <div class="text-blue-400 font-mono font-bold tracking-widest text-sm">
+                                KUTS_MESH_OPERATIONS // MDI6000 [LOCAL MODE]
+                            </div>
+                            <nav id="nav-auth" class="flex gap-4 items-center font-mono"></nav>
+                        </header>`;
+                    document.body.insertAdjacentHTML('afterbegin', headerHTML);
+                }
+
+                if (!document.getElementById('kuts-global-footer') && !window.location.pathname.includes('index.html')) {
+                    const footerHTML = `
+                        <footer id="kuts-global-footer" class="max-w-7xl mx-auto mt-auto py-8 border-t border-slate-800 text-center w-full">
+                            <a href="index.html" class="inline-flex items-center gap-2 text-[0.7rem] text-slate-500 hover:text-blue-400 font-mono uppercase tracking-widest transition-all">
+                                <span class="text-lg">←</span> RETURN TO UNIVERSAL GATEWAY
+                            </a>
+                        </footer>`;
+                    document.body.insertAdjacentHTML('beforeend', footerHTML);
+                }
+
+                updateAuthUI();
+            });
+
+            window.updateAuthUI = function() {
+                const nav = document.getElementById('nav-auth');
+                if (!nav) return;
+                
+                nav.innerHTML = `
+                    <a href="index.html" class="text-slate-400 text-[0.65rem] uppercase font-mono hover:text-white">Gateway</a>
+                    <button onclick="secureLogout()" class="bg-red-950 hover:bg-red-900 text-red-400 font-mono text-[0.65rem] px-3 py-1.5 rounded border border-red-900 uppercase tracking-widest cursor-pointer">
+                        [X] DISCONNECT
+                    </button>`;
+            };
+
+            window.secureLogout = function() {
+                localStorage.removeItem('kuts_active_session');
+                window.location.href = 'sign-in.html';
+            };
+        })();
+    </script>
+</body>
+</html>

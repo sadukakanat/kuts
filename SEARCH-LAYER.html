@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Ecosystem | Main Navigation Matrix</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+        /* =========================================================
+           KUTS ECOSYSTEM COLOR SYSTEM
+           ========================================================= */
+        :root {
+            --space-navy: #030712;
+            --surface-navy: #0F172A;
+            --steel-slate: #1E293B;
+
+            --electric-blue: #3B82F6;
+            --cyber-cyan: #06B6D4;
+            --emerald: #10B981;
+            --violet: #8B5CF6;
+            --amber: #F59E0B;
+            --magenta: #EC4899;
+            --danger-red: #EF4444;
+
+            --text-primary: #F8FAFC;
+            --text-muted: #94A3B8;
+        }
+
+        /* =========================================================
+           GLOBAL STYLES
+           ========================================================= */
+        body {
+            background-color: var(--space-navy);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .font-mono {
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        /* =========================================================
+           HERO BACKGROUND
+           ========================================================= */
+        .hero-glow {
+            background:
+                radial-gradient(
+                    circle at 50% 0%,
+                    rgba(59, 130, 246, 0.14),
+                    transparent 48%
+                ),
+                radial-gradient(
+                    circle at 10% 20%,
+                    rgba(6, 182, 212, 0.05),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 90% 80%,
+                    rgba(139, 92, 246, 0.05),
+                    transparent 35%
+                );
+        }
+
+        /* =========================================================
+           GLASS CARDS
+           ========================================================= */
+        .glass-card {
+            background: rgba(15, 23, 42, 0.68);
+            border: 1px solid var(--steel-slate);
+            backdrop-filter: blur(12px);
+            transition:
+                border-color 0.25s ease,
+                box-shadow 0.25s ease,
+                transform 0.25s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(59, 130, 246, 0.7);
+            box-shadow:
+                0 0 20px rgba(59, 130, 246, 0.12),
+                0 0 45px rgba(6, 182, 212, 0.04);
+            transform: translateY(-2px);
+        }
+
+        /* =========================================================
+           SCROLLBAR
+           ========================================================= */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--space-navy);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--steel-slate);
+            border-radius: 999px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--electric-blue);
+        }
+
+        /* =========================================================
+           SEARCH FIELD
+           ========================================================= */
+        .search-field {
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid var(--steel-slate);
+            transition:
+                border-color 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .search-field:focus {
+            border-color: var(--electric-blue);
+            box-shadow:
+                0 0 0 3px rgba(59, 130, 246, 0.12),
+                0 0 25px rgba(59, 130, 246, 0.08);
+        }
+
+        /* =========================================================
+           FILTER BUTTONS
+           ========================================================= */
+        .filter-btn {
+            transition:
+                background-color 0.2s ease,
+                border-color 0.2s ease,
+                color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .filter-btn.active {
+            background-color: rgba(59, 130, 246, 0.2);
+            border-color: var(--electric-blue);
+            color: var(--text-primary);
+            box-shadow: 0 0 14px rgba(59, 130, 246, 0.12);
+        }
+
+        /* =========================================================
+           STATUS INDICATORS
+           ========================================================= */
+        .status-online {
+            background-color: var(--emerald);
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.65);
+        }
+
+        /* =========================================================
+           EMPTY STATE
+           ========================================================= */
+        .empty-state {
+            border: 1px dashed var(--steel-slate);
+            background: rgba(15, 23, 42, 0.35);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col justify-between hero-glow p-4 md:p-8">
+
+    <!-- =========================================================
+         TOP NAVIGATION BAR
+         ========================================================= -->
+    <header class="w-full max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row justify-between items-center gap-4 border-b border-slate-800">
+        <!-- BRAND -->
+        <div class="flex items-center gap-3">
+            <div class="h-8 w-8 rounded-lg bg-blue-600/20 border border-blue-500/40 flex items-center justify-center font-mono font-bold text-blue-400">
+                ⚡
+            </div>
+            <div>
+                <span class="text-xs font-mono font-bold tracking-widest text-blue-400 uppercase block">
+                    KUTS Ecosystem Core
+                </span>
+                <span class="text-[0.65rem] text-slate-500 font-mono">
+                    Project MDI6000 // Gateway Hub
+                </span>
+            </div>
+        </div>
+
+        <!-- SYSTEM STATUS -->
+        <div class="flex items-center gap-4 font-mono text-xs">
+            <div class="hidden md:flex items-center gap-2 bg-slate-900 px-3 py-1.5 rounded border border-slate-800">
+                <span class="w-2 h-2 rounded-full status-online animate-pulse"></span>
+                <span class="text-slate-400">
+                    Node Anchor:
+                    <strong class="text-slate-200">THRINC000</strong>
+                </span>
+            </div>
+            <a href="sign-in.html" class="bg-blue-900 hover:bg-blue-800 text-white font-mono font-bold px-4 py-2 rounded transition-all uppercase tracking-wider text-[0.65rem]">
+                OPERATOR ACCESS
+            </a>
+        </div>
+    </header>
+
+    <!-- =========================================================
+         MAIN CONTENT
+         ========================================================= -->
+    <main class="w-full max-w-7xl mx-auto px-6 py-10 flex-1 flex flex-col gap-10">
+        <!-- HERO SECTION -->
+        <section class="text-center max-w-3xl mx-auto space-y-4">
+            <span class="px-3 py-1 rounded-full bg-blue-950/40 border border-blue-800/60 text-blue-400 font-mono text-xs uppercase tracking-widest">
+                Kinetic Unified Temporal Synchronization
+            </span>
+            <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-white font-mono">
+                Unified Ecosystem
+                <span class="text-blue-500">Gateway &amp; Search</span>
+            </h1>
+            <p class="text-slate-400 text-sm md:text-base leading-relaxed">
+                Welcome to the master portal. Instantly search, filter, and initialize any application layer, financial ledger, AI terminal, user guide, or regional node across the network.
+            </p>
+
+            <!-- SEARCH -->
+            <div class="pt-2 relative max-w-2xl mx-auto">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-cyan-400 font-mono font-bold">
+                    🔍
+                </div>
+                <input
+                    type="text"
+                    id="ecosystem-search"
+                    oninput="filterEcosystemModules()"
+                    placeholder="Type to search modules (e.g., wallet, user-guide, star-hunter, global-nodes)..."
+                    class="search-field w-full rounded-xl pl-12 pr-4 py-3.5 text-sm text-slate-100 placeholder-slate-500 font-mono focus:outline-none shadow-xl"
+                >
+            </div>
+
+            <!-- FILTERS -->
+            <div class="flex flex-wrap justify-center gap-2 pt-2 font-mono text-xs">
+                <button onclick="setFilter('ALL')" class="filter-btn active px-3 py-1.5 rounded bg-blue-900 text-white font-bold border border-blue-700" data-filter="ALL">
+                    All Modules
+                </button>
+                <button onclick="setFilter('CORE')" class="filter-btn px-3 py-1.5 rounded bg-slate-900 border border-slate-800 text-slate-400 hover:text-white" data-filter="CORE">
+                    Core &amp; Guides
+                </button>
+                <button onclick="setFilter('TREASURY')" class="filter-btn px-3 py-1.5 rounded bg-slate-900 border border-slate-800 text-slate-400 hover:text-white" data-filter="TREASURY">
+                    Treasury &amp; Vaults
+                </button>
+                <button onclick="setFilter('SWARM')" class="filter-btn px-3 py-1.5 rounded bg-slate-900 border border-slate-800 text-slate-400 hover:text-white" data-filter="SWARM">
+                    Swarm &amp; AI
+                </button>
+                <button onclick="setFilter('REGIONS')" class="filter-btn px-3 py-1.5 rounded bg-slate-900 border border-slate-800 text-slate-400 hover:text-white" data-filter="REGIONS">
+                    Regional Grids
+                </button>
+                <button onclick="setFilter('COMMUNE')" class="filter-btn px-3 py-1.5 rounded bg-slate-900 border border-slate-800 text-slate-400 hover:text-white" data-filter="COMMUNE">
+                    Commune Portal
+                </button>
+            </div>
+        </section>
+
+        <!-- MODULE CARDS GRID -->
+        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="modules-grid">
+            <!-- Populated via JavaScript -->
+        </section>
+    </main>
+
+    <!-- =========================================================
+         FOOTER
+         ========================================================= -->
+    <footer class="w-full max-w-7xl mx-auto border-t border-slate-800 mt-12 py-8 text-center font-mono text-xs text-slate-500 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div>
+            © 2026 PINALEAF ADVANCEMENTS LLP // AAROHAN 2050 // ALL RIGHTS RESERVED.
+        </div>
+        <div class="flex gap-6">
+            <a href="architect-manifesto.html" class="text-blue-400 hover:underline uppercase tracking-wider">
+                The Architect's Manifesto
+            </a>
+            <a href="SEARCH-LAYER.html" class="text-slate-400 hover:text-white uppercase tracking-wider">
+                Full Monolith Crawler
+            </a>
+        </div>
+    </footer>
+
+    <!-- =========================================================
+         REGISTRY & SEARCH LOGIC
+         ========================================================= -->
+    <script>
+        const ECOSYSTEM_MODULES = [
+            {
+                title: "Subscription & Membership Matrix",
+                file: "subscription.html",
+                layer: "CORE",
+                badge: "bg-purple-950 text-purple-400 border-purple-900",
+                desc: "Recurring protocol tiering, automated billing ledgers, and access rights management."
+            },
+            {
+                title: "Node Governance & Voting Matrix",
+                file: "governance.html",
+                layer: "CORE",
+                badge: "bg-cyan-950 text-cyan-400 border-cyan-900",
+                desc: "Institutional protocol voting engine, structural improvement proposals, and consensus tracking."
+            },
+            {
+                title: "Consolidated Master Monolith",
+                file: "index.html",
+                layer: "CORE",
+                badge: "bg-blue-950 text-blue-400 border-blue-900",
+                desc: "Centralized navigational grid connecting every application layer and subsystem."
+            },
+            {
+                title: "The Sovereign Covenant Charter",
+                file: "charter.html",
+                layer: "CORE",
+                badge: "bg-blue-950 text-blue-400 border-blue-900",
+                desc: "Founding constitutional rule framework defining materialization parameters."
+            },
+            {
+                title: "The Architect's Manifesto",
+                file: "architect-manifesto.html",
+                layer: "CORE",
+                badge: "bg-blue-950 text-blue-400 border-blue-900",
+                desc: "Long-term operating philosophy and foundational vision."
+            },
+            {
+                title: "Ecosystem User Guide",
+                file: "user-guide.html",
+                layer: "CORE",
+                badge: "bg-blue-950 text-blue-400 border-blue-900",
+                desc: "Operator instructions and comprehensive system manual for navigating KUTS."
+            },
+            {
+                title: "Ecosystem About Portal",
+                file: "about.html",
+                layer: "CORE",
+                badge: "bg-blue-950 text-blue-400 border-blue-900",
+                desc: "Overview of systems thinking, temporal synchronization, and research targets."
+            },
+            {
+                title: "Geodesic Mesh Globe Browser",
+                file: "browser-genesis.html",
+                layer: "CORE",
+                badge: "bg-blue-950 text-blue-400 border-blue-900",
+                desc: "Interactive Three.js visual interface capturing localized kinetic entries."
+            },
+            {
+                title: "Identity Serial Generator",
+                file: "generator.html",
+                layer: "CORE",
+                badge: "bg-blue-950 text-blue-400 border-blue-900",
+                desc: "Standalone primary identity compiler for unalterable chronological keys."
+            },
+            {
+                title: "Local Node Wallet Ledger",
+                file: "account.html",
+                layer: "TREASURY",
+                badge: "bg-amber-950 text-amber-400 border-amber-900",
+                desc: "Net settled balances, credit/debit transaction tracking, and simulations."
+            },
+            {
+                title: "Fiscal Split Management Ledger",
+                file: "ledger.html",
+                layer: "TREASURY",
+                badge: "bg-amber-950 text-amber-400 border-amber-900",
+                desc: "Macro financial ticker tracking structural units and automated compliance."
+            },
+            {
+                title: "Support & Allowance Matrix",
+                file: "allowance-ledger.html",
+                layer: "TREASURY",
+                badge: "bg-amber-950 text-amber-400 border-amber-900",
+                desc: "Zero-usury performance multipliers linked to verified milestone logging."
+            },
+            {
+                title: "Cryptographic Custodian Vault",
+                file: "custodian-vault.html",
+                layer: "TREASURY",
+                badge: "bg-amber-950 text-amber-400 border-amber-900",
+                desc: "Cold storage security layer requiring multi-node anchor signatures."
+            },
+            {
+                title: "MSME Underwriting Credit Ledger",
+                file: "loan-ledger.html",
+                layer: "TREASURY",
+                badge: "bg-amber-950 text-amber-400 border-amber-900",
+                desc: "Automated credit checking matching industrial capacity against node hardware locks."
+            },
+            {
+                title: "Multi-Party Venture Escrow Gate",
+                file: "b2b-escrow.html",
+                layer: "TREASURY",
+                badge: "bg-amber-950 text-amber-400 border-amber-900",
+                desc: "Secure escrow facility locking capital against verified milestone progression."
+            },
+            {
+                title: "Local AI Operations Node Terminal",
+                file: "ai-assistant.html",
+                layer: "SWARM",
+                badge: "bg-violet-950 text-violet-400 border-violet-900",
+                desc: "Localized heuristic logical processing hub calibrated under node profiles."
+            },
+            {
+                title: "Macro-Analytics Swarm Heatmap",
+                file: "analytics-matrix.html",
+                layer: "SWARM",
+                badge: "bg-violet-950 text-violet-400 border-violet-900",
+                desc: "Live spatial cluster matrix displaying network velocity and node bindings."
+            },
+            {
+                title: "Star Hunter Deep Telemetry Array",
+                file: "star-hunter.html",
+                layer: "SWARM",
+                badge: "bg-violet-950 text-violet-400 border-violet-900",
+                desc: "Deep space signal processing, anomaly tracking, and stellar coordination module."
+            },
+            {
+                title: "Serverless Packet Courier Matrix",
+                file: "courier.html",
+                layer: "SWARM",
+                badge: "bg-violet-950 text-violet-400 border-violet-900",
+                desc: "Non-custodial file encryption and peer retrieval index utility."
+            },
+            {
+                title: "Volatile Community Whisper Mesh",
+                file: "community.html",
+                layer: "SWARM",
+                badge: "bg-violet-950 text-violet-400 border-violet-900",
+                desc: "Ephemeral communication portal utilizing browser RAM sandboxes."
+            },
+            {
+                title: "Constitutional Compliance Suite",
+                file: "compliance.html",
+                layer: "SWARM",
+                badge: "bg-violet-950 text-violet-400 border-violet-900",
+                desc: "Automated auditing engine executing statutory TDS sweeps and RSP allocations."
+            },
+            {
+                title: "Master Global Nodes Directory",
+                file: "global-nodes.html",
+                layer: "REGIONS",
+                badge: "bg-cyan-950 text-cyan-400 border-cyan-900",
+                desc: "Complete architectural catalog of all 34 worldwide master system nodes."
+            },
+            {
+                title: "Nodes Index & Directory Grid",
+                file: "nodes-index.html",
+                layer: "REGIONS",
+                badge: "bg-cyan-950 text-cyan-400 border-cyan-900",
+                desc: "Comprehensive indexing system for all active Meso-Grid regional anchor points."
+            },
+            {
+                title: "Biotic Tracker & Carbon Tokenizer",
+                file: "biotic.html",
+                layer: "REGIONS",
+                badge: "bg-cyan-950 text-cyan-400 border-cyan-900",
+                desc: "Agricultural verification tracking soil organic carbon and biomass metrics."
+            },
+            {
+                title: "ATAIR Agro-AI Sync Module",
+                file: "bio-spatial.html",
+                layer: "REGIONS",
+                badge: "bg-cyan-950 text-cyan-400 border-cyan-900",
+                desc: "Ecological-compute node allocating surplus solar tracking resources."
+            },
+            {
+                title: "Carbon Credit Clearinghouse",
+                file: "carbon-credit-marketplace.html",
+                layer: "REGIONS",
+                badge: "bg-cyan-950 text-cyan-400 border-cyan-900",
+                desc: "Decentralized marketplace for minting and retiring carbon sequestration offsets."
+            },
+            {
+                title: "Asia-Pacific 30 Anchor Nodes",
+                file: "apac-nodes-30.html",
+                layer: "REGIONS",
+                badge: "bg-cyan-950 text-cyan-400 border-cyan-900",
+                desc: "Level 2 Meso-Grid allocation managing tech manufacturing and maritime lanes."
+            },
+            {
+                title: "Europe & Central Asia 24 Nodes",
+                file: "europe-nodes-24.html",
+                layer: "REGIONS",
+                badge: "bg-cyan-950 text-cyan-400 border-cyan-900",
+                desc: "Level 2 Meso-Grid allocation linking financial axes and Eurasian shields."
+            },
+            {
+                title: "Africa 15 Anchor Nodes",
+                file: "africa-nodes-15.html",
+                layer: "REGIONS",
+                badge: "bg-cyan-950 text-cyan-400 border-cyan-900",
+                desc: "Regional corridors securing vital raw material extraction and demographic hubs."
+            },
+            {
+                title: "Commune Human Resource Layer",
+                file: "COMMUNITY-LAYER.html",
+                layer: "COMMUNE",
+                badge: "bg-pink-950 text-pink-400 border-pink-900",
+                desc: "Coordinates strategic growth vectors of designers, technicians, and promoters."
+            },
+            {
+                title: "Task Engine & Allocator",
+                file: "task-board.html",
+                layer: "COMMUNE",
+                badge: "bg-pink-950 text-pink-400 border-pink-900",
+                desc: "Decentralized task coordination board managing worker operational milestones."
+            },
+            {
+                title: "Role Credential Registry",
+                file: "registry.html",
+                layer: "COMMUNE",
+                badge: "bg-pink-950 text-pink-400 border-pink-900",
+                desc: "Cryptographic credential registry verifying commune worker roles and clearance."
+            },
+            {
+                title: "Welfare & Facility Grid",
+                file: "facilities.html",
+                layer: "COMMUNE",
+                badge: "bg-pink-950 text-pink-400 border-pink-900",
+                desc: "Technical toolkits, travel allowance vouchers, and workspace access windows."
+            }
+        ];
+
+        let activeFilter = 'ALL';
+
+        function setFilter(layer) {
+            activeFilter = layer;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                if (btn.getAttribute('data-filter') === layer) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            filterEcosystemModules();
+        }
+
+        function filterEcosystemModules() {
+            const searchInput = document.getElementById('ecosystem-search');
+            const grid = document.getElementById('modules-grid');
+
+            if (!searchInput || !grid) return;
+
+            const query = searchInput.value.toLowerCase().trim();
+            grid.innerHTML = "";
+            let count = 0;
+
+            ECOSYSTEM_MODULES.forEach(mod => {
+                if (activeFilter !== 'ALL' && mod.layer !== activeFilter) return;
+
+                const searchableText = `
+                    ${mod.title}
+                    ${mod.file}
+                    ${mod.desc}
+                    ${mod.layer}
+                `.toLowerCase();
+
+                if (query !== "" && !searchableText.includes(query)) return;
+
+                count++;
+
+                const cardHTML = `
+                    <div class="glass-card rounded-xl p-5 flex flex-col justify-between group">
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center font-mono text-[0.65rem]">
+                                <span class="px-2 py-0.5 rounded border font-bold uppercase tracking-wider ${mod.badge}">
+                                    ${mod.layer} LAYER
+                                </span>
+                                <span class="text-slate-500 font-bold select-all">
+                                    ${mod.file}
+                                </span>
+                            </div>
+                            <h3 class="text-sm font-bold text-slate-100 group-hover:text-blue-400 transition-colors font-mono">
+                                ${mod.title}
+                            </h3>
+                            <p class="text-xs text-slate-400 leading-relaxed font-sans">
+                                ${mod.desc}
+                            </p>
+                        </div>
+                        <a
+                            href="./${mod.file}"
+                            class="mt-6 w-full text-center bg-slate-950/80 border border-slate-800 group-hover:border-blue-500/60 group-hover:bg-blue-950/30 group-hover:text-blue-300 py-2.5 rounded font-mono font-bold text-xs uppercase tracking-wider transition-all text-slate-300 block"
+                        >
+                            Launch Module &gt;&gt;
+                        </a>
+                    </div>
+                `;
+
+                grid.insertAdjacentHTML('beforeend', cardHTML);
+            });
+
+            if (count === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-12 empty-state rounded-xl text-slate-500 font-mono text-xs">
+                        No matching ecosystem modules found.
+                    </div>
+                `;
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            filterEcosystemModules();
+        });
+    </script>
+<footer class="max-w-7xl mx-auto mt-auto py-8 border-t border-slate-800 text-center w-full"><a href="index.html" class="inline-flex items-center gap-2 text-[0.7rem] text-slate-500 hover:text-blue-400 font-mono uppercase tracking-widest transition-all"><span class="text-lg">←</span> RETURN TO UNIVERSAL GATEWAY</a></footer>
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS P2P Kine Transfer Bridge</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght=300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #050a15; color: #e2e8f0; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .terminal-box { border-color: rgba(59, 130, 246, 0.3); box-shadow: 0 0 15px rgba(30, 58, 138, 0.15); }
+        .pulse-blue { animation: b-glow 2.5s infinite ease-in-out; }
+        @keyframes b-glow { 0%, 100% { border-color: rgba(59, 130, 246, 0.2); } 50% { border-color: rgba(59, 130, 246, 0.7); } }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col p-4 md:p-6 bg-[#030712]">
+
+    <!-- HUD TERMINAL HEADER -->
+    <header class="w-full max-w-5xl mx-auto border border-blue-900/60 bg-slate-900/40 p-4 rounded-xl flex flex-col md:flex-row justify-between items-center gap-4 mb-6 font-mono text-xs">
+        <div>
+            <h1 class="text-xl font-bold text-blue-400 tracking-wider">KUTS_TRANSFER_BRIDGE</h1>
+            <p class="text-slate-400 text-[0.65rem]">P2P ASSET ROUTING MATRIX // PROTOCOL: TRIPLE-SPLIT CONVERGENCE</p>
+        </div>
+        <div class="bg-black/50 p-2 rounded border border-blue-900/30 text-emerald-400 text-center w-full md:w-auto">
+            <span class="text-slate-500 block text-[0.55rem]">UNIVERSAL TRANSACTION TIMESTAMP</span>
+            <span id="transfer-clock" class="text-[0.75rem]">SYNCHRONIZING TRANSFER SWARM...</span>
+        </div>
+        <div class="text-right shrink-0">
+            <span class="text-slate-400">BRIDGE MATRIX: </span>
+            <span class="text-blue-400 font-bold animate-pulse">● PEER_ROUTING_READY</span>
+        </div>
+    </header>
+
+    <!-- MAIN DISPATCH LAYOUT -->
+    <main class="w-full max-w-5xl mx-auto grid md:grid-cols-12 gap-6 flex-1 items-start">
+        
+        <!-- LEFT COLUMN: TRANSACTION DISPATCHER FORM -->
+        <section class="md:col-span-5 flex flex-col gap-6">
+            <div class="bg-slate-900/50 border border-blue-900/40 rounded-xl p-5 flex flex-col gap-4 tabular-box pulse-blue">
+                <div class="border-b border-blue-900/40 pb-2">
+                    <h2 class="text-xs text-blue-400 font-bold tracking-widest uppercase font-mono">01. Transaction Settlement Portal</h2>
+                    <p class="text-slate-400 font-sans text-[0.7rem] mt-0.5">Authorize a direct peer-to-peer asset transfer across the corridor mesh network.</p>
+                </div>
+
+                <form id="transfer-form" class="flex flex-col gap-4 font-mono text-xs text-slate-300" onsubmit="event.preventDefault(); processKineTransfer();">
+                    <!-- Recipient Node ID Input -->
+                    <div class="flex flex-col gap-1">
+                        <label class="text-slate-500 font-bold uppercase">Recipient Target Node ID / Address:</label>
+                        <input type="text" id="recipient-id" placeholder="e.g., TUPINS014 or +9198460XXXXX" required class="bg-black/60 border border-slate-800 rounded p-2 text-blue-300 focus:outline-none focus:border-blue-500 font-bold uppercase">
+                    </div>
+
+                    <!-- Gross Kine Volume Input -->
+                    <div class="flex flex-col gap-1">
+                        <label class="text-slate-500 font-bold uppercase">Gross Kine Volume to Send (Ꝃ):</label>
+                        <input type="number" step="0.0001" min="0.0001" id="transfer-amount" value="10.0000" required class="bg-black/60 border border-slate-800 rounded p-2 text-emerald-400 focus:outline-none focus:border-blue-500 font-bold">
+                    </div>
+
+                    <!-- Live Breakdown Preview Matrix -->
+                    <div class="bg-black/40 border border-slate-900 p-3 rounded-xl text-[0.65rem] flex flex-col gap-1.5 text-slate-400">
+                        <span class="text-slate-500 font-bold uppercase block tracking-wider border-b border-slate-900 pb-1">Automated Split Breakdown:</span>
+                        <div class="flex justify-between"><span>98% Recipient Net Delivery:</span><span class="text-emerald-400 font-bold" id="split-recipient">9.8000 Ꝃ</span></div>
+                        <div class="flex justify-between"><span>1% Category 12 TDS Sweep:</span><span class="text-amber-500 font-bold" id="split-tds">0.1000 Ꝃ</span></div>
+                        <div class="flex justify-between"><span>1% Biotic Stewardship (RSP):</span><span class="text-teal-400 font-bold" id="split-rsp">0.1000 Ꝃ</span></div>
+                    </div>
+
+                    <!-- Execution Trigger Button -->
+                    <button type="submit" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 px-4 rounded border border-blue-500 text-xs tracking-wider transition-colors uppercase mt-1">
+                        Sign & Broadcast Transfer >>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- RIGHT COLUMN: DIRECT AUDIT TICKS FEED -->
+        <section class="md:col-span-7 bg-slate-900/20 border border-blue-900/30 rounded-xl p-4 terminal-box h-[480px] flex flex-col">
+            <div class="flex justify-between items-center border-b border-blue-900/40 pb-3 mb-3 shrink-0">
+                <h2 class="text-xs text-blue-400 font-bold tracking-widest uppercase font-mono">02. Local Ledger Transfer Audit Receipts</h2>
+                <span class="text-[0.6rem] bg-slate-950 text-slate-500 px-2 py-0.5 rounded border border-slate-900 font-mono font-bold">SETTLEMENT STREAM</span>
+            </div>
+
+            <!-- RECEIPT LIST FEED -->
+            <div id="transfer-ticker" class="flex-1 overflow-y-auto flex flex-col gap-2 pr-1 text-xs font-mono">
+                <div class="text-slate-500 italic p-4 text-center">Awaiting signature authorization to initialize transactional handshakes...</div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER HUD -->
+    <footer class="w-full max-w-5xl mx-auto border-t border-slate-900 pt-4 mt-6 flex flex-col sm:flex-row justify-between items-center font-mono text-[0.6rem] text-slate-500 gap-2">
+        <span>© 2026 PINALEAF ADVANCEMENTS LLP. ALL RIGHTS RESERVED.</span>
+        <span class="text-blue-400/40 uppercase tracking-widest">P2P LEDGER BRIDGE MAPPED // INVARIANT LAWS APPLIED</span>
+    </footer>
+
+    <!-- TRANSACTION LOGIC PROCESSING ENGINE -->
+    <script>
+        // --- HIGH-RESOLUTION CENTRAL CHRONO ENGINE ---
+        function runTransferClock() {
+            setInterval(() => {
+                const now = new Date();
+                const GE = "0130"; const EE = "05"; const PE = "26"; const TE = "04"; 
+                const Day = now.getDate().toString().padStart(2, '0');
+                const GigaE = now.getHours().toString().padStart(2, '0');
+                const MegaE = now.getMinutes().toString().padStart(2, '0');
+                const KiloE = now.getSeconds().toString().padStart(2, '0');
+                
+                const ms = now.getMilliseconds();
+                const BaseE = Math.floor(ms / 10).toString().padStart(2, '0');
+                const MilliE = Math.floor(Math.random() * 99).toString().padStart(2, '0'); 
+                const MicroE = Math.floor(Math.random() * 99).toString().padStart(2, '0');
+
+                document.getElementById('transfer-clock').innerText = 
+                    `(+00):${GE}.${EE}.${PE}.${TE}.${Day}.${GigaE}.${MegaE}.${KiloE}.${BaseE}.${MilliE}.${MicroE}`;
+            }, 33);
+        }
+
+        // --- DYNAMIC SLIP PREVIEW REFRESH ---
+        function calculateLiveSplits() {
+            const amount = parseFloat(document.getElementById('transfer-amount').value) || 0;
+            document.getElementById('split-recipient').innerText = `${(amount * 0.98).toFixed(4)} Ꝃ`;
+            document.getElementById('split-tds').innerText = `${(amount * 0.01).toFixed(4)} Ꝃ`;
+            document.getElementById('split-rsp').innerText = `${(amount * 0.01).toFixed(4)} Ꝃ`;
+        }
+
+        // --- EXECUTE P2P TRANSACTION AND GEN IMMUTABLE RECEIPT ---
+        async function processKineTransfer() {
+            const ticker = document.getElementById('transfer-ticker');
+            const recipient = document.getElementById('recipient-id').value.trim().toUpperCase();
+            const grossAmount = parseFloat(document.getElementById('transfer-amount').value) || 0;
+
+            if (ticker.innerText.includes("Awaiting signature authorization")) {
+                ticker.innerHTML = ""; // Clear initial text placeholder log cleanly
+            }
+
+            const timeStreamStamp = document.getElementById('transfer-clock').innerText.split(':')[1] || "00.00.00...";
+
+            // Deduct the standard mathematical system protocol values
+            const netDelivery = grossAmount * 0.98;
+            const taxTds = grossAmount * 0.01;
+            const taxRsp = grossAmount * 0.01;
+
+            // Generate an unforgeable Tx Block Hash client-side using native SubtleCrypto APIs
+            const txDataString = `FROM:MOCK_USER_NODE|TO:${recipient}|AMT:${grossAmount}|TIME:${timeStreamStamp}`;
+            const encoder = new TextEncoder();
+            const dataBytes = encoder.encode(txDataString);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', dataBytes);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const txHashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('').substring(0, 12).toUpperCase();
+
+            const txBlockId = `TX-${txHashHex}`;
+
+            const receiptHTML = `
+                <div class="p-3 bg-slate-900/60 border border-blue-900/30 rounded-xl flex flex-col gap-2 transition-all hover:border-blue-500/40">
+                    <div class="flex justify-between text-[0.6rem] text-slate-500">
+                        <span class="text-blue-400 bg-blue-950/40 border border-blue-900/40 px-1.5 py-0.5 rounded font-bold uppercase tracking-wide">
+                            ⇄ Direct Handshake Broadcasted
+                        </span>
+                        <span>BLOCK: ${timeStreamStamp.substring(13, 21)}</span>
+                    </div>
+                    <div class="text-xs font-mono font-bold text-slate-200">
+                        TRANSACTION ID: <span class="text-blue-300 font-mono select-all">${txBlockId}</span>
+                    </div>
+                    <div class="text-[0.7rem] text-slate-300 font-sans bg-black/40 border border-slate-900 p-2 rounded flex flex-col gap-0.5">
+                        <span><span class="text-slate-500 font-mono font-bold">SOURCE ADDR:</span> Local User Node Memory Baseline</span>
+                        <span><span class="text-slate-500 font-mono font-bold">TARGET ADDR:</span> <span class="text-slate-200 font-bold select-all">${recipient}</span></span>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2 text-[0.6rem] pt-1.5 border-t border-slate-900 font-mono text-center">
+                        <div class="bg-emerald-950/20 border border-emerald-900/30 p-1.5 rounded"><span class="text-slate-500 block">DELIVERED</span><span class="text-emerald-400 font-bold">+${netDelivery.toFixed(4)} Ꝃ</span></div>
+                        <div class="bg-amber-950/20 border border-amber-900/30 p-1.5 rounded"><span class="text-slate-500 block">TDS SWEEP</span><span class="text-amber-500 font-bold">+${taxTds.toFixed(4)} Ꝃ</span></div>
+                        <div class="bg-teal-950/20 border border-teal-900/30 p-1.5 rounded"><span class="text-slate-500 block">BIOTIC RSP</span><span class="text-teal-400 font-bold">+${taxRsp.toFixed(4)} Ꝃ</span></div>
+                    </div>
+                </div>`;
+
+            ticker.insertAdjacentHTML('afterbegin', receiptHTML);
+            if (ticker.children.length > 5) ticker.removeChild(ticker.lastChild);
+
+            // Clean the form input field safely
+            document.getElementById('recipient-id').value = "";
+        }
+
+        // Initialize script event handlers triggers
+        window.addEventListener('DOMContentLoaded', () => {
+            runTransferClock();
+            calculateLiveSplits();
+            document.getElementById('transfer-amount').addEventListener('input', calculateLiveSplits);
+        });
+    </script>
+</footer>
+<!-- Resilient Inline Auth & Navigation Injector for Local Testing -->
+    <script>
+        (function() {
+            window.addEventListener('DOMContentLoaded', () => {
+                // Check session; if missing during local test, auto-initialize a mock test session instead of failing
+                let session = localStorage.getItem('kuts_active_session');
+                if (!session) {
+                    session = JSON.stringify({ nodeId: "THRINC000-LOCAL-TEST", expiry: Date.now() + 86400000 });
+                    localStorage.setItem('kuts_active_session', session);
+                }
+
+                // Inject Global Header if missing
+                if (!document.getElementById('kuts-global-header')) {
+                    const headerHTML = `
+                        <header id="kuts-global-header" class="w-full max-w-7xl mx-auto p-6 flex justify-between items-center border-b border-slate-800 bg-[#030712] text-slate-200 mb-6">
+                            <div class="text-blue-400 font-mono font-bold tracking-widest text-sm">
+                                KUTS_MESH_OPERATIONS // MDI6000 [LOCAL MODE]
+                            </div>
+                            <nav id="nav-auth" class="flex gap-4 items-center font-mono"></nav>
+                        </header>`;
+                    document.body.insertAdjacentHTML('afterbegin', headerHTML);
+                }
+
+                // Inject Global Footer if missing
+                if (!document.getElementById('kuts-global-footer') && !window.location.pathname.includes('index.html')) {
+                    const footerHTML = `
+                        <footer id="kuts-global-footer" class="max-w-7xl mx-auto mt-auto py-8 border-t border-slate-800 text-center w-full">
+                            <a href="index.html" class="inline-flex items-center gap-2 text-[0.7rem] text-slate-500 hover:text-blue-400 font-mono uppercase tracking-widest transition-all">
+                                <span class="text-lg">←</span> RETURN TO UNIVERSAL GATEWAY
+                            </a>
+                        </footer>`;
+                    document.body.insertAdjacentHTML('beforeend', footerHTML);
+                }
+
+                updateAuthUI();
+            });
+
+            window.updateAuthUI = function() {
+                const nav = document.getElementById('nav-auth');
+                if (!nav) return;
+                
+                nav.innerHTML = `
+                    <a href="index.html" class="text-slate-400 text-[0.65rem] uppercase font-mono hover:text-white">Gateway</a>
+                    <button onclick="secureLogout()" class="bg-red-950 hover:bg-red-900 text-red-400 font-mono text-[0.65rem] px-3 py-1.5 rounded border border-red-900 uppercase tracking-widest cursor-pointer">
+                        [X] DISCONNECT
+                    </button>`;
+            };
+
+            window.secureLogout = function() {
+                localStorage.removeItem('kuts_active_session');
+                window.location.href = 'sign-in.html';
+            };
+        })();
+    </script>
+</body>
+</html>

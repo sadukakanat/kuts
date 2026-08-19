@@ -1,0 +1,7 @@
+{
+  "project": "KUTS Ecosystem",
+  "version": "0.0.1",
+  "status": "development",
+  "base": "KUTS-ECOSYSTEM",
+  "coreProtocol": "0.1.0-dev"
+}

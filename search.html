@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Monolith | Master Search Engine & Navigator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght=300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #020617; color: #f8fafc; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .glow-matrix { box-shadow: 0 0 30px rgba(139, 92, 246, 0.08); border-color: rgba(139, 92, 246, 0.2); }
+        .bg-grid { background-image: radial-gradient(rgba(139, 92, 246, 0.08) 1px, transparent 1px); background-size: 20px 20px; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-thumb { background: #9333ea; border-radius: 2px; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col p-4 md:p-6 bg-[#020617] bg-grid">
+
+    <!-- MASTER HUD HEADER -->
+    <header class="w-full max-w-7xl mx-auto border border-purple-900/40 bg-slate-900/70 p-5 rounded-2xl flex flex-col md:flex-row justify-between items-center gap-4 mb-6 font-mono backdrop-blur-md">
+        <div>
+            <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-purple-500 animate-ping"></span>
+                <h1 class="text-xl font-bold text-purple-400 tracking-wider">KUTS_SEARCH_MONOLITH</h1>
+            </div>
+            <p class="text-slate-500 text-[0.65rem] uppercase mt-0.5 tracking-widest">Localized Component Crawler // Invariant Data Navigation</p>
+        </div>
+        <div class="text-right flex flex-col items-center md:items-end">
+            <span class="text-slate-400 text-xs font-bold bg-slate-800/80 px-3 py-1 rounded border border-slate-700/50 uppercase tracking-wider">Active Search Head: Parser_Ready</span>
+            <span id="search-clock" class="text-purple-400/80 text-[0.65rem] mt-1 font-mono font-bold">SYNCHRONIZING READ HEADS...</span>
+        </div>
+    </header>
+
+    <!-- CORE SEARCH ENGINE SECTION -->
+    <main class="w-full max-w-7xl mx-auto flex-1 flex flex-col gap-6">
+        
+        <section class="w-full bg-slate-900/40 border border-slate-800 rounded-2xl p-6 glow-matrix backdrop-blur-sm space-y-4">
+            <div class="flex flex-col md:flex-row gap-3 font-mono text-xs">
+                <!-- Live Text Input Field -->
+                <div class="flex-1 relative">
+                    <input type="text" id="search-input" oninput="executeKUTSQuery()" placeholder="Filter system modules, category codes, asset definitions, or file pathways..." class="w-full bg-black/60 border border-slate-800 rounded-xl p-4 text-emerald-400 font-bold focus:outline-none focus:border-purple-500 tracking-wide text-sm placeholder-slate-700">
+                </div>
+                <!-- Category Option Filter -->
+                <select id="category-filter" onchange="executeKUTSQuery()" class="bg-black/60 border border-slate-800 rounded-xl p-4 text-slate-300 focus:outline-none focus:border-purple-500 font-sans text-xs min-w-[200px]">
+                    <option value="ALL">All Asset Layers</option>
+                    <option value="CORE">Core Framework & Documents</option>
+                    <option value="TREASURY">Treasury & Fiscal Splitting</option>
+                    <option value="SWARM">Swarm Telemetry & AI Subsystems</option>
+                </select>
+            </div>
+            
+            <!-- Dynamic Telemetry Counter Bar -->
+            <div class="flex justify-between items-center font-mono text-[0.65rem] text-slate-500 px-1">
+                <span>SYSTEM INDEX BOUND: <span id="indexed-count" class="text-purple-400 font-bold">0</span> COMPONENT ENVELONS PARSED</span>
+                <span>MATCHING TRACKS: <span id="match-count" class="text-emerald-400 font-bold">0</span> FOUND</span>
+            </div>
+        </section>
+
+        <!-- SEARCH RESULTS OUTPUT DESK -->
+        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="results-display-mesh">
+            <!-- Dynamic System Cards injected here by JS -->
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full max-w-7xl mx-auto border-t border-slate-900 pt-4 mt-6 text-center font-mono text-[0.65rem] text-slate-600">
+        © 2026 PINALEAF ADVANCEMENTS LLP // INDEX DATA SEARCH ENGINE // STANDALONE ENGINE COMPLETE
+    </footer>
+
+    <!-- INLINE HOOK INTEGRATION & KNOWLEDGE MATRIX REGISTER -->
+    <script>
+        // Decentralized indexing schema reflecting all component configurations found inside the .tar package
+        const KUTS_MASTER_REGISTRY = [
+            { title: "Local Node Wallet Ledger", file: "account.html", layer: "TREASURY", tags: "accounting balance kine credit debit tx gross inflow settlement thrinc000 local storage", desc: "Local settlement array checking net settled balances, credits, and transaction outflows. Contains simulation configurations and immutable local ledger export mechanisms." },
+            { title: "Local AI Operations Node Terminal", file: "ai-assistant.html", layer: "SWARM", tags: "ai assistant node units heuristics logic integration module layer-0 handshake mdi6000 cat 05", desc: "Localized heuristic logical processing hub calibrated under node coordinate identity array profiles for parsing user variables." },
+            { title: "Support & Allowance Ledger Matrix", file: "allowance-ledger.html", layer: "TREASURY", tags: "support allowance calculation worker payout performance accelerator 15% bonus zero usury", desc: "Automated allowance distribution tracks providing zero-usury performance multipliers linked strictly to verified milestone logging." },
+            { title: "Macro-Analytics Swarm Heatmap", file: "analytics-matrix.html", layer: "SWARM", tags: "swarm eye analytics metrics spatial velocity active hardware nodes hash rate live tracking feed", desc: "Live spatial cluster matrix displaying network analytics metrics, node bindings, and automated global transaction velocity heatmaps." },
+            { title: "ATAIR Agro-AI Sync Module", file: "bio-spatial.html", layer: "SWARM", tags: "bio-spatial sync environmental sensor feed agro-tourism compute load palakkad atair nilgiri sahyadri", desc: "Ecological-compute node allocating surplus solar tracking resources into background neural network training architectures." },
+            { title: "Biotic Tracker & Soil Carbon Tokenizer", file: "biotic.html", layer: "SWARM", tags: "biotic tracker carbon sequestration biomass rhizosphere microbe category 12 split steward ruleset", desc: "Agricultural verification tracker tokenizing soil organic carbon (SOC) metrics via programmatic 98/1/1 allocation protocols." },
+            { title: "Geodesic Mesh Interactive Globe Browser", file: "browser-genesis.html", layer: "CORE", tags: "browser genesis globe three.js master temporal clock galactic epoch precision tick daily pulse p2p", desc: "Interactive Three.js visual interface capturing localized kinetic entries alongside global peer-to-peer gossip tracking streams." },
+            { title: "Decoupled Variable Coordinate Explorer", file: "browser.html", layer: "CORE", tags: "core browser query ingestion decoder asset class code category map presets registry", desc: "Technical decoder interface splitting 16-category asset class definitions, geodetic log bounds, and parameter payload blocks." },
+            { title: "The Sovereign Covenant Charter Document", file: "charter.html", layer: "CORE", tags: "constitution charter axioms scalar management decay 20-worker physical materialization cascade", desc: "The founding constitutional rule framework defining virtual-to-physical anchor conversion parameters and systemic legal bounds." },
+            { title: "Serverless Volatile Community Whisper Mesh", file: "community.html", layer: "SWARM", tags: "community mesh broadcast signal whisper gossip bulletin peer swarm chat local ram sandbox", desc: "Ephemeral communication portal utilizing client-side browser RAM sandboxes to eliminate structural data persistence logs." },
+            { title: "Kine-Currency Valuation Bridge Converter", file: "converter-currency.html", layer: "TREASURY", tags: "currency converter fiat valuation matrix inr usd eur base rate liquidation capital minting", desc: "Mathematical bridge calibrating Kine asset quantities into standard fiat denominations anchored to the invariant INR baseline." },
+            { title: "Gregorian-Chrono Invariant Velocity Transform", file: "converter.html", layer: "CORE", tags: "temporal bridge bridge transformer date time conversion reverse parameter extraction calendar", desc: "Chrono transformer mapping conventional Gregorian calendar timestamps into un-collidible 22-digit synchronized temporal outputs." },
+            { title: "Serverless Multi-Format Packet Courier Matrix", file: "courier.html", layer: "CORE", tags: "courier matrix outbound packet encapsulation inbound parser decryptor radar content id hash cid file", desc: "Non-custodial file encryption and peer retrieval index utility generating secure client-side memory content identifiers (CIDs)." },
+            { title: "Independent Micro-Advance Desk Portal", file: "credit-desk.html", layer: "TREASURY", tags: "credit desk micro-advance loan repayment velocity window zero interest mandate debt holdings", desc: "Auxiliary credit deployment interface executing zero-interest mutual resource advances mapped directly to contributor reputation ratings." },
+            { title: "Cryptographic Cold Storage Custodian Vault", file: "custodian-vault.html", layer: "TREASURY", tags: "custodian vault timelock asset escrow multisig inflow log 1% tds network sweeps", desc: "Cold storage security layer requiring multi-node anchor signatures to release time-locked tokens or incoming compliance sweep revenues." },
+            { title: "Performance Insight Data Board", file: "dashboard.html", layer: "SWARM", tags: "dashboard performance analytics scoreboard stream aggregator regional coverage bulletins directive", desc: "Systemic operational scoreboard consolidating task completion metrics and regional cluster coverage parameters across active jurisdictions." },
+            { title: "Hardware Node Edge Binding Manager", file: "device-manager.html", layer: "CORE", tags: "device manager edge hardware equipment metric classification mac serial address link status streaming", desc: "Asset tracker tokenizing smart industrial power meters, factory production lines, and IoT hardware signature identifiers." },
+            { title: "Strategic Capital Allocation Funding Matrix", file: "funding-matrix.html", layer: "TREASURY", tags: "funding matrix reinvestment capital allocation proposals grant consensus weight aarohan 2050", desc: "Macro strategic deployment ledger tracking community proposals and consensus validation metrics for scaling regional hubs." },
+            { title: "Kinetic Training Grid Loop Simulator", file: "game.html", layer: "CORE", tags: "game core runner training module active order telemetry execution reward block fiscal harvest", desc: "Interactive operational engine tracking the core 300ms delay mechanics between structural rewards and Category 12 sweeps." },
+            { title: "Fixed-Width Identity Serial Number Generator", file: "generator.html", layer: "CORE", tags: "generator serial minter signature protocol sha256 unalterable primary key format constraints", desc: "Standalone primary identity compiler processing text variables into unalterable, fixed-width chronological mapping keys." },
+            { title: "Treasury System Capitalization Allocation Block", file: "genesis-ledger.html", layer: "TREASURY", tags: "genesis ledger seed reserve capital allocation dine resource units 100000 din base layer lock", desc: "Founding asset ledger anchoring 100,000 baseline Dine reserve units securely inside the central custodian environment balance." },
+            { title: "Consolidated Unified Framework Master Monolith", file: "index.html", layer: "CORE", tags: "master index monolith core system terminal phase preview navigation portal global map", desc: "The centralized navigational grid connecting every application layer, tracking log, documentation file, and mesh subsystem." },
+            { title: "16-Category Layer-0 Global Resource Converger", file: "ledger-global.html", layer: "TREASURY", tags: "ledger global resource asset class category specifications specs address minting primary keys", desc: "Macro data infrastructure register mapping physical items to specific database primary keys without collision friction." },
+            { title: "Fiscal Split Category 00 Management Ingestion", file: "ledger.html", layer: "TREASURY", tags: "ledger financial dashboard flux kine dyne triple-split calculations compliance automation", desc: "Macro financial ticker tracking structural circulation units (Flux/Kine/Dyne) and automated compliance revenue distributions." },
+            { title: "Algorithmic MSME Underwriting Credit Ledger", file: "loan-ledger.html", layer: "TREASURY", tags: "loan ledger debt allocation kinetic reliability score krs propose quantum risk constraints", desc: "Automated credit checking system matching industrial capacity metrics against node hardware token locks." },
+            { title: "Kinetic Unified Temporal Synchronization Handshake Engine", file: "kuts-mesh-worker.js", layer: "CORE", tags: "worker script background thread calibrations least action protocol webrtc data packet", desc: "Isolated multi-threaded Web Worker managing high-resolution temporal calculations, WebRTC gossiping, and back-end metric transformations." },
+            { title: "Algorithmic Output Amortization Credit Ladder", file: "repayment-engine.html", layer: "TREASURY", tags: "repayment engine amortization deduction percentage slider query clearance milestone", desc: "Dynamic amortizing ladder executing automated flow captures to organically adjust ongoing credit availability limitations." },
+            { title: "KRS Telemetry Audit Reputation Oracle", file: "reputation-oracle.html", layer: "SWARM", tags: "reputation oracle krs rating uptime index data packet sync validation matrix excellent standard", desc: "Analytical scoring validation module tracking data delivery completeness ratios to maintain strict coordinator requirements." },
+            { title: "Level 3 Capillary Nerve Router Controller", file: "router.html", layer: "SWARM", tags: "router capillary attributes secondary anchor hub corridor network trace topological nerve", desc: "Topological edge router managing real-time handshake translations between local workshop SEZs and underlying primary nodes." }
+        ];
+
+        // --- HIGH-RESOLUTION MATRIX SYSTEM CLOCK TIMER ---
+        function runSearchClock() {
+            setInterval(() => {
+                const now = new Date();
+                const GE = "0130"; const EE = "05"; const PE = "26"; const TE = "04"; 
+                const Day = now.getDate().toString().padStart(2, '0');
+                const GigaE = now.getHours().toString().padStart(2, '0');
+                const MegaE = now.getMinutes().toString().padStart(2, '0');
+                const KiloE = now.getSeconds().toString().padStart(2, '0');
+                const BaseE = Math.floor(now.getMilliseconds() / 10).toString().padStart(2, '0');
+
+                document.getElementById('search-clock').innerText = 
+                    `(+00):${GE}.${EE}.${PE}.${TE}.${Day}.${GigaE}.${MegaE}.${KiloE}.${BaseE}.${Math.floor(Math.random()*99)}.${Math.floor(Math.random()*99)}`;
+            }, 33);
+        }
+
+        // --- CORE CRAWLER AND MATCHING LOGIC ---
+        function executeKUTSQuery() {
+            const query = document.getElementById('search-input').value.toLowerCase().trim();
+            const filter = document.getElementById('category-filter').value;
+            const container = document.getElementById('results-display-mesh');
+            
+            container.innerHTML = "";
+            let matchCount = 0;
+
+            KUTS_MASTER_REGISTRY.forEach(item => {
+                // Check category filter layer
+                if (filter !== "ALL" && item.layer !== filter) return;
+
+                // Check text matching parameters across Title, File, Tags, and Description fields
+                const matchText = `${item.title} ${item.file} ${item.tags} ${item.desc}`.toLowerCase();
+                if (query !== "" && !matchText.includes(query)) return;
+
+                matchCount++;
+                
+                // Class color scheme mappings
+                let layerBadgeColor = "text-blue-400 bg-blue-950/40 border-blue-900/50";
+                if (item.layer === "TREASURY") layerBadgeColor = "text-orange-400 bg-orange-950/40 border-orange-900/50";
+                if (item.layer === "SWARM") layerBadgeColor = "text-purple-400 bg-purple-950/40 border-purple-900/50";
+
+                const cardHTML = `
+                    <div class="bg-slate-900/30 border border-slate-800/80 rounded-xl p-4 flex flex-col justify-between hover:border-purple-600/40 transition-all backdrop-blur-sm group shadow-md">
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center font-mono text-[0.6rem]">
+                                <span class="${layerBadgeColor} border px-2 py-0.5 rounded font-bold uppercase tracking-wider">${item.layer} LAYER</span>
+                                <span class="text-slate-500 font-bold select-all select-all">${item.file}</span>
+                            </div>
+                            <h3 class="text-sm font-bold font-mono text-slate-200 group-hover:text-purple-400 transition-colors">${item.title}</h3>
+                            <p class="text-[0.7rem] text-slate-400 leading-relaxed font-sans">${item.desc}</p>
+                        </div>
+                        <a href="./${item.file}" class="mt-4 text-center bg-slate-950/60 border border-slate-800 group-hover:border-purple-500/60 group-hover:text-purple-300 p-2 rounded-lg text-[0.65rem] font-mono font-bold uppercase tracking-wider transition-all">
+                            Initialize Module Pathway &gt;&gt;
+                        </a>
+                    </div>`;
+
+                container.insertAdjacentHTML('beforeend', cardHTML);
+            });
+
+            document.getElementById('match-count').innerText = matchCount;
+        }
+
+        // Boot system routines on load
+        window.addEventListener('DOMContentLoaded', () => {
+            runSearchClock();
+            document.getElementById('indexed-count').innerText = KUTS_MASTER_REGISTRY.length;
+            executeKUTSQuery(); // Initial load to render all component modules
+        });
+    </script>
+</body>
+</html>

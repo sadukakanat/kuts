@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Commune | My Task Workspace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght=300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #030712; color: #e2e8f0; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .glow-purple { box-shadow: 0 0 20px rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.3); }
+        .tab-active { border-color: #a855f7; color: #c084fc; background-color: rgba(147, 51, 234, 0.1); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col p-4 md:p-6 bg-[#030712]">
+
+    <!-- MODULE SUBHUD NAVIGATION -->
+    <header class="w-full max-w-6xl mx-auto border border-purple-900/40 bg-slate-900/50 p-4 rounded-xl flex flex-col md:flex-row justify-between items-center gap-4 mb-6 font-mono text-xs backdrop-blur-sm">
+        <div>
+            <h1 class="text-lg font-bold text-purple-400 tracking-wider">KUTS_WORKER_TASKS</h1>
+            <p class="text-slate-500 text-[0.6rem] uppercase">Personalized Contributor Tracking Console // MDI6000 [THRINC000]</p>
+        </div>
+        <div class="text-right flex flex-col items-center md:items-end gap-1">
+            <a href="index.html" class="text-cyan-400 font-bold hover:underline tracking-widest text-[0.65rem]">&lt;&lt; RETURN TO SYSTEM ROOT</a>
+            <span class="text-purple-400 font-bold bg-purple-950/40 px-2 py-0.5 rounded border border-purple-900/30 text-[0.55rem]">MEMBER ID: 0xCOM_NODE_082</span>
+        </div>
+    </header>
+
+    <!-- METRICS SUMMARY BAR -->
+    <main class="w-full max-w-6xl mx-auto flex-1 flex flex-col gap-6">
+        <section class="grid grid-cols-2 md:grid-cols-4 gap-4 font-mono text-center text-xs">
+            <div class="bg-slate-900/40 border border-slate-800 p-3 rounded-xl">
+                <span class="text-slate-500 block text-[0.55rem]">ALLOTTED</span>
+                <span id="count-allotted" class="text-purple-400 font-bold text-lg">1</span>
+            </div>
+            <div class="bg-slate-900/40 border border-slate-800 p-3 rounded-xl">
+                <span class="text-slate-500 block text-[0.55rem]">PROGRESSING</span>
+                <span id="count-progressing" class="text-yellow-500 font-bold text-lg">1</span>
+            </div>
+            <div class="bg-slate-900/40 border border-slate-800 p-3 rounded-xl">
+                <span class="text-slate-500 block text-[0.55rem]">COMPLETED</span>
+                <span id="count-completed" class="text-emerald-400 font-bold text-lg">1</span>
+            </div>
+            <div class="bg-slate-900/40 border border-slate-800 p-3 rounded-xl">
+                <span class="text-slate-500 block text-[0.55rem]">EXPIRED</span>
+                <span id="count-expired" class="text-red-400 font-bold text-lg">1</span>
+            </div>
+        </section>
+
+        <!-- STATE LIFECYCLE TABS FILTERS -->
+        <section class="bg-slate-900/30 border border-slate-800 rounded-xl flex flex-col overflow-hidden flex-1 glow-purple">
+            <div class="p-3 border-b border-slate-800 bg-black/40 flex flex-wrap gap-2 items-center justify-between shrink-0 font-mono text-xs">
+                <div class="flex flex-wrap gap-1">
+                    <button onclick="filterTasks('ALL')" id="tab-ALL" class="px-3 py-1.5 rounded border border-slate-800 text-slate-400 hover:text-white transition-all tab-active">ALL WORK</button>
+                    <button onclick="filterTasks('ALLOTTED')" id="tab-ALLOTTED" class="px-3 py-1.5 rounded border border-slate-800 text-slate-400 hover:text-purple-400 transition-all">ALLOTTED</button>
+                    <button onclick="filterTasks('PROGRESSING')" id="tab-PROGRESSING" class="px-3 py-1.5 rounded border border-slate-800 text-slate-400 hover:text-yellow-400 transition-all">PROGRESSING</button>
+                    <button onclick="filterTasks('COMPLETED')" id="tab-COMPLETED" class="px-3 py-1.5 rounded border border-slate-800 text-slate-400 hover:text-emerald-400 transition-all">COMPLETED</button>
+                    <button onclick="filterTasks('EXPIRED')" id="tab-EXPIRED" class="px-3 py-1.5 rounded border border-slate-800 text-slate-400 hover:text-red-400 transition-all">EXPIRED</button>
+                </div>
+                <div class="text-[0.65rem] text-slate-400 bg-slate-950 px-2.5 py-1 rounded border border-slate-800 font-bold uppercase">
+                    Net Realized Wallet Balance: <span id="total-wallet-earnings" class="text-emerald-400 font-bold">0.0000 Ꝃ</span>
+                </div>
+            </div>
+
+            <!-- TASK LEDGER STACK LIST -->
+            <div class="overflow-x-auto flex-1">
+                <table class="w-full text-left border-collapse font-mono text-xs whitespace-nowrap">
+                    <thead class="bg-slate-950/80 sticky top-0 z-10 text-slate-500 uppercase text-[0.6rem] tracking-wider border-b border-slate-800">
+                        <tr>
+                            <th class="p-3">Task Reference Token</th>
+                            <th class="p-3">Task Definition</th>
+                            <th class="p-3">Lifecycle State</th>
+                            <th class="p-3 text-right">Base Bounty</th>
+                            <th class="p-3 text-right text-purple-400">Modifiers (+25 & +15%)</th>
+                            <th class="p-3 text-right text-emerald-400">Net Realized (98%)[cite: 3]</th>
+                            <th class="p-3 text-center">Action Handshake</th>
+                        </tr>
+                    </thead>
+                    <tbody id="task-matrix-body" class="divide-y divide-slate-900 text-slate-300 text-[0.65rem]">
+                        <!-- Programmatic task objects injected via Javascript -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full max-w-6xl mx-auto border-t border-slate-900 pt-4 mt-6 text-center font-mono text-[0.6rem] text-slate-600">
+        PINALEAF ADVANCEMENTS LLP // SYSTEMS CONSTITUTION SECURED // 2026
+    </footer>
+
+    <!-- INTERACTIVE ARCHITECTURE INTERFACES CONTROLLER -->
+    <script>
+        // Seed database objects reflecting precise system guidelines
+        const MASTER_WORK_REPOSITORY = [
+            { token: "TSK-8812", title: "Calibrate Secondary Node TUPINS014 Telemetry Array", state: "ALLOTTED", base: 120.00 },
+            { token: "TSK-8740", title: "Map Erode Agri-Textile Gate Ingestion Micro-Corridors", state: "PROGRESSING", base: 150.00 },
+            { token: "TSK-7741", title: "Execute Localized Base-Epoch UI Optimizations", state: "COMPLETED", base: 200.00 },
+            { token: "TSK-6410", title: "Sync Traditional Power Loom MAC Signatures on Meso-Grid", state: "EXPIRED", base: 80.00 }
+        ];
+
+        function calculateTaskBreakdown(baseValue, state) {
+            if (state === "EXPIRED") {
+                return { modifiers: "0.00 Ꝃ (Voided)", net: 0.0000 };
+            }
+            // Strict implementation of contextual bonus parameters
+            const initialBonus = 25.00;
+            const performanceAccelerator = baseValue * 0.15;
+            const grossPayout = baseValue + initialBonus + performanceAccelerator;
+            
+            // Strict Category 12 Triple-Split deduction rule validation (98% Kinetic Reward)[cite: 3]
+            const netRealized = grossPayout * 0.98;
+
+            return {
+                modifiers: `+25.00 Ꝃ Base +${performanceAccelerator.toFixed(2)} Ꝃ Boost`,
+                net: netRealized
+            };
+        }
+
+        function compileTelemetryCounters() {
+            let totalWalletAccumulated = 0;
+            const tallies = { ALLOTTED: 0, PROGRESSING: 0, COMPLETED: 0, EXPIRED: 0 };
+
+            MASTER_WORK_REPOSITORY.forEach(task => {
+                tallies[task.state]++;
+                if (task.state === "COMPLETED") {
+                    totalWalletAccumulated += calculateTaskBreakdown(task.base, task.state).net;
+                }
+            });
+
+            // Update UI blocks
+            document.getElementById('count-allotted').innerText = tallies.ALLOTTED;
+            document.getElementById('count-progressing').innerText = tallies.PROGRESSING;
+            document.getElementById('count-completed').innerText = tallies.COMPLETED;
+            document.getElementById('count-expired').innerText = tallies.EXPIRED;
+            document.getElementById('total-wallet-earnings').innerText = totalWalletAccumulated.toFixed(4) + " Ꝃ";
+        }
+
+        function renderTaskMatrix(filterTarget = "ALL") {
+            const tbody = document.getElementById('task-matrix-body');
+            tbody.innerHTML = "";
+
+            const targetCollection = filterTarget === "ALL" 
+                ? MASTER_WORK_REPOSITORY 
+                : MASTER_WORK_REPOSITORY.filter(t => t.state === filterTarget);
+
+            if (targetCollection.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="7" class="p-6 text-center text-slate-500 italic">No task logs found matching specified boundary filters.</td></tr>`;
+                return;
+            }
+
+            targetCollection.forEach(task => {
+                const calculations = calculateTaskBreakdown(task.base, task.state);
+                
+                // Color formatting logic based on lifecycle state code paths
+                let stateBadgeColor = "text-purple-400 border-purple-900/50";
+                let actionButtonHTML = `<button onclick="updateState('${task.token}', 'PROGRESSING')" class="bg-purple-950/60 hover:bg-purple-900 border border-purple-700 text-purple-300 px-2 py-1 rounded text-[0.55rem] font-bold">ACCEPT TASK</button>`;
+                
+                if (task.state === "PROGRESSING") {
+                    stateBadgeColor = "text-yellow-500 border-yellow-900/50";
+                    actionButtonHTML = `<button onclick="updateState('${task.token}', 'COMPLETED')" class="bg-yellow-950/60 hover:bg-yellow-900 border border-yellow-700 text-yellow-400 px-2 py-1 rounded text-[0.55rem] font-bold">COMMIT PULSE</button>`;
+                } else if (task.state === "COMPLETED") {
+                    stateBadgeColor = "text-emerald-400 border-emerald-900/50";
+                    actionButtonHTML = `<span class="text-emerald-500 font-bold tracking-widest text-[0.6rem]">✓ SETTLED</span>`;
+                } else if (task.state === "EXPIRED") {
+                    stateBadgeColor = "text-red-400 border-red-900/50";
+                    actionButtonHTML = `<span class="text-red-600 font-bold tracking-wider text-[0.6rem]">𐄂 VOIDED</span>`;
+                }
+
+                const row = `
+                    <tr class="hover:bg-slate-900/40 transition-colors">
+                        <td class="p-3 text-slate-500 font-bold">${task.token}</td>
+                        <td class="p-3 text-slate-200 font-sans font-medium">${task.title}</td>
+                        <td class="p-3"><span class="bg-black px-2 py-0.5 rounded border uppercase text-[0.55rem] font-bold ${stateBadgeColor}">${task.state}</span></td>
+                        <td class="p-3 text-right font-bold">${task.base.toFixed(2)} Ꝃ</td>
+                        <td class="p-3 text-right text-slate-400">${calculations.modifiers}</td>
+                        <td class="p-3 text-right text-emerald-400 font-bold font-mono text-sm">${task.state === 'EXPIRED' ? '0.0000' : calculations.net.toFixed(4)} Ꝃ</td>
+                        <td class="p-3 text-center">${actionButtonHTML}</td>
+                    </tr>
+                `;
+                tbody.insertAdjacentHTML('beforeend', row);
+            });
+        }
+
+        function updateState(tokenRef, nextState) {
+            const matchIndex = MASTER_WORK_REPOSITORY.findIndex(t => t.token === tokenRef);
+            if (matchIndex !== -1) {
+                MASTER_WORK_REPOSITORY[matchIndex].state = nextState;
+                compileTelemetryCounters();
+                
+                const activeTabBtn = document.querySelector('.tab-active');
+                const currentActiveTab = activeTabBtn ? activeTabBtn.id.split('-')[1] : "ALL";
+                renderTaskMatrix(currentActiveTab);
+            }
+        }
+
+        function filterTasks(tabFilter) {
+            document.querySelectorAll('div button').forEach(btn => {
+                if(btn.id.startsWith("tab-")) btn.classList.remove('tab-active');
+            });
+            const selectedTab = document.getElementById(`tab-${tabFilter}`);
+            if (selectedTab) selectedTab.classList.add('tab-active');
+            renderTaskMatrix(tabFilter);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            compileTelemetryCounters();
+            renderTaskMatrix("ALL");
+        });
+    </script>
+<!-- Resilient Inline Auth & Navigation Injector for Local Testing -->
+    <script>
+        (function() {
+            window.addEventListener('DOMContentLoaded', () => {
+                // Check session; if missing during local test, auto-initialize a mock test session instead of failing
+                let session = localStorage.getItem('kuts_active_session');
+                if (!session) {
+                    session = JSON.stringify({ nodeId: "THRINC000-LOCAL-TEST", expiry: Date.now() + 86400000 });
+                    localStorage.setItem('kuts_active_session', session);
+                }
+
+                // Inject Global Header if missing
+                if (!document.getElementById('kuts-global-header')) {
+                    const headerHTML = `
+                        <header id="kuts-global-header" class="w-full max-w-7xl mx-auto p-6 flex justify-between items-center border-b border-slate-800 bg-[#030712] text-slate-200 mb-6">
+                            <div class="text-blue-400 font-mono font-bold tracking-widest text-sm">
+                                KUTS_MESH_OPERATIONS // MDI6000 [LOCAL MODE]
+                            </div>
+                            <nav id="nav-auth" class="flex gap-4 items-center font-mono"></nav>
+                        </header>`;
+                    document.body.insertAdjacentHTML('afterbegin', headerHTML);
+                }
+
+                // Inject Global Footer if missing
+                if (!document.getElementById('kuts-global-footer') && !window.location.pathname.includes('index.html')) {
+                    const footerHTML = `
+                        <footer id="kuts-global-footer" class="max-w-7xl mx-auto mt-auto py-8 border-t border-slate-800 text-center w-full">
+                            <a href="index.html" class="inline-flex items-center gap-2 text-[0.7rem] text-slate-500 hover:text-blue-400 font-mono uppercase tracking-widest transition-all">
+                                <span class="text-lg">←</span> RETURN TO UNIVERSAL GATEWAY
+                            </a>
+                        </footer>`;
+                    document.body.insertAdjacentHTML('beforeend', footerHTML);
+                }
+
+                updateAuthUI();
+            });
+
+            window.updateAuthUI = function() {
+                const nav = document.getElementById('nav-auth');
+                if (!nav) return;
+                
+                nav.innerHTML = `
+                    <a href="index.html" class="text-slate-400 text-[0.65rem] uppercase font-mono hover:text-white">Gateway</a>
+                    <button onclick="secureLogout()" class="bg-red-950 hover:bg-red-900 text-red-400 font-mono text-[0.65rem] px-3 py-1.5 rounded border border-red-900 uppercase tracking-widest cursor-pointer">
+                        [X] DISCONNECT
+                    </button>`;
+            };
+
+            window.secureLogout = function() {
+                localStorage.removeItem('kuts_active_session');
+                window.location.href = 'sign-in.html';
+            };
+        })();
+    </script>
+</body>
+</html>

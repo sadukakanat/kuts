@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Governance | Node Dispute & Verification Gateway</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #030712; color: #f8fafc; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .glow-red { box-shadow: 0 0 25px rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.4); }
+        .dispute-gradient { background: radial-gradient(circle at top left, rgba(239, 68, 68, 0.08), transparent 50%); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between dispute-gradient">
+
+    <!-- HEADER -->
+    <header class="w-full max-w-7xl mx-auto p-6 flex flex-col sm:flex-row justify-between items-center gap-4 border-b border-slate-900">
+        <div class="flex items-center gap-3">
+            <div class="h-8 w-8 rounded-lg bg-red-600 flex items-center justify-center font-mono font-bold text-white shadow-[0_0_15px_rgba(239,68,68,0.5)]">⚖</div>
+            <div>
+                <h1 class="text-sm font-bold tracking-widest font-mono text-white">KUTS_NODE_DISPUTE_GATEWAY</h1>
+                <span class="text-[0.6rem] text-red-400 font-mono uppercase tracking-wider block">Attribution Anomaly &amp; Exception Resolution</span>
+            </div>
+        </div>
+        <nav class="flex gap-3 font-mono text-xs">
+            <a href="compliance.html" class="text-slate-400 hover:text-white px-3 py-1.5 rounded border border-slate-800 transition-all">&lt;&lt; Compliance Suite</a>
+        </nav>
+    </header>
+
+    <!-- MAIN WORKSPACE -->
+    <main class="w-full max-w-6xl mx-auto px-6 py-12 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- LEFT: DISPUTE SUBMISSION FORM -->
+        <section class="lg:col-span-5 bg-slate-900/50 border border-slate-800/80 rounded-2xl p-6 glow-red backdrop-blur-sm">
+            <div class="border-b border-slate-800 pb-3 mb-4 font-mono text-xs flex justify-between items-center">
+                <span class="text-slate-300 font-bold uppercase tracking-wider">File Attribution Exception</span>
+                <span class="text-[0.6rem] bg-red-950 text-red-400 px-2 py-0.5 rounded border border-red-900/30 font-bold">ARBITRATION QUEUE</span>
+            </div>
+
+            <form id="dispute-form" onsubmit="handleDisputeSubmission(event)" class="space-y-4 font-mono text-xs">
+                <div>
+                    <label for="submitter-id" class="block text-slate-400 text-[0.6rem] mb-1 uppercase">Submitter / Node ID</label>
+                    <input type="text" id="submitter-id" required placeholder="e.g., THRINC000" class="w-full bg-black/60 border border-slate-800 rounded p-3 text-red-400 font-bold uppercase tracking-wider focus:outline-none focus:border-red-500">
+                </div>
+
+                <div>
+                    <label for="disputed-ref" class="block text-slate-400 text-[0.6rem] mb-1 uppercase">Disputed Enrollment / Referral Code ID</label>
+                    <input type="text" id="disputed-ref" required placeholder="e.g., REF9901A" class="w-full bg-black/60 border border-slate-800 rounded p-3 text-slate-200 uppercase tracking-wider focus:outline-none focus:border-red-500">
+                </div>
+
+                <div>
+                    <label for="dispute-reason" class="block text-slate-400 text-[0.6rem] mb-1 uppercase">Anomaly Category</label>
+                    <select id="dispute-reason" class="w-full bg-black/60 border border-slate-800 rounded p-3 text-slate-200 focus:outline-none focus:border-red-500">
+                        <option value="MISSED_ATTRIBUTION">Missed Referrer Code Attribution</option>
+                        <option value="INVALID_FORMAT_REJECTION">False Format Rejection Error</option>
+                        <option value="DUPLICATE_CLAIM">Duplicate Claim Conflict</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="audit-proof" class="block text-slate-400 text-[0.6rem] mb-1 uppercase">Cryptographic Proof / Context Hash</label>
+                    <input type="text" id="audit-proof" required placeholder="Provide transaction or session log hash reference" class="w-full bg-black/60 border border-slate-800 rounded p-3 text-slate-200 font-mono tracking-wider focus:outline-none focus:border-red-500">
+                </div>
+
+                <p id="form-status" class="hidden mt-2 p-2 rounded text-center text-xs" role="status"></p>
+
+                <button type="submit" class="w-full bg-red-700 hover:bg-red-600 text-white font-bold py-3.5 px-4 rounded-xl tracking-widest uppercase transition-all border border-red-500 shadow-[0_0_20px_rgba(239,68,68,0.2)]">
+                    Broadcast Dispute Pulse &gt;&gt;
+                </button>
+            </form>
+        </section>
+
+        <!-- RIGHT: DISPUTE ARBITRATION STREAM -->
+        <section class="lg:col-span-7 bg-slate-900/30 border border-slate-800 rounded-2xl p-6 backdrop-blur-sm space-y-4 font-mono text-xs">
+            <div class="border-b border-slate-800 pb-3 flex justify-between items-center">
+                <span class="text-slate-300 font-bold uppercase">Active Arbitration Stream</span>
+                <span class="text-red-400 text-[0.6rem]">LIVE MONITOR</span>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="text-slate-500 uppercase text-[0.6rem] border-b border-slate-800">
+                            <th class="p-3">Ticket ID</th>
+                            <th class="p-3">Submitter</th>
+                            <th class="p-3">Category</th>
+                            <th class="p-3 text-right">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dispute-body" class="divide-y divide-slate-800 text-slate-300">
+                        <!-- Dynamically populated rows -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full max-w-7xl mx-auto p-6 border-t border-slate-900/60 flex flex-col md:flex-row justify-between items-center gap-2 font-mono text-[0.6rem] text-slate-600">
+        <span>© 2026 PINALEAF ADVANCEMENTS LLP. ALL SYSTEM RIGHTS RESERVED.</span>
+        <span class="uppercase tracking-wider text-red-500/40">Node Arbitration &amp; Verification Protocol</span>
+    </footer>
+
+    <!-- SCRIPT LOGIC -->
+    <script>
+        function handleDisputeSubmission(event) {
+            event.preventDefault();
+
+            const submitterId = document.getElementById('submitter-id').value.trim().toUpperCase();
+            const disputedRef = document.getElementById('disputed-ref').value.trim().toUpperCase();
+            const reason = document.getElementById('dispute-reason').value;
+            const proof = document.getElementById('audit-proof').value.trim();
+
+            const idRegex = /^[A-Z0-9_-]{3,24}$/;
+            if (!idRegex.test(submitterId)) {
+                showStatus("Invalid Submitter ID format. Must be 3–24 alphanumeric characters.", "error");
+                return;
+            }
+
+            const disputeTicket = {
+                ticketId: "DSP_" + Math.random().toString(36).substr(2, 6).toUpperCase(),
+                submitterId,
+                disputedRef,
+                reason,
+                proofHash: proof,
+                status: "PENDING_CONSENSUS",
+                timestamp: new Date().toISOString()
+            };
+
+            // Save to local storage dispute log
+            let disputes = JSON.parse(localStorage.getItem('kuts_dispute_ledger') || '[]');
+            disputes.unshift(disputeTicket);
+            localStorage.setItem('kuts_dispute_ledger', JSON.stringify(disputes));
+
+            appendDisputeRow(disputeTicket);
+            showStatus(`Dispute ticket ${disputeTicket.ticketId} successfully broadcasted to consensus mesh.`, "success");
+            document.getElementById('dispute-form').reset();
+        }
+
+        function showStatus(message, type) {
+            const statusEl = document.getElementById('form-status');
+            statusEl.textContent = message;
+            statusEl.hidden = false;
+            if (type === 'error') {
+                statusEl.className = "mt-2 p-2 rounded text-center text-xs bg-red-950/40 border border-red-900 text-red-400 font-mono";
+            } else {
+                statusEl.className = "mt-2 p-2 rounded text-center text-xs bg-emerald-950/40 border border-emerald-900 text-emerald-400 font-mono";
+            }
+        }
+
+        function appendDisputeRow(ticket) {
+            const tbody = document.getElementById('dispute-body');
+            const rowHTML = `
+                <tr class="border-b border-slate-800 text-xs">
+                    <td class="p-3 text-red-400 font-bold">${ticket.ticketId}</td>
+                    <td class="p-3">${ticket.submitterId}</td>
+                    <td class="p-3 text-slate-400">${ticket.reason}</td>
+                    <td class="p-3 text-right font-bold text-amber-400">${ticket.status}</td>
+                </tr>
+            `;
+            tbody.insertAdjacentHTML('afterbegin', rowHTML);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const disputes = JSON.parse(localStorage.getItem('kuts_dispute_ledger') || '[]');
+            if (disputes.length > 0) {
+                document.getElementById('dispute-body').innerHTML = '';
+                disputes.slice(0, 10).forEach(ticket => appendDisputeRow(ticket));
+            } else {
+                appendDisputeRow({
+                    ticketId: "DSP_REF01",
+                    submitterId: "THRINC000",
+                    reason: "MISSED_ATTRIBUTION",
+                    status: "RESOLVED_OVERRIDE"
+                });
+            }
+        });
+    </script>
+</body>
+</html>

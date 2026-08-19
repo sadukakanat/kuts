@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS | Secure Master Wrapper Router</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #030712; color: #f8fafc; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 2px; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-[#030712] overflow-hidden">
+
+    <!-- WRAPPER TOP NAVIGATION BAR -->
+    <header class="h-16 border-b border-slate-800 bg-slate-900/80 px-6 flex justify-between items-center z-30 shrink-0 backdrop-blur-md">
+        <div class="flex items-center gap-3">
+            <div class="h-3 w-3 rounded-full bg-emerald-500 animate-pulse"></div>
+            <h1 class="text-sm font-bold font-mono tracking-widest text-blue-400">KUTS_MASTER_ROUTER_WRAPPER</h1>
+        </div>
+        
+        <!-- Module Switching Controls -->
+        <nav class="hidden md:flex gap-2 font-mono text-xs">
+            <button onclick="loadModule('index.html')" class="px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition-all">Gateway</button>
+            <button onclick="loadModule('account.html')" class="px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition-all">Wallet</button>
+            <button onclick="loadModule('dashboard.html')" class="px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition-all">Dashboard</button>
+            <button onclick="loadModule('browser-genesis.html')" class="px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition-all">3D Globe</button>
+        </nav>
+
+        <div class="font-mono text-[0.65rem] text-emerald-400 bg-emerald-950/40 border border-emerald-900/50 px-2.5 py-1 rounded">
+            WRAPPER: ACTIVE
+        </div>
+    </header>
+
+    <!-- MAIN VIEWPORT CONTAINER -->
+    <main class="flex-1 relative flex flex-col w-full h-[calc(100vh-4rem)]">
+        <!-- Dynamic Module Display Frame -->
+        <iframe id="module-frame" src="index.html" class="w-full h-full border-0 bg-[#030712]" onload="injectEnhancementsToFrame()"></iframe>
+    </main>
+
+    <!-- WRAPPER ROUTER SCRIPT LOGIC -->
+    <script>
+        // Function to switch modules dynamically inside the wrapper without hard reloads
+        function loadModule(pageName) {
+            const frame = document.getElementById('module-frame');
+            frame.src = pageName;
+        }
+
+        // Non-Invasive Enhancement Injector: 
+        // This function automatically injects persistent runtime code, CSS patches, 
+        // or storage wrappers into the loaded iframe content dynamically.
+        function injectEnhancementsToFrame() {
+            try {
+                const frameWindow = document.getElementById('module-frame').contentWindow;
+                const frameDoc = frameWindow.document;
+
+                // 1. Inject responsive mobile/touch CSS fixes dynamically
+                if (!frameDoc.getElementById('wrapper-injected-style')) {
+                    const style = frameDoc.createElement('style');
+                    style.id = 'wrapper-injected-style';
+                    style.innerHTML = `
+                        @media (max-width: 768px) {
+                            table { display: block; overflow-x: auto; white-space: nowrap; }
+                        }
+                    `;
+                    frameDoc.head.appendChild(style);
+                }
+
+                // 2. Intercept or mirror localStorage operations inside the iframe context
+                const originalSetItem = frameWindow.localStorage.setItem;
+                frameWindow.localStorage.setItem = function(key, value) {
+                    originalSetItem.apply(this, arguments);
+                    if (key.includes('kuts_')) {
+                        console.log(`[Wrapper Monitor] Intercepted state write for: ${key}`);
+                    }
+                };
+
+            } catch (e) {
+                console.warn("Cross-origin restriction or frame sandboxing prevented direct injection:", e);
+            }
+        }
+    </script>
+<button onclick="loadModule('carbon-credit-marketplace.html')" class="px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition-all">Carbon Market</button>
+</body>
+</html>

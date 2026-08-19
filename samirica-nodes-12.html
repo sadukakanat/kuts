@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS South America Grid | 12 Primary Anchor Nodes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="core/auth-bridge.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght=300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #030712; color: #cbd5e1; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .module-card { background: rgba(17, 24, 39, 0.5); border: 1px solid rgba(30, 41, 59, 1); transition: all 0.3s; }
+        .module-card:hover { border-color: rgba(20, 184, 166, 0.5); box-shadow: 0 0 15px rgba(20, 184, 166, 0.1); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <div>
+        <!-- GLOBAL HEADER -->
+        <header class="border-b border-slate-800 p-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div>
+                <h1 class="text-3xl font-bold text-teal-400 font-mono tracking-widest">KUTS_SAMERICA_SUBGRID</h1>
+                <p class="text-slate-500 mt-1 font-mono text-sm">Level 2 Meso-Grid // 12-Node South America Allocation</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <input type="text" id="searchInput" placeholder="Search hubs, resource corridors, ID..." 
+                       onkeyup="filterNodes()" class="bg-slate-900 border border-slate-700 p-2 rounded text-sm text-slate-200 font-mono w-72">
+                <a href="index.html" class="bg-slate-800 hover:bg-slate-700 text-teal-300 font-mono px-4 py-2 rounded text-sm border border-slate-700 transition-colors">
+                    << Return to Gateway
+                </a>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main class="max-w-7xl mx-auto px-6 py-12">
+            <section class="flex flex-col gap-6 mb-10">
+                <div class="font-mono text-xs text-teal-400 bg-teal-950/40 border border-teal-800/60 px-3 py-1 rounded self-start uppercase tracking-widest">
+                    ● Regional Allocation // Resource Extraction & Agricultural Logistics
+                </div>
+                <h2 class="text-4xl font-bold leading-tight text-white">
+                    South America <span class="text-teal-500">12-Node Primary Corridor</span>
+                </h2>
+                <p class="text-slate-400 max-w-3xl text-base">
+                    As the final regional sector of the 144-node harmonic expansion, South America is allocated 12 dedicated Level 2 Primary Anchor Nodes. These nodes secure continental resource extraction, Andean cordillera networks, and agricultural export channels within the KUTS architecture.
+                </p>
+
+                <!-- CORRIDOR METRICS BAR -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 font-mono text-xs mt-2">
+                    <div class="bg-slate-900/80 border border-slate-800 p-3 rounded">
+                        <span class="text-teal-400 block font-bold text-lg">12 Nodes</span>
+                        <span class="text-slate-400">Total South American Allocation[cite: 4]</span>
+                    </div>
+                    <div class="bg-slate-900/80 border border-slate-800 p-3 rounded">
+                        <span class="text-cyan-400 block font-bold text-lg">Cordillera Axes</span>
+                        <span class="text-slate-400">Andean & Spatial Anchors[cite: 4]</span>
+                    </div>
+                    <div class="bg-slate-900/80 border border-slate-800 p-3 rounded">
+                        <span class="text-emerald-400 block font-bold text-lg">Agri-Logistics</span>
+                        <span class="text-slate-400">São Paulo & Basin Corridors[cite: 4]</span>
+                    </div>
+                    <div class="bg-slate-900/80 border border-slate-800 p-3 rounded">
+                        <span class="text-purple-400 block font-bold text-lg">Least Action</span>
+                        <span class="text-slate-400">Upstream Routing Protocol</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- NODES TABLE CONTAINER -->
+            <section class="module-card rounded-xl overflow-hidden border border-slate-800">
+                <div class="overflow-x-auto">
+                    <table id="samiricaNodesTable" class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-900/80 border-b border-slate-800 font-mono text-xs text-slate-400 uppercase tracking-wider">
+                                <th class="p-4">Designation</th>
+                                <th class="p-4">Location / Core Hub</th>
+                                <th class="p-4">Industrial / Kinetic Focus</th>
+                                <th class="p-4">Global ID (9-Digit)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800/60 text-sm text-slate-300 font-mono">
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="sa-001 south american anchor sao paulo brazil saobrc006">
+                                <td class="p-4 text-teal-400 font-bold">SA-001</td>
+                                <td class="p-4 text-white font-semibold">São Paulo</td>
+                                <td class="p-4 text-slate-400">South American Industrial & Fiscal Anchor[cite: 4]</td>
+                                <td class="p-4 text-cyan-400 font-bold">SAOBRC006</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="sa-002 andean cordillera anchor lima peru limpec017">
+                                <td class="p-4 text-teal-400 font-bold">SA-002</td>
+                                <td class="p-4 text-white font-semibold">Lima</td>
+                                <td class="p-4 text-slate-400">Andean Cordillera Anchor & Mineral Transit[cite: 4]</td>
+                                <td class="p-4 text-cyan-400 font-bold">LIMPEC017</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="sa-003 sub antarctic gate stanley falkland islands psyfkc024">
+                                <td class="p-4 text-teal-400 font-bold">SA-003</td>
+                                <td class="p-4 text-white font-semibold">Stanley</td>
+                                <td class="p-4 text-slate-400">Sub-Antarctic Gate & Southern Maritime Post[cite: 4]</td>
+                                <td class="p-4 text-cyan-400 font-bold">PSYFKC024</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="sa-004 drake passage chokepoint punta arenas chile puqclc030">
+                                <td class="p-4 text-teal-400 font-bold">SA-004</td>
+                                <td class="p-4 text-white font-semibold">Punta Arenas</td>
+                                <td class="p-4 text-slate-400">Drake Passage Chokepoint & Maritime Hub[cite: 4]</td>
+                                <td class="p-4 text-cyan-400 font-bold">PUQCLC030</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="sa-005 buenos aires argentina agricultural export hub">
+                                <td class="p-4 text-teal-400 font-bold">SA-005</td>
+                                <td class="p-4 text-white font-semibold">Buenos Aires</td>
+                                <td class="p-4 text-slate-400">Southern Cone Agricultural Export & Financial Settlement</td>
+                                <td class="p-4 text-cyan-400 font-bold">BAEARP005</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="sa-006 bogota colombia northern andean node">
+                                <td class="p-4 text-teal-400 font-bold">SA-006</td>
+                                <td class="p-4 text-white font-semibold">Bogotá</td>
+                                <td class="p-4 text-slate-400">Northern Andean Hub & Inter-Oceanic Linkage</td>
+                                <td class="p-4 text-cyan-400 font-bold">BOGCOLP006</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="sa-007 santiago chile mining and tech node">
+                                <td class="p-4 text-teal-400 font-bold">SA-007</td>
+                                <td class="p-4 text-white font-semibold">Santiago</td>
+                                <td class="p-4 text-slate-400">Copper Extraction Ledger & Pacific Tech Gateway</td>
+                                <td class="p-4 text-cyan-400 font-bold">SNTCHIP007</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="sa-008 rio de janeiro brazil energy grid">
+                                <td class="p-4 text-teal-400 font-bold">SA-008</td>
+                                <td class="p-4 text-white font-semibold">Rio de Janeiro</td>
+                                <td class="p-4 text-slate-400">Offshore Energy Grid & Maritime Command</td>
+                                <td class="p-4 text-cyan-400 font-bold">RIOBRP008</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="sa-009 through sa-012 extended south american nodes">
+                                <td class="p-4 text-teal-400 font-bold">SA-009 → SA-012</td>
+                                <td class="p-4 text-white font-semibold">Extended Regional Nodes (Caracas, Quito, Montevideo, Asunción, etc.)</td>
+                                <td class="p-4 text-slate-400">Basin Sub-Capillaries & Regional Trade Points</td>
+                                <td class="p-4 text-cyan-400 font-bold">SAMINP009-012</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-800 mt-16 py-8 px-6 bg-slate-950 text-center font-mono text-xs text-slate-500">
+        <p>© 2026 PINALEAF ADVANCEMENTS LLP // AAROHAN 2050 // SOUTH AMERICA 12-NODE MESH</p>
+    </footer>
+
+    <!-- INTERACTION SCRIPT -->
+    <script>
+        function filterNodes() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            document.querySelectorAll('.node-row').forEach(row => {
+                const searchData = row.getAttribute('data-search');
+                row.style.display = searchData.includes(input) ? "" : "none";
+            });
+        }
+        window.onload = updateAuthUI;
+    </script>
+</body>
+</html>

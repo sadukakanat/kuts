@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Master Command Center | Pinaleaf Advancements LLP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #030712; color: #f8fafc; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .glow-purple { box-shadow: 0 0 25px rgba(139, 92, 246, 0.15); border-color: rgba(139, 92, 246, 0.4); }
+        .commune-gradient { background: radial-gradient(circle at top left, rgba(139, 92, 246, 0.08), transparent 50%); }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #030712; }
+        ::-webkit-scrollbar-thumb { background: #8b5cf6; border-radius: 4px; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between commune-gradient p-4 md:p-6">
+
+    <!-- MASTER COMMAND HEADER -->
+    <header class="w-full max-w-7xl mx-auto p-4 md:p-6 flex flex-col lg:flex-row justify-between items-center gap-6 border-b border-slate-800 bg-slate-900/40 backdrop-blur-md rounded-xl">
+        <div class="flex items-center gap-3">
+            <div class="h-10 w-10 rounded-lg bg-purple-600 flex items-center justify-center font-mono font-bold text-white shadow-[0_0_15px_rgba(139,92,246,0.5)] text-lg">⚡</div>
+            <div>
+                <h1 class="text-sm font-bold tracking-widest font-mono text-white">PINALEAF_MASTER_COMMAND_CENTER</h1>
+                <span class="text-[0.6rem] text-purple-400 font-mono uppercase tracking-wider block">Project MDI6000 // Master Node THRINC000</span>
+            </div>
+        </div>
+        
+        <nav class="flex flex-wrap justify-center gap-3 font-mono text-xs">
+            <a href="./index.html" class="px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors uppercase tracking-wider">Gateway Root</a>
+            <a href="./analytics-matrix.html" class="px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors uppercase tracking-wider">Swarm Matrix</a>
+            <a href="./compliance.html" class="px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors uppercase tracking-wider">Compliance Audit</a>
+        </nav>
+    </header>
+
+    <!-- MASTER WORKSPACE -->
+    <main class="w-full max-w-7xl mx-auto px-2 py-8 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        
+        <!-- LEFT PANEL: REGIONAL GRIDS -->
+        <section class="lg:col-span-4 space-y-4">
+            <div class="bg-slate-900/50 border border-slate-800 rounded-2xl p-5 glow-purple backdrop-blur-sm">
+                <div class="border-b border-slate-800 pb-3 mb-4 font-mono text-xs flex justify-between items-center">
+                    <span class="text-slate-400 font-bold uppercase tracking-wider">Meso-Grid Corridors</span>
+                    <span class="text-[0.6rem] bg-purple-950 text-purple-400 px-2 py-0.5 rounded border border-purple-900/30 font-bold">144 NODES</span>
+                </div>
+                <div id="regional-grid-container" class="space-y-3">
+                    <!-- Populated via Step 3 Script -->
+                </div>
+            </div>
+        </section>
+
+        <!-- CENTER & RIGHT PANEL: FISCAL TELEMETRY & BROADCAST CONTROLS -->
+        <section class="lg:col-span-8 space-y-6">
+            
+            <!-- Category 12 Fiscal Telemetry Box -->
+            <div class="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 glow-purple backdrop-blur-sm">
+                <div class="border-b border-slate-800 pb-3 mb-4 font-mono text-xs flex justify-between items-center">
+                    <span class="text-slate-400 font-bold uppercase tracking-wider">Category 12 Fiscal Compliance Pool</span>
+                    <span class="text-[0.6rem] bg-emerald-950 text-emerald-400 px-2 py-0.5 rounded border border-emerald-900/30 font-bold">LIVE SWEEP</span>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono">
+                    <div class="bg-black/40 p-4 rounded-xl border border-slate-900">
+                        <span class="text-slate-500 text-[0.6rem] uppercase block mb-1">Accumulated Master TDS Pool</span>
+                        <span id="master-tds-pool" class="text-emerald-400 font-bold text-2xl">0.0000 Ꝃ</span>
+                    </div>
+                    <div class="bg-black/40 p-4 rounded-xl border border-slate-900">
+                        <span class="text-slate-500 text-[0.6rem] uppercase block mb-1">Master Synchronization Status</span>
+                        <span class="text-blue-400 font-bold text-lg">THRINC000 SECURE</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Decentralized Broadcast Control Form -->
+            <div class="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 glow-purple backdrop-blur-sm">
+                <div class="border-b border-slate-800 pb-3 mb-4 font-mono text-xs flex justify-between items-center">
+                    <span class="text-slate-400 font-bold uppercase tracking-wider">Master Mesh Broadcast Control</span>
+                    <span class="text-[0.6rem] bg-blue-950 text-blue-400 px-2 py-0.5 rounded border border-blue-900/30 font-bold">PINALEAF DIRECTIVE</span>
+                </div>
+                <form onsubmit="broadcastMasterDirective(event)" class="space-y-4 font-mono text-xs">
+                    <div>
+                        <label class="block text-slate-500 text-[0.6rem] uppercase mb-1 font-bold">Network-Wide Operational Directive Message</label>
+                        <textarea id="master-directive-input" rows="3" placeholder="Enter broadcast text for global meso-grid nodes..." required class="w-full bg-black/60 border border-slate-700 rounded p-3 text-slate-200 font-sans focus:outline-none focus:border-purple-500 text-xs resize-none"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-purple-700 hover:bg-purple-600 text-white font-bold py-3 rounded-xl tracking-widest uppercase transition-all border border-purple-500 shadow-[0_0_20px_rgba(139,92,246,0.2)]">
+                        Broadcast Master Directive to Mesh &gt;&gt;
+                    </button>
+                </form>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full max-w-7xl mx-auto p-6 border-t border-slate-900/60 flex flex-col md:flex-row justify-between items-center gap-2 font-mono text-[0.6rem] text-slate-600">
+        <span>© 2026 PINALEAF ADVANCEMENTS LLP. ALL SYSTEM RIGHTS RESERVED.</span>
+        <span class="uppercase tracking-wider text-purple-500/40">Master Command Center Operational Grid</span>
+    </footer>
+
+    <!-- INJECTING LOGIC SCRIPTS FROM STEPS -->
+    <script src="core/master-command-auth.js"></script>
+    <script src="./master-telemetry.js"></script>
+    <script src="./master-fiscal.js"></script>
+    <script src="./master-broadcast.js"></script>
+</body>
+</html>

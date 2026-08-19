@@ -1,3 +1,1 @@
-The Kinetic Unified Temporal Synchronization (KUTS) framework is not a commercial utility, nor is it subject to corporate or political capture. It is an invariant cyber-physical matrix engineered under the **MDI6000 Project** and the **Aarohan 2050 Mission** to replace non-linear, drift-prone sexagesimal time structures with an absolute temporal metric anchored directly to the velocity of light.
-
-Traditional software systems allocate power through financial equity, token accumulation, or central authority. The KUTS network rejects these models. Governance of this time-stream belongs exclusively to the physical infrastructure layers that maintain it.
+//

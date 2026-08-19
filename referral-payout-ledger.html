@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Treasury | Referral Payout & Attribution Ledger</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #030712; color: #f8fafc; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .glow-amber { box-shadow: 0 0 25px rgba(245, 158, 11, 0.15); border-color: rgba(245, 158, 11, 0.4); }
+        .treasury-gradient { background: radial-gradient(circle at top left, rgba(245, 158, 11, 0.08), transparent 50%); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between treasury-gradient">
+
+    <!-- HEADER -->
+    <header class="w-full max-w-7xl mx-auto p-6 flex flex-col sm:flex-row justify-between items-center gap-4 border-b border-slate-900">
+        <div class="flex items-center gap-3">
+            <div class="h-8 w-8 rounded-lg bg-amber-600 flex items-center justify-center font-mono font-bold text-white shadow-[0_0_15px_rgba(245,158,11,0.5)]">₳</div>
+            <div>
+                <h1 class="text-sm font-bold tracking-widest font-mono text-white">KUTS_REFERRAL_PAYOUT_LEDGER</h1>
+                <span class="text-[0.6rem] text-amber-400 font-mono uppercase tracking-wider block">Support Bonus &amp; Matrix Distribution Engine</span>
+            </div>
+        </div>
+        <nav class="flex gap-3 font-mono text-xs">
+            <a href="allowance-ledger.html" class="text-slate-400 hover:text-white px-3 py-1.5 rounded border border-slate-800 transition-all">&lt;&lt; Allowance Ledger</a>
+        </nav>
+    </header>
+
+    <!-- MAIN WORKSPACE -->
+    <main class="w-full max-w-6xl mx-auto px-6 py-12 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- LEFT: PAYOUT ALLOCATION FORM -->
+        <section class="lg:col-span-5 bg-slate-900/50 border border-slate-800/80 rounded-2xl p-6 glow-amber backdrop-blur-sm">
+            <div class="border-b border-slate-800 pb-3 mb-4 font-mono text-xs flex justify-between items-center">
+                <span class="text-slate-300 font-bold uppercase tracking-wider">Execute Attribution Bonus</span>
+                <span class="text-[0.6rem] bg-amber-950 text-amber-400 px-2 py-0.5 rounded border border-amber-900/30 font-bold">ZERO USURY</span>
+            </div>
+
+            <form id="payout-form" onsubmit="handlePayoutSubmission(event)" class="space-y-4 font-mono text-xs">
+                <div>
+                    <label for="referrer-id" class="block text-slate-400 text-[0.6rem] mb-1 uppercase">Referrer Node ID</label>
+                    <input type="text" id="referrer-id" required placeholder="e.g., THRINC000" class="w-full bg-black/60 border border-slate-800 rounded p-3 text-amber-400 font-bold uppercase tracking-wider focus:outline-none focus:border-amber-500">
+                </div>
+
+                <div>
+                    <label for="referred-id" class="block text-slate-400 text-[0.6rem] mb-1 uppercase">Referred User / Student Node ID</label>
+                    <input type="text" id="referred-id" required placeholder="e.g., THRINC000-USR2" class="w-full bg-black/60 border border-slate-800 rounded p-3 text-slate-200 uppercase tracking-wider focus:outline-none focus:border-amber-500">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label for="bonus-type" class="block text-slate-400 text-[0.6rem] mb-1 uppercase">Allocation Matrix</label>
+                        <select id="bonus-type" class="w-full bg-black/60 border border-slate-800 rounded p-3 text-slate-200 focus:outline-none focus:border-amber-500">
+                            <option value="SUPPORT_BONUS">Initial Support Bonus (+25.00 Ꝃ)</option>
+                            <option value="PERFORMANCE_BOOST">Performance Matrix (+15.00%)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="base-value" class="block text-slate-400 text-[0.6rem] mb-1 uppercase">Base Value (Ꝃ)</label>
+                        <input type="number" id="base-value" value="25.00" step="any" min="0" required class="w-full bg-black/60 border border-slate-800 rounded p-3 text-slate-200 focus:outline-none focus:border-amber-500">
+                    </div>
+                </div>
+
+                <p id="form-status" class="hidden mt-2 p-2 rounded text-center text-xs" role="status"></p>
+
+                <button type="submit" class="w-full bg-amber-700 hover:bg-amber-600 text-white font-bold py-3.5 px-4 rounded-xl tracking-widest uppercase transition-all border border-amber-500 shadow-[0_0_20px_rgba(245,158,11,0.2)]">
+                    Commit Payout Attribution &gt;&gt;
+                </button>
+            </form>
+        </section>
+
+        <!-- RIGHT: SETTLED LEDGER STREAM -->
+        <section class="lg:col-span-7 bg-slate-900/30 border border-slate-800 rounded-2xl p-6 backdrop-blur-sm space-y-4 font-mono text-xs">
+            <div class="border-b border-slate-800 pb-3 flex justify-between items-center">
+                <span class="text-slate-300 font-bold uppercase">Settled Referral Payout Stream</span>
+                <span class="text-amber-400 text-[0.6rem]">IMMUTABLE LOG</span>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="text-slate-500 uppercase text-[0.6rem] border-b border-slate-800">
+                            <th class="p-3">Ref Key</th>
+                            <th class="p-3">Referrer</th>
+                            <th class="p-3">Referred</th>
+                            <th class="p-3 text-right">Settled (Ꝃ)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="payout-body" class="divide-y divide-slate-800 text-slate-300">
+                        <!-- Dynamically populated rows -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full max-w-7xl mx-auto p-6 border-t border-slate-900/60 flex flex-col md:flex-row justify-between items-center gap-2 font-mono text-[0.6rem] text-slate-600">
+        <span>© 2026 PINALEAF ADVANCEMENTS LLP. ALL SYSTEM RIGHTS RESERVED.</span>
+        <span class="uppercase tracking-wider text-amber-500/40">Referral Payout Financial Gateway</span>
+    </footer>
+
+    <!-- SCRIPT LOGIC -->
+    <script>
+        function handlePayoutSubmission(event) {
+            event.preventDefault();
+
+            const referrerId = document.getElementById('referrer-id').value.trim().toUpperCase();
+            const referredId = document.getElementById('referred-id').value.trim().toUpperCase();
+            const bonusType = document.getElementById('bonus-type').value;
+            const baseValue = parseFloat(document.getElementById('base-value').value);
+
+            const idRegex = /^[A-Z0-9_-]{3,24}$/;
+            if (!idRegex.test(referrerId) || !idRegex.test(referredId)) {
+                showStatus("Invalid Node ID format. Must be 3–24 alphanumeric characters.", "error");
+                return;
+            }
+
+            if (referrerId === referredId) {
+                showStatus("Referrer and Referred nodes cannot be identical.", "error");
+                return;
+            }
+
+            // Calculate final distribution value
+            let finalPayout = baseValue;
+            if (bonusType === 'PERFORMANCE_BOOST') {
+                finalPayout = baseValue * 1.15; // 15% Matrix Boost
+            }
+
+            const payoutRecord = {
+                key: Math.random().toString(36).substr(2, 8).toUpperCase(),
+                referrerId,
+                referredId,
+                bonusType,
+                payout: finalPayout.toFixed(2),
+                timestamp: new Date().toISOString()
+            };
+
+            // Save to localStorage ledger feed
+            let ledger = JSON.parse(localStorage.getItem('kuts_referral_ledger') || '[]');
+            ledger.unshift(payoutRecord);
+            localStorage.setItem('kuts_referral_ledger', JSON.stringify(ledger));
+
+            appendPayoutRow(payoutRecord);
+            showStatus(`Successfully attributed and settled ${payoutRecord.payout} Ꝃ to referrer ${referrerId}.`, "success");
+            document.getElementById('payout-form').reset();
+        }
+
+        function showStatus(message, type) {
+            const statusEl = document.getElementById('form-status');
+            statusEl.textContent = message;
+            statusEl.hidden = false;
+            if (type === 'error') {
+                statusEl.className = "mt-2 p-2 rounded text-center text-xs bg-red-950/40 border border-red-900 text-red-400 font-mono";
+            } else {
+                statusEl.className = "mt-2 p-2 rounded text-center text-xs bg-emerald-950/40 border border-emerald-900 text-emerald-400 font-mono";
+            }
+        }
+
+        function appendPayoutRow(rec) {
+            const tbody = document.getElementById('payout-body');
+            const rowHTML = `
+                <tr class="border-b border-slate-800 text-xs">
+                    <td class="p-3 text-amber-400 font-bold">${rec.key}</td>
+                    <td class="p-3">${rec.referrerId}</td>
+                    <td class="p-3 text-slate-400">${rec.referredId}</td>
+                    <td class="p-3 text-right font-bold text-emerald-400">+${rec.payout} Ꝃ</td>
+                </tr>
+            `;
+            tbody.insertAdjacentHTML('afterbegin', rowHTML);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const ledger = JSON.parse(localStorage.getItem('kuts_referral_ledger') || '[]');
+            if (ledger.length > 0) {
+                document.getElementById('payout-body').innerHTML = '';
+                ledger.slice(0, 10).forEach(rec => appendPayoutRow(rec));
+            } else {
+                // Default mock entry if empty
+                appendPayoutRow({
+                    key: "REF9901A",
+                    referrerId: "THRINC000",
+                    referredId: "THRINC000-USR1",
+                    bonusType: "SUPPORT_BONUS",
+                    payout: "25.00"
+                });
+            }
+        });
+    </script>
+</body>
+</html>

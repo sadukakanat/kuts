@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Ecosystem | Subscription & Membership Matrix</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Authentication Bridge -->
+    <script src="core/auth-bridge.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #030712; color: #cbd5e1; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .glow-purple { box-shadow: 0 0 25px rgba(168, 85, 247, 0.1); border-color: rgba(168, 85, 247, 0.3); }
+        .glow-emerald { box-shadow: 0 0 25px rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); }
+        .tier-card { transition: all 0.25s ease; }
+        .tier-card:hover { border-color: rgba(168, 85, 247, 0.7); transform: translateY(-2px); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col p-4 md:p-6 bg-[#030712]">
+
+    <!-- SUBHUD HEADER -->
+    <header class="w-full max-w-6xl mx-auto border border-purple-900/60 bg-slate-900/50 p-4 rounded-xl flex flex-col md:flex-row justify-between items-center gap-4 mb-6 font-mono text-xs backdrop-blur-sm">
+        <div>
+            <h1 class="text-base font-bold text-purple-400 tracking-wider">KUTS_SUBSCRIPTION_MATRIX</h1>
+            <p class="text-slate-500 text-[0.6rem] uppercase tracking-wider">Category 12 // Recurring Protocol Tiering & Access Clearinghouse</p>
+        </div>
+        <div class="flex items-center gap-4">
+            <span class="text-purple-400 font-bold bg-purple-950/40 px-2.5 py-1 rounded border border-purple-900/30 text-[0.55rem]">NODE: THRINC000</span>
+            <div id="nav-auth" class="flex gap-4 items-center"></div>
+        </div>
+    </header>
+
+    <!-- MAIN WORKSPACE -->
+    <main class="w-full max-w-6xl mx-auto flex-1 flex flex-col gap-8">
+        
+        <!-- STATUS BANNER -->
+        <section id="active-sub-banner" class="bg-purple-950/20 border border-purple-900/40 rounded-xl p-5 flex flex-col sm:flex-row justify-between items-center gap-4 glow-purple font-mono">
+            <div>
+                <span class="text-[0.6rem] text-purple-400 uppercase tracking-widest block mb-1">Current Membership Status</span>
+                <h2 id="sub-status-text" class="text-lg font-bold text-white">Checking node subscription matrix...</h2>
+            </div>
+            <button id="cancel-sub-btn" onclick="terminateSubscription()" class="hidden bg-red-950 hover:bg-red-900 text-red-400 border border-red-800 px-4 py-2 rounded text-[0.65rem] uppercase tracking-widest transition-colors font-bold">
+                Revoke Tier Access
+            </button>
+        </section>
+
+        <!-- TIER OPTIONS GRID -->
+        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 font-mono">
+            
+            <!-- BHARAT REGIONAL TIER (SPECIAL LOCAL TIER) -->
+            <div class="tier-card bg-slate-900/70 border border-emerald-500/60 rounded-xl p-6 flex flex-col justify-between glow-emerald relative">
+                <div class="absolute -top-3 right-4 bg-emerald-600 text-white text-[0.55rem] font-bold px-2 py-0.5 rounded uppercase tracking-widest">Special India Rate</div>
+                <div class="space-y-4">
+                    <span class="text-[0.6rem] text-emerald-400 uppercase tracking-widest block">Regional MSME & Workers</span>
+                    <h3 class="text-xl font-bold text-white">Bharat Tier</h3>
+                    <div class="text-3xl font-bold text-emerald-400">₹236.00 <span class="text-sm font-normal text-slate-400">/ mo</span></div>
+                    <p class="text-xs text-slate-400 font-sans leading-relaxed">Exclusive for Indian users. Fixed introductory pricing for the first 6 months (includes 18% GST). Unlocks regional meso-grid cluster routing and local compliance tools.</p>
+                </div>
+                <button onclick="commitBharatSubscription('Bharat Regional Tier', 236.00, 'INR')" class="mt-6 w-full bg-emerald-900 hover:bg-emerald-800 text-white py-2.5 rounded text-xs font-bold uppercase tracking-wider transition-colors border border-emerald-500">
+                    Select Bharat Tier
+                </button>
+            </div>
+
+            <!-- TIER 1: OPERATOR -->
+            <div class="tier-card bg-slate-900/50 border border-slate-800 rounded-xl p-6 flex flex-col justify-between">
+                <div class="space-y-4">
+                    <span class="text-[0.6rem] text-slate-500 uppercase tracking-widest block">Entry Level</span>
+                    <h3 class="text-xl font-bold text-slate-100">Operator Tier</h3>
+                    <div class="text-3xl font-bold text-purple-400">25.00 <span class="text-sm font-normal text-slate-400">Ꝃ / cycle</span></div>
+                    <p class="text-xs text-slate-400 font-sans leading-relaxed">Basic access to mesh task allocation boards, local node wallet ledgers, and standard P2P gossip streams[cite: 5].</p>
+                </div>
+                <button onclick="commitSubscription('Operator Tier', 25.00, 'KINE')" class="mt-6 w-full bg-slate-800 hover:bg-slate-700 text-slate-200 py-2.5 rounded text-xs font-bold uppercase tracking-wider transition-colors border border-slate-700">
+                    Select Operator
+                </button>
+            </div>
+
+            <!-- TIER 2: VALIDATOR -->
+            <div class="tier-card bg-slate-900/60 border border-purple-500/50 rounded-xl p-6 flex flex-col justify-between glow-purple relative">
+                <div class="absolute -top-3 right-4 bg-purple-600 text-white text-[0.55rem] font-bold px-2 py-0.5 rounded uppercase tracking-widest">Recommended</div>
+                <div class="space-y-4">
+                    <span class="text-[0.6rem] text-purple-400 uppercase tracking-widest block">Advanced Level</span>
+                    <h3 class="text-xl font-bold text-white">Validator Tier</h3>
+                    <div class="text-3xl font-bold text-yellow-400">100.00 <span class="text-sm font-normal text-slate-400">Ꝃ / cycle</span></div>
+                    <p class="text-xs text-slate-400 font-sans leading-relaxed">Full access to telemetry analytics heatmaps, hardware device bindings, priority allowance matrices, and AI heuristics terminals[cite: 5].</p>
+                </div>
+                <button onclick="commitSubscription('Validator Tier', 100.00, 'KINE')" class="mt-6 w-full bg-purple-900 hover:bg-purple-800 text-white py-2.5 rounded text-xs font-bold uppercase tracking-wider transition-colors border border-purple-500">
+                    Select Validator
+                </button>
+            </div>
+
+            <!-- TIER 3: SOVEREIGN ANCHOR -->
+            <div class="tier-card bg-slate-900/50 border border-slate-800 rounded-xl p-6 flex flex-col justify-between">
+                <div class="space-y-4">
+                    <span class="text-[0.6rem] text-cyan-400 uppercase tracking-widest block">Master Enterprise</span>
+                    <h3 class="text-xl font-bold text-slate-100">Sovereign Anchor</h3>
+                    <div class="text-3xl font-bold text-cyan-400">500.00 <span class="text-sm font-normal text-slate-400">Ꝃ / cycle</span></div>
+                    <p class="text-xs text-slate-400 font-sans leading-relaxed">Unrestricted jurisdiction controls, multi-party venture escrow clearing rights, and automated carbon credit minting dashboards[cite: 5].</p>
+                </div>
+                <button onclick="commitSubscription('Sovereign Anchor', 500.00, 'KINE')" class="mt-6 w-full bg-cyan-950/60 hover:bg-cyan-900 text-cyan-300 py-2.5 rounded text-xs font-bold uppercase tracking-wider transition-colors border border-cyan-800">
+                    Select Sovereign
+                </button>
+            </div>
+
+        </section>
+
+        <!-- SUBSCRIPTION AUDIT LOG HISTORY -->
+        <section class="bg-slate-900/30 border border-slate-800 rounded-xl p-5 flex flex-col">
+            <h2 class="text-xs text-slate-300 font-bold tracking-widest uppercase font-mono border-b border-slate-800 pb-3 mb-4">Subscription Billing Ledger</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse font-mono text-xs whitespace-nowrap">
+                    <thead>
+                        <tr class="bg-black/30 text-slate-500 uppercase text-[0.6rem] tracking-wider border-b border-slate-800">
+                            <th class="p-3">KUTS Timestamp</th>
+                            <th class="p-3">Selected Tier Level</th>
+                            <th class="p-3 text-right">Cycle Cost</th>
+                            <th class="p-3 text-right pr-4 text-emerald-400">Settlement State</th>
+                        </tr>
+                    </thead>
+                    <tbody id="sub-ledger-body" class="divide-y divide-slate-800/40 text-slate-300 text-[0.65rem]">
+                        <tr><td colspan="4" class="p-4 text-center text-slate-500 italic">No recurring billing history registered on this layer.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full max-w-6xl mx-auto border-t border-slate-900 pt-4 mt-8 flex flex-col sm:flex-row justify-between items-center font-mono text-[0.6rem] text-slate-600 gap-2">
+        <span>© 2026 PINALEAF ADVANCEMENTS LLP. ALL RIGHTS RESERVED.[cite: 1]</span>
+        <a href="index.html" class="text-purple-400 hover:underline uppercase tracking-widest">← Return to Universal Gateway</a>
+    </footer>
+
+    <!-- LOGIC SCRIPT -->
+    <script>
+        // 1 Tera-Epoch (TE) = ~38.61 days converted to milliseconds[cite: 5]
+        const TERA_EPOCH_MS = 38.61 * 24 * 60 * 60 * 1000;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (!localStorage.getItem('kuts_active_session')) {
+                window.location.href = 'sign-in.html';
+                return;
+            }
+            updateAuthUI();
+            loadSubscriptionState();
+        });
+
+        function loadSubscriptionState() {
+            const savedSub = localStorage.getItem('kuts_active_subscription');
+            const statusText = document.getElementById('sub-status-text');
+            const cancelBtn = document.getElementById('cancel-sub-btn');
+            const ledgerBody = document.getElementById('sub-ledger-body');
+
+            if (savedSub) {
+                const sub = JSON.parse(savedSub);
+                
+                // If it's the Bharat Tier, use 6 months (approx 180 days) validity, otherwise default to 1 Tera-Epoch[cite: 5]
+                const durationMs = sub.currency === 'INR' ? (6 * 30 * 24 * 60 * 60 * 1000) : TERA_EPOCH_MS;
+                const startTime = new Date(sub.rawTimestamp).getTime();
+                const expiryTime = startTime + durationMs;
+                const now = Date.now();
+                const timeLeft = expiryTime - now;
+
+                if (timeLeft > 0) {
+                    const daysLeft = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                    const hoursLeft = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    
+                    const costDisplay = sub.currency === 'INR' ? `₹${sub.cost.toFixed(2)}/mo` : `${sub.cost.toFixed(2)} Ꝃ/TE`;
+                    
+                    statusText.innerHTML = `Active Tier: <span class="text-emerald-400 font-bold">${sub.tier}</span> (${costDisplay}) — <span class="text-emerald-400">${daysLeft} days, ${hoursLeft} hrs remaining</span>`;
+                    cancelBtn.classList.remove('hidden');
+
+                    ledgerBody.innerHTML = `
+                        <tr class="hover:bg-slate-900/30 transition-colors">
+                            <td class="p-3 text-slate-500">${sub.timestamp}</td>
+                            <td class="p-3 text-emerald-400 font-bold">${sub.tier}</td>
+                            <td class="p-3 text-right text-slate-200">${sub.currency === 'INR' ? '₹' + sub.cost.toFixed(2) : sub.cost.toFixed(2) + ' Ꝃ'}</td>
+                            <td class="p-3 text-right text-emerald-400 font-bold pr-4">✓ ACTIVE (${sub.currency === 'INR' ? '6-Month Plan' : '1 TE'})</td>
+                        </tr>
+                    `;
+                } else {
+                    statusText.innerHTML = `<span class="text-red-400">Subscription cycle expired for ${sub.tier}. Renewal required.[cite: 5]</span>`;
+                    cancelBtn.classList.remove('hidden');
+                }
+            } else {
+                statusText.innerText = "No active subscription tier bound to this node handle.";
+                cancelBtn.classList.add('hidden');
+                ledgerBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-500 italic">No recurring billing history registered on this layer.[cite: 5]</td></tr>`;
+            }
+        }
+
+        function commitSubscription(tierName, costValue, currencyType) {
+            const now = new Date();
+            const timestamp = `(+00):0130.05.26.04.${now.getDate().toString().padStart(2,'0')}.${now.getHours().toString().padStart(2,'0')}.${now.getMinutes().toString().padStart(2,'0')}.${now.getSeconds().toString().padStart(2,'0')}`;
+            
+            const subData = { 
+                tier: tierName, 
+                cost: costValue, 
+                currency: currencyType,
+                timestamp: timestamp,
+                rawTimestamp: now.toISOString()
+            };
+            
+            localStorage.setItem('kuts_active_subscription', JSON.stringify(subData));
+            loadSubscriptionState();
+            alert(`SUCCESS: Node successfully bound to [${tierName}] under the standard matrix[cite: 5].`);
+        }
+
+        function commitBharatSubscription(tierName, costValue, currencyType) {
+            const now = new Date();
+            const timestamp = `(+00):0130.05.26.04.${now.getDate().toString().padStart(2,'0')}.${now.getHours().toString().padStart(2,'0')}.${now.getMinutes().toString().padStart(2,'0')}.${now.getSeconds().toString().padStart(2,'0')}`;
+            
+            const subData = { 
+                tier: tierName, 
+                cost: costValue, 
+                currency: currencyType,
+                timestamp: timestamp,
+                rawTimestamp: now.toISOString()
+            };
+            
+            localStorage.setItem('kuts_active_subscription', JSON.stringify(subData));
+            loadSubscriptionState();
+            alert(`SUCCESS: Node successfully bound to [${tierName}] at ₹236/month for the initial 6-month promotional period (inclusive of 18% GST).`);
+        }
+
+        function terminateSubscription() {
+            if (confirm("WARNING: Revoke active subscription tier?[cite: 5]")) {
+                localStorage.removeItem('kuts_active_subscription');
+                loadSubscriptionState();
+            }
+        }
+    </script>
+</body>
+</html>
