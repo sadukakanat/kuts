@@ -1,0 +1,11 @@
+const WalletConfig = {
+
+    DEFAULT_CURRENCY: "INR",
+
+    MIN_TRANSACTION_AMOUNT: 1,
+
+    MAX_TRANSACTION_AMOUNT: 1000000,
+
+    ALLOW_NEGATIVE_BALANCE: false
+
+};

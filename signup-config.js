@@ -1,0 +1,11 @@
+const SignupConfig = {
+
+    MIN_PASSWORD_LENGTH: 8,
+
+    REQUIRE_EMAIL_VERIFICATION: true,
+
+    REQUIRE_PHONE_VERIFICATION: true,
+
+    DEFAULT_USER_STATUS: "ACTIVE"
+
+};

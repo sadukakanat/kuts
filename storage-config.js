@@ -1,0 +1,1 @@
+StorageConfig.WALLET_KEY
