@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Hardware Bridge | Device Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght=300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #050a15; color: #e2e8f0; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .glow-cyan { box-shadow: 0 0 15px rgba(34, 211, 238, 0.15); border-color: rgba(34, 211, 238, 0.4); }
+        .scanline-container { position: relative; overflow: hidden; }
+        .scanline { width: 100%; height: 2px; background: rgba(34, 211, 238, 0.3); position: absolute; z-index: 10; animation: scan 4s linear infinite; pointer-events: none; }
+        @keyframes scan { 0% { top: -10%; } 100% { top: 110%; } }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col p-4 md:p-6 bg-[#030712] relative">
+
+    <!-- HEADER -->
+    <header class="w-full max-w-6xl mx-auto border border-cyan-900/60 bg-slate-900/40 p-4 rounded-xl flex flex-col md:flex-row justify-between items-center gap-4 mb-6 font-mono text-xs z-20 relative">
+        <div>
+            <h1 class="text-xl font-bold text-cyan-400 tracking-wider">KUTS_HARDWARE_BRIDGE</h1>
+            <p class="text-slate-400 text-[0.65rem]">PHYSICAL IOT BINDING LAYER // ZERO-TRUST DEVICE AUTHENTICATION</p>
+        </div>
+        <div class="text-right shrink-0">
+            <span class="text-slate-400">ANCHOR NODE: </span>
+            <span class="text-emerald-400 font-bold animate-pulse">THRINC000</span>
+        </div>
+    </header>
+
+    <main class="w-full max-w-6xl mx-auto flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 z-20 relative">
+        
+        <!-- DEVICE REGISTRATION PANEL -->
+        <section class="lg:col-span-4 flex flex-col gap-4">
+            <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-5 flex-1 glow-cyan scanline-container">
+                <div class="scanline"></div>
+                <h2 class="text-[0.7rem] text-cyan-400 font-bold tracking-widest mb-4 uppercase font-mono border-b border-cyan-900/40 pb-2">Bind New Hardware</h2>
+                
+                <form id="binding-form" class="flex flex-col gap-3 font-mono text-xs">
+                    <div>
+                        <label class="block text-[0.6rem] text-slate-500 mb-1">DEVICE DESIGNATION</label>
+                        <input type="text" id="dev-name" placeholder="e.g., Factory Smart Meter 01" required class="w-full bg-black/60 border border-slate-700 rounded p-2 text-slate-200 focus:border-cyan-500 outline-none">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-[0.6rem] text-slate-500 mb-1">KINETIC MEASUREMENT CLASS</label>
+                        <select id="dev-type" class="w-full bg-black/60 border border-slate-700 rounded p-2 text-slate-200 focus:border-cyan-500 outline-none">
+                            <option value="Industrial Energy (kWh)">Industrial Energy (kWh)</option>
+                            <option value="Logistics Telematics (GPS)">Logistics Telematics (GPS)</option>
+                            <option value="Biometric Time-Clock">Biometric Time-Clock</option>
+                            <option value="Legacy Machine Bridge (IoT)">Legacy Machine Bridge (IoT)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-[0.6rem] text-slate-500 mb-1">PHYSICAL HARDWARE MAC / TPM ID</label>
+                        <input type="text" id="dev-mac" placeholder="00:1B:44:11:3A:B7" required class="w-full bg-black/60 border border-slate-700 rounded p-2 text-cyan-300 font-bold tracking-widest uppercase focus:border-cyan-500 outline-none placeholder-slate-700">
+                    </div>
+
+                    <div class="mt-4 p-3 bg-cyan-950/20 border border-cyan-900/50 rounded text-[0.6rem] text-slate-400 leading-tight">
+                        <span class="text-cyan-500 font-bold">SECURITY NOTICE:</span> Binding this hardware will generate an immutable RSA-2048 key. All future ledger transactions from this machine will bypass human input forms.
+                    </div>
+
+                    <button type="submit" id="bind-btn" class="w-full bg-cyan-700 hover:bg-cyan-600 text-white font-bold py-2.5 rounded border border-cyan-400 tracking-wider text-[0.65rem] uppercase mt-2 transition-colors relative overflow-hidden group">
+                        <span class="relative z-10">INITIALIZE CRYPTO-HANDSHAKE >></span>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- ACTIVE HARDWARE MATRIX -->
+        <section class="lg:col-span-8 bg-slate-900/50 border border-slate-800 rounded-xl flex flex-col overflow-hidden">
+            <div class="p-4 border-b border-slate-800 bg-black/40 flex justify-between items-center shrink-0">
+                <h2 class="text-xs text-slate-300 font-bold tracking-widest uppercase font-mono">Bound Network Assets</h2>
+                <span class="text-[0.6rem] font-mono text-emerald-400 bg-emerald-950/30 px-2 py-0.5 rounded border border-emerald-900/50">LIVE VERIFICATION</span>
+            </div>
+            
+            <div class="flex-1 p-4 overflow-y-auto">
+                <div id="device-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Devices injected here via JS -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full max-w-6xl mx-auto border-t border-slate-900 pt-4 mt-6 flex justify-between items-center font-mono text-[0.6rem] text-slate-500 z-20 relative">
+        <span>© 2026 PINALEAF ADVANCEMENTS LLP. MDI6000 PROJECT ARCHITECTURE.</span>
+        <span class="uppercase tracking-widest text-cyan-500/30">SECURE ENDPOINT REGISTRY</span>
+    </footer>
+
+    <!-- LOGIC SCRIPT -->
+    <script>
+        let boundDevices = [];
+
+        function initDeviceManager() {
+            const savedData = localStorage.getItem('kuts_hardware_state');
+            if (savedData) {
+                boundDevices = JSON.parse(savedData);
+            } else {
+                // Pre-load a demo device for visual reference
+                addDeviceToState("Warehouse Bay 1 Sensor", "Industrial Energy (kWh)", "A4:C3:F0:99:21:BB", true);
+            }
+            renderGrid();
+        }
+
+        function addDeviceToState(name, type, mac, isSystemSim = false) {
+            const signatureKey = "KUTS-" + Math.floor(Math.random() * 999999999999).toString(16).toUpperCase().padStart(12, '0');
+            const newDevice = {
+                id: Date.now().toString(),
+                name: name,
+                type: type,
+                mac: mac.toUpperCase(),
+                signatureKey: signatureKey,
+                status: 'ONLINE',
+                ping: Math.floor(Math.random() * 40) + 10
+            };
+            boundDevices.unshift(newDevice);
+            if(!isSystemSim) localStorage.setItem('kuts_hardware_state', JSON.stringify(boundDevices));
+        }
+
+        function renderGrid() {
+            const grid = document.getElementById('device-grid');
+            grid.innerHTML = "";
+
+            if (boundDevices.length === 0) {
+                grid.innerHTML = `<div class="col-span-2 text-center text-slate-500 text-xs font-mono py-8">No hardware assets currently bound to this node.</div>`;
+                return;
+            }
+
+            boundDevices.forEach(dev => {
+                const card = `
+                    <div class="bg-black/40 border border-slate-700/50 rounded-lg p-3 hover:border-cyan-800/50 transition-colors">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-sm font-bold text-slate-200 truncate pr-2">${dev.name}</h3>
+                            <span class="text-[0.55rem] font-mono text-emerald-400 bg-emerald-950/30 px-1.5 py-0.5 rounded border border-emerald-900/50 flex items-center gap-1">
+                                <span class="h-1 w-1 bg-emerald-400 rounded-full animate-pulse"></span>${dev.status}
+                            </span>
+                        </div>
+                        <div class="text-[0.6rem] text-slate-400 font-mono space-y-1 mb-3">
+                            <p>CLASS: <span class="text-slate-300">${dev.type}</span></p>
+                            <p>MAC_ID: <span class="text-slate-300">${dev.mac}</span></p>
+                        </div>
+                        <div class="border-t border-slate-800 pt-2 flex justify-between items-center text-[0.55rem] font-mono">
+                            <span class="text-cyan-500/70 truncate w-2/3" title="${dev.signatureKey}">KEY: ${dev.signatureKey}</span>
+                            <span class="text-slate-500">PING: ${dev.ping}ms</span>
+                        </div>
+                    </div>
+                `;
+                grid.insertAdjacentHTML('beforeend', card);
+            });
+        }
+
+        document.getElementById('binding-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('bind-btn');
+            const originalText = btn.innerHTML;
+            
+            // UI Handshake Simulation
+            btn.innerHTML = `<span class="animate-pulse">NEGOTIATING KEY EXCHANGE...</span>`;
+            btn.classList.replace('bg-cyan-700', 'bg-slate-700');
+            
+            setTimeout(() => {
+                const name = document.getElementById('dev-name').value;
+                const type = document.getElementById('dev-type').value;
+                const mac = document.getElementById('dev-mac').value;
+                
+                addDeviceToState(name, type, mac);
+                renderGrid();
+                
+                document.getElementById('binding-form').reset();
+                btn.innerHTML = originalText;
+                btn.classList.replace('bg-slate-700', 'bg-cyan-700');
+            }, 1200); // 1.2 second simulated delay for dramatic effect
+        });
+
+        // Initialize on load
+        window.onload = initDeviceManager;
+    </script>
+<!-- Universal Gateway Return Link -->
+<footer class="max-w-7xl mx-auto mt-12 py-8 border-t border-slate-800 text-center">
+    <a href="index.html" class="inline-flex items-center gap-2 text-[0.7rem] text-slate-500 hover:text-blue-400 font-mono uppercase tracking-widest transition-all">
+        <span class="text-lg">←</span> RETURN TO UNIVERSAL GATEWAY
+    </a>
+</footer>
+</body>
+</html>

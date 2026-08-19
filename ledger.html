@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Kine Resource Ledger | System Financial Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght=300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #050a15; color: #e2e8f0; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .terminal-box { border-color: rgba(59, 130, 246, 0.3); box-shadow: 0 0 15px rgba(30, 58, 138, 0.15); }
+        .glow-emerald { box-shadow: 0 0 15px rgba(16, 185, 129, 0.15); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col p-4 md:p-6 bg-[#040812]">
+
+    <header class="w-full max-w-6xl mx-auto border border-blue-900/60 bg-slate-900/40 p-4 rounded-xl flex flex-col md:flex-row justify-between items-center gap-4 mb-6 font-mono text-xs">
+        <div>
+            <h1 class="text-xl font-bold text-blue-400 tracking-wider">KUTS_RESOURCE_LEDGER</h1>
+            <p class="text-slate-400 text-[0.65rem]">FISCAL CATEGORY [$00$] MANAGEMENT PORTAL // MISSION: AAROHAN 2050</p>
+        </div>
+        <div class="bg-black/50 p-2 rounded border border-blue-900/30 text-emerald-400 text-center w-full md:w-auto">
+            <span class="text-slate-500 block text-[0.55rem]">MASTER SYSTEM CLOCK SIGNATURE</span>
+            <span id="ledger-clock" class="text-[0.75rem]">SYNCING UNIFIED TIME-STREAM...</span>
+        </div>
+        <div class="text-right shrink-0">
+            <span class="text-slate-400">LEDGER STATUS: </span>
+            <span class="text-emerald-400 font-bold animate-pulse">● RECONCILIATION_SYNCED</span>
+        </div>
+    </header>
+
+    <main class="w-full max-w-6xl mx-auto flex flex-col gap-6 flex-1">
+        
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-4 font-mono text-xs">
+            <div class="bg-slate-900/40 border border-blue-900/30 p-4 rounded-xl relative overflow-hidden">
+                <span class="text-slate-500 block text-[0.6rem] uppercase font-bold">Micro-Unit // High-Frequency Logging</span>
+                <h3 class="text-2xl text-blue-300 font-bold mt-1" id="val-flux">0 ƒ</h3>
+                <p class="text-slate-400 font-sans text-[0.7rem] mt-2 leading-relaxed">
+                    The **Flux (ƒ)** represents 0.01 Kine. Engineered specifically for packet-level serialization, millisecond transaction tracking, and sub-second AI state-logging.
+                </p>
+                <span class="absolute bottom-2 right-3 text-[2.5rem] opacity-5 font-bold text-blue-400 select-none">ƒ</span>
+            </div>
+            
+            <div class="bg-slate-900/60 border border-emerald-800/50 p-4 rounded-xl glow-emerald relative overflow-hidden">
+                <span class="text-emerald-400 block text-[0.6rem] uppercase font-bold">Primary Settlement // Asset Valuation</span>
+                <h3 class="text-2xl text-emerald-400 font-bold mt-1" id="val-kine">0.0000 Ꝃ</h3>
+                <p class="text-slate-400 font-sans text-[0.7rem] mt-2 leading-relaxed">
+                    The **Kine (Ꝃ)** is the base unit of settled physical action. Mathematically tied to an invariant resource block containing at least 10 kWh of energy and 0.1M AI compute tokens.
+                </p>
+                <span class="absolute bottom-1 right-3 text-[2.5rem] opacity-5 font-bold text-emerald-400 select-none">Ꝃ</span>
+            </div>
+
+            <div class="bg-slate-900/40 border border-purple-900/30 p-4 rounded-xl relative overflow-hidden">
+                <span class="text-slate-500 block text-[0.6rem] uppercase font-bold">Macro-Unit // Infrastructure Scaling</span>
+                <h3 class="text-2xl text-purple-400 font-bold mt-1" id="val-dyne">0.00 O</h3>
+                <p class="text-slate-400 font-sans text-[0.7rem] mt-2 leading-relaxed">
+                    The **Dyne (O)** equals 100 Kine. Reserved exclusively for civilizational-scale resource financing, major industrial asset deployment, and funding the long-duration MDI6000 Project metrics.
+                </p>
+                <span class="absolute bottom-2 right-3 text-[2.5rem] opacity-5 font-bold text-purple-400 select-none">O</span>
+            </div>
+        </section>
+
+        <section class="grid md:grid-cols-12 gap-6 items-start">
+            
+            <div class="md:col-span-4 flex flex-col gap-6">
+                <div class="bg-slate-900/40 border border-amber-900/40 p-4 rounded-xl font-mono text-xs flex flex-col gap-2">
+                    <div class="flex justify-between items-center border-b border-amber-900/30 pb-2">
+                        <span class="text-amber-400 font-bold uppercase tracking-wider text-[0.65rem]">Category 12 TDS Compliance</span>
+                        <span class="text-[0.55rem] bg-amber-950 text-amber-300 px-2 py-0.5 rounded border border-amber-900">THRIND000 TARGET</span>
+                    </div>
+                    <div class="bg-black/40 p-3 rounded border border-slate-900 mt-1">
+                        <span class="text-[0.65rem] text-slate-500 block">TOTAL HARVESTED TDS COMPLIANCE</span>
+                        <span id="lbl-tds" class="text-lg text-amber-500 font-bold">0.0000 Ꝃ</span>
+                    </div>
+                    <p class="font-sans text-[0.65rem] text-slate-400 leading-relaxed">
+                        The 1% Tax Deducted at Source (TDS) is automatically split from every transaction block at the point of ingestion, mathematically hardcoding tax compliance into the time-stream.
+                    </p>
+                </div>
+
+                <div class="bg-slate-900/40 border border-teal-900/40 p-4 rounded-xl font-mono text-xs flex flex-col gap-2">
+                    <div class="flex justify-between items-center border-b border-teal-900/30 pb-2">
+                        <span class="text-teal-400 font-bold uppercase tracking-wider text-[0.65rem]">Biotic Stewardship (RSP Pool)</span>
+                        <span class="text-[0.55rem] bg-teal-950 text-teal-300 px-2 py-0.5 rounded border border-teal-900">BIOME NET-POSITIVE</span>
+                    </div>
+                    <div class="bg-black/40 p-3 rounded border border-slate-900 mt-1">
+                        <span class="text-[0.65rem] text-slate-500 block">TOTAL REGENERATIVE BIOTIC TAX FUNDS</span>
+                        <span id="lbl-rsp" class="text-lg text-teal-400 font-bold">0.0000 Ꝃ</span>
+                    </div>
+                    <p class="font-sans text-[0.65rem] text-slate-400 leading-relaxed">
+                        Channels a dedicated 1% cryptographic tax directly to ecological stewards (farmers/foresters), minting credits via verified soil carbon sequestration and planetary biome health metrics.
+                    </p>
+                </div>
+            </div>
+
+            <div class="md:col-span-8 bg-slate-900/20 border border-blue-900/40 rounded-xl p-4 terminal-box h-[440px] flex flex-col">
+                <div class="flex justify-between items-center border-b border-blue-900/40 pb-3 mb-3 shrink-0">
+                    <h2 class="text-xs text-blue-400 font-bold tracking-widest uppercase font-mono">01. Live Fiscal Audit Ticker Feed</h2>
+                    <span class="text-[0.6rem] bg-slate-950 text-slate-500 px-2 py-0.5 rounded border border-slate-900 font-mono font-bold">BRACKET CODING: [$00$]</span>
+                </div>
+                
+                <div id="fiscal-ticker" class="flex-1 overflow-y-auto flex flex-col gap-2 pr-1 text-xs font-mono">
+                    </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        let kineCirculation = 1042.5000;
+        let accruedTds = 10.4250;
+        let accruedRsp = 10.4250;
+
+        // --- HIGH-RESOLUTION CLOCK MATRIX ---
+        function initLedgerClock() {
+            setInterval(() => {
+                const now = new Date();
+                const GE = "0130"; const EE = "05"; const PE = "26"; const TE = "04"; 
+                const Day = now.getDate().toString().padStart(2, '0');
+                const GigaE = now.getHours().toString().padStart(2, '0');
+                const MegaE = now.getMinutes().toString().padStart(2, '0');
+                const KiloE = now.getSeconds().toString().padStart(2, '0');
+                
+                const ms = now.getMilliseconds();
+                const BaseE = Math.floor(ms / 10).toString().padStart(2, '0');
+                const MilliE = Math.floor(Math.random() * 99).toString().padStart(2, '0'); 
+                const MicroE = Math.floor(Math.random() * 99).toString().padStart(2, '0');
+
+                document.getElementById('ledger-clock').innerText = 
+                    `(+00):${GE}.${EE}.${PE}.${TE}.${Day}.${GigaE}.${MegaE}.${KiloE}.${BaseE}.${MilliE}.${MicroE}`;
+            }, 33);
+        }
+
+        // --- INTERFACE BALANCES SYNC REFRESH ---
+        function updateDashboardMetrics() {
+            document.getElementById('val-flux').innerText = `${Math.floor(kineCirculation * 100).toLocaleString()} ƒ`;
+            document.getElementById('val-kine').innerText = `${kineCirculation.toFixed(4)} Ꝃ`;
+            document.getElementById('val-dyne').innerText = `${(kineCirculation / 100).toFixed(2)} O`;
+            
+            document.getElementById('lbl-tds').innerText = `${accruedTds.toFixed(4)} Ꝃ`;
+            document.getElementById('lbl-rsp').innerText = `${accruedRsp.toFixed(4)} Ꝃ`;
+        }
+
+        // --- PROGRAMMATIC TRANSACTIONS INJECTOR ---
+        function simulateIncomingTelemetryPulses() {
+            const ticker = document.getElementById('fiscal-ticker');
+            const targetOrigins = ["BOMINP001", "DELINP003", "TUPINS014", "BLRINP002", "CJBINP005"];
+            
+            const selectedOrigin = targetOrigins[Math.floor(Math.random() * targetOrigins.length)];
+            const rawKineMints = Math.random() * 12.5;
+            
+            // Apply KUTS structural Triple-Split calculations (98% reward, 1% TDS, 1% RSP rule structures)
+            const nodeReward = rawKineMints * 0.98;
+            const systemTds = rawKineMints * 0.01;
+            const systemRsp = rawKineMints * 0.01;
+
+            // Increment matrix stats values
+            kineCircCirc = kineCirculation += rawKineMints;
+            accruedTds += systemTds;
+            accruedRsp += systemRsp;
+
+            const timeString = document.getElementById('ledger-clock').innerText.split(':')[1] || "00.00.00...";
+            
+            const logHTML = `
+                <div class="p-2.5 bg-slate-900/60 border border-slate-800 rounded-lg flex flex-col gap-1 transition-all hover:border-blue-900/50">
+                    <div class="flex justify-between text-[0.6rem] text-slate-500">
+                        <span class="text-blue-400 bg-blue-950/40 border border-blue-900/40 px-1 rounded font-bold">[$00$] COMPLIANCE INGESTION</span>
+                        <span>${timeString}</span>
+                    </div>
+                    <div class="text-slate-300 font-semibold">Processed telemetry from ${selectedOrigin}. Total Mint: +${rawKineMints.toFixed(4)} Ꝃ</div>
+                    <div class="grid grid-cols-3 gap-2 text-[0.6rem] pt-1 mt-1 border-t border-slate-900/60 font-mono">
+                        <span class="text-orange-400">Node Share: +${nodeReward.toFixed(4)} Ꝃ</span>
+                        <span class="text-amber-500">TDS Sweep: +${systemTds.toFixed(4)} Ꝃ</span>
+                        <span class="text-teal-400">Biotic RSP: +${systemRsp.toFixed(4)} Ꝃ</span>
+                    </div>
+                </div>`;
+            
+            ticker.insertAdjacentHTML('afterbegin', logHTML);
+            if (ticker.children.length > 15) ticker.removeChild(ticker.lastChild);
+
+            updateDashboardMetrics();
+        }
+
+        // Boot system scripts triggers
+        window.addEventListener('DOMContentLoaded', () => {
+            initLedgerClock();
+            updateDashboardMetrics();
+            setInterval(simulateIncomingTelemetryPulses, 4000); // 4-second incoming networking loop simulation
+        });
+    </script>
+<!-- Resilient Inline Auth & Navigation Injector for Local Testing -->
+    <script>
+        (function() {
+            window.addEventListener('DOMContentLoaded', () => {
+                // Check session; if missing during local test, auto-initialize a mock test session instead of failing
+                let session = localStorage.getItem('kuts_active_session');
+                if (!session) {
+                    session = JSON.stringify({ nodeId: "THRINC000-LOCAL-TEST", expiry: Date.now() + 86400000 });
+                    localStorage.setItem('kuts_active_session', session);
+                }
+
+                // Inject Global Header if missing
+                if (!document.getElementById('kuts-global-header')) {
+                    const headerHTML = `
+                        <header id="kuts-global-header" class="w-full max-w-7xl mx-auto p-6 flex justify-between items-center border-b border-slate-800 bg-[#030712] text-slate-200 mb-6">
+                            <div class="text-blue-400 font-mono font-bold tracking-widest text-sm">
+                                KUTS_MESH_OPERATIONS // MDI6000 [LOCAL MODE]
+                            </div>
+                            <nav id="nav-auth" class="flex gap-4 items-center font-mono"></nav>
+                        </header>`;
+                    document.body.insertAdjacentHTML('afterbegin', headerHTML);
+                }
+
+                // Inject Global Footer if missing
+                if (!document.getElementById('kuts-global-footer') && !window.location.pathname.includes('index.html')) {
+                    const footerHTML = `
+                        <footer id="kuts-global-footer" class="max-w-7xl mx-auto mt-auto py-8 border-t border-slate-800 text-center w-full">
+                            <a href="index.html" class="inline-flex items-center gap-2 text-[0.7rem] text-slate-500 hover:text-blue-400 font-mono uppercase tracking-widest transition-all">
+                                <span class="text-lg">←</span> RETURN TO UNIVERSAL GATEWAY
+                            </a>
+                        </footer>`;
+                    document.body.insertAdjacentHTML('beforeend', footerHTML);
+                }
+
+                updateAuthUI();
+            });
+
+            window.updateAuthUI = function() {
+                const nav = document.getElementById('nav-auth');
+                if (!nav) return;
+                
+                nav.innerHTML = `
+                    <a href="index.html" class="text-slate-400 text-[0.65rem] uppercase font-mono hover:text-white">Gateway</a>
+                    <button onclick="secureLogout()" class="bg-red-950 hover:bg-red-900 text-red-400 font-mono text-[0.65rem] px-3 py-1.5 rounded border border-red-900 uppercase tracking-widest cursor-pointer">
+                        [X] DISCONNECT
+                    </button>`;
+            };
+
+            window.secureLogout = function() {
+                localStorage.removeItem('kuts_active_session');
+                window.location.href = 'sign-in.html';
+            };
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Network | Master Module Menu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght=300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #030712; color: #cbd5e1; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .glow-blue { box-shadow: 0 0 20px rgba(59, 130, 246, 0.15); border-color: rgba(59, 130, 246, 0.3); }
+        .module-card:hover { transform: translateY(-2px); border-color: rgba(59, 130, 246, 0.5); background-color: rgba(15, 23, 42, 0.8); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col p-6 bg-[#030712]">
+
+    <header class="w-full max-w-6xl mx-auto border border-slate-800 bg-slate-900/50 p-6 rounded-xl flex flex-col items-center gap-3 mb-8 font-mono backdrop-blur-sm text-center relative">
+        <a href="index.html" class="absolute left-6 top-6 text-xs text-slate-400 hover:text-blue-400 border border-slate-700 hover:border-blue-500 px-3 py-1.5 rounded transition-colors flex items-center gap-2">
+            <span>⏻</span> System Gateway
+        </a>
+        <h1 class="text-2xl font-bold text-blue-400 tracking-wider mt-8 md:mt-0">KUTS_MASTER_DIRECTORY_MENU</h1>
+        <p class="text-slate-400 text-xs uppercase tracking-wider">Complete Index of All 37 System Modules & Engines</p>
+    </header>
+
+    <main class="w-full max-w-6xl mx-auto flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <section class="bg-slate-900/40 border border-slate-800 rounded-xl p-5 glow-blue flex flex-col">
+            <h2 class="text-sm text-blue-400 font-bold tracking-widest uppercase font-mono border-b border-slate-800 pb-3 mb-4 flex items-center gap-2">📱 Dashboards & Gateways</h2>
+            <div class="space-y-2 font-mono text-xs flex-1">
+                <a href="index.html" class="block p-3 bg-black/40 border border-slate-800 rounded transition-all module-card"><span class="text-white font-bold block">index.html</span><span class="text-slate-500 text-[0.65rem]">System Authentication Gateway</span></a>
+                <a href="browser-genesis.html" class="block p-3 bg-black/40 border border-slate-800 rounded transition-all module-card"><span class="text-white font-bold block">browser-genesis.html</span><span class="text-slate-500 text-[0.65rem]">Master Mission Control Portal</span></a>
+                <a href="dashboard.html" class="block p-3 bg-black/40 border border-slate-800 rounded transition-all module-card"><span class="text-white font-bold block">dashboard.html</span><span class="text-slate-500 text-[0.65rem]">Unified Worker Dashboard</span></a>
+            </div>
+        </section>
+
+        <section class="bg-slate-900/40 border border-slate-800 rounded-xl p-5 glow-blue flex flex-col">
+            <h2 class="text-sm text-emerald-400 font-bold tracking-widest uppercase font-mono border-b border-slate-800 pb-3 mb-4 flex items-center gap-2">🏦 Treasury & Finance</h2>
+            <div class="space-y-2 font-mono text-xs flex-1">
+                <a href="account.html" class="block p-3 bg-black/40 border border-slate-800 rounded transition-all module-card"><span class="text-white font-bold block">account.html</span><span class="text-slate-500 text-[0.65rem]">Node Wallet Ledger</span></a>
+                <a href="allowance-ledger.html" class="block p-3 bg-black/40 border border-slate-800 rounded transition-all module-card"><span class="text-white font-bold block">allowance-ledger.html</span><span class="text-slate-500 text-[0.65rem]">Support & Allowance Disbursal</span></a>
+                <a href="b2b-escrow.html" class="block p-3 bg-black/40 border border-slate-800 rounded transition-all module-card"><span class="text-white font-bold block">b2b-escrow.html</span><span class="text-slate-500 text-[0.65rem]">Multi-Party Venture Escrow</span></a>
+                <a href="credit-desk.html" class="block p-3 bg-black/40 border border-slate-800 rounded transition-all module-card"><span class="text-white font-bold block">credit-desk.html</span><span class="text-slate-500 text-[0.65rem]">Independent Credit Desk</span></a>
+                <a href="loan-ledger.html" class="block p-3 bg-black/40 border border-slate-800 rounded transition-all module-card"><span class="text-white font-bold block">loan-ledger.html</span><span class="text-slate-500 text-[0.65rem]">Business Credit Lines</span></a>
+                <a href="repayment-engine.html" class="block p-3 bg-black/40 border border-slate-800 rounded transition-all module-card"><span class="text-white font-bold block">repayment-engine.html</span><span class="text-slate-500 text-[0.65rem]">Amortization Sweep Matrix</span></a>
+                <a href="ledger-global.html" class="block p-3 bg-black/40 border border-slate-800 rounded transition-all module-card"><span class="text-white font-bold block">ledger-global.html</span><span class="text-slate-500 text-[0.65rem]">Asset Multi-Converter</span></a>
+                <a href="custodian-vault.html" class="block p-3 bg-black/40 border border-slate-800 rounded transition-all module-card"><span class="text-white font-bold block">custodian-vault.html</span><span class="text-slate-500 text-[0.65rem]">Corporate Custodian Asset Vault</span></a>
+            </div>
+        </section>
+
+        <section class="bg-slate-900/40 border border-slate-800 rounded-xl p-5 glow-blue flex flex-col">
+            <h2 class="text-sm text-purple-400 font-bold tracking-widest uppercase font-mono border-b border-slate-800 pb-3 mb-4 flex items-center gap-2">⚖️ Governance & Admin</h2>
+            <div class="space-y-2 font-mono text-xs flex-1">
+                <a href="architect-manifesto.html" class="block p-3 bg-black/40 border border-slate-800 rounded transition-all module-card"><span class="text-white font-bold block">architect-manifesto.html</span><span class="text-slate-500 text-[0.65rem]">Core Philosophy & Directives</span></a>
+                <a href="compliance.html" class="block p-3 bg-black/40 border border-slate-800 rounded transition-all module-card"><span class="text-white font-bold block">compliance.html</span><span class="text-slate-500 text-[0.65rem]">Constitutional Compliance Suite</span></a>
+                <a href="capacity-planner.html" class="block p-3 bg-black/40 border border-slate-800 rounded transition-all module-card"><span class="text-white font-bold block">capacity-planner.html</span><span class="text-slate-500 text-[0.65rem]">Executive Capacity Planner</span></a>
+                <a href="entity-registry.html" class="block p-3 bg-black/40 border border-slate-800 rounded transition-all module-card"><span class="text-white font-bold block">entity-registry.html</span><span class="text-slate-500 text-[0.65rem]">Entity Onboarding Matrix</span></a>
+                <a href="registry.html" class="block p-3 bg-black/40 border border-slate-800 rounded transition-all module-card"><span class="text-white font-bold block">registry.html</span><span class="text-slate-500 text-[0.65rem]">Contributor Member Registry</span></a>
+            </div>
+        </section>
+
+        <section class="bg-slate-900/40 border border-slate-800 rounded-xl p-5 glow-blue flex flex-col">
+            <h2 class="text-sm text-amber-400 font-bold tracking-widest uppercase font-mono border-b border-slate-800 pb-3 mb-4 flex items-center gap-2">📦 Operations & Tasks</h2>
+            <div class="space-y-2 font-mono text-xs flex-1">
+                <a href="supply-chain.html" class="block p-3 bg-black/40 border border-slate-800 rounded transition-all module-card"><span class="text-white font-bold block">supply-chain.html</span><span class="text-slate-500 text-[0.65rem]">Logistics Freight Router</span></a>
+                <a href="facilities.html" class="block p-3 bg-black/40 border border-slate-800 rounded transition-all module-card"><span class="text-white font-bold block">facilities.html</span><span class="text-slate-500 text-[0.65rem]">Commune Facilities & Welfare Hub</span></a>
+                <a href="biotic.html" class="block p-3 bg-black/40 border border-slate-800 rounded transition-all module-card"><span class="text-white font-bold block">biotic.html</span><span class="text-slate-500 text-[0.65rem]">Agro-Biotic Regeneration Monitor</span></a>
+                <a href="my-task.html" class="block p-3 bg-black/40 border border-slate-800 rounded transition-all module-card"><span class="text-white font-bold block">my-task.html</span><span class="text-slate-500 text-[0.65rem]">Personal Task Desk</span></a>
+                <a href="task-board.html" class="block p-3 bg-black/40 border border-slate-800 rounded transition-all module-card"><span class="text-white font-bold block">task-board.html</span><span class="text-slate-500 text-[0.65rem]">Administrative Task Allocator</span></a>
+            </div>
+        </section>
+
+        <section class="bg-slate-900/40 border border-slate-800 rounded-xl p-5 glow-blue flex flex-col">
+            <h2 class="text-sm text-red-400 font-bold tracking-widest uppercase font-mono border-b border-slate-800 pb-3 mb-4 flex items-center gap-2">🔒 Utilities & Security</h2>
+            <div class="space-y-2 font-mono text-xs flex-1">
+                <a href="converter.html" class="block p-3 bg-black/40 border border-slate-800 rounded transition-all module-card"><span class="text-white font-bold block">converter.html</span><span class="text-slate-500 text-[0.65rem]">Chrono Transformer</span></a>
+                <a href="courier.html" class="block p-3 bg-black/40 border border-slate-800 rounded transition-all module-card"><span class="text-white font-bold block">courier.html</span><span class="text-slate-500 text-[0.65rem]">Secure Cryptographic Courier</span></a>
+                <a href="device-manager.html" class="block p-3 bg-black/40 border border-slate-800 rounded transition-all module-card"><span class="text-white font-bold block">device-manager.html</span><span class="text-slate-500 text-[0.65rem]">Zero-Trust Hardware Registry</span></a>
+                <a href="security.html" class="block p-3 bg-black/40 border border-slate-800 rounded transition-all module-card"><span class="text-white font-bold block">security.html</span><span class="text-slate-500 text-[0.65rem]">Biometric Sandbox</span></a>
+                <a href="star-hunter.html" class="block p-3 bg-black/40 border border-slate-800 rounded transition-all module-card"><span class="text-white font-bold block">star-hunter.html</span><span class="text-slate-500 text-[0.65rem]">Kinetic Sandbox Simulator</span></a>
+            </div>
+        </section>
+
+        <section class="bg-slate-900/40 border border-slate-800 rounded-xl p-5 glow-blue flex flex-col">
+            <h2 class="text-sm text-cyan-400 font-bold tracking-widest uppercase font-mono border-b border-slate-800 pb-3 mb-4 flex items-center gap-2">⚙️ JS Engines & Daemons</h2>
+            <div class="space-y-2 font-mono text-xs flex-1 h-64 overflow-y-auto pr-2">
+                <div class="p-3 bg-black/40 border border-slate-800 rounded"><span class="text-white font-bold block">kuts-core-bridge.js</span><span class="text-slate-500 text-[0.65rem]">Central Operations</span></div>
+                <div class="p-3 bg-black/40 border border-slate-800 rounded"><span class="text-white font-bold block">kuts-p2p-mesh.js</span><span class="text-slate-500 text-[0.65rem]">WebRTC P2P Mesh</span></div>
+                <div class="p-3 bg-black/40 border border-slate-800 rounded"><span class="text-white font-bold block">kuts-sync-protocol.js</span><span class="text-slate-500 text-[0.65rem]">Ledger Reconciliation</span></div>
+                <div class="p-3 bg-black/40 border border-slate-800 rounded"><span class="text-white font-bold block">kuts-data-exporter.js</span><span class="text-slate-500 text-[0.65rem]">JSON/CSV Extraction</span></div>
+                <div class="p-3 bg-black/40 border border-slate-800 rounded"><span class="text-white font-bold block">kuts-schema-validator.js</span><span class="text-slate-500 text-[0.65rem]">Data Integrity Formatter</span></div>
+                <div class="p-3 bg-black/40 border border-slate-800 rounded"><span class="text-white font-bold block">kuts-currency-converter.js</span><span class="text-slate-500 text-[0.65rem]">Fiat-to-Kine Converter</span></div>
+                <div class="p-3 bg-black/40 border border-slate-800 rounded"><span class="text-white font-bold block">kuts-time-converter.js</span><span class="text-slate-500 text-[0.65rem]">Temporal Mapping</span></div>
+                <div class="p-3 bg-black/40 border border-slate-800 rounded"><span class="text-white font-bold block">kuts-coordinate-generator.js</span><span class="text-slate-500 text-[0.65rem]">Geodesic Mapping</span></div>
+                <div class="p-3 bg-black/40 border border-slate-800 rounded"><span class="text-white font-bold block">kuts-stress-tester.js</span><span class="text-slate-500 text-[0.65rem]">Automated Load Validator</span></div>
+                <div class="p-3 bg-black/40 border border-slate-800 rounded"><span class="text-white font-bold block">kuts-persistence-bridge.js</span><span class="text-slate-500 text-[0.65rem]">WebSocket Client</span></div>
+                <div class="p-3 bg-black/40 border border-slate-800 rounded"><span class="text-white font-bold block">kuts-relay-daemon.js</span><span class="text-slate-500 text-[0.65rem]">Node.js Archival Backend</span></div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="w-full max-w-6xl mx-auto border-t border-slate-800 pt-6 mt-8 text-center font-mono text-[0.6rem] text-slate-500 tracking-widest uppercase">
+        © 2026 PINALEAF ADVANCEMENTS LLP // KUTS DIRECTORY INDEX // 37 MODULES REGISTERED
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    margin: 0;
+    min-height: 100%;
+  }
+
+  body {
+    font-family: Inter, sans-serif;
+  }
+
+  button,
+  input,
+  select {
+    font: inherit;
+  }
+
+  ::selection {
+    background: rgba(16, 185, 129, 0.25);
+  }
+}
+
+@layer components {
+  .font-mono {
+    font-family: "Share Tech Mono", monospace;
+  }
+}

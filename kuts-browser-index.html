@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aarohan 2050 | Kinetic Unified Temporal Synchronization</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght=300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #050a15; color: #e2e8f0; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .border-glow { border-color: rgba(59, 130, 246, 0.3); box-shadow: 0 0 15px rgba(30, 58, 138, 0.2); }
+        .text-gradient { background: linear-gradient(135deg, #60a5fa 0%, #34d399 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-group { border: 1px solid rgba(30, 58, 138, 0.3); background: rgba(15, 23, 42, 0.6); border-radius: 8px; padding: 0.5rem; }
+        .nav-link { display: block; font-size: 0.65rem; padding: 0.25rem 0.5rem; border-radius: 4px; transition: all 0.2s; white-space: nowrap; font-family: 'Share Tech Mono', monospace; font-weight: bold; }
+        .nav-link:hover { background: rgba(59, 130, 246, 0.2); color: #fff; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-blue-500/30 selection:text-blue-200">
+
+    <!-- MASTER GLOBAL NAVIGATION HEADER -->
+    <header class="border-b border-blue-900/60 bg-slate-900/80 backdrop-blur-md sticky top-0 z-50 px-6 py-4">
+        <div class="max-w-[98rem] mx-auto flex flex-col xl:flex-row justify-between items-center gap-6">
+            
+            <!-- BRANDING & TOP NAV -->
+            <div class="text-center xl:text-left flex flex-col gap-2">
+                <div>
+                    <div class="text-xl font-bold tracking-wider text-blue-400 font-mono">KUTS<span class="text-slate-200">_SYSTEM</span></div>
+                    <div class="text-[0.65rem] text-slate-400 font-mono tracking-tight">GLOBAL COORDINATE DEPLOYMENT MATRIX</div>
+                </div>
+                <nav class="flex justify-center xl:justify-start gap-4 text-[0.65rem] font-mono tracking-widest uppercase text-slate-400 mt-1">
+                    <a href="#architecture" class="hover:text-blue-400 transition-colors">01. Architecture</a>
+                    <a href="#nodes" class="hover:text-blue-400 transition-colors">02. Spatial Nodes</a>
+                    <a href="./manifesto.html" target="_blank" class="text-purple-400 font-bold hover:text-purple-300 transition-colors">03. Manifesto</a>
+                    <a href="./timeline.html" target="_blank" class="text-blue-400 font-bold hover:text-blue-300 transition-colors">04. Cosmic Timeline</a>
+                </nav>
+            </div>
+
+            <!-- COMPLETE CATEGORIZED MODULAR HUD CONTAINER -->
+            <nav class="flex flex-wrap justify-center gap-3 max-w-5xl">
+                <!-- CORE LAYER -->
+                <div class="nav-group">
+                    <span class="text-[0.5rem] text-slate-500 uppercase tracking-wider px-1 block">Core Suite</span>
+                    <div class="flex flex-wrap gap-1 mt-1">
+                        <a href="./browser-genesis.html" target="_blank" class="nav-link text-emerald-400 animate-pulse bg-emerald-950/20 border border-emerald-900/30">🌍 GENESIS HUD</a>
+                        <a href="./courier.html" target="_blank" class="nav-link text-cyan-400">📨 COURIER</a>
+                        <a href="./browser.html" target="_blank" class="nav-link text-blue-400">🔍 CORE BROWSER</a>
+                        <a href="./ai-assistant.html" target="_blank" class="nav-link text-purple-400">🤖 AI COMPANION</a>
+                    </div>
+                </div>
+
+                <!-- VALUE & SETTLEMENT -->
+                <div class="nav-group">
+                    <span class="text-[0.5rem] text-slate-500 uppercase tracking-wider px-1 block">Value & Settlement</span>
+                    <div class="flex flex-wrap gap-1 mt-1">
+                        <a href="./account.html" target="_blank" class="nav-link text-yellow-400">💳 NODE WALLET</a>
+                        <a href="./ledger.html" target="_blank" class="nav-link text-blue-400">Ꝃ LEDGER</a>
+                        <a href="./ledger-global.html" target="_blank" class="nav-link text-purple-400">🗂 GLOBAL REG</a>
+                        <a href="./transfer.html" target="_blank" class="nav-link text-emerald-400">⇄ P2P XFER</a>
+                        <a href="./market.html" target="_blank" class="nav-link text-orange-400">🪙 BUY/SELL</a>
+                    </div>
+                </div>
+
+                <!-- BRIDGES & TIME -->
+                <div class="nav-group">
+                    <span class="text-[0.5rem] text-slate-500 uppercase tracking-wider px-1 block">Bridges & Time</span>
+                    <div class="flex flex-wrap gap-1 mt-1">
+                        <a href="./converter.html" target="_blank" class="nav-link text-emerald-400">⏳ CHRONO BRIDGE</a>
+                        <a href="./converter-currency.html" target="_blank" class="nav-link text-orange-400">🪙 VALUE BRIDGE</a>
+                        <a href="./universal-timeline.html" target="_blank" class="nav-link text-amber-400">🌌 GALACTIC CORE</a>
+                    </div>
+                </div>
+
+                <!-- PHASE 2 ADVANCED INTEL -->
+                <div class="nav-group">
+                    <span class="text-[0.5rem] text-slate-500 uppercase tracking-wider px-1 block">Phase 2 / Intelligence</span>
+                    <div class="flex flex-wrap gap-1 mt-1">
+                        <a href="./reputation-oracle.html" target="_blank" class="nav-link text-purple-400">👁️ ORACLE QUERY</a>
+                        <a href="./analytics-matrix.html" target="_blank" class="nav-link text-blue-400">📊 SWARM EYE</a>
+                        <a href="./bio-spatial.html" target="_blank" class="nav-link text-green-400">🌱 BIO-SPATIAL</a>
+                    </div>
+                </div>
+
+                <!-- UTILITIES & SIMULATION -->
+                <div class="nav-group">
+                    <span class="text-[0.5rem] text-slate-500 uppercase tracking-wider px-1 block">System Utilities</span>
+                    <div class="flex flex-wrap gap-1 mt-1">
+                        <a href="./device-manager.html" target="_blank" class="nav-link text-cyan-400">🔌 HW BRIDGE</a>
+                        <a href="./nodes.html" target="_blank" class="nav-link text-amber-500">📡 NODE GRID</a>
+                        <a href="./security.html" target="_blank" class="nav-link text-red-400">🔒 SEC CHECK</a>
+                        <a href="./generator.html" target="_blank" class="nav-link text-blue-400">🔑 ID GEN</a>
+                        <a href="./biotic.html" target="_blank" class="nav-link text-teal-400">🌱 BIOTIC</a>
+                        <a href="./router.html" target="_blank" class="nav-link text-orange-400">🌐 ROUTER</a>
+                        <a href="./scoreboard.html" target="_blank" class="nav-link text-blue-300">📊 STANDINGS</a>
+                        <a href="./community.html" target="_blank" class="nav-link text-purple-400">💬 COMM MESH</a>
+                        <a href="./game.html" target="_blank" class="nav-link text-emerald-400">🎮 GAME</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN PRODUCT MARKETING GRAPH HERO -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-6 py-12 md:py-24 grid md:grid-cols-12 gap-12 items-center">
+        <div class="md:col-span-7 flex flex-col gap-6">
+            <div class="font-mono text-xs text-emerald-400 bg-emerald-950/40 border border-emerald-800/60 px-3 py-1 rounded self-start uppercase tracking-widest animate-pulse">
+                ● Project MDI6000 // Mission Aarohan 2050 Active
+            </div>
+            <h2 class="text-4xl md:text-6xl font-bold tracking-tight leading-tight">
+                The Physics-Based Time Matrix for <span class="text-gradient">Global Industry</span>
+            </h2>
+            <p class="text-slate-400 text-sm md:text-base leading-relaxed">
+                Kinetic Unified Temporal Synchronization (KUTS) completely replaces non-linear, drift-prone astronomical timekeeping (UTC/Gregorian) with an invariant framework anchored directly to the velocity of light (<span class="font-mono text-slate-200">c</span>) in a vacuum. Engineered for hyper-frequency AI state-logging, automated supply chains, and distributed industrial resource networks.
+            </p>
+            <div class="flex flex-wrap gap-4 pt-4 font-mono text-xs">
+                <a href="./browser.html" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-6 py-3 rounded border border-blue-400 transition-all tracking-widest uppercase">
+                    Launch Core Browser Engine >>
+                </a>
+                <a href="./game.html" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-6 py-3 rounded border border-emerald-400 transition-all tracking-widest uppercase">
+                    Access Training Portal 🎮
+                </a>
+            </div>
+        </div>
+
+        <div class="md:col-span-5 bg-slate-900/40 border border-blue-900/40 rounded-2xl p-6 border-glow flex flex-col gap-4">
+            <div class="flex justify-between items-center border-b border-blue-900/50 pb-3">
+                <span class="text-xs font-mono text-blue-400">MASTER SYSTEM REGISTRY HUD</span>
+                <span class="h-2 w-2 rounded-full bg-emerald-400 animate-ping"></span>
+            </div>
+            <div class="bg-black/50 border border-slate-800 p-3 rounded font-mono text-xs flex flex-col gap-1">
+                <span class="text-slate-500 block">DECENTRALIZED CHRONO CORE STRING</span>
+                <span id="promo-clock" class="text-emerald-400 font-bold tracking-wide break-all text-sm">(+00):0130.05.26.04.24...</span>
+            </div>
+            <div class="grid grid-cols-2 gap-3 text-[0.7rem] font-mono">
+                <div class="bg-slate-950 p-3 rounded border border-slate-900"><span class="text-slate-500 block">BASE-EPOCH CALIBRATION</span><span class="text-slate-200 text-xs">333.56 Nanoseconds</span></div>
+                <div class="bg-slate-950 p-3 rounded border border-slate-900"><span class="text-slate-500 block">GOVERNANCE CONTEXT</span><span class="text-slate-200 text-xs">KPOW Meritocracy Swarm</span></div>
+            </div>
+            <blockquote class="border-l-2 border-emerald-500 pl-4 py-1 text-xs text-slate-400 italic">
+                "Hardcoding regulatory compliance, structural tax extraction, and resource-backed valuation logic directly into the universal time-stream."
+            </blockquote>
+        </div>
+    </main>
+
+    <!-- SECTION 01: ARCHITECTURE DETAILS -->
+    <section id="architecture" class="bg-slate-950 border-t border-blue-900/40 py-20 px-6">
+        <div class="max-w-7xl w-full mx-auto flex flex-col gap-12">
+            <div class="text-center md:text-left">
+                <span class="font-mono text-xs text-blue-400 tracking-widest block uppercase mb-2">01 // TECHNICAL SPECIFICATIONS</span>
+                <h3 class="text-3xl font-bold tracking-tight">The Multi-Scalar Architecture</h3>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6 font-mono text-xs">
+                <div class="bg-slate-900/40 border border-slate-800/80 p-6 rounded-xl flex flex-col gap-3">
+                    <div class="text-orange-400 text-sm font-bold">[&lt;&lt;00&gt;&gt;] KINETIC REWARDS</div>
+                    <p class="text-slate-400 font-sans text-xs leading-relaxed">Maps physical work metrics seamlessly to digital token generation. Translates industrial energy expenditure, freight mileage, and manual hours into token weights under the Least Action Protocol.</p>
+                </div>
+                <div class="bg-slate-900/40 border border-slate-800/80 p-6 rounded-xl flex flex-col gap-3">
+                    <div class="text-blue-400 text-sm font-bold">[$00$] FISCAL AUTOMATION</div>
+                    <p class="text-slate-400 font-sans text-xs leading-relaxed">Hardcodes compliance. Incoming asset pulses processed by Category 12 algorithms initiate an immediate 1% Tax Deducted at Source (TDS) sweep to the central node, eliminating transaction friction.</p>
+                </div>
+                <div class="bg-slate-900/40 border border-slate-800/80 p-6 rounded-xl flex flex-col gap-3">
+                    <div class="text-purple-400 text-sm font-bold">(*00*) NEURAL PACKET SYNC</div>
+                    <p class="text-slate-400 font-sans text-xs leading-relaxed">Engineered for autonomous processing scales. Features fixed-width 22-digit serialization identifiers optimized to serve as native database primary keys for high-frequency algorithmic logs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 02: ANCHOR GRID TILES -->
+    <section id="nodes" class="py-20 px-6 max-w-7xl w-full mx-auto flex flex-col gap-12">
+        <div>
+            <span class="font-mono text-xs text-blue-400 tracking-widest block uppercase mb-2">02 // GEODESIC BOUNDING LAYER</span>
+            <h3 class="text-3xl font-bold tracking-tight">The 34-Point Global Anchor Grid</h3>
+            <p class="text-slate-400 text-sm max-w-2xl mt-2">Data routing pathways are locked to 34 mathematically sealed Level 1 anchor nodes across the planet, guaranteeing zero-drift alignment across spatial extremities.</p>
+        </div>
+        <div class="overflow-x-auto border border-blue-900/40 rounded-xl bg-slate-900/20 font-mono text-xs">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-slate-900/60 border-b border-blue-900/40 text-slate-400 uppercase tracking-wider text-[0.65rem]">
+                        <th class="p-4">Node Designation</th>
+                        <th class="p-4">Geographic Anchor</th>
+                        <th class="p-4">System Alphanumeric ID</th>
+                        <th class="p-4">WGS 84 Mapping Coordinate</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-blue-950/40 text-slate-300">
+                    <tr class="hover:bg-blue-950/20"><td class="p-4 font-bold text-emerald-400">0. Master Origin Node</td><td class="p-4">Thrissur, India</td><td class="p-4 text-blue-300">THRINC000</td><td class="p-4">10.5249° N, 76.2144° E</td></tr>
+                    <tr class="hover:bg-blue-950/20"><td class="p-4">0. Antipodal Node</td><td class="p-4">International Waters (Pacific)</td><td class="p-4 text-blue-300">ANTZZC001</td><td class="p-4">10.5249° S, 103.7856° W</td></tr>
+                    <tr class="hover:bg-blue-950/20"><td class="p-4">1. Prime Meridian Anchor</td><td class="p-4">London, UK</td><td class="p-4 text-blue-300">LDNUKC001</td><td class="p-4">51.5074° N, 0.1278° W</td></tr>
+                    <tr class="hover:bg-blue-950/20"><td class="p-4">2. Afro-Eurasian Hub</td><td class="p-4">Dubai, UAE</td><td class="p-4 text-blue-300">DXBAEC002</td><td class="p-4">25.2048° N, 55.2708° E</td></tr>
+                    <tr class="hover:bg-blue-950/20"><td class="p-4">3. Western Fiscal Pivot</td><td class="p-4">New York City, USA</td><td class="p-4 text-blue-300">NYKUSC003</td><td class="p-4">40.7128° N, 74.0060° W</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- CORE SITE FOOTER MATRICES -->
+    <footer class="border-t border-blue-900/40 bg-slate-950 p-6 font-mono text-[0.65rem] text-slate-500 text-center flex flex-col md:flex-row justify-between items-center gap-4">
+        <span>© 2026 PINALEAF ADVANCEMENTS LLP. ALL RIGHTS RESERVED.</span>
+        <span class="text-blue-400/60 tracking-widest uppercase">MDI6000 CORE SUITE LAUNCHPAD // SECURED DECENTRALIZED PRODUCTION BUILD</span>
+    </footer>
+
+    <!-- CLOCK CHRONO HANDLER INTERACTION SCRIPT -->
+    <script>
+        setInterval(() => {
+            const now = new Date();
+            const day = now.getDate().toString().padStart(2, '0');
+            const hours = now.getHours().toString().padStart(2, '0');
+            const mins = now.getMinutes().toString().padStart(2, '0');
+            const secs = now.getSeconds().toString().padStart(2, '0');
+            const baseE = Math.floor(now.getMilliseconds() / 10).toString().padStart(2, '0');
+            
+            document.getElementById('promo-clock').innerText = 
+                `(+00):0130.05.26.04.${day}.${hours}.${mins}.${secs}.${baseE}.${Math.floor(Math.random()*99)}.${Math.floor(Math.random()*99)}`;
+        }, 33);
+    </script>
+<!-- Resilient Inline Auth & Navigation Injector for Local Testing -->
+    <script>
+        (function() {
+            window.addEventListener('DOMContentLoaded', () => {
+                // Check session; if missing during local test, auto-initialize a mock test session instead of failing
+                let session = localStorage.getItem('kuts_active_session');
+                if (!session) {
+                    session = JSON.stringify({ nodeId: "THRINC000-LOCAL-TEST", expiry: Date.now() + 86400000 });
+                    localStorage.setItem('kuts_active_session', session);
+                }
+
+                // Inject Global Header if missing
+                if (!document.getElementById('kuts-global-header')) {
+                    const headerHTML = `
+                        <header id="kuts-global-header" class="w-full max-w-7xl mx-auto p-6 flex justify-between items-center border-b border-slate-800 bg-[#030712] text-slate-200 mb-6">
+                            <div class="text-blue-400 font-mono font-bold tracking-widest text-sm">
+                                KUTS_MESH_OPERATIONS // MDI6000 [LOCAL MODE]
+                            </div>
+                            <nav id="nav-auth" class="flex gap-4 items-center font-mono"></nav>
+                        </header>`;
+                    document.body.insertAdjacentHTML('afterbegin', headerHTML);
+                }
+
+                // Inject Global Footer if missing
+                if (!document.getElementById('kuts-global-footer') && !window.location.pathname.includes('index.html')) {
+                    const footerHTML = `
+                        <footer id="kuts-global-footer" class="max-w-7xl mx-auto mt-auto py-8 border-t border-slate-800 text-center w-full">
+                            <a href="index.html" class="inline-flex items-center gap-2 text-[0.7rem] text-slate-500 hover:text-blue-400 font-mono uppercase tracking-widest transition-all">
+                                <span class="text-lg">←</span> RETURN TO UNIVERSAL GATEWAY
+                            </a>
+                        </footer>`;
+                    document.body.insertAdjacentHTML('beforeend', footerHTML);
+                }
+
+                updateAuthUI();
+            });
+
+            window.updateAuthUI = function() {
+                const nav = document.getElementById('nav-auth');
+                if (!nav) return;
+                
+                nav.innerHTML = `
+                    <a href="index.html" class="text-slate-400 text-[0.65rem] uppercase font-mono hover:text-white">Gateway</a>
+                    <button onclick="secureLogout()" class="bg-red-950 hover:bg-red-900 text-red-400 font-mono text-[0.65rem] px-3 py-1.5 rounded border border-red-900 uppercase tracking-widest cursor-pointer">
+                        [X] DISCONNECT
+                    </button>`;
+            };
+
+            window.secureLogout = function() {
+                localStorage.removeItem('kuts_active_session');
+                window.location.href = 'sign-in.html';
+            };
+        })();
+    </script>
+</body>
+</html>

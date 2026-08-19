@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Fixed-Width Serial Number Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght=300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #050a15; color: #e2e8f0; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .terminal-box { border-color: rgba(59, 130, 246, 0.3); box-shadow: 0 0 15px rgba(30, 58, 138, 0.15); }
+        .glow-blue { box-shadow: 0 0 15px rgba(59, 130, 246, 0.2); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col p-4 md:p-6 bg-[#040812]">
+
+    <header class="w-full max-w-5xl mx-auto border border-blue-900/60 bg-slate-900/40 p-4 rounded-xl flex flex-col md:flex-row justify-between items-center gap-4 mb-6 font-mono text-xs">
+        <div>
+            <h1 class="text-xl font-bold text-blue-400 tracking-wider">KUTS_SERIAL_GENERATOR</h1>
+            <p class="text-slate-400 text-[0.65rem]">IMMUTABLE PRIMARY ID MINTER // METHODOLOGY: COUPLING HASH ARCHITECTURE</p>
+        </div>
+        <div class="bg-black/50 p-2 rounded border border-blue-900/30 text-emerald-400 text-center w-full md:w-auto">
+            <span class="text-slate-500 block text-[0.55rem]">DECENTRALIZED TIME-STREAM OVERHEAD</span>
+            <span id="gen-clock" class="text-[0.75rem]">SYNCING ENGINE...</span>
+        </div>
+        <div class="text-right shrink-0">
+            <span class="text-slate-400">SIGNATURE PROTOCOL: </span>
+            <span class="text-blue-400 font-bold animate-pulse">● SHA256_LOCAL_STANDALONE</span>
+        </div>
+    </header>
+
+    <main class="w-full max-w-5xl mx-auto grid md:grid-cols-12 gap-6 flex-1 items-start">
+        
+        <section class="md:col-span-5 flex flex-col gap-6">
+            <div class="bg-slate-900/50 border border-blue-900/40 rounded-xl p-5 flex flex-col gap-4 terminal-box glow-blue">
+                <div class="border-b border-blue-900/40 pb-2">
+                    <h2 class="text-xs text-blue-400 font-bold tracking-widest uppercase font-mono">01. Metadata Ingestion Panel</h2>
+                    <p class="text-slate-400 font-sans text-[0.7rem] mt-0.5">Input text parameters to serialize unalterable network keys.</p>
+                </div>
+
+                <form id="serial-form" class="flex flex-col gap-4 font-mono text-xs text-slate-300" onsubmit="event.preventDefault(); mintKutsSerialNumber();">
+                    <div class="flex flex-col gap-1">
+                        <label class="text-slate-500 font-bold uppercase">Assign Domain Target Node:</label>
+                        <input type="text" id="target-node-id" value="TUPINS014" class="bg-black/60 border border-slate-800 rounded p-2 text-blue-300 focus:outline-none focus:border-blue-500 uppercase font-bold">
+                    </div>
+
+                    <div class="flex flex-col gap-1">
+                        <label class="text-slate-500 font-bold uppercase">Raw Telemetry Data String payload:</label>
+                        <textarea id="raw-payload" rows="3" class="bg-black/60 border border-slate-800 rounded p-2 text-slate-200 focus:outline-none focus:border-blue-500 font-sans text-xs resize-none">ENERGY_LOG: 250kWh | SHIFT_SECTOR: WEAVING_A | OPERATOR_REF: +9198460XXXXX</textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 px-4 rounded border border-blue-500 text-xs tracking-wider transition-colors uppercase mt-1">
+                        Mint 22-Digit Serial String >>
+                    </button>
+                </form>
+            </div>
+
+            <div class="bg-slate-900/30 border border-slate-800 p-4 rounded-xl font-mono text-[0.65rem] text-slate-400 leading-relaxed">
+                <span class="text-blue-400 block font-bold mb-1 uppercase">Fixed-Width Invariance Constraints:</span>
+                Every produced identity utilizes a standardized format containing exactly 22 synchronized chronological elements combined with data entropy weights. This outputs a lean string designed to serve directly as database primary keys, eliminating multi-node collision friction.
+            </div>
+        </section>
+
+        <section class="md:col-span-7 bg-slate-900/20 border border-blue-900/30 rounded-xl p-4 terminal-box h-[485px] flex flex-col">
+            <div class="flex justify-between items-center border-b border-blue-900/40 pb-3 mb-3 shrink-0">
+                <h2 class="text-xs text-blue-400 font-bold tracking-widest uppercase font-mono">02. Primary Key Serialization Audit Register</h2>
+                <span class="text-[0.6rem] bg-slate-950 text-slate-500 px-2 py-0.5 rounded border border-slate-900 font-mono font-bold">LIVE MINTER LOG</span>
+            </div>
+
+            <div id="serial-ticker" class="flex-1 overflow-y-auto flex flex-col gap-2 pr-1 text-xs font-mono">
+                <div class="text-slate-500 italic p-4 text-center">Awaiting data configurations to mint unalterable temporal keys...</div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="w-full max-w-5xl mx-auto border-t border-blue-900/40 pt-4 mt-6 flex flex-col sm:flex-row justify-between items-center font-mono text-[0.6rem] text-slate-500 gap-2">
+        <span>© 2026 PINALEAF ADVANCEMENTS LLP. ALL RIGHTS RESERVED.</span>
+        <span class="text-blue-400/50 uppercase tracking-widest">SERIALIZATION CONTROLLER DEPLOYED // STANDALONE CORE INFRASTRUCTURE</span>
+    </footer>
+
+    <script>
+        // --- HIGH-RESOLUTION CENTRAL CHRONO ENGINE ---
+        function runGeneratorClock() {
+            setInterval(() => {
+                const now = new Date();
+                const GE = "0130"; const EE = "05"; const PE = "26"; const TE = "04"; 
+                const Day = now.getDate().toString().padStart(2, '0');
+                const GigaE = now.getHours().toString().padStart(2, '0');
+                const MegaE = now.getMinutes().toString().padStart(2, '0');
+                const KiloE = now.getSeconds().toString().padStart(2, '0');
+                
+                const ms = now.getMilliseconds();
+                const BaseE = Math.floor(ms / 10).toString().padStart(2, '0');
+                const MilliE = Math.floor(Math.random() * 99).toString().padStart(2, '0'); 
+                const MicroE = Math.floor(Math.random() * 99).toString().padStart(2, '0');
+
+                document.getElementById('gen-clock').innerText = 
+                    `(+00):${GE}.${EE}.${PE}.${TE}.${Day}.${GigaE}.${MegaE}.${KiloE}.${BaseE}.${MilliE}.${MicroE}`;
+            }, 33);
+        }
+
+        // --- CLIENT-SIDE IMMUTABLE HASH COUPLER ---
+        async function mintKutsSerialNumber() {
+            const ticker = document.getElementById('serial-ticker');
+            const targetNode = document.getElementById('target-node-id').value.trim().toUpperCase() || "GRIDNODE";
+            const payload = document.getElementById('raw-payload').value;
+
+            if (ticker.innerText.includes("Awaiting data configurations")) {
+                ticker.innerHTML = ""; // Wipe clean the initial text log placeholder
+            }
+
+            // Extract the live time string down to macro clock ticks
+            const fullClockString = document.getElementById('gen-clock').innerText;
+            const timeStreamStamp = fullClockString.split(':')[1] || "00.00.00...";
+
+            // Create a cryptographic hash of the raw telemetry payload text using browser internal subtle crypto APIs
+            const encoder = new TextEncoder();
+            const dataBytes = encoder.encode(payload + timeStreamStamp);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', dataBytes);
+            
+            // Convert byte array buffer to hexadecimal string representation
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+            // Extract exactly 6 characters of entropy to keep the final payload lean and fast
+            const payloadEntropy = hashHex.substring(0, 6).toUpperCase();
+
+            // Assemble the final, fixed-width unalterable primary key identity signature string
+            const finalKutsSerial = `${targetNode}-${timeStreamStamp.substring(13, 22)}-${payloadEntropy}`;
+
+            const logHTML = `
+                <div class="p-3 bg-slate-900/60 border border-slate-800 rounded-xl flex flex-col gap-2 transition-all hover:border-blue-500/40">
+                    <div class="flex justify-between text-[0.6rem] text-slate-500">
+                        <span class="text-emerald-400 bg-emerald-950/40 border border-emerald-900/40 px-1.5 py-0.5 rounded font-bold uppercase tracking-wide">
+                            ✔ Primary Key Minted Successfully
+                        </span>
+                        <span>MINT TIME: ${timeStreamStamp.substring(13, 21)}</span>
+                    </div>
+                    <div class="bg-black/60 p-2.5 rounded border border-blue-950 flex justify-between items-center font-mono">
+                        <span class="text-blue-300 font-bold select-all tracking-wider text-sm">${finalKutsSerial}</span>
+                        <button onclick="navigator.clipboard.writeText('${finalKutsSerial}'); fontAlert(this);" class="text-[0.6rem] bg-blue-950 border border-blue-800/80 text-blue-400 px-2 py-1 rounded hover:bg-blue-900 transition-colors uppercase font-bold">Copy</button>
+                    </div>
+                    <div class="text-[0.65rem] text-slate-400 font-sans leading-relaxed">
+                        <span class="text-slate-500 font-mono font-bold block uppercase">Ingested Telemetry Baseline Source:</span>
+                        "${payload.substring(0, 80)}${payload.length > 80 ? '...' : ''}"
+                    </div>
+                </div>`;
+
+            ticker.insertAdjacentHTML('afterbegin', logHTML);
+            if (ticker.children.length > 5) ticker.removeChild(ticker.lastChild);
+        }
+
+        // Small notification utility function to give user interface visual confirmation click feedbacks
+        function fontAlert(btn) {
+            const originalText = btn.innerText;
+            btn.innerText = "COPIED";
+            btn.className = "text-[0.6rem] bg-emerald-950 border border-emerald-800 text-emerald-400 px-2 py-1 rounded uppercase font-bold";
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.className = "text-[0.6rem] bg-blue-950 border border-blue-800/80 text-blue-400 px-2 py-1 rounded hover:bg-blue-900 transition-colors uppercase font-bold";
+            }, 1500);
+        }
+
+        // Initialize script event handlers triggers
+        window.addEventListener('DOMContentLoaded', () => {
+            runGeneratorClock();
+        });
+    </script>
+<!-- Universal Gateway Return Link -->
+<footer class="max-w-7xl mx-auto mt-12 py-8 border-t border-slate-800 text-center">
+    <a href="index.html" class="inline-flex items-center gap-2 text-[0.7rem] text-slate-500 hover:text-blue-400 font-mono uppercase tracking-widest transition-all">
+        <span class="text-lg">←</span> RETURN TO UNIVERSAL GATEWAY
+    </a>
+</footer>
+</body>
+</html>

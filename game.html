@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Core Runner | MSME Network Simulator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #050a15; color: #e2e8f0; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .terminal-box { border-color: rgba(59, 130, 246, 0.3); box-shadow: 0 0 15px rgba(30, 58, 138, 0.2); }
+        .pulse-emerald { animation: p-glow 2s infinite; }
+        @keyframes p-glow { 0%, 100% { border-color: rgba(16, 185, 129, 0.3); } 50% { border-color: rgba(16, 185, 129, 0.8); } }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col p-4 md:p-6 bg-[#040812]">
+
+    <!-- HUD TERMINAL HEADER -->
+    <header class="w-full max-w-5xl mx-auto border border-blue-900/60 bg-slate-900/40 p-4 rounded-xl flex flex-col md:flex-row justify-between items-center gap-4 mb-6 font-mono text-xs">
+        <div>
+            <h1 class="text-xl font-bold text-blue-400 tracking-wider">KUTS_CORE_RUNNER</h1>
+            <p class="text-slate-400 text-[0.65rem]">SIMULATION TRAINING MODULE // MISSION: AAROHAN 2050</p>
+        </div>
+        <div class="bg-black/50 p-2 rounded border border-blue-900/30 text-emerald-400 text-center break-all w-full md:w-auto">
+            <span class="text-slate-500 block text-[0.55rem]">SYSTEM CLOCK SIGNATURE</span>
+            <span id="game-clock">SYNCING TIME-STREAM...</span>
+        </div>
+        <div class="text-right shrink-0">
+            <span class="text-slate-400">NODE STATUS: </span>
+            <span class="text-emerald-400 animate-pulse font-bold">● TRAINING_GRID_ACTIVE</span>
+        </div>
+    </header>
+
+    <!-- MAIN INTERFACE GRID -->
+    <main class="w-full max-w-5xl mx-auto grid md:grid-cols-12 gap-6 flex-1 items-start">
+        
+        <!-- LEFT COLUMN: CONTROL DECK & MISSIONS -->
+        <section class="md:col-span-4 flex flex-col gap-6">
+            
+            <!-- ACCOUNTS / SCOREBOARD PANEL -->
+            <div class="bg-slate-900/50 border border-blue-900/40 rounded-xl p-4 terminal-box">
+                <h2 class="text-xs text-blue-400 font-bold tracking-widest uppercase mb-3 font-mono">01. Node Resource Balances</h2>
+                <div class="flex flex-col gap-3 font-mono">
+                    <div class="bg-black/40 p-3 rounded border border-slate-800">
+                        <span class="text-[0.65rem] text-slate-500 block">TOTAL MINTED KINE (Ꝃ)</span>
+                        <span id="balance-kine" class="text-xl text-emerald-400 font-bold">0.0000 Ꝃ</span>
+                    </div>
+                    <div class="bg-black/40 p-3 rounded border border-slate-800">
+                        <span class="text-[0.65rem] text-slate-500 block">HARVESTED 1% TDS LAWSUITE (THRIND000)</span>
+                        <span id="balance-tds" class="text-xs text-blue-300">0.0000 Ꝃ</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MISSION GENERATOR CARD -->
+            <div id="mission-card" class="bg-slate-900/80 border border-emerald-800/40 rounded-xl p-4 flex flex-col gap-3 pulse-emerald">
+                <div class="flex justify-between items-center border-b border-emerald-900/40 pb-2">
+                    <h2 class="text-xs text-emerald-400 font-bold tracking-widest uppercase font-mono">02. Active Kinetic Order</h2>
+                    <span id="node-level-tag" class="text-[0.55rem] font-mono bg-blue-950 text-blue-300 px-2 py-0.5 rounded border border-blue-800">LEVEL 3 EDGE</span>
+                </div>
+                <div class="font-mono text-xs">
+                    <span class="text-slate-500 block">TARGET ROUTING PIPELINE:</span>
+                    <span id="mission-target" class="text-slate-200 text-sm font-bold">TUPINS014 // Tiruppur Export Hub</span>
+                </div>
+                <div class="p-3 bg-black/40 rounded border border-slate-800 font-sans text-xs text-slate-300 leading-relaxed">
+                    <span class="font-mono text-[0.65rem] text-orange-400 block mb-1 uppercase font-bold">Telemetry Ingestion Requirement:</span>
+                    <span id="mission-description">Loading operational parameters...</span>
+                </div>
+                <button id="execute-btn" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-mono font-bold py-2.5 px-4 rounded border border-emerald-400 text-xs tracking-wider transition-colors">
+                    EXECUTE KINETIC PULSE >>
+                </button>
+            </div>
+        </section>
+
+        <!-- RIGHT COLUMN: INTERACTIVE DRIFT AUDIT & FEED -->
+        <section class="md:col-span-8 bg-slate-900/30 border border-blue-900/20 rounded-xl p-4 terminal-box flex flex-col h-[520px]">
+            <div class="flex justify-between items-center border-b border-blue-900/40 pb-3 mb-3 shrink-0">
+                <h2 class="text-xs text-blue-400 font-bold tracking-widest uppercase font-mono">03. Decentralized Live Gossip Feed</h2>
+                <div class="text-[0.65rem] font-mono text-slate-500">MDI6000 SECURITY AUDIT PROTOCOL (SAP) SECURITY VETTED</div>
+            </div>
+            
+            <!-- SIMULATED TERMINAL GLITCH TICKER -->
+            <div id="game-ledger-feed" class="flex-1 overflow-y-auto flex flex-col gap-2 pr-1 text-xs font-mono">
+                <!-- Live structural transactions dynamically generated here -->
+                <div class="text-slate-500 italic p-4 text-center">Initialize network handshake to begin tracking asset state logs...</div>
+            </div>
+            
+            <div class="mt-3 p-3 bg-slate-950/80 border border-blue-900/40 rounded-lg text-[0.7rem] font-mono text-slate-400 leading-relaxed shrink-0">
+                <span class="text-blue-400 block font-bold mb-1">💡 OPERATIONS TRAINING NOTES:</span>
+                Under the Least Action Protocol, 99% of work values generate a <span class="text-orange-400">[<<00>>] Kinetic</span> reward pulse. Exactly 300ms later, Category 12 fires a secondary <span class="text-emerald-400">[$00$] Fiscal</span> sweep to auto-harvest the 1% TDS overhead.
+            </div>
+        </section>
+    </main>
+
+    <!-- INLINE SIMULATOR ENGINE ENGINE -->
+    <script>
+        // --- DATA DICTIONARY REPOSITORIES ---
+        const MISSIONS = [
+            { type: "energy", target: "TUPINS014 // Tiruppur Export Hub", desc: "A fabric processing mill demands high-frequency calibration. Expended 250 kWh of Industrial Energy to log production stability.", value: 250 },
+            { type: "distance", target: "ERDINS015 // Erode Agri-Textile Gate", desc: "A cargo fleet initiates transit of organic cotton materials. Complete a 400 km freight run along the corridor routing tracks.", value: 400 },
+            { type: "time", target: "SLMINS016 // Salem Steel Capillary", desc: "An production floor shifts hardware layout configs. Log an 8-Hour specialized labor cycle into the topological capillary ledger.", value: 8 },
+            { type: "energy", target: "KARINS017 // Karur Weaving Axis", desc: "Automated weaving power looms trigger a surge cycle. Verify and pass 120 kWh of kinetic power input values to the meso-grid network.", value: 120 },
+            { type: "distance", target: "PALINP005 // Coimbatore Core", desc: "Dispatched precision sub-components to macro logistics centers. Log a 150 km transport vector using dynamic telecommunication handshakes.", value: 150 }
+        ];
+
+        let currentKineBalance = 0.0000;
+        let currentTdsBalance = 0.0000;
+        let activeMissionIndex = 0;
+
+        // --- MASTER CLOCK LOOP ENGINE ---
+        function runGameClock() {
+            setInterval(() => {
+                const now = new Date();
+                const GE = "0130"; const EE = "05"; const PE = "26"; const TE = "04"; 
+                const Day = now.getDate().toString().padStart(2, '0');
+                const GigaE = now.getHours().toString().padStart(2, '0');
+                const MegaE = now.getMinutes().toString().padStart(2, '0');
+                const KiloE = now.getSeconds().toString().padStart(2, '0');
+                
+                const ms = now.getMilliseconds();
+                const BaseE = Math.floor(ms / 10).toString().padStart(2, '0');
+                const MilliE = Math.floor(Math.random() * 99).toString().padStart(2, '0'); 
+                const MicroE = Math.floor(Math.random() * 99).toString().padStart(2, '0');
+
+                document.getElementById('game-clock').innerText = 
+                    `(+00):${GE}.${EE}.${PE}.${TE}.${Day}.${GigaE}.${MegaE}.${KiloE}.${BaseE}.${MilliE}.${MicroE}`;
+            }, 33);
+        }
+
+        // --- MISSION DISPATCH COUPLER ---
+        function loadNextMission() {
+            activeMissionIndex = Math.floor(Math.random() * MISSIONS.length);
+            const activeOrder = MISSIONS[activeMissionIndex];
+            
+            document.getElementById('mission-target').innerText = activeOrder.target;
+            document.getElementById('mission-description').innerText = activeOrder.desc;
+            
+            // System design logic rule: dynamically set tracking status label matching hierarchy bounds
+            const levelTag = document.getElementById('node-level-tag');
+            if(activeOrder.target.includes("INP")) {
+                levelTag.innerText = "LEVEL 2 PRIMARY";
+                levelTag.className = "text-[0.55rem] font-mono bg-purple-950 text-purple-300 px-2 py-0.5 rounded border border-purple-800";
+            } else {
+                levelTag.innerText = "LEVEL 3 EDGE";
+                levelTag.className = "text-[0.55rem] font-mono bg-blue-950 text-blue-300 px-2 py-0.5 rounded border border-blue-800";
+            }
+        }
+
+        // --- KINETIC SIMULATION PROCESSOR ---
+        function processKineticPulse() {
+            const activeOrder = MISSIONS[activeMissionIndex];
+            const ledgerFeed = document.getElementById('game-ledger-feed');
+            
+            if(ledgerFeed.innerText.includes("Initialize network handshake")) {
+                ledgerFeed.innerHTML = ""; // Clear clean the initial instruction placeholder
+            }
+
+            let totalKineGenerated = 0;
+            let descriptiveSummary = "";
+
+            // Evaluate mapping formula parameters (1 Kine token ruleset architectures)
+            if(activeOrder.type === 'energy') {
+                totalKineGenerated = activeOrder.value / 10;
+                descriptiveSummary = `Verified: ${activeOrder.value} kWh Industrial Energy Expended`;
+            } else if(activeOrder.type === 'distance') {
+                totalKineGenerated = activeOrder.value / 100;
+                descriptiveSummary = `Verified: ${activeOrder.value} km Corridor Transit Checked`;
+            } else if(activeOrder.type === 'time') {
+                totalKineGenerated = activeOrder.value / 8;
+                descriptiveSummary = `Verified: ${activeOrder.value} Hours Labor Processing Fixed`;
+            }
+
+            // Category 12 Split Calculations
+            const userRewardShare = totalKineGenerated * 0.99;
+            const systemTdsShare = totalKineGenerated * 0.01;
+
+            // Step A: Push the immediate Kinetic Reward Block
+            const kTimeString = document.getElementById('game-clock').innerText.split(':')[1];
+            const kineticHTML = `
+                <div class="p-2.5 bg-orange-950/20 border border-orange-900/40 rounded-lg flex flex-col gap-1 transition-all hover:border-orange-500/50">
+                    <div class="flex justify-between text-[0.6rem]">
+                        <span class="text-orange-400 bg-orange-950/60 px-1 rounded font-bold">[<<00>>] KINETIC RECORD</span>
+                        <span class="text-slate-500">${kTimeString}</span>
+                    </div>
+                    <div class="text-slate-200 font-semibold">${descriptiveSummary}</div>
+                    <div class="flex justify-between text-[0.65rem] border-t border-slate-800 pt-1 mt-1">
+                        <span class="text-orange-300/80">NODE_SRC: MOCK_USER_POINT</span>
+                        <span class="text-emerald-400 font-bold">+${userRewardShare.toFixed(4)} Ꝃ</span>
+                    </div>
+                </div>`;
+            ledgerFeed.insertAdjacentHTML('afterbegin', kineticHTML);
+
+            // Dynamically add rewards to dashboard balance views
+            currentKineBalance += userRewardShare;
+            document.getElementById('balance-kine').innerText = `${currentKineBalance.toFixed(4)} Ꝃ`;
+
+            // Step B: Lock out execution, then fire the compliance TDS sweep exactly 300ms later
+            setTimeout(() => {
+                const fTimeString = document.getElementById('game-clock').innerText.split(':')[1];
+                const fiscalHTML = `
+                    <div class="p-2.5 bg-emerald-950/20 border border-emerald-900/40 rounded-lg flex flex-col gap-1 transition-all hover:border-emerald-500/50">
+                        <div class="flex justify-between text-[0.6rem]">
+                            <span class="text-emerald-400 bg-emerald-950/60 px-1 rounded font-bold">[$00$] FISCAL HARVEST</span>
+                            <span class="text-slate-500">${fTimeString}</span>
+                        </div>
+                        <div class="text-slate-200">Category 12 Automation: 1% TDS Extracted From Ledger Token Stream</div>
+                        <div class="flex justify-between text-[0.65rem] border-t border-slate-800 pt-1 mt-1">
+                            <span class="text-blue-400">NODE_TARGET: THRIND000</span>
+                            <span class="text-blue-300 font-bold">+${systemTdsShare.toFixed(4)} Ꝃ</span>
+                        </div>
+                    </div>`;
+                ledgerFeed.insertAdjacentHTML('afterbegin', fiscalHTML);
+
+                currentTdsBalance += systemTdsShare;
+                document.getElementById('balance-tds').innerText = `${currentTdsBalance.toFixed(4)} Ꝃ`;
+                
+                // Limit ledger array feed visually to avoid scrolling memory leaks
+                if(ledgerFeed.children.length > 8) ledgerFeed.removeChild(ledgerFeed.lastChild);
+            }, 300);
+
+            // Cycle active operational requirements
+            loadNextMission();
+        }
+
+        // --- REGISTER BOOTLOADER CONTEXT ---
+        window.addEventListener('DOMContentLoaded', () => {
+            runGameClock();
+            loadNextMission();
+            document.getElementById('execute-btn').addEventListener('click', processKineticPulse);
+        });
+    </script>
+<!-- Universal Gateway Return Link -->
+<footer class="max-w-7xl mx-auto mt-12 py-8 border-t border-slate-800 text-center">
+    <a href="index.html" class="inline-flex items-center gap-2 text-[0.7rem] text-slate-500 hover:text-blue-400 font-mono uppercase tracking-widest transition-all">
+        <span class="text-lg">←</span> RETURN TO UNIVERSAL GATEWAY
+    </a>
+</footer>
+</body>
+</html>

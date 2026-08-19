@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Global Hub | External Gateway</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #030712; color: #cbd5e1; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .glow-blue { box-shadow: 0 0 25px rgba(59, 130, 246, 0.1); border-color: rgba(59, 130, 246, 0.25); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col p-4 md:p-6 bg-[#030712]">
+
+    <header class="w-full max-w-7xl mx-auto border border-slate-800 bg-slate-900/50 p-4 rounded-xl flex flex-col sm:flex-row justify-between items-center gap-4 mb-6 font-mono text-xs backdrop-blur-sm">
+        <div>
+            <h1 class="text-base font-bold text-blue-400 tracking-wider">KUTS_GLOBAL_HUB</h1>
+            <p class="text-slate-500 text-[0.6rem] uppercase tracking-wider">External Matrix & Platform Access Layer</p>
+        </div>
+        <div class="flex items-center gap-3">
+            <a href="KUTS-Module-Menu.html" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded border border-slate-700">← Control Center</a>
+        </div>
+    </header>
+
+    <main class="w-full max-w-7xl mx-auto flex-1 space-y-6">
+        <!-- Search filter bar -->
+        <div class="bg-slate-900/50 border border-slate-800 p-4 rounded-xl flex items-center gap-4">
+            <span class="font-mono text-xs text-blue-400 uppercase">Filter Hub:</span>
+            <input type="text" id="hub-search" placeholder="Type platform name..." onkeyup="filterHub()" class="flex-1 bg-black border border-slate-800 p-2 rounded text-xs font-mono text-slate-200 outline-none focus:border-blue-500">
+        </div>
+
+        <!-- Links Grid Container -->
+        <div id="hub-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 font-mono text-xs">
+            
+            <!-- AI Platforms Section -->
+            <div class="bg-slate-900/30 border border-slate-800 rounded-xl p-4 space-y-3 hub-category">
+                <h2 class="text-blue-400 font-bold uppercase tracking-widest border-b border-slate-800 pb-2">01. AI Platforms</h2>
+                <div class="space-y-2">
+                    <a href="https://aistudio.google.com" target="_blank" class="block bg-black/40 hover:bg-blue-950/30 border border-slate-800 hover:border-blue-800 p-3 rounded transition-all flex justify-between items-center group">
+                        <span class="text-slate-200 font-bold">Google AI Studio / Gemini</span>
+                        <span class="text-blue-400 text-[0.6rem] group-hover:translate-x-1 transition-transform">CONNECT →</span>
+                    </a>
+                    <a href="https://chatgpt.com" target="_blank" class="block bg-black/40 hover:bg-blue-950/30 border border-slate-800 hover:border-blue-800 p-3 rounded transition-all flex justify-between items-center group">
+                        <span class="text-slate-200 font-bold">OpenAI ChatGPT</span>
+                        <span class="text-blue-400 text-[0.6rem] group-hover:translate-x-1 transition-transform">CONNECT →</span>
+                    </a>
+                    <a href="https://claude.ai" target="_blank" class="block bg-black/40 hover:bg-blue-950/30 border border-slate-800 hover:border-blue-800 p-3 rounded transition-all flex justify-between items-center group">
+                        <span class="text-slate-200 font-bold">Anthropic Claude</span>
+                        <span class="text-blue-400 text-[0.6rem] group-hover:translate-x-1 transition-transform">CONNECT →</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Search Engines Section -->
+            <div class="bg-slate-900/30 border border-slate-800 rounded-xl p-4 space-y-3 hub-category">
+                <h2 class="text-blue-400 font-bold uppercase tracking-widest border-b border-slate-800 pb-2">02. Search Engines</h2>
+                <div class="space-y-2">
+                    <a href="https://www.google.com" target="_blank" class="block bg-black/40 hover:bg-blue-950/30 border border-slate-800 hover:border-blue-800 p-3 rounded transition-all flex justify-between items-center group">
+                        <span class="text-slate-200 font-bold">Google Search</span>
+                        <span class="text-blue-400 text-[0.6rem] group-hover:translate-x-1 transition-transform">LAUNCH →</span>
+                    </a>
+                    <a href="https://www.perplexity.ai" target="_blank" class="block bg-black/40 hover:bg-blue-950/30 border border-slate-800 hover:border-blue-800 p-3 rounded transition-all flex justify-between items-center group">
+                        <span class="text-slate-200 font-bold">Perplexity AI</span>
+                        <span class="text-blue-400 text-[0.6rem] group-hover:translate-x-1 transition-transform">LAUNCH →</span>
+                    </a>
+                    <a href="https://duckduckgo.com" target="_blank" class="block bg-black/40 hover:bg-blue-950/30 border border-slate-800 hover:border-blue-800 p-3 rounded transition-all flex justify-between items-center group">
+                        <span class="text-slate-200 font-bold">DuckDuckGo</span>
+                        <span class="text-blue-400 text-[0.6rem] group-hover:translate-x-1 transition-transform">LAUNCH →</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Social Media Section -->
+            <div class="bg-slate-900/30 border border-slate-800 rounded-xl p-4 space-y-3 hub-category">
+                <h2 class="text-blue-400 font-bold uppercase tracking-widest border-b border-slate-800 pb-2">03. Social & Code</h2>
+                <div class="space-y-2">
+                    <a href="https://x.com" target="_blank" class="block bg-black/40 hover:bg-blue-950/30 border border-slate-800 hover:border-blue-800 p-3 rounded transition-all flex justify-between items-center group">
+                        <span class="text-slate-200 font-bold">X (Twitter)</span>
+                        <span class="text-blue-400 text-[0.6rem] group-hover:translate-x-1 transition-transform">OPEN →</span>
+                    </a>
+                    <a href="https://www.linkedin.com" target="_blank" class="block bg-black/40 hover:bg-blue-950/30 border border-slate-800 hover:border-blue-800 p-3 rounded transition-all flex justify-between items-center group">
+                        <span class="text-slate-200 font-bold">LinkedIn</span>
+                        <span class="text-blue-400 text-[0.6rem] group-hover:translate-x-1 transition-transform">OPEN →</span>
+                    </a>
+                    <a href="https://github.com" target="_blank" class="block bg-black/40 hover:bg-blue-950/30 border border-slate-800 hover:border-blue-800 p-3 rounded transition-all flex justify-between items-center group">
+                        <span class="text-slate-200 font-bold">GitHub</span>
+                        <span class="text-blue-400 text-[0.6rem] group-hover:translate-x-1 transition-transform">OPEN →</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        function filterHub() {
+            const query = document.getElementById('hub-search').value.toLowerCase();
+            const cards = document.querySelectorAll('#hub-grid a');
+            
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    card.style.display = "flex";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+    </script>
+<!-- KUTS Universal Domain Footer -->
+<footer class="kuts-domain-footer">
+    <div class="footer-container">
+        <div class="footer-brand">
+            <span class="brand-dot"></span>
+            <strong>KUTS Ecosystem</strong>
+            <small>Global Navigation Matrix</small>
+        </div>
+        <nav class="domain-nav" aria-label="System Domains">
+            <a href="KUTS-Module-Menu.html?filter=core" class="domain-link">Core & Gateways</a>
+            <span class="divider" aria-hidden="true">•</span>
+            <a href="KUTS-Module-Menu.html?filter=finance" class="domain-link">Finance</a>
+            <span class="divider" aria-hidden="true">•</span>
+            <a href="KUTS-Module-Menu.html?filter=governance" class="domain-link">Governance</a>
+            <span class="divider" aria-hidden="true">•</span>
+            <a href="KUTS-Module-Menu.html?filter=operations" class="domain-link">Operations</a>
+            <span class="divider" aria-hidden="true">•</span>
+            <a href="KUTS-Module-Menu.html?filter=academy" class="domain-link">Academy</a>
+            <span class="divider" aria-hidden="true">•</span>
+            <a href="KUTS-Module-Menu.html?filter=network" class="domain-link">Network</a>
+            <span class="divider" aria-hidden="true">•</span>
+            <a href="KUTS-Module-Menu.html?filter=tools" class="domain-link">Tools</a>
+        </nav>
+    </div>
+    <div class="footer-bottom">
+        <p> © 2026 PINALEAF ADVANCEMENTS LLP // MD16000 ARCHITECTURE // AAROHAN 2050 </p>
+    </div>
+
+    <style>
+        .kuts-domain-footer {
+            width: 100%;
+            background: rgba(7, 11, 18, 0.92);
+            border-top: 1px solid #1e2a3a;
+            padding: 20px 24px 14px;
+            margin-top: auto;
+            font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+            color: #91a1b8;
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #edf4ff;
+        }
+        .footer-brand strong {
+            letter-spacing: 0.05em;
+        }
+        .footer-brand small {
+            color: #687a93;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-left: 1px solid #1e2a3a;
+            padding-left: 8px;
+        }
+        .brand-dot {
+            width: 6px;
+            height: 6px;
+            background: #35d39a;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #35d39a;
+        }
+        .domain-nav {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            font-size: 12px;
+        }
+        .domain-link {
+            color: #91a1b8;
+            text-decoration: none;
+            transition: color 0.15s ease;
+        }
+        .domain-link:hover {
+            color: #61a5ff;
+            text-decoration: underline;
+        }
+        .divider {
+            color: #2a3b51;
+            font-size: 10px;
+        }
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 14px auto 0;
+            padding-top: 10px;
+            border-top: 1px solid rgba(30, 42, 58, 0.5);
+            text-align: center;
+            font-size: 10px;
+            color: #5f7088;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+        @media (max-width: 768px) {
+            .footer-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .domain-nav {
+                gap: 8px;
+            }
+            .divider {
+                display: none;
+            }
+            .domain-link {
+                background: #0d1420;
+                border: 1px solid #1e2a3a;
+                padding: 4px 8px;
+                border-radius: 6px;
+                font-size: 11px;
+            }
+        }
+    </style>
+</footer>
+</body>
+</html>

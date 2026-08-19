@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Europe & Central Asia Grid | 24 Primary Anchor Nodes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="core/auth-bridge.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght=300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #030712; color: #cbd5e1; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .module-card { background: rgba(17, 24, 39, 0.5); border: 1px solid rgba(30, 41, 59, 1); transition: all 0.3s; }
+        .module-card:hover { border-color: rgba(16, 185, 129, 0.5); box-shadow: 0 0 15px rgba(16, 185, 129, 0.1); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <div>
+        <!-- GLOBAL HEADER -->
+        <header class="border-b border-slate-800 p-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div>
+                <h1 class="text-3xl font-bold text-emerald-400 font-mono tracking-widest">KUTS_EUROPE_SUBGRID</h1>
+                <p class="text-slate-500 mt-1 font-mono text-sm">Level 2 Meso-Grid // 24-Node Europe & Central Asia Allocation</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <input type="text" id="searchInput" placeholder="Search hubs, industrial axes, ID..." 
+                       onkeyup="filterNodes()" class="bg-slate-900 border border-slate-700 p-2 rounded text-sm text-slate-200 font-mono w-72">
+                <a href="index.html" class="bg-slate-800 hover:bg-slate-700 text-emerald-300 font-mono px-4 py-2 rounded text-sm border border-slate-700 transition-colors">
+                    << Return to Gateway
+                </a>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main class="max-w-7xl mx-auto px-6 py-12">
+            <section class="flex flex-col gap-6 mb-10">
+                <div class="font-mono text-xs text-emerald-400 bg-emerald-950/40 border border-emerald-800/60 px-3 py-1 rounded self-start uppercase tracking-widest">
+                    ● Regional Allocation // Industrial & Fiscal Gateways
+                </div>
+                <h2 class="text-4xl font-bold leading-tight text-white">
+                    Europe & Central Asia <span class="text-emerald-500">24-Node Primary Corridor</span>
+                </h2>
+                <p class="text-slate-400 max-w-3xl text-base">
+                    As part of the 144-node harmonic expansion, the Europe and Central Asia region is allocated 24 dedicated Level 2 Primary Anchor Nodes. These nodes bridge Western industrial and fiscal centers with Eurasian boreal shields and steppe transit corridors, maintaining systemic data synchronicity.
+                </p>
+
+                <!-- CORRIDOR METRICS BAR -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 font-mono text-xs mt-2">
+                    <div class="bg-slate-900/80 border border-slate-800 p-3 rounded">
+                        <span class="text-emerald-400 block font-bold text-lg">24 Nodes</span>
+                        <span class="text-slate-400">Total European/Central Asian Allocation[cite: 4]</span>
+                    </div>
+                    <div class="bg-slate-900/80 border border-slate-800 p-3 rounded">
+                        <span class="text-cyan-400 block font-bold text-lg">Fiscal Axes</span>
+                        <span class="text-slate-400">Primary Financial Gateways</span>
+                    </div>
+                    <div class="bg-slate-900/80 border border-slate-800 p-3 rounded">
+                        <span class="text-blue-400 block font-bold text-lg">Steppe Shields</span>
+                        <span class="text-slate-400">Eurasian Boreal Integration</span>
+                    </div>
+                    <div class="bg-slate-900/80 border border-slate-800 p-3 rounded">
+                        <span class="text-purple-400 block font-bold text-lg">Least Action</span>
+                        <span class="text-slate-400">Upstream Routing Protocol</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- NODES TABLE CONTAINER -->
+            <section class="module-card rounded-xl overflow-hidden border border-slate-800">
+                <div class="overflow-x-auto">
+                    <table id="europeNodesTable" class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-900/80 border-b border-slate-800 font-mono text-xs text-slate-400 uppercase tracking-wider">
+                                <th class="p-4">Designation</th>
+                                <th class="p-4">Location / Core Hub</th>
+                                <th class="p-4">Industrial / Kinetic Focus</th>
+                                <th class="p-4">Global ID (9-Digit)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800/60 text-sm text-slate-300 font-mono">
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="eu-001 prime meridian anchor london uk ldnukc001">
+                                <td class="p-4 text-emerald-400 font-bold">EU-001</td>
+                                <td class="p-4 text-white font-semibold">London</td>
+                                <td class="p-4 text-slate-400">Prime Meridian & Western Fiscal Exchange[cite: 4]</td>
+                                <td class="p-4 text-cyan-400 font-bold">LDNUKC001</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="eu-002 central european axis berlin germany berdec019">
+                                <td class="p-4 text-emerald-400 font-bold">EU-002</td>
+                                <td class="p-4 text-white font-semibold">Berlin</td>
+                                <td class="p-4 text-slate-400">Central European Industrial Axis[cite: 4]</td>
+                                <td class="p-4 text-cyan-400 font-bold">BERDEC019</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="eu-003 sub polar atlantic anchor reykjavik iceland rekisc015">
+                                <td class="p-4 text-emerald-400 font-bold">EU-003</td>
+                                <td class="p-4 text-white font-semibold">Reykjavik</td>
+                                <td class="p-4 text-slate-400">Sub-Polar Atlantic Geothermal & Energy Node[cite: 4]</td>
+                                <td class="p-4 text-cyan-400 font-bold">REKISC015</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="eu-004 eurasian boreal shield moscow russia mowruc021">
+                                <td class="p-4 text-emerald-400 font-bold">EU-004</td>
+                                <td class="p-4 text-white font-semibold">Moscow</td>
+                                <td class="p-4 text-slate-400">Eurasian Boreal Shield & Grid Coordination[cite: 4]</td>
+                                <td class="p-4 text-cyan-400 font-bold">MOWRUC021</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="eu-005 eurasian steppe anchor almaty kazakhstan alakzc028">
+                                <td class="p-4 text-emerald-400 font-bold">EU-005</td>
+                                <td class="p-4 text-white font-semibold">Almaty</td>
+                                <td class="p-4 text-slate-400">Eurasian Steppe Overland Anchor[cite: 4]</td>
+                                <td class="p-4 text-cyan-400 font-bold">ALAKZC028</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="eu-006 paris france aerospace engineering">
+                                <td class="p-4 text-emerald-400 font-bold">EU-006</td>
+                                <td class="p-4 text-white font-semibold">Paris</td>
+                                <td class="p-4 text-slate-400">Aerospace Engineering & Western European Logistics</td>
+                                <td class="p-4 text-cyan-400 font-bold">PARFRP006</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="eu-007 frankfurt germany central banking">
+                                <td class="p-4 text-emerald-400 font-bold">EU-007</td>
+                                <td class="p-4 text-white font-semibold">Frankfurt</td>
+                                <td class="p-4 text-slate-400">Central Banking Ledger & Continental Settlement</td>
+                                <td class="p-4 text-cyan-400 font-bold">FRAGERP007</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="eu-008 rome italy mediterranean trade">
+                                <td class="p-4 text-emerald-400 font-bold">EU-008</td>
+                                <td class="p-4 text-white font-semibold">Rome</td>
+                                <td class="p-4 text-slate-400">Mediterranean Trade Pivot & Infrastructure Core</td>
+                                <td class="p-4 text-cyan-400 font-bold">ROMITP008</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="eu-009 rotterdam netherlands port logistics">
+                                <td class="p-4 text-emerald-400 font-bold">EU-009</td>
+                                <td class="p-4 text-white font-semibold">Rotterdam</td>
+                                <td class="p-4 text-slate-400">Primary European Maritime Port & Freight Terminal</td>
+                                <td class="p-4 text-cyan-400 font-bold">ROTNLp009</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="eu-010 warsaw poland eastern manufacturing">
+                                <td class="p-4 text-emerald-400 font-bold">EU-010</td>
+                                <td class="p-4 text-white font-semibold">Warsaw</td>
+                                <td class="p-4 text-slate-400">Eastern European Manufacturing & Transit Hub</td>
+                                <td class="p-4 text-cyan-400 font-bold">WARPLP010</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="eu-011 through eu-024 extended european nodes">
+                                <td class="p-4 text-emerald-400 font-bold">EU-011 → EU-024</td>
+                                <td class="p-4 text-white font-semibold">Extended Regional Nodes (Madrid, Stockholm, Zurich, Vienna, Istanbul, Kyiv, Tashkent, Minsk, Oslo, Copenhagen, etc.)</td>
+                                <td class="p-4 text-slate-400">Continental Capillaries & Regional Energy Corridors</td>
+                                <td class="p-4 text-cyan-400 font-bold">EURINP011-024</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-800 mt-16 py-8 px-6 bg-slate-950 text-center font-mono text-xs text-slate-500">
+        <p>© 2026 PINALEAF ADVANCEMENTS LLP // AAROHAN 2050 // EUROPE & CENTRAL ASIA 24-NODE MESH</p>
+    </footer>
+
+    <!-- INTERACTION SCRIPT -->
+    <script>
+        function filterNodes() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            document.querySelectorAll('.node-row').forEach(row => {
+                const searchData = row.getAttribute('data-search');
+                row.style.display = searchData.includes(input) ? "" : "none";
+            });
+        }
+        window.onload = updateAuthUI;
+    </script>
+</body>
+</html>

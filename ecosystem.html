@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KUTS Ecosystem // Master Index & Node Control</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #030712;
+      --panel: rgba(15, 23, 42, 0.78);
+      --border: rgba(148, 163, 184, 0.14);
+      --electric-blue: #38bdf8;
+      --emerald: #34d399;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: #e5e7eb;
+      background: radial-gradient(circle at 50% -10%, rgba(56, 189, 248, 0.10), transparent 38%), var(--bg);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .mono {
+      font-family: 'Share Tech Mono', monospace;
+    }
+
+    .grid-bg {
+      background-image:
+        linear-gradient(rgba(148, 163, 184, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(148, 163, 184, 0.035) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .node-card {
+      transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .node-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(56, 189, 248, 0.4);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+    }
+
+    .glass-card {
+      background: rgba(15, 23, 42, 0.68);
+      border: 1px solid rgba(30, 41, 59, 1);
+      backdrop-filter: blur(12px);
+      transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    }
+
+    .glass-card:hover {
+      border-color: rgba(56, 189, 248, 0.6);
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .pulse {
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+        box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.35);
+      }
+      50% {
+        opacity: 0.65;
+        box-shadow: 0 0 0 7px rgba(52, 211, 153, 0);
+      }
+    }
+
+    .search-field {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(30, 41, 59, 1);
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .search-field:focus {
+      border-color: var(--electric-blue);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.12);
+    }
+
+    .filter-btn.active {
+      background-color: rgba(56, 189, 248, 0.2);
+      border-color: var(--electric-blue);
+      color: #f8fafc;
+      box-shadow: 0 0 14px rgba(56, 189, 248, 0.12);
+    }
+  </style>
+</head>
+
+<body class="grid-bg min-h-screen flex flex-col justify-between p-4 md:p-8">
+
+  <!-- HEADER -->
+  <header class="w-full max-w-7xl mx-auto border-b border-slate-800/80 pb-5">
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="h-9 w-9 rounded-lg bg-blue-600/20 border border-blue-500/40 flex items-center justify-center font-mono font-bold text-sky-400">
+          ⚡
+        </div>
+        <div>
+          <div class="mono text-xs tracking-[0.25em] text-sky-400">
+            KUTS // MASTER INDEX & NODE CONTROL
+          </div>
+          <h1 class="text-lg md:text-xl font-semibold tracking-tight text-slate-100">
+            Ecosystem Control Matrix
+          </h1>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <div class="flex items-center gap-2 bg-slate-900/90 px-3 py-1.5 rounded border border-slate-800 font-mono text-xs">
+          <div id="systemDot" class="w-2.5 h-2.5 rounded-full bg-emerald-400 pulse"></div>
+          <span id="systemStatus" class="mono text-xs text-emerald-400 font-bold">LIVE</span>
+        </div>
+        <a href="sign-in.html" class="bg-blue-900 hover:bg-blue-800 text-white font-mono font-bold px-4 py-2 rounded transition-all uppercase tracking-wider text-[0.65rem]">
+          OPERATOR ACCESS
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT AREA -->
+  <main class="w-full max-w-7xl mx-auto py-8 flex-1 flex flex-col gap-10">
+
+    <!-- HERO / SEARCH SECTION -->
+    <section class="text-center max-w-3xl mx-auto space-y-4">
+      <span class="px-3 py-1 rounded-full bg-blue-950/40 border border-blue-800/60 text-blue-400 font-mono text-xs uppercase tracking-widest">
+        Kinetic Unified Temporal Synchronization
+      </span>
+      <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-white font-mono">
+        Unified Ecosystem <span class="text-sky-400">Index</span>
+      </h2>
+      <p class="text-slate-400 text-sm md:text-base leading-relaxed">
+        Real-time node telemetry merged with instant search access across architectural specifications, spatial ledgers, and modules.
+      </p>
+
+      <!-- SEARCH INPUT -->
+      <div class="pt-2 relative max-w-2xl mx-auto">
+        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-sky-400 font-mono">
+          🔍
+        </div>
+        <input
+          type="text"
+          id="ecosystem-search"
+          oninput="filterModules()"
+          placeholder="Search modules (e.g., global, chronometer, academic, wallet)..."
+          class="search-field w-full rounded-xl pl-12 pr-4 py-3.5 text-sm text-slate-100 placeholder-slate-500 font-mono focus:outline-none shadow-xl"
+        >
+      </div>
+
+      <!-- FILTER BUTTONS -->
+      <div class="flex flex-wrap justify-center gap-2 pt-2 font-mono text-xs">
+        <button onclick="setFilter('ALL')" class="filter-btn active px-3 py-1.5 rounded bg-slate-900 border border-slate-800 text-slate-400" data-filter="ALL">All Systems</button>
+        <button onclick="setFilter('CORE')" class="filter-btn px-3 py-1.5 rounded bg-slate-900 border border-slate-800 text-slate-400 hover:text-white" data-filter="CORE">Core &amp; Specs</button>
+        <button onclick="setFilter('COSMOLOGY')" class="filter-btn px-3 py-1.5 rounded bg-slate-900 border border-slate-800 text-slate-400 hover:text-white" data-filter="COSMOLOGY">Cosmology</button>
+        <button onclick="setFilter('SPATIAL')" class="filter-btn px-3 py-1.5 rounded bg-slate-900 border border-slate-800 text-slate-400 hover:text-white" data-filter="SPATIAL">Spatial Ledger</button>
+        <button onclick="setFilter('ACADEMY')" class="filter-btn px-3 py-1.5 rounded bg-slate-900 border border-slate-800 text-slate-400 hover:text-white" data-filter="ACADEMY">UCM Academy</button>
+      </div>
+    </section>
+
+    <!-- LIVE NODE TELEMETRY LAYER -->
+    <section>
+      <div class="flex items-center justify-between mb-4">
+        <div>
+          <div class="mono text-[10px] uppercase tracking-[0.2em] text-slate-500">
+            Live Telemetry
+          </div>
+          <h3 class="text-base font-semibold text-slate-200 font-mono">
+            Active Node Hierarchy
+          </h3>
+        </div>
+        <div id="lastUpdate" class="mono text-[10px] text-slate-400">
+          Last Sync: --
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <!-- GLOBAL NODE -->
+        <article id="globalCard" class="node-card panel rounded-2xl p-6">
+          <div class="flex items-start justify-between">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center bg-sky-400/10 border border-sky-400/20 text-sky-400">
+              ◎
+            </div>
+            <span id="globalStatus" class="mono text-[10px] px-2.5 py-1 rounded-full bg-emerald-400/10 text-emerald-400 font-semibold">
+              ACTIVE
+            </span>
+          </div>
+          <div class="mt-5">
+            <div class="mono text-[10px] uppercase tracking-[0.2em] text-slate-500">Global Node</div>
+            <h4 id="globalName" class="mt-1 text-lg font-semibold text-slate-100 font-mono">THRINC000</h4>
+            <p id="globalRegion" class="mt-0.5 text-xs text-slate-400">Global Anchor</p>
+          </div>
+          <div class="mt-5 pt-4 border-t border-slate-800/80 grid grid-cols-2 gap-4">
+            <div>
+              <div class="mono text-[9px] text-slate-500 uppercase">Latency</div>
+              <div id="globalLatency" class="mono text-xs text-slate-300 mt-0.5">-- ms</div>
+            </div>
+            <div>
+              <div class="mono text-[9px] text-slate-500 uppercase">Sync</div>
+              <div id="globalSync" class="mono text-xs text-emerald-400 mt-0.5">100%</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- PRIMARY NODE -->
+        <article id="primaryCard" class="node-card panel rounded-2xl p-6">
+          <div class="flex items-start justify-between">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center bg-violet-400/10 border border-violet-400/20 text-violet-400">
+              ◈
+            </div>
+            <span id="primaryStatus" class="mono text-[10px] px-2.5 py-1 rounded-full bg-emerald-400/10 text-emerald-400 font-semibold">
+              ACTIVE
+            </span>
+          </div>
+          <div class="mt-5">
+            <div class="mono text-[10px] uppercase tracking-[0.2em] text-slate-500">Primary Node</div>
+            <h4 id="primaryName" class="mt-1 text-lg font-semibold text-slate-100 font-mono">PRIMARY-001</h4>
+            <p id="primaryRegion" class="mt-0.5 text-xs text-slate-400">Thrissur / India</p>
+          </div>
+          <div class="mt-5 pt-4 border-t border-slate-800/80 grid grid-cols-2 gap-4">
+            <div>
+              <div class="mono text-[9px] text-slate-500 uppercase">Latency</div>
+              <div id="primaryLatency" class="mono text-xs text-slate-300 mt-0.5">-- ms</div>
+            </div>
+            <div>
+              <div class="mono text-[9px] text-slate-500 uppercase">Sync</div>
+              <div id="primarySync" class="mono text-xs text-emerald-400 mt-0.5">100%</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- SECONDARY NODE -->
+        <article id="secondaryCard" class="node-card panel rounded-2xl p-6">
+          <div class="flex items-start justify-between">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center bg-emerald-400/10 border border-emerald-400/20 text-emerald-400">
+              ◇
+            </div>
+            <span id="secondaryStatus" class="mono text-[10px] px-2.5 py-1 rounded-full bg-emerald-400/10 text-emerald-400 font-semibold">
+              ACTIVE
+            </span>
+          </div>
+          <div class="mt-5">
+            <div class="mono text-[10px] uppercase tracking-[0.2em] text-slate-500">Secondary Node</div>
+            <h4 id="secondaryName" class="mt-1 text-lg font-semibold text-slate-100 font-mono">SECONDARY-001</h4>
+            <p id="secondaryRegion" class="mt-0.5 text-xs text-slate-400">Regional Replica</p>
+          </div>
+          <div class="mt-5 pt-4 border-t border-slate-800/80 grid grid-cols-2 gap-4">
+            <div>
+              <div class="mono text-[9px] text-slate-500 uppercase">Latency</div>
+              <div id="secondaryLatency" class="mono text-xs text-slate-300 mt-0.5">-- ms</div>
+            </div>
+            <div>
+              <div class="mono text-[9px] text-slate-500 uppercase">Sync</div>
+              <div id="secondarySync" class="mono text-xs text-emerald-400 mt-0.5">99%</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- MODULE CARDS GRID -->
+    <section class="space-y-4">
+      <div class="mono text-[10px] uppercase tracking-[0.2em] text-slate-500">
+        Catalog Directory
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="modules-grid">
+        <!-- Populated via JavaScript -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="w-full max-w-7xl mx-auto border-t border-slate-800 mt-12 py-6 text-center font-mono text-xs text-slate-500 flex flex-col md:flex-row justify-between items-center gap-4">
+    <div>
+      © 2026 PINALEAF ADVANCEMENTS LLP // AAROHAN 2050 // ALL RIGHTS RESERVED.
+    </div>
+    <div class="flex gap-6">
+      <span id="networkState" class="text-emerald-400">NETWORK SYNCHRONIZED</span>
+    </div>
+  </footer>
+
+  <!-- COMBINED APPLICATION SCRIPT -->
+  <script>
+    const API_ENDPOINT = "/api/nodes";
+    const REFRESH_INTERVAL = 5000;
+
+    const fallbackState = {
+      global: { id: "THRINC000", region: "Global Anchor", status: "ACTIVE", latency: 12, sync: 100 },
+      primary: { id: "PRIMARY-001", region: "Thrissur / India", status: "ACTIVE", latency: 18, sync: 100 },
+      secondary: { id: "SECONDARY-001", region: "Regional Replica", status: "ACTIVE", latency: 24, sync: 99 }
+    };
+
+    const KUTS_MASTER_INDEX = [
+      {
+        title: "Aarohan Chronos Runtime HUD",
+        file: "aarohan-chronos/index.html",
+        layer: "CORE",
+        badge: "bg-blue-950 text-blue-400 border-blue-900",
+        desc: "High-resolution chronometer engine, daily pulse minting interface, and P2P mesh simulator."
+      },
+      {
+        title: "KUTS Master Template Specification",
+        file: "KUTS_Master_Template_Updated_20260624.pdf",
+        layer: "CORE",
+        badge: "bg-blue-950 text-blue-400 border-blue-900",
+        desc: "Technical abstract, 64-order base-100 geometric scaling architecture, and 22-digit serial protocol."
+      },
+      {
+        title: "Master Operational Template",
+        file: "KUTS_Operational_Template_D01.pdf",
+        layer: "CORE",
+        badge: "bg-amber-950 text-amber-400 border-amber-900",
+        desc: "System constitution governing triple-split distribution (98% reward, 1% TDS, 1% RSP) and daily pulse workflows."
+      },
+      {
+        title: "Universal Genesis String Addendum",
+        file: "KUTS_Master_Template_Addendum_Final_D01.pdf",
+        layer: "COSMOLOGY",
+        badge: "bg-purple-950 text-purple-400 border-purple-900",
+        desc: "Theoretical cosmology mapping the Big Bang singularity, Planck Wall floor, and early macro-epochs."
+      },
+      {
+        title: "Planetary Geodesic 34-Node Grid",
+        file: "global-nodes.html",
+        layer: "SPATIAL",
+        badge: "bg-cyan-950 text-cyan-400 border-cyan-900",
+        desc: "Comprehensive directory of Level 1 Global Anchor Nodes anchored by Thrissur origin node THRINC000."
+      },
+      {
+        title: "Level 2 Primary Meso-Grid (144 Nodes)",
+        file: "apac-nodes-30.html",
+        layer: "SPATIAL",
+        badge: "bg-cyan-950 text-cyan-400 border-cyan-900",
+        desc: "Meso-grid economic clusters weighted by industrial density and MSME distribution corridors."
+      },
+      {
+        title: "Level 3 Secondary Micro-Grid (1,728 Nodes)",
+        file: "nodes-index.html",
+        layer: "SPATIAL",
+        badge: "bg-cyan-950 text-cyan-400 border-cyan-900",
+        desc: "Topological capillaries and edge-compute gateways connecting localized industrial estates."
+      },
+      {
+        title: "KUTS Academy Master Portal",
+        file: "academy.html",
+        layer: "ACADEMY",
+        badge: "bg-emerald-950 text-emerald-400 border-emerald-400",
+        desc: "Users Club Membership (UCM) training ground for MSMEs, merchants, and strategic workers."
+      },
+      {
+        title: "Sandbox & Key Minting Terminal",
+        file: "academy-sandbox.html",
+        layer: "ACADEMY",
+        badge: "bg-emerald-950 text-emerald-400 border-emerald-400",
+        desc: "Zero-risk simulation terminal for testing escrow splits and minting permanent 22-digit keys."
+      },
+      {
+        title: "Local Node Wallet Ledger",
+        file: "account.html",
+        layer: "CORE",
+        badge: "bg-amber-950 text-amber-400 border-amber-900",
+        desc: "Net settled Kine balances, credit/debit tracking, and transaction history export utilities."
+      }
+    ];
+
+    let activeFilter = 'ALL';
+
+    function setText(id, value) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = value;
+    }
+
+    function updateNode(prefix, node) {
+      setText(`${prefix}Name`, node.id);
+      setText(`${prefix}Region`, node.region);
+      setText(`${prefix}Latency`, `${node.latency} ms`);
+      setText(`${prefix}Sync`, `${node.sync}%`);
+      setText(`${prefix}Status`, node.status);
+    }
+
+    function updateDashboard(data) {
+      updateNode("global", data.global);
+      updateNode("primary", data.primary);
+      updateNode("secondary", data.secondary);
+      setText("lastUpdate", "Last Sync: " + new Date().toLocaleTimeString());
+      setText("networkState", "NETWORK SYNCHRONIZED");
+      setText("systemStatus", "LIVE");
+    }
+
+    async function loadNodes() {
+      const started = performance.now();
+      try {
+        const response = await fetch(API_ENDPOINT, { cache: "no-store", headers: { "Accept": "application/json" } });
+        if (!response.ok) throw new Error(`API returned ${response.status}`);
+        const data = await response.json();
+        const requestLatency = Math.round(performance.now() - started);
+        
+        ['global', 'primary', 'secondary'].forEach(key => {
+          if (data[key] && data[key].latency == null) data[key].latency = requestLatency;
+        });
+
+        updateDashboard(data);
+      } catch (error) {
+        updateDashboard(fallbackState);
+        setText("networkState", "LOCAL FALLBACK MODE");
+        setText("systemStatus", "DEGRADED");
+        document.getElementById("systemDot").className = "w-2.5 h-2.5 rounded-full bg-amber-400";
+      }
+    }
+
+    function setFilter(layer) {
+      activeFilter = layer;
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        if (btn.getAttribute('data-filter') === layer) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+      filterModules();
+    }
+
+    function filterModules() {
+      const query = document.getElementById('ecosystem-search').value.toLowerCase().trim();
+      const grid = document.getElementById('modules-grid');
+      grid.innerHTML = "";
+      let count = 0;
+
+      KUTS_MASTER_INDEX.forEach(mod => {
+        if (activeFilter !== 'ALL' && mod.layer !== activeFilter) return;
+        const searchableText = `${mod.title} ${mod.file} ${mod.desc} ${mod.layer}`.toLowerCase();
+        if (query !== "" && !searchableText.includes(query)) return;
+
+        count++;
+        const cardHTML = `
+          <div class="glass-card rounded-xl p-5 flex flex-col justify-between group">
+            <div class="space-y-3">
+              <div class="flex justify-between items-center font-mono text-[0.65rem]">
+                <span class="px-2 py-0.5 rounded border font-bold uppercase tracking-wider ${mod.badge}">
+                  ${mod.layer} LAYER
+                </span>
+                <span class="text-slate-500 font-bold select-all">
+                  ${mod.file}
+                </span>
+              </div>
+              <h3 class="text-sm font-bold text-slate-100 group-hover:text-sky-400 transition-colors font-mono">
+                ${mod.title}
+              </h3>
+              <p class="text-xs text-slate-400 leading-relaxed font-sans">
+                ${mod.desc}
+              </p>
+            </div>
+            <a href="./${mod.file}" target="_blank" class="mt-6 w-full text-center bg-slate-950/80 border border-slate-800 group-hover:border-sky-500/60 group-hover:bg-sky-950/30 group-hover:text-sky-300 py-2.5 rounded font-mono font-bold text-xs uppercase tracking-wider transition-all text-slate-300 block">
+              Launch Module &gt;&gt;
+            </a>
+          </div>
+        `;
+        grid.insertAdjacentHTML('beforeend', cardHTML);
+      });
+
+      if (count === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full text-center py-12 border border-dashed border-slate-800 rounded-xl text-slate-500 font-mono text-xs">
+            No matching ecosystem modules or specifications found.
+          </div>
+        `;
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      filterModules();
+      loadNodes();
+      setInterval(loadNodes, REFRESH_INTERVAL);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Global Nodes Matrix | MDI6000 Planetary Grid</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="core/auth-bridge.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght=300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #030712; color: #cbd5e1; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .module-card { background: rgba(17, 24, 39, 0.5); border: 1px solid rgba(30, 41, 59, 1); transition: all 0.3s; }
+        .module-card:hover { border-color: rgba(59, 130, 246, 0.5); box-shadow: 0 0 15px rgba(59, 130, 246, 0.1); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <div>
+        <!-- GLOBAL HEADER -->
+        <header class="border-b border-slate-800 p-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div>
+                <h1 class="text-3xl font-bold text-blue-400 font-mono tracking-widest">KUTS_GLOBAL_NODES</h1>
+                <p class="text-slate-500 mt-1 font-mono text-sm">Planetary Geodesic Architecture // 34-Node Universal Grid</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <input type="text" id="searchInput" placeholder="Filter by city, ID, or nation..." 
+                       onkeyup="filterNodes()" class="bg-slate-900 border border-slate-700 p-2 rounded text-sm text-slate-200 font-mono w-72">
+                <a href="index.html" class="bg-slate-800 hover:bg-slate-700 text-blue-300 font-mono px-4 py-2 rounded text-sm border border-slate-700 transition-colors">
+                    << Return to Gateway
+                </a>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main class="max-w-7xl mx-auto px-6 py-12">
+            <section class="flex flex-col gap-6 mb-10">
+                <div class="font-mono text-xs text-emerald-400 bg-emerald-950/40 border border-emerald-800/60 px-3 py-1 rounded self-start uppercase tracking-widest">
+                    ● Level 1 Spatial Anchor Network // Mathematically Sealed
+                </div>
+                <h2 class="text-4xl font-bold leading-tight text-white">
+                    Comprehensive 34-Point <span class="text-blue-500">Planetary Grid</span>
+                </h2>
+                <p class="text-slate-400 max-w-3xl text-base">
+                    This registry tracks the foundational spatial coordinate network for the Aarohan 2050 master plan. All nodes strictly adhere to the 9-digit alphanumeric ID format ([3-City][2-Nation][1-Function][3-Sequence]) to anchor the Least Action Protocol[cite: 6].
+                </p>
+            </section>
+
+            <!-- NODES TABLE CONTAINER -->
+            <section class="module-card rounded-xl overflow-hidden border border-slate-800">
+                <div class="overflow-x-auto">
+                    <table id="nodesTable" class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-900/80 border-b border-slate-800 font-mono text-xs text-slate-400 uppercase tracking-wider">
+                                <th class="p-4">Index / Designation</th>
+                                <th class="p-4">Location / Region</th>
+                                <th class="p-4">Nation</th>
+                                <th class="p-4">Global ID (9-Digit)</th>
+                                <th class="p-4">WGS 84 Coordinates</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800/60 text-sm text-slate-300 font-mono">
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="0 master origin node thrissur india thrinc000">
+                                <td class="p-4 text-emerald-400 font-bold">0. Master Origin Node[cite: 6]</td>
+                                <td class="p-4 text-white font-semibold">Thrissur</td>
+                                <td class="p-4 text-slate-400">India[cite: 6]</td>
+                                <td class="p-4 text-blue-400 font-bold">THRINC000[cite: 6]</td>
+                                <td class="p-4 text-slate-400">10.5249° N, 76.2144° E[cite: 6]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="0 antipodal node international waters pacific antzzc001">
+                                <td class="p-4 text-amber-400">0. Antipodal Node[cite: 6]</td>
+                                <td class="p-4 text-white font-semibold">International Waters (Pacific)</td>
+                                <td class="p-4 text-slate-400">Open Ocean[cite: 6]</td>
+                                <td class="p-4 text-blue-400 font-bold">ANTZZC001[cite: 6]</td>
+                                <td class="p-4 text-slate-400">10.5249° S, 103.7856° W[cite: 6]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="1 prime meridian anchor london uk ldnukc001">
+                                <td class="p-4">1. Prime Meridian Anchor[cite: 6]</td>
+                                <td class="p-4 text-white font-semibold">London</td>
+                                <td class="p-4 text-slate-400">United Kingdom[cite: 6]</td>
+                                <td class="p-4 text-blue-400 font-bold">LDNUKC001[cite: 6]</td>
+                                <td class="p-4 text-slate-400">51.5074° N, 0.1278° W[cite: 6]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="2 afro eurasian hub dubai uae dxbaec002">
+                                <td class="p-4">2. Afro-Eurasian Hub[cite: 6]</td>
+                                <td class="p-4 text-white font-semibold">Dubai</td>
+                                <td class="p-4 text-slate-400">United Arab Emirates[cite: 6]</td>
+                                <td class="p-4 text-blue-400 font-bold">DXBAEC002[cite: 6]</td>
+                                <td class="p-4 text-slate-400">25.2048° N, 55.2708° E[cite: 6]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="3 western fiscal pivot new york city usa nykusc003">
+                                <td class="p-4">3. Western Fiscal Pivot[cite: 6]</td>
+                                <td class="p-4 text-white font-semibold">New York City</td>
+                                <td class="p-4 text-slate-400">United States[cite: 6]</td>
+                                <td class="p-4 text-blue-400 font-bold">NYKUSC003[cite: 6]</td>
+                                <td class="p-4 text-slate-400">40.7128° N, 74.0060° W[cite: 6]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="4 eastern pacific anchor tokyo japan tyojpc004">
+                                <td class="p-4">4. Eastern Pacific Anchor[cite: 6]</td>
+                                <td class="p-4 text-white font-semibold">Tokyo</td>
+                                <td class="p-4 text-slate-400">Japan[cite: 6]</td>
+                                <td class="p-4 text-blue-400 font-bold">TYOJPC004[cite: 6]</td>
+                                <td class="p-4 text-slate-400">35.6762° N, 139.6503° E[cite: 6]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="5 international date line sync suva fiji suvfjc005">
+                                <td class="p-4">5. Int'l Date Line Sync[cite: 6]</td>
+                                <td class="p-4 text-white font-semibold">Suva</td>
+                                <td class="p-4 text-slate-400">Fiji[cite: 6]</td>
+                                <td class="p-4 text-blue-400 font-bold">SUVFJC005[cite: 6]</td>
+                                <td class="p-4 text-slate-400">18.1248° S, 178.4501° E[cite: 6]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="6 south american anchor sao paulo brazil saobrc006">
+                                <td class="p-4">6. South American Anchor[cite: 6]</td>
+                                <td class="p-4 text-white font-semibold">São Paulo</td>
+                                <td class="p-4 text-slate-400">Brazil[cite: 6]</td>
+                                <td class="p-4 text-blue-400 font-bold">SAOBRC006[cite: 6]</td>
+                                <td class="p-4 text-slate-400">23.5558° S, 46.6396° W[cite: 6]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="7 boreal apex north pole arctic ocean npxarc007">
+                                <td class="p-4">7. Boreal Apex (North Pole)[cite: 6]</td>
+                                <td class="p-4 text-white font-semibold">Arctic Ocean</td>
+                                <td class="p-4 text-slate-400">International Waters[cite: 6]</td>
+                                <td class="p-4 text-blue-400 font-bold">NPXARC007[cite: 6]</td>
+                                <td class="p-4 text-slate-400">90.0000° N, 0.0000° E[cite: 6]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="8 austral apex south pole antarctica spoaqc008">
+                                <td class="p-4">8. Austral Apex (South Pole)[cite: 6]</td>
+                                <td class="p-4 text-white font-semibold">Antarctica</td>
+                                <td class="p-4 text-slate-400">Antarctic Treaty[cite: 6]</td>
+                                <td class="p-4 text-blue-400 font-bold">SPOAQC008[cite: 6]</td>
+                                <td class="p-4 text-slate-400">90.0000° S, 0.0000° E[cite: 6]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="9 malacca strait pivot singapore sgpsgc009">
+                                <td class="p-4">9. Malacca Strait Pivot[cite: 6]</td>
+                                <td class="p-4 text-white font-semibold">Singapore</td>
+                                <td class="p-4 text-slate-400">Singapore[cite: 6]</td>
+                                <td class="p-4 text-blue-400 font-bold">SGPSGC009[cite: 6]</td>
+                                <td class="p-4 text-slate-400">1.3521° N, 103.8198° E[cite: 6]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="10 australasian anchor sydney australia sydauc010">
+                                <td class="p-4">10. Australasian Anchor[cite: 6]</td>
+                                <td class="p-4 text-white font-semibold">Sydney</td>
+                                <td class="p-4 text-slate-400">Australia[cite: 6]</td>
+                                <td class="p-4 text-blue-400 font-bold">SYDAUC010[cite: 6]</td>
+                                <td class="p-4 text-slate-400">33.8688° S, 151.2093° E[cite: 6]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="11 good hope pivot cape town south africa cptzac011">
+                                <td class="p-4">11. Good Hope Pivot[cite: 6]</td>
+                                <td class="p-4 text-white font-semibold">Cape Town</td>
+                                <td class="p-4 text-slate-400">South Africa[cite: 6]</td>
+                                <td class="p-4 text-blue-400 font-bold">CPTZAC011[cite: 6]</td>
+                                <td class="p-4 text-slate-400">33.9249° S, 18.4241° E[cite: 6]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="12 interoceanic canal pivot panama city panama ptypac012">
+                                <td class="p-4">12. Interoceanic Canal Pivot[cite: 6]</td>
+                                <td class="p-4 text-white font-semibold">Panama City</td>
+                                <td class="p-4 text-slate-400">Panama[cite: 6]</td>
+                                <td class="p-4 text-blue-400 font-bold">PTYPAC012[cite: 6]</td>
+                                <td class="p-4 text-slate-400">8.9806° N, 79.5198° W[cite: 6]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="13 pacific rim tech anchor los angeles usa laxusc013">
+                                <td class="p-4">13. Pacific Rim Tech Anchor[cite: 6]</td>
+                                <td class="p-4 text-white font-semibold">Los Angeles</td>
+                                <td class="p-4 text-slate-400">United States[cite: 6]</td>
+                                <td class="p-4 text-blue-400 font-bold">LAXUSC013[cite: 6]</td>
+                                <td class="p-4 text-slate-400">34.0522° N, 118.2437° W[cite: 6]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="14 east african rift anchor nairobi kenya nbokec014">
+                                <td class="p-4">14. East African Rift Anchor[cite: 6]</td>
+                                <td class="p-4 text-white font-semibold">Nairobi</td>
+                                <td class="p-4 text-slate-400">Kenya[cite: 6]</td>
+                                <td class="p-4 text-blue-400 font-bold">NBOKEC014[cite: 6]</td>
+                                <td class="p-4 text-slate-400">1.2921° S, 36.8219° E[cite: 6]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="15 sub polar atlantic anchor reykjavik iceland rekisc015">
+                                <td class="p-4">15. Sub-Polar Atlantic Anchor[cite: 6]</td>
+                                <td class="p-4 text-white font-semibold">Reykjavik</td>
+                                <td class="p-4 text-slate-400">Iceland[cite: 6]</td>
+                                <td class="p-4 text-blue-400 font-bold">REKISC015[cite: 6]</td>
+                                <td class="p-4 text-slate-400">64.1466° N, 21.9426° W[cite: 6]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="16 central pacific anchor honolulu usa hnlusc016">
+                                <td class="p-4">16. Central Pacific Anchor[cite: 6]</td>
+                                <td class="p-4 text-white font-semibold">Honolulu</td>
+                                <td class="p-4 text-slate-400">United States[cite: 6]</td>
+                                <td class="p-4 text-blue-400 font-bold">HNLUSC016[cite: 6]</td>
+                                <td class="p-4 text-slate-400">21.3099° N, 157.8581° W[cite: 6]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="17 andean cordillera anchor lima peru limpec017">
+                                <td class="p-4">17. Andean Cordillera Anchor[cite: 6]</td>
+                                <td class="p-4 text-white font-semibold">Lima</td>
+                                <td class="p-4 text-slate-400">Peru[cite: 6]</td>
+                                <td class="p-4 text-blue-400 font-bold">LIMPEC017[cite: 6]</td>
+                                <td class="p-4 text-slate-400">12.0464° S, 77.0428° W[cite: 6]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="18 med red sea intersection cairo egypt caiegc018">
+                                <td class="p-4">18. Med-Red Sea Intersection[cite: 6]</td>
+                                <td class="p-4 text-white font-semibold">Cairo</td>
+                                <td class="p-4 text-slate-400">Egypt[cite: 6]</td>
+                                <td class="p-4 text-blue-400 font-bold">CAIEGC018[cite: 6]</td>
+                                <td class="p-4 text-slate-400">30.0444° N, 31.2357° E[cite: 6]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="19 central european axis berlin germany berdec019">
+                                <td class="p-4">19. Central European Axis[cite: 6]</td>
+                                <td class="p-4 text-white font-semibold">Berlin</td>
+                                <td class="p-4 text-slate-400">Germany[cite: 6]</td>
+                                <td class="p-4 text-blue-400 font-bold">BERDEC019[cite: 6]</td>
+                                <td class="p-4 text-slate-400">52.5200° N, 13.4050° E[cite: 6]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="20 gulf of guinea anchor lagos nigeria losngc020">
+                                <td class="p-4">20. Gulf of Guinea Anchor[cite: 6]</td>
+                                <td class="p-4 text-white font-semibold">Lagos</td>
+                                <td class="p-4 text-slate-400">Nigeria[cite: 6]</td>
+                                <td class="p-4 text-blue-400 font-bold">LOSNGC020[cite: 6]</td>
+                                <td class="p-4 text-slate-400">6.5244° N, 3.3792° E[cite: 6]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="21 eurasian boreal shield moscow russia mowruc021">
+                                <td class="p-4">21. Eurasian Boreal Shield[cite: 6]</td>
+                                <td class="p-4 text-white font-semibold">Moscow</td>
+                                <td class="p-4 text-slate-400">Russia[cite: 6]</td>
+                                <td class="p-4 text-blue-400 font-bold">MOWRUC021[cite: 6]</td>
+                                <td class="p-4 text-slate-400">55.7558° N, 37.6173° E[cite: 6]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="22 central indian ocean base male maldives mlemvc022">
+                                <td class="p-4">22. Central Indian Ocean Base[cite: 6]</td>
+                                <td class="p-4 text-white font-semibold">Malé</td>
+                                <td class="p-4 text-slate-400">Maldives[cite: 6]</td>
+                                <td class="p-4 text-blue-400 font-bold">MLEMVC022[cite: 6]</td>
+                                <td class="p-4 text-slate-400">4.1755° N, 73.5093° E[cite: 6]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="23 east asian interior chengdu china ctucnc023">
+                                <td class="p-4">23. East Asian Interior[cite: 6]</td>
+                                <td class="p-4 text-white font-semibold">Chengdu</td>
+                                <td class="p-4 text-slate-400">China[cite: 6]</td>
+                                <td class="p-4 text-blue-400 font-bold">CTUCNC023[cite: 6]</td>
+                                <td class="p-4 text-slate-400">30.5728° N, 104.0668° E[cite: 6]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="24 sub antarctic gate stanley falkland islands psyfkc024">
+                                <td class="p-4">24. Sub-Antarctic Gate[cite: 6]</td>
+                                <td class="p-4 text-white font-semibold">Stanley</td>
+                                <td class="p-4 text-slate-400">Falkland Islands[cite: 6]</td>
+                                <td class="p-4 text-blue-400 font-bold">PSYFKC024[cite: 6]</td>
+                                <td class="p-4 text-slate-400">51.6944° S, 57.8528° W[cite: 6]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="25 south pacific void papeete french polynesia pptpfc025">
+                                <td class="p-4">25. South Pacific Void[cite: 6]</td>
+                                <td class="p-4 text-white font-semibold">Papeete</td>
+                                <td class="p-4 text-slate-400">French Polynesia[cite: 6]</td>
+                                <td class="p-4 text-blue-400 font-bold">PPTPFC025[cite: 6]</td>
+                                <td class="p-4 text-slate-400">17.5388° S, 149.5665° W[cite: 6]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="26 boreal pacific bridge anchorage usa ancusc026">
+                                <td class="p-4">26. Boreal Pacific Bridge[cite: 6]</td>
+                                <td class="p-4 text-white font-semibold">Anchorage</td>
+                                <td class="p-4 text-slate-400">United States[cite: 6]</td>
+                                <td class="p-4 text-blue-400 font-bold">ANCUSC026[cite: 6]</td>
+                                <td class="p-4 text-slate-400">61.2181° N, 149.9003° W[cite: 6]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="27 southern indian ocean port louis mauritius mrumuc027">
+                                <td class="p-4">27. Southern Indian Ocean[cite: 6]</td>
+                                <td class="p-4 text-white font-semibold">Port Louis</td>
+                                <td class="p-4 text-slate-400">Mauritius[cite: 6]</td>
+                                <td class="p-4 text-blue-400 font-bold">MRUMUC027[cite: 6]</td>
+                                <td class="p-4 text-slate-400">20.1609° S, 57.5012° E[cite: 6]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="28 eurasian steppe anchor almaty kazakhstan alakzc028">
+                                <td class="p-4">28. Eurasian Steppe Anchor[cite: 6]</td>
+                                <td class="p-4 text-white font-semibold">Almaty</td>
+                                <td class="p-4 text-slate-400">Kazakhstan[cite: 6]</td>
+                                <td class="p-4 text-blue-400 font-bold">ALAKZC028[cite: 6]</td>
+                                <td class="p-4 text-slate-400">43.2220° N, 76.8512° E[cite: 6]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="29 north atlantic maritime halifax canada halcac029">
+                                <td class="p-4">29. North Atlantic Maritime[cite: 6]</td>
+                                <td class="p-4 text-white font-semibold">Halifax</td>
+                                <td class="p-4 text-slate-400">Canada[cite: 6]</td>
+                                <td class="p-4 text-blue-400 font-bold">HALCAC029[cite: 6]</td>
+                                <td class="p-4 text-slate-400">44.6488° N, 63.5752° W[cite: 6]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="30 drake passage chokepoint punta arenas chile puqclc030">
+                                <td class="p-4">30. Drake Passage Chokepoint[cite: 6]</td>
+                                <td class="p-4 text-white font-semibold">Punta Arenas</td>
+                                <td class="p-4 text-slate-400">Chile[cite: 6]</td>
+                                <td class="p-4 text-blue-400 font-bold">PUQCLC030[cite: 6]</td>
+                                <td class="p-4 text-slate-400">53.1404° S, 70.9096° W[cite: 6]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="31 philippine sea tech node manila philippines mnlphc031">
+                                <td class="p-4">31. Philippine Sea Tech Node[cite: 6]</td>
+                                <td class="p-4 text-white font-semibold">Manila</td>
+                                <td class="p-4 text-slate-400">Philippines[cite: 6]</td>
+                                <td class="p-4 text-blue-400 font-bold">MNLPHC031[cite: 6]</td>
+                                <td class="p-4 text-slate-400">14.5995° N, 120.9842° E[cite: 6]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="32 equatorial atlantic bridge dakar senegal dkrsnc032">
+                                <td class="p-4">32. Equatorial Atlantic Bridge[cite: 6]</td>
+                                <td class="p-4 text-white font-semibold">Dakar</td>
+                                <td class="p-4 text-slate-400">Senegal[cite: 6]</td>
+                                <td class="p-4 text-blue-400 font-bold">DKRSNC032[cite: 6]</td>
+                                <td class="p-4 text-slate-400">14.7167° N, 17.4677° W[cite: 6]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-800 mt-16 py-8 px-6 bg-slate-950 text-center font-mono text-xs text-slate-500">
+        <p>© 2026 PINALEAF ADVANCEMENTS LLP // MDI6000 CORE ARCHITECTURE // AAROHAN 2050</p>
+    </footer>
+
+    <!-- INTERACTION SCRIPT -->
+    <script>
+        function filterNodes() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            document.querySelectorAll('.node-row').forEach(row => {
+                const searchData = row.getAttribute('data-search');
+                row.style.display = searchData.includes(input) ? "" : "none";
+            });
+        }
+        window.onload = updateAuthUI;
+    </script>
+</body>
+</html>

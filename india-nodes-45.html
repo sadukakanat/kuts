@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Indian Subcontinent Grid | 45 Primary Anchor Nodes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="core/auth-bridge.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght=300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #030712; color: #cbd5e1; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .module-card { background: rgba(17, 24, 39, 0.5); border: 1px solid rgba(30, 41, 59, 1); transition: all 0.3s; }
+        .module-card:hover { border-color: rgba(59, 130, 246, 0.5); box-shadow: 0 0 15px rgba(59, 130, 246, 0.1); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <div>
+        <!-- GLOBAL HEADER -->
+        <header class="border-b border-slate-800 p-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div>
+                <h1 class="text-3xl font-bold text-cyan-400 font-mono tracking-widest">KUTS_INDIA_SUBGRID</h1>
+                <p class="text-slate-500 mt-1 font-mono text-sm">Level 2 Meso-Grid // 45-Node Subcontinental Allocation</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <input type="text" id="searchInput" placeholder="Search hubs, industrial sectors, ID..." 
+                       onkeyup="filterNodes()" class="bg-slate-900 border border-slate-700 p-2 rounded text-sm text-slate-200 font-mono w-72">
+                <a href="index.html" class="bg-slate-800 hover:bg-slate-700 text-blue-300 font-mono px-4 py-2 rounded text-sm border border-slate-700 transition-colors">
+                    << Return to Gateway
+                </a>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main class="max-w-7xl mx-auto px-6 py-12">
+            <section class="flex flex-col gap-6 mb-10">
+                <div class="font-mono text-xs text-cyan-400 bg-cyan-950/40 border border-cyan-800/60 px-3 py-1 rounded self-start uppercase tracking-widest">
+                    ● Subcontinental Allocation // High-Density MSME Clustering
+                </div>
+                <h2 class="text-4xl font-bold leading-tight text-white">
+                    Indian Subcontinent <span class="text-cyan-500">45-Node Primary Corridor</span>
+                </h2>
+                <p class="text-slate-400 max-w-3xl text-base">
+                    As the primary operational theater for the Aarohan 2050 mission, the Indian Subcontinent is assigned 45 dedicated Level 2 Primary Anchor Nodes. These nodes capture high-density MSME industrial output, heavy energy grids, and regional transit corridors, routing verified kinetic pulses back to the Master Origin Node in Thrissur (`THRINC000`)[cite: 3].
+                </p>
+
+                <!-- CORRIDOR METRICS BAR -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 font-mono text-xs mt-2">
+                    <div class="bg-slate-900/80 border border-slate-800 p-3 rounded">
+                        <span class="text-cyan-400 block font-bold text-lg">THRINC000</span>
+                        <span class="text-slate-400">Master Origin (Thrissur)[cite: 3]</span>
+                    </div>
+                    <div class="bg-slate-900/80 border border-slate-800 p-3 rounded">
+                        <span class="text-blue-400 block font-bold text-lg">45 Nodes</span>
+                        <span class="text-slate-400">Total Subcontinental Allocation[cite: 3]</span>
+                    </div>
+                    <div class="bg-slate-900/80 border border-slate-800 p-3 rounded">
+                        <span class="text-emerald-400 block font-bold text-lg">1:12 Ratio</span>
+                        <span class="text-slate-400">Secondary Capillary Expansion</span>
+                    </div>
+                    <div class="bg-slate-900/80 border border-slate-800 p-3 rounded">
+                        <span class="text-purple-400 block font-bold text-lg">Category 12</span>
+                        <span class="text-slate-400">Automated Fiscal / TDS Routing[cite: 3]</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- NODES TABLE CONTAINER -->
+            <section class="module-card rounded-xl overflow-hidden border border-slate-800">
+                <div class="overflow-x-auto">
+                    <table id="indiaNodesTable" class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-900/80 border-b border-slate-800 font-mono text-xs text-slate-400 uppercase tracking-wider">
+                                <th class="p-4">Designation</th>
+                                <th class="p-4">Location / Core Hub</th>
+                                <th class="p-4">Industrial / Kinetic Focus</th>
+                                <th class="p-4">Global ID (9-Digit)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800/60 text-sm text-slate-300 font-mono">
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="p-001 western hub mumbai india financial logistics bominp001">
+                                <td class="p-4 text-cyan-400 font-bold">P-001[cite: 3]</td>
+                                <td class="p-4 text-white font-semibold">Mumbai</td>
+                                <td class="p-4 text-slate-400">Financial & Maritime Logistics[cite: 3]</td>
+                                <td class="p-4 text-blue-400 font-bold">BOMINP001[cite: 3]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="p-002 southern tech axis bengaluru india ai computation blrinp002">
+                                <td class="p-4 text-cyan-400 font-bold">P-002[cite: 3]</td>
+                                <td class="p-4 text-white font-semibold">Bengaluru</td>
+                                <td class="p-4 text-slate-400">AI & High-Performance Computation[cite: 3]</td>
+                                <td class="p-4 text-blue-400 font-bold">BLRINP002[cite: 3]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="p-003 northern transit hub new delhi india overland routing delinp003">
+                                <td class="p-4 text-cyan-400 font-bold">P-003[cite: 3]</td>
+                                <td class="p-4 text-white font-semibold">New Delhi</td>
+                                <td class="p-4 text-slate-400">Overland Transit & Administrative Core[cite: 3]</td>
+                                <td class="p-4 text-blue-400 font-bold">DELINP003[cite: 3]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="p-004 eastern resource gate kolkata india raw material transit ccuinp004">
+                                <td class="p-4 text-cyan-400 font-bold">P-004[cite: 3]</td>
+                                <td class="p-4 text-white font-semibold">Kolkata</td>
+                                <td class="p-4 text-slate-400">Raw Material Transit & Eastern Gate[cite: 3]</td>
+                                <td class="p-4 text-blue-400 font-bold">CCUINP004[cite: 3]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="p-005 textile precision core coimbatore india msme density cjbinp005">
+                                <td class="p-4 text-cyan-400 font-bold">P-005[cite: 3]</td>
+                                <td class="p-4 text-white font-semibold">Coimbatore</td>
+                                <td class="p-4 text-slate-400">Textile Density & Precision Engineering[cite: 3]</td>
+                                <td class="p-4 text-blue-400 font-bold">CJBINP005[cite: 3]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="p-006 western manufacturing ahmedabad india industrial output amdinp006">
+                                <td class="p-4 text-cyan-400 font-bold">P-006[cite: 3]</td>
+                                <td class="p-4 text-white font-semibold">Ahmedabad</td>
+                                <td class="p-4 text-slate-400">Industrial Output & Chemical Processing[cite: 3]</td>
+                                <td class="p-4 text-blue-400 font-bold">AMDINP006[cite: 3]</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="p-007 central mineral corridor raipur india mining resources raipinp007">
+                                <td class="p-4 text-cyan-400 font-bold">P-007</td>
+                                <td class="p-4 text-white font-semibold">Raipur</td>
+                                <td class="p-4 text-slate-400">Central Mineral Extraction & Steel Hub</td>
+                                <td class="p-4 text-blue-400 font-bold">RAIPINP007</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="p-008 deccan tech corridor hyderabad india pharma tech hydinp008">
+                                <td class="p-4 text-cyan-400 font-bold">P-008</td>
+                                <td class="p-4 text-white font-semibold">Hyderabad</td>
+                                <td class="p-4 text-slate-400">Pharmaceuticals & Digital Tech Corridor</td>
+                                <td class="p-4 text-blue-400 font-bold">HYDINP009</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="p-009 southern maritime gateway chennai india auto export chninp009">
+                                <td class="p-4 text-cyan-400 font-bold">P-009</td>
+                                <td class="p-4 text-white font-semibold">Chennai</td>
+                                <td class="p-4 text-slate-400">Automotive Manufacturing & Export Gateway</td>
+                                <td class="p-4 text-blue-400 font-bold">CHNINP009</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="p-010 western coastal port kochi india spice marine logistics cokinp010">
+                                <td class="p-4 text-cyan-400 font-bold">P-010</td>
+                                <td class="p-4 text-white font-semibold">Kochi</td>
+                                <td class="p-4 text-slate-400">Marine Logistics & Export Terminal</td>
+                                <td class="p-4 text-blue-400 font-bold">COKINP010</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="p-011 gangetic industrial zone kanpur india leather agro processing knpinp011">
+                                <td class="p-4 text-cyan-400 font-bold">P-011</td>
+                                <td class="p-4 text-white font-semibold">Kanpur</td>
+                                <td class="p-4 text-slate-400">Agro-Processing & Leather Manufacturing</td>
+                                <td class="p-4 text-blue-400 font-bold">KNPINP011</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="p-012 eastern delta node patna india riverine logistics ptninp012">
+                                <td class="p-4 text-cyan-400 font-bold">P-012</td>
+                                <td class="p-4 text-white font-semibold">Patna</td>
+                                <td class="p-4 text-slate-400">Riverine Trade & Agricultural Hub</td>
+                                <td class="p-4 text-blue-400 font-bold">PTNINP012</td>
+                            </tr>
+                            <!-- (Nodes P-013 through P-045 structured to map across subcontinental regional corridors) -->
+                            <tr class="hover:bg-slate-900/40 transition-colors node-row" data-search="p-013 to p-045 extended subcontinental nodes regional msme expansion">
+                                <td class="p-4 text-cyan-400 font-bold">P-013 → P-045</td>
+                                <td class="p-4 text-white font-semibold">Extended Regional Corridors (Nagpur, Pune, Surat, Jaipur, Lucknow, Indore, Visakhapatnam, Madurai, Bhopal, Vadodara, Patna, Ranchi, etc.)</td>
+                                <td class="p-4 text-slate-400">Localized MSME Secondary Capillary Interconnects</td>
+                                <td class="p-4 text-blue-400 font-bold">INDINP013-045</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-800 mt-16 py-8 px-6 bg-slate-950 text-center font-mono text-xs text-slate-500">
+        <p>© 2026 PINALEAF ADVANCEMENTS LLP // AAROHAN 2050 // INDIAN SUBCONTINENT 45-NODE MESH</p>
+    </footer>
+
+    <!-- INTERACTION SCRIPT -->
+    <script>
+        function filterNodes() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            document.querySelectorAll('.node-row').forEach(row => {
+                const searchData = row.getAttribute('data-search');
+                row.style.display = searchData.includes(input) ? "" : "none";
+            });
+        }
+        window.onload = updateAuthUI;
+    </script>
+</body>
+</html>

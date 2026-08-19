@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Commune | Facilities & Welfare Window</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght=300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #030712; color: #f8fafc; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .glow-purple { box-shadow: 0 0 20px rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.3); }
+        .facility-card { background: rgba(15, 23, 42, 0.4); border: 1px solid rgba(139, 92, 246, 0.1); transition: all 0.2s; }
+        .facility-card:hover { border-color: rgba(139, 92, 246, 0.4); background: rgba(15, 23, 42, 0.7); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col p-4 md:p-6 bg-[#030712]">
+
+    <!-- MODULE SUBHUD -->
+    <header class="w-full max-w-6xl mx-auto border border-purple-900/40 bg-slate-900/50 p-4 rounded-xl flex flex-col md:flex-row justify-between items-center gap-4 mb-6 font-mono text-xs backdrop-blur-sm">
+        <div>
+            <h1 class="text-lg font-bold text-purple-400 tracking-wider">KUTS_COMMUNE_FACILITIES</h1>
+            <p class="text-slate-500 text-[0.6rem] uppercase">Resource Infrastructure // Welfare & Tool Access Windows</p>
+        </div>
+        <div class="text-right">
+            <span class="text-slate-500 text-[0.6rem] block">SUPPORT LAYER</span>
+            <span class="text-purple-400 font-bold">[06] WELFARE GRID</span>
+        </div>
+    </header>
+
+    <main class="w-full max-w-6xl mx-auto flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- LEFT 4 COLUMNS: REQUISITION PANEL -->
+        <section class="lg:col-span-4 bg-slate-900/50 border border-slate-800 rounded-xl p-5 flex flex-col justify-between glow-purple">
+            <div>
+                <h2 class="text-xs text-purple-400 font-bold tracking-widest uppercase font-mono border-b border-slate-800 pb-3 mb-4">Request Resource Access</h2>
+                <form id="facility-form" class="space-y-4 font-mono text-xs">
+                    <div>
+                        <label class="block text-slate-500 text-[0.6rem] mb-1">WORKER ID TOKEN</label>
+                        <input type="text" id="fac-worker" placeholder="e.g., 0xCOM_NODE_082" required class="w-full bg-black border border-slate-800 p-2.5 rounded text-slate-200 outline-none focus:border-purple-500 uppercase">
+                    </div>
+                    <div>
+                        <label class="block text-slate-500 text-[0.6rem] mb-1">SELECT INFRASTRUCTURE FACILITY</label>
+                        <select id="fac-type" required class="w-full bg-black border border-slate-800 p-2.5 rounded text-purple-400 font-bold outline-none focus:border-purple-500">
+                            <option value="TOOLKIT">Technical Node Installation Kit</option>
+                            <option value="TRAVEL">Regional Travel Allowance Voucher</option>
+                            <option value="WORKSPACE">ATAIR Shared Space Priority Access</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="w-full bg-purple-950 hover:bg-purple-900 border border-purple-700 text-purple-300 py-3 rounded uppercase tracking-widest font-bold text-[0.65rem] transition-all">
+                        Submit Requisition Claim
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- RIGHT 8 COLUMNS: PROVISION STATUS OVERVIEW -->
+        <section class="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-4 h-fit">
+            <div class="facility-card p-4 rounded-xl">
+                <h3 class="text-xs font-mono font-bold text-slate-200 mb-1">🔧 HARDWARE TOOLKITS</h3>
+                <p class="text-[0.7rem] text-slate-400 font-sans leading-relaxed mb-3">Allocated to active Technicians deploying factory nodes locally within Thrissur micro-grids.</p>
+                <span class="text-[0.6rem] font-mono bg-emerald-950 text-emerald-400 border border-emerald-900 px-2 py-0.5 rounded font-bold">STATUS: AVAILABLE</span>
+            </div>
+            
+            <div class="facility-card p-4 rounded-xl">
+                <h3 class="text-xs font-mono font-bold text-slate-200 mb-1">🚆 REGIONAL TRAVEL SUPPORT</h3>
+                <p class="text-[0.7rem] text-slate-400 font-sans leading-relaxed mb-3">Transit funding offsets for Promoters traveling to onboard regional small businesses and micro-units.</p>
+                <span class="text-[0.6rem] font-mono bg-emerald-950 text-emerald-400 border border-emerald-900 px-2 py-0.5 rounded font-bold">STATUS: AVAILABLE</span>
+            </div>
+
+            <div class="facility-card p-4 rounded-xl md:col-span-2">
+                <h3 class="text-xs font-mono font-bold text-slate-200 mb-1">📊 LOGGED COMMUNE DISBURSEMENTS</h3>
+                <div id="facility-log" class="space-y-2 mt-2 font-mono text-[0.6rem] text-slate-400 max-h-[120px] overflow-y-auto">
+                    <div class="bg-black/40 border border-slate-900 p-2 rounded flex justify-between items-center">
+                        <span>REQ-FAC-014 // 0xCOM_NODE_211</span>
+                        <span class="text-yellow-500 font-bold">● TRANSIT SUPPORT DISPATCHED</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="w-full max-w-6xl mx-auto border-t border-slate-900 pt-4 mt-6 text-center font-mono text-[0.6rem] text-slate-600">
+        PINALEAF ADVANCEMENTS LLP // OPERATIONAL PERKS MANAGEMENT 2026
+    </footer>
+
+    <script>
+        document.getElementById('facility-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const node = document.getElementById('fac-worker').value.toUpperCase().trim();
+            const type = document.getElementById('fac-type').value;
+            const log = document.getElementById('facility-log');
+
+            const row = `
+                <div class="bg-purple-950/20 border border-purple-900/40 p-2 rounded flex justify-between items-center text-slate-200 animate-pulse">
+                    <span>REQ-FAC-NEW // ${node} (${type})</span>
+                    <span class="text-purple-400 font-bold">⌛ PROVISIONING LOGGED</span>
+                </div>
+            `;
+            log.insertAdjacentHTML('afterbegin', row);
+            e.target.reset();
+        });
+    </script>
+<!-- Resilient Inline Auth & Navigation Injector for Local Testing -->
+    <script>
+        (function() {
+            window.addEventListener('DOMContentLoaded', () => {
+                // Check session; if missing during local test, auto-initialize a mock test session instead of failing
+                let session = localStorage.getItem('kuts_active_session');
+                if (!session) {
+                    session = JSON.stringify({ nodeId: "THRINC000-LOCAL-TEST", expiry: Date.now() + 86400000 });
+                    localStorage.setItem('kuts_active_session', session);
+                }
+
+                // Inject Global Header if missing
+                if (!document.getElementById('kuts-global-header')) {
+                    const headerHTML = `
+                        <header id="kuts-global-header" class="w-full max-w-7xl mx-auto p-6 flex justify-between items-center border-b border-slate-800 bg-[#030712] text-slate-200 mb-6">
+                            <div class="text-blue-400 font-mono font-bold tracking-widest text-sm">
+                                KUTS_MESH_OPERATIONS // MDI6000 [LOCAL MODE]
+                            </div>
+                            <nav id="nav-auth" class="flex gap-4 items-center font-mono"></nav>
+                        </header>`;
+                    document.body.insertAdjacentHTML('afterbegin', headerHTML);
+                }
+
+                // Inject Global Footer if missing
+                if (!document.getElementById('kuts-global-footer') && !window.location.pathname.includes('index.html')) {
+                    const footerHTML = `
+                        <footer id="kuts-global-footer" class="max-w-7xl mx-auto mt-auto py-8 border-t border-slate-800 text-center w-full">
+                            <a href="index.html" class="inline-flex items-center gap-2 text-[0.7rem] text-slate-500 hover:text-blue-400 font-mono uppercase tracking-widest transition-all">
+                                <span class="text-lg">←</span> RETURN TO UNIVERSAL GATEWAY
+                            </a>
+                        </footer>`;
+                    document.body.insertAdjacentHTML('beforeend', footerHTML);
+                }
+
+                updateAuthUI();
+            });
+
+            window.updateAuthUI = function() {
+                const nav = document.getElementById('nav-auth');
+                if (!nav) return;
+                
+                nav.innerHTML = `
+                    <a href="index.html" class="text-slate-400 text-[0.65rem] uppercase font-mono hover:text-white">Gateway</a>
+                    <button onclick="secureLogout()" class="bg-red-950 hover:bg-red-900 text-red-400 font-mono text-[0.65rem] px-3 py-1.5 rounded border border-red-900 uppercase tracking-widest cursor-pointer">
+                        [X] DISCONNECT
+                    </button>`;
+            };
+
+            window.secureLogout = function() {
+                localStorage.removeItem('kuts_active_session');
+                window.location.href = 'sign-in.html';
+            };
+        })();
+    </script>
+</body>
+</html>

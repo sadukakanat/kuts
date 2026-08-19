@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS | Autonomous MSME Loan Ledger</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght=300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #030712; color: #f8fafc; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .glow-emerald { box-shadow: 0 0 15px rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); }
+        .glow-amber { box-shadow: 0 0 15px rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col p-4 md:p-6 bg-[#02040a]">
+
+    <!-- DEPLOYMENT OVERLAY HUD -->
+    <header class="w-full max-w-7xl mx-auto border border-emerald-900/40 bg-slate-900/40 p-4 rounded-xl flex flex-col md:flex-row justify-between items-center gap-4 mb-6 font-mono text-xs backdrop-blur-sm">
+        <div>
+            <h1 class="text-xl font-bold text-emerald-400 tracking-wider">KUTS_CREDIT_LEDGER</h1>
+            <p class="text-slate-400 text-[0.65rem] uppercase">Algorithmic MSME Line of Credit // Zero-Usury Underwriting</p>
+        </div>
+        <div class="flex gap-4 font-mono text-xs text-right">
+            <div>
+                <span class="text-slate-500 text-[0.6rem] block">GLOBAL CREDIT CAP</span>
+                <span class="text-emerald-400 font-bold">10,000,000 Ꝃ</span>
+            </div>
+            <div class="border-l border-slate-800 pl-4">
+                <span class="text-slate-500 text-[0.6rem] block">TREASURY PARENT</span>
+                <a href="treasury-core.html" class="text-cyan-400 font-bold hover:underline">&lt;&lt; BACK</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="w-full max-w-7xl mx-auto flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- COLUMN 1: ALGORITHMIC UNDERWRITING RADAR (LEFT 5 COLUMNS) -->
+        <section class="lg:col-span-5 bg-slate-900/60 border border-slate-800 rounded-xl p-5 flex flex-col justify-between glow-emerald">
+            <div>
+                <h2 class="text-xs text-emerald-400 font-bold tracking-widest uppercase font-mono border-b border-slate-800 pb-3 mb-4">Underwrite New Debt Allocation</h2>
+                
+                <form id="underwrite-form" class="space-y-4 font-mono text-xs">
+                    <div>
+                        <label class="block text-slate-500 text-[0.6rem] mb-1">BORROWER NODE IDENTIFIER</label>
+                        <input type="text" id="loan-node" placeholder="ENTER TARGET NODE ID (e.g., TCRIND045)" required class="w-full bg-black border border-slate-800 p-2.5 rounded text-emerald-400 font-bold tracking-widest focus:border-emerald-500 outline-none uppercase placeholder-slate-800">
+                    </div>
+                    <div>
+                        <label class="block text-slate-500 text-[0.6rem] mb-1">KINETIC RELIABILITY SCORE (KRS) FEED</label>
+                        <input type="number" id="loan-krs" placeholder="INPUT LATEST ORACLE SCORE (1 - 100)" min="1" max="100" required class="w-full bg-black border border-slate-800 p-2.5 rounded text-slate-200 focus:border-emerald-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-slate-500 text-[0.6rem] mb-1">PROPOSED QUANTUM REQUEST (Ꝃ)</label>
+                        <input type="number" id="loan-quantum" placeholder="MAX AMOUNT: 100,000" min="500" max="100000" required class="w-full bg-black border border-slate-800 p-2.5 rounded text-slate-200 focus:border-emerald-500 outline-none">
+                    </div>
+
+                    <div class="bg-black/50 p-3 rounded border border-slate-800 text-[0.65rem] space-y-1.5">
+                        <span class="text-slate-500 block uppercase font-bold tracking-wider">Automated Risk Constraints</span>
+                        <div class="flex justify-between text-slate-400"><span>Interest Framework:</span><span class="text-emerald-400 font-bold">0.00% (Usury-Free)</span></div>
+                        <div class="flex justify-between text-slate-400"><span>Collateral Binding:</span><span class="text-amber-500">Node Hardware Token Lock</span></div>
+                        <div class="flex justify-between text-slate-400"><span>Max Allowable Term:</span><span>720 KUTS Cycles</span></div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-emerald-900 hover:bg-emerald-800 text-emerald-100 font-bold py-3 rounded text-[0.65rem] tracking-widest uppercase transition-all border border-emerald-500">
+                        Execute Underwriting Evaluation
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- COLUMN 2: LOAN BOOK & REPAYMENT STREAM (RIGHT 7 COLUMNS) -->
+        <section class="lg:col-span-7 bg-slate-900/30 border border-slate-800 rounded-xl p-5 flex flex-col overflow-hidden">
+            <h2 class="text-xs text-slate-300 font-bold tracking-widest uppercase font-mono border-b border-slate-800 pb-3 mb-4">Active Loan Ledger Book</h2>
+            
+            <div id="loan-book-container" class="space-y-4 flex-1 overflow-y-auto pr-1">
+                <!-- LOAN NODE PRE-SET 1 -->
+                <div class="bg-black/40 border border-slate-800 p-4 rounded-lg font-mono text-xs space-y-3 glow-amber">
+                    <div class="flex justify-between items-center">
+                        <span class="text-amber-500 font-bold">NODE ID // TCRIND012 [THRISSUR FABRICATOR]</span>
+                        <span class="text-amber-400 font-bold text-[0.55rem] bg-amber-950/30 px-2 py-0.5 rounded border border-amber-900/50">KRS: 84 // STANDARD</span>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2 text-[0.65rem] bg-slate-950/60 p-2 rounded border border-slate-900">
+                        <div><span class="text-slate-500 block text-[0.55rem]">PRINCIPAL</span><span class="text-slate-300">45,000 Ꝃ</span></div>
+                        <div><span class="text-slate-500 block text-[0.55rem]">AMORTIZED PAID</span><span class="text-emerald-400">15,200 Ꝃ</span></div>
+                        <div><span class="text-slate-500 block text-[0.55rem]">OUTSTANDING</span><span class="text-orange-400">29,800 Ꝃ</span></div>
+                    </div>
+                    <div class="w-full bg-slate-900 h-1 rounded-full overflow-hidden"><div class="bg-emerald-500 h-full w-[33.7%]"></div></div>
+                </div>
+
+                <!-- LOAN NODE PRE-SET 2 -->
+                <div class="bg-black/40 border border-slate-800 p-4 rounded-lg font-mono text-xs space-y-3">
+                    <div class="flex justify-between items-center">
+                        <span class="text-emerald-400 font-bold">NODE ID // KNMIND004 [KANIMANGALAM BRASS]</span>
+                        <span class="text-emerald-400 font-bold text-[0.55rem] bg-emerald-950/30 px-2 py-0.5 rounded border border-emerald-900/50">KRS: 96 // PRIME</span>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2 text-[0.65rem] bg-slate-950/60 p-2 rounded border border-slate-900">
+                        <div><span class="text-slate-500 block text-[0.55rem]">PRINCIPAL</span><span class="text-slate-300">80,000 Ꝃ</span></div>
+                        <div><span class="text-slate-500 block text-[0.55rem]">AMORTIZED PAID</span><span class="text-emerald-400">72,000 Ꝃ</span></div>
+                        <div><span class="text-slate-500 block text-[0.55rem]">OUTSTANDING</span><span class="text-emerald-400">8,000 Ꝃ</span></div>
+                    </div>
+                    <div class="w-full bg-slate-900 h-1 rounded-full overflow-hidden"><div class="bg-emerald-500 h-full w-[90%]"></div></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="w-full max-w-7xl mx-auto border-t border-slate-900 pt-4 mt-6 text-center font-mono text-[0.6rem] text-slate-600">
+        KUTS AUTONOMOUS CENTRAL BANKING ABSTRACT // OPERATING ENVIRONMENT 2026
+    </footer>
+
+    <script>
+        document.getElementById('underwrite-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const node = document.getElementById('loan-node').value.toUpperCase().trim();
+            const krs = parseInt(document.getElementById('loan-krs').value);
+            const quantum = parseInt(document.getElementById('loan-quantum').value);
+            const container = document.getElementById('loan-book-container');
+
+            // Algorithmic Underwriting Evaluation Simulation
+            if (krs < 80) {
+                alert(`ALGORITHMIC EVALUATION FAILURE:\nNode ${node} holds a KRS score below the minimum risk tolerance layer. Asset advancement denied.`);
+                return;
+            }
+
+            const cardHTML = `
+                <div class="bg-slate-900/50 border border-emerald-900/40 p-4 rounded-lg font-mono text-xs space-y-3 animate-fade-in">
+                    <div class="flex justify-between items-center">
+                        <span class="text-emerald-400 font-bold">NODE ID // ${node} [NEW DISBURSAL]</span>
+                        <span class="text-emerald-400 font-bold text-[0.55rem] bg-emerald-950/30 px-2 py-0.5 rounded border border-emerald-900/50">KRS: ${krs} // VERIFIED</span>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2 text-[0.65rem] bg-slate-950/60 p-2 rounded border border-slate-900">
+                        <div><span class="text-slate-500 block text-[0.55rem]">PRINCIPAL</span><span class="text-slate-200">${quantum.toLocaleString()} Ꝃ</span></div>
+                        <div><span class="text-slate-500 block text-[0.55rem]">AMORTIZED PAID</span><span class="text-emerald-400">0 Ꝃ</span></div>
+                        <div><span class="text-slate-500 block text-[0.55rem]">OUTSTANDING</span><span class="text-emerald-400">${quantum.toLocaleString()} Ꝃ</span></div>
+                    </div>
+                    <div class="w-full bg-slate-900 h-1 rounded-full overflow-hidden"><div class="bg-emerald-500 h-full w-[2%]"></div></div>
+                </div>
+            `;
+
+            container.insertAdjacentHTML('afterbegin', cardHTML);
+            document.getElementById('underwrite-form').reset();
+        });
+    </script>
+<!-- Resilient Inline Auth & Navigation Injector for Local Testing -->
+    <script>
+        (function() {
+            window.addEventListener('DOMContentLoaded', () => {
+                // Check session; if missing during local test, auto-initialize a mock test session instead of failing
+                let session = localStorage.getItem('kuts_active_session');
+                if (!session) {
+                    session = JSON.stringify({ nodeId: "THRINC000-LOCAL-TEST", expiry: Date.now() + 86400000 });
+                    localStorage.setItem('kuts_active_session', session);
+                }
+
+                // Inject Global Header if missing
+                if (!document.getElementById('kuts-global-header')) {
+                    const headerHTML = `
+                        <header id="kuts-global-header" class="w-full max-w-7xl mx-auto p-6 flex justify-between items-center border-b border-slate-800 bg-[#030712] text-slate-200 mb-6">
+                            <div class="text-blue-400 font-mono font-bold tracking-widest text-sm">
+                                KUTS_MESH_OPERATIONS // MDI6000 [LOCAL MODE]
+                            </div>
+                            <nav id="nav-auth" class="flex gap-4 items-center font-mono"></nav>
+                        </header>`;
+                    document.body.insertAdjacentHTML('afterbegin', headerHTML);
+                }
+
+                // Inject Global Footer if missing
+                if (!document.getElementById('kuts-global-footer') && !window.location.pathname.includes('index.html')) {
+                    const footerHTML = `
+                        <footer id="kuts-global-footer" class="max-w-7xl mx-auto mt-auto py-8 border-t border-slate-800 text-center w-full">
+                            <a href="index.html" class="inline-flex items-center gap-2 text-[0.7rem] text-slate-500 hover:text-blue-400 font-mono uppercase tracking-widest transition-all">
+                                <span class="text-lg">←</span> RETURN TO UNIVERSAL GATEWAY
+                            </a>
+                        </footer>`;
+                    document.body.insertAdjacentHTML('beforeend', footerHTML);
+                }
+
+                updateAuthUI();
+            });
+
+            window.updateAuthUI = function() {
+                const nav = document.getElementById('nav-auth');
+                if (!nav) return;
+                
+                nav.innerHTML = `
+                    <a href="index.html" class="text-slate-400 text-[0.65rem] uppercase font-mono hover:text-white">Gateway</a>
+                    <button onclick="secureLogout()" class="bg-red-950 hover:bg-red-900 text-red-400 font-mono text-[0.65rem] px-3 py-1.5 rounded border border-red-900 uppercase tracking-widest cursor-pointer">
+                        [X] DISCONNECT
+                    </button>`;
+            };
+
+            window.secureLogout = function() {
+                localStorage.removeItem('kuts_active_session');
+                window.location.href = 'sign-in.html';
+            };
+        })();
+    </script>
+</body>
+</html>
