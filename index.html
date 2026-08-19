@@ -1,208 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aarohan Chronos // V2 Runtime HUD</title>
-  <style>
-    body {
-      font-family: monospace;
-      background: #0d1117;
-      color: #c9d1d9;
-      margin: 0;
-      padding: 2rem;
-    }
-    h1 { color: #58a6ff; font-size: 1.5rem; }
-    .card {
-      background: #161b22;
-      border: 1px solid #30363d;
-      border-radius: 6px;
-      padding: 1.5rem;
-      margin-bottom: 1rem;
-    }
-    button {
-      background: #238636;
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    button:hover { background: #2ea043; }
-    pre { background: #010409; padding: 1rem; border-radius: 4px; overflow-x: auto; color: #7ee787; }
-  </style>
-</head>
-<body>
-
-  <h1>Aarohan Chronos // Version 2 Runtime HUD</h1>
-  
-  <div class="card">
-    <h3>System Status & Controls</h3>
-    <button id="initBtn">Initialize Runtime & Run Tests</button>
-  </div>
-
-  <div class="card">
-    <h3>Live Dashboard Projection</h3>
-    <pre id="output">Click 'Initialize Runtime' to boot the core...</pre>
-  </div>
-
-  <!-- Load the main runtime and test suite as a module -->
-  <script type="module">
-    import { ChronosRuntime, ChronosTestSuite } from './index.js';
-
-    const outputEl = document.getElementById('output');
-    const initBtn = document.getElementById('initBtn');
-
-    initBtn.addEventListener('click', async () => {
-      outputEl.textContent = "Booting Chronos V2 Runtime & executing test suite...\n";
-      
-      try {
-        // 1. Initialize Runtime
-        const runtime = new ChronosRuntime();
-        const initStatus = await runtime.initialize();
-        
-        // 2. Run Test Suite
-        const testResults = await ChronosTestSuite.runAllTests();
-        
-        // 3. Get Dashboard Projection
-        const dashboard = runtime.getDashboardState();
-
-        outputEl.textContent = JSON.stringify({
-          initialization: initStatus,
-          tests: testResults,
-          dashboardState: dashboard
-        }, null, 2);
-        
-      } catch (err) {
-        outputEl.textContent = `Error during execution: ${err.message}`;
-        console.error(err);
-      }
-    });
-  </script>
-<!-- KUTS Universal Domain Footer -->
-<footer class="kuts-domain-footer">
-    <div class="footer-container">
-        <div class="footer-brand">
-            <span class="brand-dot"></span>
-            <strong>KUTS Ecosystem</strong>
-            <small>Global Navigation Matrix</small>
-        </div>
-        <nav class="domain-nav" aria-label="System Domains">
-            <a href="../KUTS-Module-Menu.html?filter=core" class="domain-link">Core & Gateways</a>
-            <span class="divider" aria-hidden="true">•</span>
-            <a href="../KUTS-Module-Menu.html?filter=finance" class="domain-link">Finance</a>
-            <span class="divider" aria-hidden="true">•</span>
-            <a href="../KUTS-Module-Menu.html?filter=governance" class="domain-link">Governance</a>
-            <span class="divider" aria-hidden="true">•</span>
-            <a href="../KUTS-Module-Menu.html?filter=operations" class="domain-link">Operations</a>
-            <span class="divider" aria-hidden="true">•</span>
-            <a href="../KUTS-Module-Menu.html?filter=academy" class="domain-link">Academy</a>
-            <span class="divider" aria-hidden="true">•</span>
-            <a href="../KUTS-Module-Menu.html?filter=network" class="domain-link">Network</a>
-            <span class="divider" aria-hidden="true">•</span>
-            <a href="../KUTS-Module-Menu.html?filter=tools" class="domain-link">Tools</a>
-        </nav>
-    </div>
-    <div class="footer-bottom">
-        <p> © 2026 PINALEAF ADVANCEMENTS LLP // MD16000 ARCHITECTURE // AAROHAN 2050 </p>
-    </div>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Global Ecosystem | Universal Gateway</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght=300;400;600&display=swap" rel="stylesheet">
     <style>
-        .kuts-domain-footer {
-            width: 100%;
-            background: rgba(7, 11, 18, 0.92);
-            border-top: 1px solid #1e2a3a;
-            padding: 20px 24px 14px;
-            margin-top: auto;
-            font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
-            color: #91a1b8;
-        }
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            gap: 16px;
-        }
-        .footer-brand {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 13px;
-            color: #edf4ff;
-        }
-        .footer-brand strong {
-            letter-spacing: 0.05em;
-        }
-        .footer-brand small {
-            color: #687a93;
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            border-left: 1px solid #1e2a3a;
-            padding-left: 8px;
-        }
-        .brand-dot {
-            width: 6px;
-            height: 6px;
-            background: #35d39a;
-            border-radius: 50%;
-            box-shadow: 0 0 8px #35d39a;
-        }
-        .domain-nav {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 10px;
-            font-size: 12px;
-        }
-        .domain-link {
-            color: #91a1b8;
-            text-decoration: none;
-            transition: color 0.15s ease;
-        }
-        .domain-link:hover {
-            color: #61a5ff;
-            text-decoration: underline;
-        }
-        .divider {
-            color: #2a3b51;
-            font-size: 10px;
-        }
-        .footer-bottom {
-            max-width: 1200px;
-            margin: 14px auto 0;
-            padding-top: 10px;
-            border-top: 1px solid rgba(30, 42, 58, 0.5);
-            text-align: center;
-            font-size: 10px;
-            color: #5f7088;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-        }
-        @media (max-width: 768px) {
-            .footer-container {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .domain-nav {
-                gap: 8px;
-            }
-            .divider {
-                display: none;
-            }
-            .domain-link {
-                background: #0d1420;
-                border: 1px solid #1e2a3a;
-                padding: 4px 8px;
-                border-radius: 6px;
-                font-size: 11px;
-            }
-        }
+        body { background-color: #030712; color: #f1f5f9; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
     </style>
-</footer>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Global Platform Navigation -->
+    <nav class="border-b border-slate-800 bg-slate-900/50 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-blue-400 font-mono tracking-widest uppercase">KUTS_GENESIS</h1>
+            <div class="flex gap-6 text-[0.7rem] font-mono uppercase tracking-widest text-slate-400">
+                <a href="#" onclick="loadModule('dashboard')" class="hover:text-blue-400">01. Learning</a>
+                <a href="#" onclick="loadModule('compliance')" class="hover:text-blue-400">02. Operations</a>
+                <a href="#" onclick="loadModule('registry')" class="hover:text-blue-400">03. Collaboration</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Micro-Frontend Container Shell -->
+    <main id="kuts-app-container" class="flex-1 max-w-7xl mx-auto w-full p-6">
+        <div class="text-center mt-20">
+            <h2 class="text-3xl font-bold text-slate-100 font-mono">Welcome to Aarohan 2050</h2>
+            <p class="text-slate-500 mt-4 max-w-md mx-auto">Select a path from the navigation menu to activate your local KUTS node connection and enter the decentralized ecosystem.</p>
+        </div>
+    </main>
+
+    <!-- Shared Platform Services -->
+    <footer class="border-t border-slate-800 p-6 text-center text-[0.6rem] font-mono text-slate-600 uppercase tracking-widest">
+        © 2026 PINALEAF ADVANCEMENTS LLP // MD16000 ARCHITECTURE // ORIGIN: THRINC000
+    </footer>
+
+    <script>
+        // Orchestration Controller
+        async function loadModule(moduleName) {
+            const container = document.getElementById('kuts-app-container');
+            const path = `./${moduleName}.html`;
+            
+            console.log("System State: Attempting to fetch:", path);
+            
+            try {
+                const response = await fetch(path);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                
+                const html = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                
+                // Extract content
+                const content = doc.querySelector('main') || doc.body;
+                container.innerHTML = content.innerHTML;
+
+                // Revive scripts
+                doc.querySelectorAll('script').forEach(oldScript => {
+                    const newScript = document.createElement('script');
+                    if (oldScript.src) newScript.src = oldScript.src;
+                    else newScript.textContent = oldScript.textContent;
+                    document.body.appendChild(newScript);
+                });
+                
+                console.log(`System State: ${moduleName} Module Synchronized.`);
+            } catch (err) {
+                console.error("Sync Error:", err);
+                // Fallback for local file:// protocol
+                container.innerHTML = `
+                    <div class="p-6 border border-red-900 bg-red-950/20 text-red-400 font-mono text-xs text-center rounded">
+                        <p>Synchronization Error: ${err.message}</p>
+                        <p class="mt-2">If running locally, please use VS Code "Live Server" to bypass CORS policy.</p>
+                    </div>`;
+            }
+        } // <-- Fixed: removed extra floating brace
+
+        // Ecosystem Manifest Initializer
+        async function initializeEcosystem() {
+            try {
+                // Points to the Assets sub-folder from the root
+                const response = await fetch('./Assets/manifest.json');
+                if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
+                
+                const ecosystemManifest = await response.json();
+                console.log("System State: Manifest synchronized successfully.");
+                
+                // Ensure renderDynamicNavigation exists before calling it
+                if (typeof renderDynamicNavigation === 'function') {
+                    renderDynamicNavigation(ecosystemManifest);
+                }
+            } catch (err) {
+                console.error("Manifest Sync Error:", err);
+                document.getElementById('kuts-app-container').innerHTML = `
+                    <div class="p-6 border border-red-900 bg-red-950/20 text-red-400 font-mono text-xs text-center rounded">
+                        <p>Ecosystem Initialization Failed: ${err.message}</p>
+                        <p class="mt-2">Please ensure manifest.json is inside your Assets folder and valid.</p>
+                    </div>`;
+            }
+        }
+
+        // Run on page load if needed
+        window.addEventListener('DOMContentLoaded', initializeEcosystem);
+    </script>
 </body>
 </html>
