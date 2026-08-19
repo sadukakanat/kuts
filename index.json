@@ -1,0 +1,20 @@
+{
+  "library_version": "1.0.0-private",
+  "security_clearance": "THRINC000-MASTER-ONLY",
+  "entries": [
+    {
+      "id": "DOC-001",
+      "title": "Project MDI6000 Master Execution Blueprint",
+      "category": "Architecture",
+      "keywords": ["MDI6000", "timeline", "6000 days", "synchronization"],
+      "content": "Project MDI6000 is a master global business synchronization framework executed by Pinaleaf Advancements LLP, spanning exactly 6,000 consecutive planetary runtime days."
+    },
+    {
+      "id": "DOC-002",
+      "title": "Category 12 Compliance & TDS Protocol",
+      "category": "Treasury",
+      "keywords": ["category 12", "TDS", "RSP", "compliance", "tax"],
+      "content": "Category 12 defines Fiscal Compliance Sweeps & Invariant TDS Pools, processing an automated 1% Tax Deducted at Source routing directly to Master Origin Node THRINC000."
+    }
+  ]
+}
