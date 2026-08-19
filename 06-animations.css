@@ -1,0 +1,338 @@
+/* ==========================================================
+   AAROHAN DESIGN SYSTEM (ADS) v1.0
+   File: 06-animations.css
+
+   Purpose:
+   Global animation library.
+
+   Building tomorrow's digital infrastructure, today.
+==========================================================*/
+
+
+/* ==========================================================
+   TRANSITIONS
+========================================================== */
+
+.a-transition {
+    transition: all var(--transition-normal) var(--ease);
+}
+
+
+/* ==========================================================
+   FADE IN
+========================================================== */
+
+.a-fade-in {
+    animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+
+}
+
+
+/* ==========================================================
+   FADE UP
+========================================================== */
+
+.a-fade-up {
+    animation: fadeUp .9s ease forwards;
+}
+
+@keyframes fadeUp {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(40px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+
+/* ==========================================================
+   FADE DOWN
+========================================================== */
+
+.a-fade-down {
+    animation: fadeDown .9s ease forwards;
+}
+
+@keyframes fadeDown {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(-40px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+
+/* ==========================================================
+   SCALE IN
+========================================================== */
+
+.a-scale-in {
+    animation: scaleIn .8s ease forwards;
+}
+
+@keyframes scaleIn {
+
+    from {
+
+        opacity:0;
+
+        transform:scale(.9);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}
+
+
+/* ==========================================================
+   FLOAT
+========================================================== */
+
+.a-float{
+    animation:float 6s ease-in-out infinite;
+}
+
+@keyframes float{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-10px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+/* ==========================================================
+   GLOW
+========================================================== */
+
+.a-glow{
+
+    animation:glow 3s ease-in-out infinite;
+
+}
+
+@keyframes glow{
+
+    0%{
+
+        box-shadow:0 0 0 rgba(124,58,237,.2);
+
+    }
+
+    50%{
+
+        box-shadow:0 0 35px rgba(124,58,237,.45);
+
+    }
+
+    100%{
+
+        box-shadow:0 0 0 rgba(124,58,237,.2);
+
+    }
+
+}
+
+
+/* ==========================================================
+   PULSE
+========================================================== */
+
+.a-pulse{
+
+    animation:pulse 2s infinite;
+
+}
+
+@keyframes pulse{
+
+    0%{
+
+        transform:scale(1);
+
+    }
+
+    50%{
+
+        transform:scale(1.05);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+    }
+
+}
+
+
+/* ==========================================================
+   ROTATE
+========================================================== */
+
+.a-rotate{
+
+    animation:rotate 18s linear infinite;
+
+}
+
+@keyframes rotate{
+
+    from{
+
+        transform:rotate(0deg);
+
+    }
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+
+/* ==========================================================
+   GRADIENT SHIFT
+========================================================== */
+
+.a-gradient{
+
+    background-size:200% 200%;
+
+    animation:gradientMove 8s ease infinite;
+
+}
+
+@keyframes gradientMove{
+
+    0%{
+
+        background-position:0% 50%;
+
+    }
+
+    50%{
+
+        background-position:100% 50%;
+
+    }
+
+    100%{
+
+        background-position:0% 50%;
+
+    }
+
+}
+
+
+/* ==========================================================
+   HOVER LIFT
+========================================================== */
+
+.a-hover-lift{
+
+    transition:transform var(--transition-normal);
+
+}
+
+.a-hover-lift:hover{
+
+    transform:translateY(-8px);
+
+}
+
+
+/* ==========================================================
+   HOVER SCALE
+========================================================== */
+
+.a-hover-scale{
+
+    transition:transform var(--transition-normal);
+
+}
+
+.a-hover-scale:hover{
+
+    transform:scale(1.03);
+
+}
+
+
+/* ==========================================================
+   REDUCED MOTION
+========================================================== */
+
+@media (prefers-reduced-motion: reduce){
+
+    *{
+
+        animation:none !important;
+
+        transition:none !important;
+
+        scroll-behavior:auto !important;
+
+    }
+
+}

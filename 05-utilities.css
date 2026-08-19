@@ -1,0 +1,260 @@
+/* ==========================================================
+   AAROHAN DESIGN SYSTEM (ADS) v1.0
+   File: 05-utilities.css
+
+   Purpose:
+   Utility helper classes for spacing, display, alignment,
+   colors, sizing, and visibility.
+
+   Building tomorrow's digital infrastructure, today.
+==========================================================*/
+
+
+/* ==========================================================
+   DISPLAY
+==========================================================*/
+
+.a-block { display:block; }
+.a-inline { display:inline; }
+.a-inline-block { display:inline-block; }
+.a-flex { display:flex; }
+.a-grid { display:grid; }
+.a-hidden { display:none; }
+
+
+/* ==========================================================
+   FLEX HELPERS
+==========================================================*/
+
+.a-items-center { align-items:center; }
+.a-items-start { align-items:flex-start; }
+.a-items-end { align-items:flex-end; }
+
+.a-justify-center { justify-content:center; }
+.a-justify-between { justify-content:space-between; }
+.a-justify-around { justify-content:space-around; }
+
+.a-flex-column { flex-direction:column; }
+.a-flex-wrap { flex-wrap:wrap; }
+
+
+/* ==========================================================
+   TEXT ALIGNMENT
+==========================================================*/
+
+.a-text-left { text-align:left; }
+.a-text-center { text-align:center; }
+.a-text-right { text-align:right; }
+
+
+/* ==========================================================
+   TEXT COLORS
+==========================================================*/
+
+.a-text-primary {
+    color:var(--color-text-primary);
+}
+
+.a-text-secondary {
+    color:var(--color-text-secondary);
+}
+
+.a-text-muted {
+    color:var(--color-text-muted);
+}
+
+.a-text-accent {
+    color:var(--color-secondary);
+}
+
+
+/* ==========================================================
+   BACKGROUNDS
+==========================================================*/
+
+.a-bg-primary {
+    background:var(--gradient-primary);
+}
+
+.a-bg-surface {
+    background:var(--color-surface);
+}
+
+.a-bg-glass {
+    background:var(--glass-background);
+}
+
+
+/* ==========================================================
+   WIDTH
+==========================================================*/
+
+.a-w-100 {
+    width:100%;
+}
+
+.a-max-600 {
+    max-width:600px;
+}
+
+.a-max-720 {
+    max-width:720px;
+}
+
+.a-max-960 {
+    max-width:960px;
+}
+
+
+/* ==========================================================
+   MARGIN TOP
+==========================================================*/
+
+.a-mt-0 { margin-top:0; }
+.a-mt-2 { margin-top:var(--space-2); }
+.a-mt-4 { margin-top:var(--space-4); }
+.a-mt-6 { margin-top:var(--space-6); }
+.a-mt-8 { margin-top:var(--space-8); }
+.a-mt-12 { margin-top:var(--space-12); }
+.a-mt-16 { margin-top:var(--space-16); }
+
+
+/* ==========================================================
+   MARGIN BOTTOM
+==========================================================*/
+
+.a-mb-0 { margin-bottom:0; }
+.a-mb-2 { margin-bottom:var(--space-2); }
+.a-mb-4 { margin-bottom:var(--space-4); }
+.a-mb-6 { margin-bottom:var(--space-6); }
+.a-mb-8 { margin-bottom:var(--space-8); }
+.a-mb-12 { margin-bottom:var(--space-12); }
+.a-mb-16 { margin-bottom:var(--space-16); }
+
+
+/* ==========================================================
+   PADDING
+==========================================================*/
+
+.a-p-2 { padding:var(--space-2); }
+.a-p-4 { padding:var(--space-4); }
+.a-p-6 { padding:var(--space-6); }
+.a-p-8 { padding:var(--space-8); }
+
+.a-px-4 {
+    padding-left:var(--space-4);
+    padding-right:var(--space-4);
+}
+
+.a-py-4 {
+    padding-top:var(--space-4);
+    padding-bottom:var(--space-4);
+}
+
+
+/* ==========================================================
+   GAP
+==========================================================*/
+
+.a-gap-2 { gap:var(--space-2); }
+.a-gap-4 { gap:var(--space-4); }
+.a-gap-6 { gap:var(--space-6); }
+.a-gap-8 { gap:var(--space-8); }
+
+
+/* ==========================================================
+   BORDER RADIUS
+==========================================================*/
+
+.a-rounded-sm {
+    border-radius:var(--radius-sm);
+}
+
+.a-rounded-md {
+    border-radius:var(--radius-md);
+}
+
+.a-rounded-lg {
+    border-radius:var(--radius-lg);
+}
+
+.a-rounded-xl {
+    border-radius:var(--radius-xl);
+}
+
+.a-rounded-pill {
+    border-radius:var(--radius-pill);
+}
+
+
+/* ==========================================================
+   SHADOWS
+==========================================================*/
+
+.a-shadow-soft {
+    box-shadow:var(--shadow-soft);
+}
+
+.a-shadow-medium {
+    box-shadow:var(--shadow-medium);
+}
+
+.a-shadow-large {
+    box-shadow:var(--shadow-large);
+}
+
+
+/* ==========================================================
+   POSITION
+==========================================================*/
+
+.a-relative {
+    position:relative;
+}
+
+.a-absolute {
+    position:absolute;
+}
+
+.a-fixed {
+    position:fixed;
+}
+
+
+/* ==========================================================
+   OVERFLOW
+==========================================================*/
+
+.a-overflow-hidden {
+    overflow:hidden;
+}
+
+.a-overflow-auto {
+    overflow:auto;
+}
+
+
+/* ==========================================================
+   CURSOR
+==========================================================*/
+
+.a-pointer {
+    cursor:pointer;
+}
+
+
+/* ==========================================================
+   OPACITY
+==========================================================*/
+
+.a-opacity-50 {
+    opacity:.5;
+}
+
+.a-opacity-75 {
+    opacity:.75;
+}
+
+.a-opacity-100 {
+    opacity:1;
+}

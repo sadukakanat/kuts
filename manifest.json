@@ -1,24 +1,20 @@
 {
-  "name": "KUTS Metric Time System",
-  "short_name": "KUTS",
-  "start_url": "./index.html",
-  "display": "fullscreen",
-  "background_color": "#040812",
-  "theme_color": "#050a15",
-  "orientation": "portrait",
-  "categories": ["productivity", "utilities"],
-  "icons": [
-    {
-      "src": "icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
+  "version": "2.0.0-kuts",
+  "last_synchronized": "2026-08-13T00:00:00Z",
+  "domains": {
+    "core": {
+      "label": "Core & Gateways",
+      "icon": "⚡",
+      "priority": 1,
+      "modules": [
+        {
+          "file": "index.html",
+          "name": "System Gateway",
+          "route": "/core/gateway",
+          "status": "stable",
+          "hash": "QmQXjjPhUU2v..."
+        }
+      ]
     }
-  ]
+  }
 }
