@@ -1,357 +1,208 @@
-<!doctype html>
-<html lang="en" class="dark">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
-    <meta
-      name="description"
-      content="Aarohan Chronos global time and Kine production interface."
-    />
-    <title>AAROHAN CHRONOS // GLOBAL TIME SYSTEM</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aarohan Chronos // V2 Runtime HUD</title>
+  <style>
+    body {
+      font-family: monospace;
+      background: #0d1117;
+      color: #c9d1d9;
+      margin: 0;
+      padding: 2rem;
+    }
+    h1 { color: #58a6ff; font-size: 1.5rem; }
+    .card {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    button {
+      background: #238636;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover { background: #2ea043; }
+    pre { background: #010409; padding: 1rem; border-radius: 4px; overflow-x: auto; color: #7ee787; }
+  </style>
+</head>
+<body>
 
-    <!-- Tailwind CSS CDN with Custom Theme Extensions -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        darkMode: 'class',
-        theme: {
-          extend: {
-            colors: {
-              kutsDark: "#0b0f19",
-              kutsPanel: "#131b2e",
-              kutsGreen: "#10b981",
-              kutsCyan: "#06b6d4",
-            },
-            fontFamily: {
-              mono: ['"Share Tech Mono"', "monospace"],
-              sans: ["Inter", "sans-serif"],
-            },
-          },
-        },
-      };
-    </script>
+  <h1>Aarohan Chronos // Version 2 Runtime HUD</h1>
+  
+  <div class="card">
+    <h3>System Status & Controls</h3>
+    <button id="initBtn">Initialize Runtime & Run Tests</button>
+  </div>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link
-      rel="preconnect"
-      href="https://fonts.gstatic.com"
-      crossorigin
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Share+Tech+Mono&display=swap"
-      rel="stylesheet"
-    />
-  </head>
+  <div class="card">
+    <h3>Live Dashboard Projection</h3>
+    <pre id="output">Click 'Initialize Runtime' to boot the core...</pre>
+  </div>
 
-  <body
-    class="bg-[#0b0f19] text-slate-200 font-sans antialiased h-screen flex flex-col overflow-hidden"
-  >
-    <!-- Header HUD -->
-    <header
-      class="bg-[#131b2e] border-b border-slate-800 px-6 py-3 flex justify-between items-center text-sm font-mono"
-    >
-      <div class="flex items-center space-x-4">
-        <span class="text-[#10b981] font-bold tracking-wider">
-          PROJECT: MD16000 // AAROHAN CHRONOS
-        </span>
+  <!-- Load the main runtime and test suite as a module -->
+  <script type="module">
+    import { ChronosRuntime, ChronosTestSuite } from './index.js';
 
-        <span
-          id="network-status"
-          data-hud="network-status"
-          data-status="idle"
-          class="bg-emerald-900/50 text-emerald-400 px-2 py-0.5 rounded text-xs border border-emerald-700/50"
-        >
-          P2P MESH SIMULATION
-        </span>
-      </div>
+    const outputEl = document.getElementById('output');
+    const initBtn = document.getElementById('initBtn');
 
-      <div class="flex items-center space-x-6 text-slate-400">
-        <span>
-          ANCHOR:
-          <strong class="text-[#06b6d4]" id="anchor-node">
-            THRINC000
-          </strong>
-        </span>
+    initBtn.addEventListener('click', async () => {
+      outputEl.textContent = "Booting Chronos V2 Runtime & executing test suite...\n";
+      
+      try {
+        // 1. Initialize Runtime
+        const runtime = new ChronosRuntime();
+        const initStatus = await runtime.initialize();
+        
+        // 2. Run Test Suite
+        const testResults = await ChronosTestSuite.runAllTests();
+        
+        // 3. Get Dashboard Projection
+        const dashboard = runtime.getDashboardState();
 
-        <span
-          id="custody-status"
-          data-hud="custodial-status"
-          data-status="idle"
-          class="text-amber-400"
-        >
-          CUSTODY: PINALEAF ADVANCEMENTS LLP
-        </span>
-      </div>
-    </header>
-
-    <!-- Main Interface Grid -->
-    <main
-      class="flex-1 grid grid-cols-1 lg:grid-cols-3 gap-4 p-4 overflow-hidden"
-    >
-      <!-- Left Column: Daily Pulse Form -->
-      <section
-        class="bg-[#131b2e] border border-slate-800 rounded-lg p-5 flex flex-col justify-between"
-      >
-        <div>
-          <h2
-            class="font-mono text-[#06b6d4] text-lg mb-4 border-b border-slate-800 pb-2"
-          >
-            GLOBAL KINE PRODUCER
-          </h2>
-
-          <form
-            id="pulse-form"
-            class="space-y-4 font-mono text-xs"
-            novalidate
-          >
-            <div>
-              <label
-                for="metric-type"
-                class="block text-slate-400 mb-1"
-              >
-                METRIC TYPE
-              </label>
-
-              <select
-                id="metric-type"
-                name="metricType"
-                class="w-full bg-slate-900 border border-slate-700 rounded p-2 text-slate-200"
-              >
-                <option value="energy">
-                  Industrial Energy (10 kWh = 1 Kine)
-                </option>
-                <option value="logistics">
-                  Logistics Distance (100 km = 10 Kines)
-                </option>
-                <option value="labor">
-                  Labor Duration (8 Hours = 10 Kines)
-                </option>
-              </select>
-            </div>
-
-            <div>
-              <label
-                for="metric-value"
-                class="block text-slate-400 mb-1"
-              >
-                VERIFIED QUANTITY
-              </label>
-
-              <input
-                type="number"
-                id="metric-value"
-                name="value"
-                value="10"
-                min="0"
-                step="any"
-                inputmode="decimal"
-                class="w-full bg-slate-900 border border-slate-700 rounded p-2 text-slate-200"
-                required
-              />
-
-              <p
-                id="pulse-status"
-                class="hidden mt-1"
-                role="status"
-                aria-live="polite"
-              ></p>
-
-              <p
-                id="pulse-error"
-                class="hidden mt-1 text-red-400"
-                role="alert"
-              ></p>
-            </div>
-
-            <button
-              type="submit"
-              class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 rounded transition tracking-wider"
-            >
-              EXECUTE PULSE &amp; MINT KINES
-            </button>
-          </form>
+        outputEl.textContent = JSON.stringify({
+          initialization: initStatus,
+          tests: testResults,
+          dashboardState: dashboard
+        }, null, 2);
+        
+      } catch (err) {
+        outputEl.textContent = `Error during execution: ${err.message}`;
+        console.error(err);
+      }
+    });
+  </script>
+<!-- KUTS Universal Domain Footer -->
+<footer class="kuts-domain-footer">
+    <div class="footer-container">
+        <div class="footer-brand">
+            <span class="brand-dot"></span>
+            <strong>KUTS Ecosystem</strong>
+            <small>Global Navigation Matrix</small>
         </div>
+        <nav class="domain-nav" aria-label="System Domains">
+            <a href="../KUTS-Module-Menu.html?filter=core" class="domain-link">Core & Gateways</a>
+            <span class="divider" aria-hidden="true">•</span>
+            <a href="../KUTS-Module-Menu.html?filter=finance" class="domain-link">Finance</a>
+            <span class="divider" aria-hidden="true">•</span>
+            <a href="../KUTS-Module-Menu.html?filter=governance" class="domain-link">Governance</a>
+            <span class="divider" aria-hidden="true">•</span>
+            <a href="../KUTS-Module-Menu.html?filter=operations" class="domain-link">Operations</a>
+            <span class="divider" aria-hidden="true">•</span>
+            <a href="../KUTS-Module-Menu.html?filter=academy" class="domain-link">Academy</a>
+            <span class="divider" aria-hidden="true">•</span>
+            <a href="../KUTS-Module-Menu.html?filter=network" class="domain-link">Network</a>
+            <span class="divider" aria-hidden="true">•</span>
+            <a href="../KUTS-Module-Menu.html?filter=tools" class="domain-link">Tools</a>
+        </nav>
+    </div>
+    <div class="footer-bottom">
+        <p> © 2026 PINALEAF ADVANCEMENTS LLP // MD16000 ARCHITECTURE // AAROHAN 2050 </p>
+    </div>
 
-        <div
-          class="bg-slate-900/80 border border-slate-800 p-3 rounded font-mono text-xs space-y-1"
-        >
-          <div class="text-slate-400">
-            MINTED BALANCE:
-          </div>
-
-          <div
-            id="display-kines"
-            data-hud="minted-amount"
-            class="text-[#10b981] text-sm font-bold"
-          >
-            0.00 KINES (0.00 DYNE)
-          </div>
-        </div>
-      </section>
-
-      <!-- Center Column: Geodesic Mesh Canvas -->
-      <section
-        class="bg-[#131b2e] border border-slate-800 rounded-lg relative overflow-hidden flex flex-col items-center justify-center"
-        aria-label="Planetary geodesic mesh visualization"
-      >
-        <div
-          id="globe-container"
-          class="absolute inset-0"
-        ></div>
-
-        <div
-          class="absolute top-4 left-4 bg-[#0b0f19]/80 border border-slate-800 px-3 py-1.5 rounded font-mono text-xs pointer-events-none"
-        >
-          PLANETARY GEODESIC MESH (34 NODES)
-        </div>
-      </section>
-
-      <!-- Right Column: Universal Temporal Clock & Ledger Gossip -->
-      <section
-        class="bg-[#131b2e] border border-slate-800 rounded-lg p-5 flex flex-col justify-between font-mono"
-      >
-        <div>
-          <h2
-            class="text-[#06b6d4] text-lg mb-4 border-b border-slate-800 pb-2"
-          >
-            64-ORDER CHRONOMETER
-          </h2>
-
-          <div
-            class="bg-slate-900 border border-slate-800 p-3 rounded mb-4"
-          >
-            <div
-              class="text-[10px] text-slate-500 mb-1"
-            >
-              22-DIGIT SERIAL STRING (LIGHT-VELOCITY BASE)
-            </div>
-
-            <div
-              id="temporal-string"
-              class="text-emerald-400 text-sm tracking-widest break-all"
-              aria-live="polite"
-            >
-              --:--.--------.--------
-            </div>
-          </div>
-        </div>
-
-        <!-- HUD / realization status -->
-        <div
-          class="grid grid-cols-2 gap-2 mb-4 text-[10px]"
-        >
-          <div
-            class="bg-slate-900/70 border border-slate-800 rounded p-2"
-          >
-            <div class="text-slate-500">
-              GLOBAL NODES
-            </div>
-            <div
-              id="global-nodes"
-              data-hud="global-nodes"
-              class="text-[#06b6d4] font-bold"
-            >
-              —
-            </div>
-          </div>
-
-          <div
-            class="bg-slate-900/70 border border-slate-800 rounded p-2"
-          >
-            <div class="text-slate-500">
-              PRIMARY NODES
-            </div>
-            <div
-              id="primary-nodes"
-              data-hud="primary-nodes"
-              class="text-[#06b6d4] font-bold"
-            >
-              —
-            </div>
-          </div>
-
-          <div
-            class="bg-slate-900/70 border border-slate-800 rounded p-2"
-          >
-            <div class="text-slate-500">
-              GLOBAL PROGRESS
-            </div>
-            <div
-              id="global-progress"
-              data-hud="global-progress"
-              class="text-emerald-400 font-bold"
-            >
-              —
-            </div>
-          </div>
-
-          <div
-            class="bg-slate-900/70 border border-slate-800 rounded p-2"
-          >
-            <div class="text-slate-500">
-              PRIMARY PROGRESS
-            </div>
-            <div
-              id="primary-progress"
-              data-hud="primary-progress"
-              class="text-emerald-400 font-bold"
-            >
-              —
-            </div>
-          </div>
-
-          <div
-            class="bg-slate-900/70 border border-slate-800 rounded p-2 col-span-2"
-          >
-            <div class="text-slate-500">
-              TRANSITION STATUS
-            </div>
-            <div
-              id="transition-status"
-              data-hud="transition-status"
-              data-status="pending"
-              class="text-amber-400 font-bold"
-            >
-              PENDING
-            </div>
-          </div>
-
-          <div
-            id="last-event"
-            data-hud="last-event"
-            class="hidden"
-            aria-hidden="true"
-          ></div>
-        </div>
-
-        <div
-          class="flex-1 overflow-hidden flex flex-col"
-        >
-          <div class="text-xs text-slate-400 mb-2">
-            P2P LEDGER GOSSIP FEED
-          </div>
-
-          <div
-            id="gossip-feed"
-            class="flex-1 bg-slate-900/50 border border-slate-800 rounded p-2 overflow-y-auto text-[11px] space-y-1.5 text-slate-400"
-            aria-live="polite"
-            aria-label="Ledger gossip feed"
-          >
-            <div>
-              [SYSTEM] Initializing Aarohan Chronos engine...
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <!-- Script source mapping fix: use relative path if running static bundle -->
-    <script
-      type="module"
-      src="./src/main.js"
-    ></script>
-  </body>
+    <style>
+        .kuts-domain-footer {
+            width: 100%;
+            background: rgba(7, 11, 18, 0.92);
+            border-top: 1px solid #1e2a3a;
+            padding: 20px 24px 14px;
+            margin-top: auto;
+            font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+            color: #91a1b8;
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #edf4ff;
+        }
+        .footer-brand strong {
+            letter-spacing: 0.05em;
+        }
+        .footer-brand small {
+            color: #687a93;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-left: 1px solid #1e2a3a;
+            padding-left: 8px;
+        }
+        .brand-dot {
+            width: 6px;
+            height: 6px;
+            background: #35d39a;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #35d39a;
+        }
+        .domain-nav {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            font-size: 12px;
+        }
+        .domain-link {
+            color: #91a1b8;
+            text-decoration: none;
+            transition: color 0.15s ease;
+        }
+        .domain-link:hover {
+            color: #61a5ff;
+            text-decoration: underline;
+        }
+        .divider {
+            color: #2a3b51;
+            font-size: 10px;
+        }
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 14px auto 0;
+            padding-top: 10px;
+            border-top: 1px solid rgba(30, 42, 58, 0.5);
+            text-align: center;
+            font-size: 10px;
+            color: #5f7088;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+        @media (max-width: 768px) {
+            .footer-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .domain-nav {
+                gap: 8px;
+            }
+            .divider {
+                display: none;
+            }
+            .domain-link {
+                background: #0d1420;
+                border: 1px solid #1e2a3a;
+                padding: 4px 8px;
+                border-radius: 6px;
+                font-size: 11px;
+            }
+        }
+    </style>
+</footer>
+</body>
 </html>

@@ -1,13 +1,9 @@
 /**
- * AAROHAN CHRONOS // KINE MINTING ENGINE
- *
- * Deterministic conversion layer for resource metrics -> Kines.
- *
- * Important:
- * - This client-side engine calculates quantities; it does not verify that
- *   the supplied metric came from a trusted physical or external source.
- * - Persistent balances, authorization, anti-replay protection, and
- *   cryptographic transaction verification belong in a trusted ledger layer.
+ * AAROHAN CHRONOS // V2 MINTING CALCULATION ENGINE
+ * Deterministic conversion layer for resource metrics -> mint proposals.
+ * 
+ * Note: This module performs calculations only. It does not mutate
+ * authoritative ledger state directly.
  */
 
 const METRIC_RULES = Object.freeze({
@@ -16,13 +12,11 @@ const METRIC_RULES = Object.freeze({
     kinesPerUnit: 1 / 10,
     description: "Industrial Energy",
   }),
-
   logistics: Object.freeze({
     unit: "km",
     kinesPerUnit: 10 / 100,
     description: "Logistics Distance",
   }),
-
   labor: Object.freeze({
     unit: "hours",
     kinesPerUnit: 10 / 8,
@@ -31,45 +25,33 @@ const METRIC_RULES = Object.freeze({
 });
 
 const KINES_PER_DYNE = 100;
+const POLICY_VERSION = "v2.0";
 
-export class MintingEngine {
+export class MintingCalculationEngine {
   constructor() {
-    this.totalKines = 0;
-    this.totalDynes = 0;
-    this.totalPulses = 0;
-    this.lastMint = null;
+    this.policyVersion = POLICY_VERSION;
   }
 
-  processPulse(metricType, value) {
+  createMintProposal(metricType, value) {
     this.validateMetric(metricType, value);
 
     const numericValue = Number(value);
     const rule = METRIC_RULES[metricType];
+    const proposedKines = numericValue * rule.kinesPerUnit;
+    const proposedDynes = proposedKines / KINES_PER_DYNE;
 
-    const sessionKines = numericValue * rule.kinesPerUnit;
-
-    this.totalKines += sessionKines;
-    this.totalDynes = this.totalKines / KINES_PER_DYNE;
-    this.totalPulses += 1;
-
-    const result = {
-      metricType,
+    return {
+      metric: metricType.toUpperCase(),
       metricDescription: rule.description,
-      inputValue: numericValue,
-      inputUnit: rule.unit,
+      input: numericValue,
+      unit: rule.unit,
       conversionRate: rule.kinesPerUnit,
-      sessionKines,
-      totalKines: this.totalKines,
-      totalDynes: this.totalDynes,
-      pulseNumber: this.totalPulses,
-      verified: false,
-      verificationStatus: "CLIENT_INPUT_UNVERIFIED",
-      timestamp: new Date().toISOString(),
+      proposedKines,
+      proposedDynes,
+      policyVersion: this.policyVersion,
+      status: "PROPOSED",
+      timestamp: new Date().toISOString()
     };
-
-    this.lastMint = Object.freeze({ ...result });
-
-    return result;
   }
 
   validateMetric(metricType, value) {
@@ -98,25 +80,6 @@ export class MintingEngine {
       ])
     );
   }
-
-  getBalance() {
-    return {
-      totalKines: this.totalKines,
-      totalDynes: this.totalDynes,
-      totalPulses: this.totalPulses,
-    };
-  }
-
-  getLastMint() {
-    return this.lastMint ? { ...this.lastMint } : null;
-  }
-
-  resetSession() {
-    this.totalKines = 0;
-    this.totalDynes = 0;
-    this.totalPulses = 0;
-    this.lastMint = null;
-  }
 }
 
-export { KINES_PER_DYNE, METRIC_RULES };
+export { KINES_PER_DYNE, METRIC_RULES, POLICY_VERSION };
