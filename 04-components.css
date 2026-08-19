@@ -331,3 +331,202 @@
     }
 
 }
+/* ==========================================
+   BUTTONS
+========================================== */
+
+.btn {
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 14px 28px;
+
+    border-radius: 999px;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    transition: all .3s ease;
+
+}
+
+.btn-primary {
+
+    background: linear-gradient(
+        135deg,
+        #4F8CFF,
+        #6AA8FF
+    );
+
+    color: white;
+
+    box-shadow:
+        0 10px 30px rgba(79,140,255,.35);
+
+}
+
+.btn-primary:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 16px 40px rgba(79,140,255,.45);
+
+}
+
+.btn-secondary {
+
+    color: white;
+
+    border: 1px solid rgba(255,255,255,.18);
+
+    background: rgba(255,255,255,.03);
+
+}
+
+.btn-secondary:hover {
+
+    background: rgba(255,255,255,.08);
+
+}
+
+/* ==========================================
+   COMPONENT 01
+   SECTION HEADER
+========================================== */
+
+.component-section{
+
+    padding:120px 0;
+
+}
+
+.component-preview{
+
+    margin-top:60px;
+
+    background:#101522;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:20px;
+
+    padding:60px;
+
+}
+
+.section-header-demo{
+
+    max-width:700px;
+
+    margin:auto;
+
+    text-align:center;
+
+}
+
+.demo-label{
+
+    display:inline-block;
+
+    margin-bottom:16px;
+
+    font-size:.75rem;
+
+    letter-spacing:.25em;
+
+    text-transform:uppercase;
+
+    color:#6a5cff;
+
+}
+
+.demo-title{
+
+    font-size:3rem;
+
+    font-weight:700;
+
+    margin-bottom:20px;
+
+    color:#ffffff;
+
+}
+
+.demo-description{
+
+    font-size:1.05rem;
+
+    line-height:1.8;
+
+    color:#b8bfd0;
+
+}
+
+/* ==========================================
+   DS-002
+   INFORMATION CARD
+========================================== */
+
+.info-card{
+
+    max-width:420px;
+
+    margin:auto;
+
+    padding:40px;
+
+    background:#101522;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:20px;
+
+    text-align:center;
+
+    transition:.3s ease;
+
+}
+
+.info-card:hover{
+
+    transform:translateY(-6px);
+
+    border-color:#4f7cff;
+
+    box-shadow:0 20px 40px rgba(79,124,255,.15);
+
+}
+
+.info-icon{
+
+    font-size:2.5rem;
+
+    margin-bottom:20px;
+
+}
+
+.info-title{
+
+    font-size:2rem;
+
+    margin-bottom:20px;
+
+    color:#ffffff;
+
+}
+
+.info-text{
+
+    font-size:1rem;
+
+    line-height:1.8;
+
+    color:#b8bfd0;
+
+    margin-bottom:30px;
+
+}

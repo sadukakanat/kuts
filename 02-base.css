@@ -34,7 +34,13 @@ body {
 
     font-family: var(--font-body);
 
-    background: var(--color-background);
+    background:
+radial-gradient(
+circle at top,
+rgba(79,140,255,.12),
+transparent 40%
+),
+#060A15;
 
     color: var(--color-text-primary);
 
