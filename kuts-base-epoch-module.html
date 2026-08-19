@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Base-Epoch Core Module</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #030712; color: #f1f5f9; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .glass-panel { background: rgba(13, 20, 32, 0.75); backdrop-filter: blur(16px); }
+        .tabular-nums { font-variant-numeric: tabular-nums; }
+    </style>
+</head>
+<body class="p-6 flex justify-center items-center min-h-screen">
+
+    <!-- REUSABLE BASE-EPOCH MODULE -->
+    <div id="kuts-base-epoch-module" class="glass-panel border border-blue-500/40 rounded-2xl p-6 max-w-md w-full shadow-2xl">
+        <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-3">
+            <div>
+                <span class="text-[0.6rem] font-mono text-blue-400 uppercase tracking-widest block">KUTS Core Subsystem</span>
+                <h3 class="text-sm font-mono font-bold text-slate-100 uppercase">Base-Epoch Resolution Module</h3>
+            </div>
+            <span class="text-[0.6rem] font-mono text-emerald-400 bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-900/40">Active (333.56ns)</span>
+        </div>
+
+        <div class="space-y-4 font-mono">
+            <div class="bg-black/60 border border-slate-800 rounded-xl p-4 text-center">
+                <span class="text-[0.55rem] text-slate-500 uppercase tracking-wider block mb-1">Live Base-Epoch Count (BE)</span>
+                <span id="module-scale-be" class="text-xl font-bold text-blue-400 tabular-nums">0 BE</span>
+                <p class="text-[0.5rem] text-slate-600 mt-1">Light distance: 100 meters per tick[cite: 2]</p>
+            </div>
+
+            <div class="bg-black/60 border border-slate-800 rounded-xl p-4 text-center">
+                <span class="text-[0.55rem] text-slate-500 uppercase tracking-wider block mb-1">Master 22-Digit Segment Seed</span>
+                <span id="module-pulse-seed" class="text-xs text-slate-300 tabular-nums">(+00):0130.05.26.04.18.17.45.12.00.00.00</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- CORE ENGINE EXPORT SCRIPT -->
+    <script>
+        class KUTSBaseEpochEngine {
+            constructor(updateCallback) {
+                this.updateCallback = updateCallback;
+                this.startEngine();
+            }
+
+            startEngine() {
+                setInterval(() => {
+                    const now = performance.now();
+                    // 1 Base-Epoch (BE) = 333.56 nanoseconds = 0.00033356 milliseconds[cite: 2]
+                    const totalBaseEpochs = Math.floor(now / 0.00033356);
+                    
+                    const currentTime = new Date();
+                    const hr = String(currentTime.getUTCHours()).padStart(2, '0');
+                    const mn = String(currentTime.getUTCMinutes()).padStart(2, '0');
+                    const sc = String(currentTime.getUTCSeconds()).padStart(2, '0');
+                    const subTick = Math.floor((now * 1000) % 333560) / 33356;
+
+                    const telemetry = {
+                        baseEpochs: totalBaseEpochs.toLocaleString(),
+                        rawBeValue: totalBaseEpochs,
+                        formattedString: `(+00):0130.05.26.${hr}.${mn}.${sc}.${Math.floor(subTick * 100).toString().padStart(2, '0')}.00.00.00`
+                    };
+
+                    if (this.updateCallback) {
+                        this.updateCallback(telemetry);
+                    }
+                }, 50);
+            }
+        }
+
+        // Initialize Module UI Binding
+        document.addEventListener('DOMContentLoaded', () => {
+            new KUTSBaseEpochEngine((data) => {
+                document.getElementById('module-scale-be').innerText = `${data.baseEpochs} BE`;
+                document.getElementById('module-pulse-seed').innerText = data.formattedString;
+            });
+        });
+    </script>
+</body>
+</html>

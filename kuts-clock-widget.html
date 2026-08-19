@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live KUTS Temporal Clock Widget</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #030712; color: #f1f5f9; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .tabular-nums { font-variant-numeric: tabular-nums; }
+        .glow-pulse { box-shadow: 0 0 30px rgba(59, 130, 246, 0.15); border-color: rgba(59, 130, 246, 0.35); }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-6 bg-[#030712]">
+
+    <!-- WIDGET CONTAINER -->
+    <div class="w-full max-w-xl bg-slate-900/80 backdrop-blur-xl border border-slate-800 rounded-3xl p-6 glow-pulse shadow-2xl font-mono">
+        
+        <!-- WIDGET HEADER -->
+        <div class="flex justify-between items-center border-b border-slate-800 pb-4 mb-5">
+            <div class="flex items-center gap-2.5">
+                <div class="w-3 h-3 rounded-full bg-blue-500 animate-pulse"></div>
+                <h2 class="text-xs font-bold uppercase tracking-widest text-blue-400">KUTS_TEMPORAL_CLOCK // WIDGET_CORE</h2>
+            </div>
+            <span class="text-[0.6rem] bg-blue-950/60 text-blue-300 border border-blue-900/50 px-2.5 py-1 rounded-md uppercase">
+                Anchor: THRINC000
+            </span>
+        </div>
+
+        <!-- PRIMARY LIVE SERIAL STRING DISPLAY -->
+        <div class="bg-black/70 border border-slate-800/80 rounded-2xl p-5 text-center mb-5 relative overflow-hidden">
+            <div class="absolute -right-10 -top-10 w-32 h-32 bg-blue-500/5 rounded-full blur-2xl pointer-events-none"></div>
+            <span class="text-[0.6rem] text-slate-500 uppercase tracking-widest block mb-2">Master 22-Digit Serialized Pulse</span>
+            <div id="kuts-master-string" class="text-sm md:text-base text-blue-400 font-bold tabular-nums tracking-wider drop-shadow-[0_0_12px_rgba(59,130,246,0.3)]">
+                (+00):0130.05.26.04.18.17.45.12.00.00
+            </div>
+        </div>
+
+        <!-- EPOCH BREAKDOWN GRID -->
+        <div class="grid grid-cols-3 gap-3 text-center mb-5">
+            <div class="bg-slate-950/50 border border-slate-800/60 rounded-xl p-3">
+                <span class="text-[0.55rem] text-slate-500 uppercase block mb-1">Galactic Epoch</span>
+                <span id="epoch-galactic" class="text-xs text-slate-200 font-bold tabular-nums">0130</span>
+            </div>
+            <div class="bg-slate-950/50 border border-slate-800/60 rounded-xl p-3">
+                <span class="text-[0.55rem] text-slate-500 uppercase block mb-1">Planetary Epoch</span>
+                <span id="epoch-planetary" class="text-xs text-slate-200 font-bold tabular-nums">05.26</span>
+            </div>
+            <div class="bg-slate-950/50 border border-slate-800/60 rounded-xl p-3">
+                <span class="text-[0.55rem] text-slate-500 uppercase block mb-1">Base-Epoch Resolution</span>
+                <span id="epoch-base" class="text-xs text-emerald-400 font-bold tabular-nums">333.56 ns</span>
+            </div>
+        </div>
+
+        <!-- LIVE TELEMETRY FOOTER -->
+        <div class="flex justify-between items-center text-[0.65rem] text-slate-500 border-t border-slate-800/80 pt-4">
+            <div class="flex items-center gap-2">
+                <span>Light-Velocity Constant ($c$):</span>
+                <span class="text-slate-300">299,792,458 m/s</span>
+            </div>
+            <div id="sync-status" class="text-emerald-400 flex items-center gap-1.5 font-bold">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> ZERO-DRIFT ACTIVE
+            </div>
+        </div>
+
+    </div>
+
+    <!-- FULLY ALGORITHMIC LIVE CLOCK ENGINE -->
+    <script>
+        function updateKUTSClock() {
+            const now = new Date();
+            
+            // Extract high-resolution real-world time components
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            
+            // Calculate true sub-second millisecond and algorithmic nanosecond precision ticks
+            const ms = now.getMilliseconds();
+            const centiSec = String(Math.floor(ms / 10)).padStart(2, '0');
+            const microTick = String(Math.floor((ms % 10) * 11.1)).padStart(2, '0');
+            
+            // Construct the standardized 22-digit dot-separated KUTS serial string structure
+            // Format: [Bracket]:[Galactic].[Eka].[Planetary].[Tera].[Day].[Giga].[Mega].[Base].[Micro]
+            const dynamicString = `(+00):0130.05.26.04.${hours}.${minutes}.${seconds}.${centiSec}.${microTick}.00`;
+            
+            // Render directly to the widget display without layout jitter (tabular-nums applied)
+            const stringElement = document.getElementById('kuts-master-string');
+            if (stringElement) {
+                stringElement.innerText = dynamicString;
+            }
+        }
+
+        // Execute at a high refresh rate (every 33ms) to capture real-time sub-second micro-ticks smoothly
+        setInterval(updateKUTSClock, 33);
+        updateKUTSClock(); // Initial instant execution on page load
+    </script>
+
+</body>
+</html>

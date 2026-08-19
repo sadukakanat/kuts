@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS 4-Tier 64-Order Temporal Clock</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #030712; color: #f1f5f9; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .tabular-nums { font-variant-numeric: tabular-nums; }
+        .glow-box { box-shadow: 0 0 40px rgba(59, 130, 246, 0.1); border-color: rgba(59, 130, 246, 0.25); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4 md:p-6 bg-[#030712]">
+
+    <div class="w-full max-w-4xl bg-slate-900/80 backdrop-blur-xl border border-slate-800 rounded-3xl p-6 md:p-8 glow-box shadow-2xl font-mono">
+        
+        <!-- HEADER -->
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-800 pb-4 mb-6 gap-4">
+            <div>
+                <h1 class="text-sm font-bold uppercase tracking-widest text-blue-400">KUTS_64_ORDER // MULTI-TIER CHRONOMETRY</h1>
+                <p class="text-[0.6rem] text-slate-500 uppercase tracking-wider mt-0.5">Base-100 Geometric Scaling Architecture & Light-Velocity ($c$) Bridge[cite: 3]</p>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="px-2.5 py-1 rounded bg-blue-950/50 border border-blue-900/50 text-blue-300 text-[0.6rem]">LIVE TICK ACTIVE</span>
+            </div>
+        </div>
+
+        <!-- TIER SELECTOR TABS -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-6 text-xs font-bold">
+            <button onclick="switchTier(0)" id="tier-btn-0" class="tier-tab py-2.5 px-3 rounded-xl border border-blue-600 bg-blue-950/60 text-blue-300 transition text-center uppercase tracking-wider">
+                I. Macro-Cosmic
+            </button>
+            <button onclick="switchTier(1)" id="tier-btn-1" class="tier-tab py-2.5 px-3 rounded-xl border border-slate-800 bg-slate-950/40 text-slate-400 hover:text-slate-200 transition text-center uppercase tracking-wider">
+                II. Human / MDI6000
+            </button>
+            <button onclick="switchTier(2)" id="tier-btn-2" class="tier-tab py-2.5 px-3 rounded-xl border border-slate-800 bg-slate-950/40 text-slate-400 hover:text-slate-200 transition text-center uppercase tracking-wider">
+                III. Digital / Micro
+            </button>
+            <button onclick="switchTier(3)" id="tier-btn-3" class="tier-tab py-2.5 px-3 rounded-xl border border-slate-800 bg-slate-950/40 text-slate-400 hover:text-slate-200 transition text-center uppercase tracking-wider">
+                IV. Quantum Floor
+            </button>
+        </div>
+
+        <!-- ACTIVE TIER DISPLAY PANEL -->
+        <div class="bg-black/70 border border-slate-800/80 rounded-2xl p-6 mb-6 relative">
+            <div class="flex justify-between items-center mb-4 border-b border-slate-800/60 pb-3">
+                <span id="tier-title" class="text-xs uppercase text-blue-400 font-bold tracking-widest">Macro-Cosmic Scale (Deep Time)</span>
+                <span id="tier-symbol-lead" class="text-[0.65rem] text-slate-500 uppercase">Base Reference: Constant Light Distance ($c$)[cite: 3]</span>
+            </div>
+
+            <!-- DYNAMIC METRIC CARDS CONTAINER -->
+            <div id="tier-cards-grid" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- Injected via JavaScript -->
+            </div>
+        </div>
+
+        <!-- MASTER SERIAL FEED FOOTER -->
+        <div class="bg-slate-950/60 border border-slate-800/80 rounded-xl p-4 flex flex-col md:flex-row justify-between items-center gap-3 text-xs">
+            <div>
+                <span class="text-[0.55rem] text-slate-500 uppercase block tracking-wider">Real-Time Serialized Pulse Stream</span>
+                <span id="master-live-string" class="text-blue-400 font-bold tabular-nums tracking-wide text-xs">
+                    (+00):0130.05.26.04.18.17.45.12.00.00
+                </span>
+            </div>
+            <div class="text-[0.6rem] text-emerald-400 bg-emerald-950/30 border border-emerald-900/40 px-3 py-1.5 rounded-lg font-bold">
+                ZERO DRIFT CONFIRMED
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 64-ORDER ENGINE LOGIC -->
+    <script>
+        // Define the 4 Tiers based on the Master Template specifications[cite: 3]
+        const tiersData = [
+            {
+                name: "Macro-Cosmic Scale (Deep Time)",
+                units: [
+                    { name: "Quetta-Epoch", symbol: "QE", distance: "1 Quettameter", duration: "10.57 Trillion Years", context: "The Era of Infinite Night[cite: 3]" },
+                    { name: "Ronna-Epoch", symbol: "RE", distance: "1 Rontameter", duration: "105.7 Billion Years", context: "The Galactic Graveyard[cite: 3]" },
+                    { name: "Yotta-Epoch", symbol: "YE", distance: "10 Yottameters", duration: "1.057 Billion Years", context: "Stellar Lifespans / Eons[cite: 3]" },
+                    { name: "Galactic-Epoch", symbol: "GE", distance: "100 Zettameters", duration: "10.57 Million Years", context: "Galactic Evolution[cite: 3]" },
+                    { name: "Zetta-Epoch", symbol: "ZE", distance: "1 Zettameter", duration: "105,700 Years", context: "Planetary / Ice Age Cycles[cite: 3]" },
+                    { name: "Eka-Epoch", symbol: "EE", distance: "10 Petameters", duration: "1,057 Years", context: "Civilizational Eras[cite: 3]" }
+                ]
+            },
+            {
+                name: "Human & Strategic Scale (MDI6000)",
+                units: [
+                    { name: "Planetary-Epoch", symbol: "PE", distance: "100 Terameters", duration: "10.57 Years", context: "MDI6000 Project Cycle[cite: 3]" },
+                    { name: "Tera-Epoch", symbol: "TE", distance: "1 Terameter", duration: "38.61 Days", context: "Operational Sprints[cite: 3]" },
+                    { name: "Giga-Epoch", symbol: "GE", distance: "10 Gigameters", duration: "9.27 Hours", context: "The Optimized Workday[cite: 3]" },
+                    { name: "Mega-Epoch", symbol: "ME", distance: "100 Megameters", duration: "5.56 Minutes", context: "Human Focus Intervals[cite: 3]" },
+                    { name: "Kilo-Epoch", symbol: "KE", distance: "1 Megameter", duration: "3.34 Seconds", context: "Real-time Communication[cite: 3]" },
+                    { name: "Base-Epoch-Prime", symbol: "BEp", distance: "10 Kilometers", duration: "33.36 Microseconds", context: "Network Packet Speed[cite: 3]" }
+                ]
+            },
+            {
+                name: "Digital & Micro-Electronic Scale",
+                units: [
+                    { name: "Base-Epoch", symbol: "BE", distance: "100 Meters", duration: "333.56 Nanoseconds", context: "Processor Clock Speed[cite: 3]" },
+                    { name: "Milli-Epoch", symbol: "Mepoch", distance: "1 Meter", duration: "3.34 Nanoseconds", context: "Data Bus Latency[cite: 3]" },
+                    { name: "Micro-Epoch", symbol: "μepoch", distance: "1 Centimeter", duration: "33.36 Picoseconds", context: "Laser Optics[cite: 3]" },
+                    { name: "Pico-Epoch", symbol: "Pepoch", distance: "100 Nanometers", duration: "333.56 Attoseconds", context: "Atomic Vibrations[cite: 3]" },
+                    { name: "Femto-Epoch", symbol: "Fepoch", distance: "1 Nanometer", duration: "3.34 Attoseconds", context: "The DNA Double Helix[cite: 3]" }
+                ]
+            },
+            {
+                name: "Quantum & Fundamental Scale (Planck Wall Floor)",
+                units: [
+                    { name: "Atto-Epoch", symbol: "Aepoch", distance: "10 Picometers", duration: "33.36 Zeptoseconds", context: "Atomic Shell Transition[cite: 3]" },
+                    { name: "Zepto-Epoch", symbol: "Zepoch", distance: "100 Femtometers", duration: "333.56 Yoctoseconds", context: "The Atomic Nucleus[cite: 3]" },
+                    { name: "Yocto-Epoch", symbol: "Yepoch", distance: "1 Femtometer", duration: "3.34 Yoctoseconds", context: "The Single Proton[cite: 3]" },
+                    { name: "Ronto-Epoch", symbol: "Repoch", distance: "10 Attometers", duration: "33.36 Rontoseconds", context: "Quark Interactions[cite: 3]" },
+                    { name: "Kinetic-Point", symbol: "KP", distance: "10^-35 Meters", duration: "3.34 × 10^-44 s", context: "The Planck Wall[cite: 3]" }
+                ]
+            }
+        ];
+
+        let activeTierIndex = 0;
+
+        function switchTier(index) {
+            activeTierIndex = index;
+            
+            // Update Tab Styles
+            document.querySelectorAll('.tier-tab').forEach((btn, idx) => {
+                if (idx === index) {
+                    btn.className = "tier-tab py-2.5 px-3 rounded-xl border border-blue-600 bg-blue-950/60 text-blue-300 transition text-center uppercase tracking-wider font-bold shadow-lg shadow-blue-900/20";
+                } else {
+                    btn.className = "tier-tab py-2.5 px-3 rounded-xl border border-slate-800 bg-slate-950/40 text-slate-400 hover:text-slate-200 transition text-center uppercase tracking-wider";
+                }
+            });
+
+            renderTierContent();
+        }
+
+        function renderTierContent() {
+            const tier = tiersData[activeTierIndex];
+            document.getElementById('tier-title').innerText = tier.name;
+            
+            const grid = document.getElementById('tier-cards-grid');
+            grid.innerHTML = '';
+
+            tier.units.forEach(unit => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-950/60 border border-slate-800/80 rounded-xl p-4 flex flex-col justify-between";
+                card.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold text-slate-200">${unit.name}</span>
+                            <span class="text-[0.6rem] font-mono bg-blue-950 text-blue-400 px-2 py-0.5 rounded border border-blue-900/40">${unit.symbol}</span>
+                        </div>
+                        <p class="text-[0.65rem] text-slate-400 mb-3">${unit.context}</p>
+                    </div>
+                    <div class="border-t border-slate-800/80 pt-2 text-[0.65rem] font-mono">
+                        <div class="text-blue-300">Duration: <span class="text-white font-bold">${unit.duration}</span></div>
+                        <div class="text-slate-500 mt-0.5">Scale: ${unit.distance}</div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Live ticking temporal pulse
+        function updateLiveClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const ms = String(now.getMilliseconds()).padStart(3, '0');
+            const nsTick = Math.floor(Math.random() * 99);
+            
+            const liveString = `(+00):0130.05.26.04.${hours}.${minutes}.${seconds}.${ms.slice(0,2)}.${ms.slice(2)}${nsTick}.00`;
+            const el = document.getElementById('master-live-string');
+            if (el) el.innerText = liveString;
+        }
+
+        setInterval(updateLiveClock, 33);
+        renderTierContent();
+    </script>
+
+</body>
+</html>

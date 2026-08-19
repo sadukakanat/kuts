@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUTS Strategic Clock | Human & MDI6000 Scale Module</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #030712; color: #f1f5f9; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Share Tech Mono', monospace; }
+        .tabular-nums { font-variant-numeric: tabular-nums; }
+        .glow-amber { box-shadow: 0 0 40px rgba(245, 158, 11, 0.12); border-color: rgba(245, 158, 11, 0.3); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4 md:p-6 bg-[#030712]">
+
+    <div class="w-full max-w-4xl bg-slate-900/80 backdrop-blur-xl border border-slate-800 rounded-3xl p-6 md:p-8 glow-amber shadow-2xl font-mono">
+        
+        <!-- HEADER -->
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-800 pb-4 mb-6 gap-4">
+            <div>
+                <h1 class="text-sm font-bold uppercase tracking-widest text-amber-400">KUTS_STRATEGIC_CLOCK // TIER_02</h1>
+                <p class="text-[0.6rem] text-slate-500 uppercase tracking-wider mt-0.5">Human & MDI6000 Operational Scale (Sprint, Workday, & Cycle Horizon)</p>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="px-2.5 py-1 rounded bg-amber-950/50 border border-amber-900/50 text-amber-300 text-[0.6rem] animate-pulse">
+                    MDI6000 CYCLE ACTIVE
+                </span>
+            </div>
+        </div>
+
+        <!-- REAL-TIME STRATEGIC TICKER DISPLAY -->
+        <div class="bg-black/80 border border-amber-900/40 rounded-2xl p-6 mb-6 text-center relative overflow-hidden">
+            <div class="absolute inset-0 bg-amber-500/5 blur-3xl pointer-events-none"></div>
+            <span class="text-[0.6rem] text-slate-500 uppercase tracking-widest block mb-2">Tera-Epoch Operational Sprint Horizon</span>
+            <div id="strategic-ticker" class="text-xl md:text-2xl text-amber-400 font-bold tabular-nums tracking-wider drop-shadow-[0_0_15px_rgba(245,158,11,0.3)]">
+                38.61 Days [TE_SPRINT_CYCLE]
+            </div>
+            <div class="mt-3 flex justify-center gap-6 text-[0.65rem] text-slate-400">
+                <div>Light-Distance Scale: <span class="text-white">1 Terameter</span></div>
+                <div>Execution Status: <span class="text-emerald-400">Phase Synchronized</span></div>
+            </div>
+        </div>
+
+        <!-- STRATEGIC UNITS GRID -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            
+            <!-- Planetary-Epoch (MDI6000) -->
+            <div class="bg-amber-950/20 border border-amber-800/40 rounded-xl p-4 flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-bold text-amber-300">Planetary-Epoch</span>
+                        <span class="text-[0.6rem] font-mono bg-amber-900 text-white px-2 py-0.5 rounded border border-amber-700">PE</span>
+                    </div>
+                    <p class="text-[0.65rem] text-amber-400/80 mb-3">MDI6000 Project Cycle</p>
+                </div>
+                <div class="border-t border-amber-900/60 pt-2 text-[0.65rem] font-mono">
+                    <div class="text-amber-200">Duration: <span class="text-white font-bold">10.57 Years</span></div>
+                    <div class="text-amber-400/70 mt-0.5">Scale: 100 Terameters</div>
+                </div>
+            </div>
+
+            <!-- Tera-Epoch -->
+            <div class="bg-slate-950/60 border border-slate-800/80 rounded-xl p-4 flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-bold text-slate-200">Tera-Epoch</span>
+                        <span class="text-[0.6rem] font-mono bg-amber-950 text-amber-400 px-2 py-0.5 rounded border border-amber-900/40">TE</span>
+                    </div>
+                    <p class="text-[0.65rem] text-slate-400 mb-3">Operational Sprints</p>
+                </div>
+                <div class="border-t border-slate-800/80 pt-2 text-[0.65rem] font-mono">
+                    <div class="text-amber-300">Duration: <span class="text-white font-bold">38.61 Days</span></div>
+                    <div class="text-slate-500 mt-0.5">Scale: 1 Terameter</div>
+                </div>
+            </div>
+
+            <!-- Giga-Epoch -->
+            <div class="bg-slate-950/60 border border-slate-800/80 rounded-xl p-4 flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-bold text-slate-200">Giga-Epoch</span>
+                        <span class="text-[0.6rem] font-mono bg-amber-950 text-amber-400 px-2 py-0.5 rounded border border-amber-900/40">GE</span>
+                    </div>
+                    <p class="text-[0.65rem] text-slate-400 mb-3">Optimized Workday</p>
+                </div>
+                <div class="border-t border-slate-800/80 pt-2 text-[0.65rem] font-mono">
+                    <div class="text-amber-300">Duration: <span class="text-white font-bold">9.27 Hours</span></div>
+                    <div class="text-slate-500 mt-0.5">Scale: 10 Gigameters</div>
+                </div>
+            </div>
+
+            <!-- Mega-Epoch -->
+            <div class="bg-slate-950/60 border border-slate-800/80 rounded-xl p-4 flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-bold text-slate-200">Mega-Epoch</span>
+                        <span class="text-[0.6rem] font-mono bg-amber-950 text-amber-400 px-2 py-0.5 rounded border border-amber-900/40">ME</span>
+                    </div>
+                    <p class="text-[0.65rem] text-slate-400 mb-3">Micro-Focus Intervals</p>
+                </div>
+                <div class="border-t border-slate-800/80 pt-2 text-[0.65rem] font-mono">
+                    <div class="text-amber-300">Duration: <span class="text-white font-bold">5.56 Minutes</span></div>
+                    <div class="text-slate-500 mt-0.5">Scale: 100 Megameters</div>
+                </div>
+            </div>
+
+            <!-- Kilo-Epoch -->
+            <div class="bg-slate-950/60 border border-slate-800/80 rounded-xl p-4 flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-bold text-slate-200">Kilo-Epoch</span>
+                        <span class="text-[0.6rem] font-mono bg-amber-950 text-amber-400 px-2 py-0.5 rounded border border-amber-900/40">KE</span>
+                    </div>
+                    <p class="text-[0.65rem] text-slate-400 mb-3">Communication Latency</p>
+                </div>
+                <div class="border-t border-slate-800/80 pt-2 text-[0.65rem] font-mono">
+                    <div class="text-amber-300">Duration: <span class="text-white font-bold">3.34 Seconds</span></div>
+                    <div class="text-slate-500 mt-0.5">Scale: 1 Megameter</div>
+                </div>
+            </div>
+
+            <!-- Base-Epoch-Prime -->
+            <div class="bg-slate-950/60 border border-slate-800/80 rounded-xl p-4 flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-bold text-slate-200">Base-Epoch-Prime</span>
+                        <span class="text-[0.6rem] font-mono bg-amber-950 text-amber-400 px-2 py-0.5 rounded border border-amber-900/40">BEp</span>
+                    </div>
+                    <p class="text-[0.65rem] text-slate-400 mb-3">Regional Network Transit</p>
+                </div>
+                <div class="border-t border-slate-800/80 pt-2 text-[0.65rem] font-mono">
+                    <div class="text-amber-300">Duration: <span class="text-white font-bold">33.36 Microseconds</span></div>
+                    <div class="text-slate-500 mt-0.5">Scale: 10 Kilometers</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- FOOTER NAVIGATION -->
+        <div class="bg-slate-950/60 border border-slate-800/80 rounded-xl p-4 flex flex-col md:flex-row justify-between items-center gap-3 text-xs">
+            <div class="text-slate-400">
+                Strategic State: <span class="text-amber-400 font-bold">MDI6000 Framework Engaged</span>
+            </div>
+            <div class="flex gap-4">
+                <a href="kuts-64-order-clock.html" class="text-[0.65rem] text-amber-400 hover:text-amber-300 underline uppercase tracking-wider">
+                    ← Overview
+                </a>
+                <a href="kuts-micro-clock.html" class="text-[0.65rem] text-blue-400 hover:text-blue-300 underline uppercase tracking-wider">
+                    Tier 3 Micro Clock →
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- STRATEGIC TICKER SCRIPT -->
+    <script>
+        const strategicStates = [
+            "38.61 Days [TE_SPRINT_CYCLE]",
+            "9.27 Hours [GE_OPTIMIZED_WORKDAY]",
+            "5.56 Minutes [ME_FOCUS_INTERVAL]",
+            "10.57 Years [PE_MDI6000_HORIZON]"
+        ];
+
+        function simulateStrategicTicker() {
+            const randomIndex = Math.floor(Math.random() * strategicStates.length);
+            const tickerEl = document.getElementById('strategic-ticker');
+            if (tickerEl) {
+                tickerEl.innerText = strategicStates[randomIndex];
+            }
+        }
+
+        // Rotate strategic horizon state every 1200ms
+        setInterval(simulateStrategicTicker, 1200);
+    </script>
+
+</body>
+</html>

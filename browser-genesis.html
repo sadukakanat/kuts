@@ -194,58 +194,23 @@
         }
         setInterval(simulateNetworkNoise, 3500);
 
-        document.getElementById('daily-pulse-form').addEventListener('submit', async function(e) {
+        document.getElementById('daily-pulse-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const userId = document.getElementById('dp-id').value.toUpperCase();
             const type = document.getElementById('dp-type').value;
             const value = parseFloat(document.getElementById('dp-value').value);
-            
-            // Map form selector values to KPE resource classes
-            let resourceClass = "Energy";
-            if (type === 'distance') resourceClass = "Distance";
-            if (type === 'time') resourceClass = "Labor";
+            let text = ""; let kine = 0;
 
-            // Generate temporal binding serial and dummy signature hash for SAP validation
-            const kutsSerial = generateKUTSTimestamp("[<<00>>]");
-            const eventHash = "KPE-HASH-" + Math.random().toString(36).substring(2);
-            const sessionToken = JSON.parse(localStorage.getItem('kuts_active_session') || '{}').expiry || "LOCAL-AUTH";
+            if(type === 'energy') { kine = value / 10; text = `Log: ${value.toFixed(1)} kWh Output`; } 
+            else if(type === 'distance') { kine = value / 100; text = `Log: ${value.toFixed(1)} km Trans`; } 
+            else if(type === 'time') { kine = value / 8; text = `Log: ${value.toFixed(1)} Hrs Labor`; }
 
-            try {
-                // Dispatch payload to the KPE backend service API (/api/v1/ingest)
-                const response = await fetch('http://127.0.0.1:8080/api/v1/ingest', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        node_id: "THRINU000-EDGE",
-                        session_token: String(sessionToken),
-                        producer_identity: userId,
-                        resource_class: resourceClass,
-                        raw_quantity: value,
-                        kuts_serial: kutsSerial,
-                        event_hash: eventHash
-                    })
-                });
-
-                const result = await response.json();
-
-                if (result.status === "SUCCESS_SETTLED") {
-                    let text = `Log: ${value.toFixed(1)} ${type}`;
-                    injectLedgerEntry("[<<00>>]", "Kinetic", "text-orange-400", "bg-orange-900/20", userId, text, result.kinetic_reward.toFixed(4));
-                    
-                    setTimeout(() => { 
-                        injectLedgerEntry("[$00$]", "Fiscal", "text-emerald-400", "bg-emerald-900/20", "THRIND000", `1% TDS Sweep Extracted`, result.infrastructure_tax.toFixed(4)); 
-                    }, 400);
-                } else {
-                    console.error("SAP Verification Failed:", result.audit_status);
-                    alert("KPE Audit Rejection: " + result.audit_status);
-                }
-            } catch (error) {
-                console.error("Failed to connect to KPE backend service:", error);
-                alert("Network error: Unable to reach KPE core service at 127.0.0.1:8080");
-            }
-
+            const tds = kine * 0.01; const net = kine - tds;
+            injectLedgerEntry("[<<00>>]", "Kinetic", "text-orange-400", "bg-orange-900/20", userId, text, net.toFixed(4));
+            setTimeout(() => { injectLedgerEntry("[$00$]", "Fiscal", "text-emerald-400", "bg-emerald-900/20", "THRIND000", `1% TDS Sweep Extracted`, tds.toFixed(4)); }, 400);
             document.getElementById('dp-value').value = '';
         });
+
         // --- 3. Three.js Mobile & Desktop Globe Core ---
         window.onload = function() { initThreeJSGlobe(); };
 
